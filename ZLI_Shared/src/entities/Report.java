@@ -1,0 +1,67 @@
+package entities;
+
+import java.util.*;
+import enums.ReportType;
+
+public class Report
+{
+
+	Branch branch;
+	private Date reportDate;
+	private ReportType reportType;
+	public Report(Branch branch, Date reportDate, ReportType reportType)
+	{
+		super();
+		this.branch = branch;
+		this.reportDate = reportDate;
+		this.reportType = reportType;
+	}
+	public Branch getBranch()
+	{
+		return branch;
+	}
+	public void setBranch(Branch branch)
+	{
+		this.branch = branch;
+	}
+	public Date getReportDate()
+	{
+		return reportDate;
+	}
+	public void setReportDate(Date reportDate)
+	{
+		this.reportDate = reportDate;
+	}
+	public ReportType getReportType()
+	{
+		return reportType;
+	}
+	public void setReportType(ReportType reportType)
+	{
+		this.reportType = reportType;
+	}
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(branch, reportDate, reportType);
+	}
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Report other = (Report) obj;
+		return branch.equals(other.branch) && reportDate.equals(other.reportDate)
+				&& reportType == other.reportType;
+	}
+	
+	
+	
+
+	
+	
+}
