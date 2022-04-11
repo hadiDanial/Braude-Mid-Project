@@ -1,4 +1,4 @@
-package entities;
+package entities.other;
 
 public class Location
 {

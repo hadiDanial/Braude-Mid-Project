@@ -1,7 +1,9 @@
-package entities;
+package entities.surveys;
 
 import java.time.Instant;
 import java.util.*;
+
+import entities.users.User;
 
 public class Survey
 {

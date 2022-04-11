@@ -1,4 +1,4 @@
-package entities;
+package entities.other;
 
 import java.util.*;
 import enums.ReportType;

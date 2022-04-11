@@ -1,4 +1,4 @@
-import entities.Product;
+import entities.products.Product;
 import enums.ProductType;
 
 public class TestClass

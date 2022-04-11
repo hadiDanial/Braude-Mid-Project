@@ -1,7 +1,8 @@
-package entities;
+package entities.users;
 
 import java.time.Instant;
 
+import entities.other.Branch;
 import enums.OrderStatus;
 
 public class Order

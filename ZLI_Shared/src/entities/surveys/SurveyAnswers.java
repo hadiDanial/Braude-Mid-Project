@@ -1,6 +1,8 @@
-package entities;
+package entities.surveys;
 
 import java.util.*;
+
+import entities.users.User;
 
 public class SurveyAnswers
 {

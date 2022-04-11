@@ -1,4 +1,6 @@
-package entities;
+package entities.users;
+
+import entities.other.Location;
 
 public class OrderDelivery
 {
@@ -27,14 +29,15 @@ public class OrderDelivery
 	{
 		this.orderWithDelivery = orderWithDelivery;
 	}
-	@Override
-	public int hashCode()
+	
+	public Location getLocation()
 	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((orderWithDelivery == null) ? 0 : orderWithDelivery.hashCode());
-		result = prime * result + ((recipientName == null) ? 0 : recipientName.hashCode());
-		return result;
+		return location;
+	}
+
+	public void setLocation(Location location)
+	{
+		this.location = location;
 	}
 
 	public String getRecipientName()
@@ -60,6 +63,16 @@ public class OrderDelivery
 	public void setDelivered(boolean delivered)
 	{
 		this.delivered = delivered;
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((orderWithDelivery == null) ? 0 : orderWithDelivery.hashCode());
+		result = prime * result + ((recipientName == null) ? 0 : recipientName.hashCode());
+		return result;
 	}
 	
 	@Override

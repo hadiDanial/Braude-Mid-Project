@@ -1,4 +1,4 @@
-package entities;
+package entities.products;
 
 public class ItemInProduct
 {

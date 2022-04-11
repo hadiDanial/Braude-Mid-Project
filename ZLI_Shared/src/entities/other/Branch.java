@@ -1,6 +1,8 @@
-package entities;
+package entities.other;
 
 import java.util.*;
+
+import entities.users.User;
 
 public class Branch
 {
