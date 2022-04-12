@@ -22,6 +22,23 @@ public class User
 	public User()
 	{
 		super();
+		credit = 0;
+		accountStatus = AccountStatus.Pending;
+	}
+	
+	public User(String username, String password, String firstName, String lastName, String emailAddress,
+			String phoneNumber, UserRole role, AccountStatus accountStatus, float credit)
+	{
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailAddress = emailAddress;
+		this.phoneNumber = phoneNumber;
+		this.role = role;
+		this.accountStatus = accountStatus;
+		this.credit = credit;
 	}
 
 	public int getUserId()

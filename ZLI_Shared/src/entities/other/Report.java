@@ -5,8 +5,8 @@ import enums.ReportType;
 
 public class Report
 {
-
-	Branch branch;
+	private int reportId;
+	private Branch branch;
 	private Date reportDate;
 	private ReportType reportType;
 	public Report(Branch branch, Date reportDate, ReportType reportType)
@@ -16,6 +16,18 @@ public class Report
 		this.reportDate = reportDate;
 		this.reportType = reportType;
 	}
+	
+	public int getReportId()
+	{
+		return reportId;
+	}
+
+	public void setReportId(int reportId)
+	{
+		this.reportId = reportId;
+	}
+
+
 	public Branch getBranch()
 	{
 		return branch;

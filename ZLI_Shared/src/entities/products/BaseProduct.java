@@ -11,10 +11,9 @@ public abstract class BaseProduct
 	private int quantityInStock;
 	
 	private static final String NEW_PRODUCT_NAME = "New Product";
-	public BaseProduct(int productId, String productName, float price, byte[] image, int quantityInStock)
+	public BaseProduct(String productName, float price, byte[] image, int quantityInStock)
 	{
 		super();
-		this.productId = productId;
 		this.productName = productName;
 		this.originalPrice = price;
 		this.currentPrice = originalPrice;

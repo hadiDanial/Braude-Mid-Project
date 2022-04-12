@@ -8,19 +8,18 @@ import enums.OrderStatus;
 public class Order
 {
 	private int orderId;
-	OrderDelivery deliveryDetails;
+	private OrderDelivery deliveryDetails;
 	private String greetingCard;
 	private Instant orderDate;
 	private Instant deliveryDate;
 	private float totalCost;
 	private OrderStatus orderStatus;
-	Branch branch;
+	private Branch branch;
 	
-	public Order(int orderId, OrderDelivery deliveryDetails, String greetingCard, Instant deliveryDate, float totalCost,
+	public Order(OrderDelivery deliveryDetails, String greetingCard, Instant deliveryDate, float totalCost,
 			OrderStatus orderStatus, Branch branch)
 	{
 		super();
-		this.orderId = orderId;
 		this.deliveryDetails = deliveryDetails;
 		this.greetingCard = greetingCard;
 		this.deliveryDate = deliveryDate;

@@ -6,10 +6,10 @@ public class Item extends BaseProduct
 {
 	private ItemType itemType;
 	private Color primaryColor;
-	public Item(int productId, String productName, float price, byte[] image, int quantityInStock, ItemType itemType,
+	public Item(String productName, float price, byte[] image, int quantityInStock, ItemType itemType,
 			Color primaryColor)
 	{
-		super(productId, productName, price, image, quantityInStock);
+		super(productName, price, image, quantityInStock);
 		this.itemType = itemType;
 		this.primaryColor = primaryColor;
 	}

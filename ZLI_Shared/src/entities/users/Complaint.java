@@ -11,11 +11,10 @@ public class Complaint
 	private Instant submissionTime;
 	private String complaintResult;
 	private boolean wasHandled;
-	public Complaint(int complaintId, User customer, User customerServiceEmployee, String complaintDetails,
+	public Complaint(User customer, User customerServiceEmployee, String complaintDetails,
 			Instant submissionTime, String complaintResult, boolean wasHandled)
 	{
 		super();
-		this.complaintId = complaintId;
 		this.customer = customer;
 		this.customerServiceEmployee = customerServiceEmployee;
 		this.complaintDetails = complaintDetails;

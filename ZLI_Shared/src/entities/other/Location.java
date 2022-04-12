@@ -2,6 +2,7 @@ package entities.other;
 
 public class Location
 {
+	private int locationId;
 	private String city;
 	private int zipCode;
 	private String street;
@@ -16,6 +17,17 @@ public class Location
 		this.building = building;
 		this.notes = notes;
 	}
+	
+	public int getLocationId()
+	{
+		return locationId;
+	}
+
+	public void setLocationId(int locationId)
+	{
+		this.locationId = locationId;
+	}
+
 	public String getCity()
 	{
 		return city;

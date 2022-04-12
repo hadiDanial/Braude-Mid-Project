@@ -13,10 +13,9 @@ public class Branch
 	private String branchName;
 	private Location location;
 	
-	public Branch(int branchId, User manager, ArrayList<User> workers, String branchName, Location location)
+	public Branch(User manager, ArrayList<User> workers, String branchName, Location location)
 	{
 		super();
-		this.branchId = branchId;
 		this.manager = manager;
 		this.workers = workers;
 		this.branchName = branchName;

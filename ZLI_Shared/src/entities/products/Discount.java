@@ -8,10 +8,9 @@ public class Discount
 	private ArrayList<DiscountedProduct> discountedProducts;
 	private int startDate;
 	private int endDate;
-	public Discount(int discountId, ArrayList<DiscountedProduct> discountedProducts, int startDate, int endDate)
+	public Discount(ArrayList<DiscountedProduct> discountedProducts, int startDate, int endDate)
 	{
 		super();
-		this.discountId = discountId;
 		this.discountedProducts = discountedProducts;
 		this.startDate = startDate;
 		this.endDate = endDate;
