@@ -4,6 +4,8 @@ public class Question
 {
 	private Survey survey; 
 	private String questionText;
+	
+	
 	public Question(Survey survey, String questionText)
 	{
 		super();

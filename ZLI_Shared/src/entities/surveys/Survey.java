@@ -12,13 +12,15 @@ public class Survey
 	private ArrayList<User> customers;
 	private String analysisResults; // Should be saved as a PDF
 	private Instant surveyDate;
-	public Survey(int surveyId, User customerServiceSpecialist, ArrayList<User> customers, String analysisResults,
+	
+	static final int NUM_QUESTIONS = 6;
+		
+	public Survey(User customerServiceSpecialist, ArrayList<User> customers, String analysisResults,
 			Instant surveyDate)
 	{
 		super();
 		this.customerServiceSpecialist = customerServiceSpecialist;
 		this.customers = customers;
-		this.surveyId = surveyId;
 		this.analysisResults = analysisResults;
 		this.surveyDate = surveyDate;
 	}
