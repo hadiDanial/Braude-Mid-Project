@@ -1,8 +1,11 @@
 package entities.users;
 
 import java.time.Instant;
+import java.util.ArrayList;
 
 import entities.other.Branch;
+import entities.products.Item;
+import entities.products.Product;
 import enums.OrderStatus;
 
 public class Order
@@ -10,24 +13,30 @@ public class Order
 	private int orderId;
 	private OrderDelivery deliveryDetails;
 	private String greetingCard;
+	private ArrayList<Product> products;
+	private ArrayList<Item> items;
 	private Instant orderDate;
 	private Instant deliveryDate;
 	private float totalCost;
 	private OrderStatus orderStatus;
 	private Branch branch;
+
+	public Order(){	}
 	
-	public Order(OrderDelivery deliveryDetails, String greetingCard, Instant deliveryDate, float totalCost,
-			OrderStatus orderStatus, Branch branch)
+	public Order(OrderDelivery deliveryDetails, String greetingCard, ArrayList<Product> products, ArrayList<Item> items,
+			Instant deliveryDate, float totalCost, OrderStatus orderStatus, Branch branch)
 	{
-		super();
 		this.deliveryDetails = deliveryDetails;
 		this.greetingCard = greetingCard;
+		this.products = products;
+		this.items = items;
 		this.deliveryDate = deliveryDate;
 		this.orderDate = Instant.now();
 		this.totalCost = totalCost;
 		this.orderStatus = orderStatus;
 		this.branch = branch;
 	}
+	
 	public int getOrderId()
 	{
 		return orderId;
