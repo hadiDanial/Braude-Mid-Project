@@ -20,12 +20,14 @@ public class Order
 	private float totalCost;
 	private OrderStatus orderStatus;
 	private Branch branch;
-
+	private User customer;
+	
 	public Order(){	}
 	
 	public Order(OrderDelivery deliveryDetails, String greetingCard, ArrayList<Product> products, ArrayList<Item> items,
-			Instant deliveryDate, float totalCost, OrderStatus orderStatus, Branch branch)
+			Instant deliveryDate, float totalCost, OrderStatus orderStatus, Branch branch, User customer)
 	{
+		super();
 		this.deliveryDetails = deliveryDetails;
 		this.greetingCard = greetingCard;
 		this.products = products;
@@ -35,72 +37,119 @@ public class Order
 		this.totalCost = totalCost;
 		this.orderStatus = orderStatus;
 		this.branch = branch;
+		this.customer = customer;
 	}
 	
 	public int getOrderId()
 	{
 		return orderId;
 	}
+	
 	public void setOrderId(int orderId)
 	{
 		this.orderId = orderId;
 	}
+	
 	public OrderDelivery getDeliveryDetails()
 	{
 		return deliveryDetails;
 	}
+	
 	public void setDeliveryDetails(OrderDelivery deliveryDetails)
 	{
 		this.deliveryDetails = deliveryDetails;
 	}
+	
 	public String getGreetingCard()
 	{
 		return greetingCard;
 	}
+	
 	public void setGreetingCard(String greetingCard)
 	{
 		this.greetingCard = greetingCard;
 	}
+	
 	public Instant getOrderDate()
 	{
 		return orderDate;
 	}
+	
 	public void setOrderDate(Instant orderDate)
 	{
 		this.orderDate = orderDate;
 	}
+	
 	public Instant getDeliveryDate()
 	{
 		return deliveryDate;
 	}
+	
 	public void setDeliveryDate(Instant deliveryDate)
 	{
 		this.deliveryDate = deliveryDate;
 	}
+	
 	public float getTotalCost()
 	{
 		return totalCost;
 	}
+	
 	public void setTotalCost(float totalCost)
 	{
 		this.totalCost = totalCost;
 	}
+	
 	public OrderStatus getOrderStatus()
 	{
 		return orderStatus;
 	}
+	
 	public void setOrderStatus(OrderStatus orderStatus)
 	{
 		this.orderStatus = orderStatus;
 	}
+	
 	public Branch getBranch()
 	{
 		return branch;
 	}
+	
 	public void setBranch(Branch branch)
 	{
 		this.branch = branch;
 	}
+	
+	public ArrayList<Product> getProducts()
+	{
+		return products;
+	}
+
+	public void setProducts(ArrayList<Product> products)
+	{
+		this.products = products;
+	}
+
+	public ArrayList<Item> getItems()
+	{
+		return items;
+	}
+
+	public void setItems(ArrayList<Item> items)
+	{
+		this.items = items;
+	}
+
+	public User getCustomer()
+	{
+		return customer;
+	}
+
+	public void setCustomer(User customer)
+	{
+		this.customer = customer;
+	}
+
 	@Override
 	public int hashCode()
 	{
@@ -112,6 +161,7 @@ public class Order
 		result = prime * result + orderId;
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -160,6 +210,4 @@ public class Order
 		}
 		return true;
 	}
-
-	
 }

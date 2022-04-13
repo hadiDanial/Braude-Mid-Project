@@ -11,8 +11,9 @@ public class Complaint
 	private Instant submissionTime;
 	private String complaintResult;
 	private boolean wasHandled;
+	
 	public Complaint(User customer, User customerServiceEmployee, String complaintDetails,
-			Instant submissionTime, String complaintResult, boolean wasHandled)
+			Instant submissionTime, String complaintResult)
 	{
 		super();
 		this.customer = customer;
@@ -20,7 +21,7 @@ public class Complaint
 		this.complaintDetails = complaintDetails;
 		this.submissionTime = submissionTime;
 		this.complaintResult = complaintResult;
-		this.wasHandled = wasHandled;
+		this.wasHandled = false;
 	}
 	public int getComplaintId()
 	{
