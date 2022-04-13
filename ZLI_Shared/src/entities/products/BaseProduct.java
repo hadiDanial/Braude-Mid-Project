@@ -9,8 +9,10 @@ public abstract class BaseProduct
 	private float originalPrice, currentPrice;
 	private byte[] image;
 	private int quantityInStock;
-	
+	private boolean isOnSale = false;
+
 	private static final String NEW_PRODUCT_NAME = "New Product";
+	
 	public BaseProduct(String productName, float price, byte[] image, int quantityInStock)
 	{
 		super();
@@ -20,32 +22,39 @@ public abstract class BaseProduct
 		this.image = image;
 		this.quantityInStock = quantityInStock;
 	}
+	
 	public BaseProduct()
 	{
 		super();
 		quantityInStock = 0;
 		productName = NEW_PRODUCT_NAME;
 	}
+	
 	public int getProductId()
 	{
 		return productId;
 	}
+	
 	public void setProductId(int productId)
 	{
 		this.productId = productId;
 	}
+	
 	public String getProductName()
 	{
 		return productName;
 	}
+	
 	public void setProductName(String productName)
 	{
 		this.productName = productName;
 	}
+	
 	public float getOriginalPrice()
 	{
 		return originalPrice;
 	}
+	
 	public void setOriginalPrice(float price)
 	{
 		this.originalPrice = price;
@@ -55,26 +64,42 @@ public abstract class BaseProduct
 	{
 		return currentPrice;
 	}
+	
 	public void setCurrentPrice(float currentPrice)
 	{
 		this.currentPrice = currentPrice;
 	}
+	
 	public byte[] getImage()
 	{
 		return image;
 	}
+	
 	public void setImage(byte[] image)
 	{
 		this.image = image;
 	}
+	
 	public int getQuantityInStock()
 	{
 		return quantityInStock;
 	}
+	
 	public void setQuantityInStock(int quantityInStock)
 	{
 		this.quantityInStock = quantityInStock;
 	}
+	
+	public boolean isOnSale()
+	{
+		return isOnSale;
+	}
+	
+	public void setOnSale(boolean isOnSale)
+	{
+		this.isOnSale = isOnSale;
+	}
+	
 	@Override
 	public int hashCode()
 	{
