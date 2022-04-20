@@ -100,6 +100,10 @@ public abstract class BaseProduct
 		this.isOnSale = isOnSale;
 	}
 	
+	public boolean isInStock()
+	{
+		return quantityInStock > 0;
+	}
 	@Override
 	public int hashCode()
 	{
