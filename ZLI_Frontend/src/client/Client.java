@@ -35,7 +35,7 @@ public class Client extends AbstractClient
 	 * 
 	 * @param message
 	 */
-	private void handleMessageFromClientUI(String message)
+	protected void handleMessageFromClientUI(String message)
 	{
 		// TODO - implement Client.handleMessageFromClientUI
 		throw new UnsupportedOperationException();
