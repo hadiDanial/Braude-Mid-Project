@@ -1,9 +1,18 @@
 package controllers;
 
+import server.Server;
+
 public class ServerController
 {
 
 	private Server server;
+	
+	
+
+	public ServerController()
+	{
+		server = Server.getInstance();
+	}
 
 	/**
 	 * 
