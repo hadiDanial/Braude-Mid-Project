@@ -1,13 +1,15 @@
 package controllers;
 
+import client.Client;
 import entities.products.*;
 
 public class OrderController
 {
 	private static OrderController instance;
+	private Client client;
 	
 	private OrderController() {
-		
+		client = Client.getInstance();
 	}
 	
 	public static OrderController getInstance()
