@@ -2,17 +2,14 @@ package controllers;
 
 import server.Server;
 
-public class ServerController
-{
+public class ServerController {
 
 	private Server server;
-	
-	
 
-	public ServerController()
-	{
-		server = Server.getInstance();
-	}
+	// public ServerController()
+	// {
+	// server = Server.getInstance();
+	// }
 
 	/**
 	 * 
@@ -20,14 +17,12 @@ public class ServerController
 	 * @param username
 	 * @param password
 	 */
-	public boolean connectToDatabase(String schemaName, String username, String password)
-	{
+	public boolean connectToDatabase(String schemaName, String username, String password) {
 		// TODO - implement ServerController.connectToDatabase
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean disconnectFromDatabase()
-	{
+	public boolean disconnectFromDatabase() {
 		// TODO - implement ServerController.disconnectFromDatabase
 		throw new UnsupportedOperationException();
 	}
@@ -36,18 +31,19 @@ public class ServerController
 	 * 
 	 * @param textToAdd
 	 */
-	public void updateConsole(String textToAdd)
-	{
+	public void updateConsole(String textToAdd) {
 		// TODO - implement ServerController.updateConsole
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * Uses the Server object it has (singleton, Server.getInstance() ) to start the server. Appends result (success or failure) to the console using the ServerUI class.
+	 * Uses the Server object it has (singleton, Server.getInstance() ) to start the
+	 * server. Appends result (success or failure) to the console using the ServerUI
+	 * class.
+	 * 
 	 * @param port
 	 */
-	public boolean startServer(String port)
-	{
+	public boolean startServer(String port) {
 		// TODO - implement ServerController.startServer
 		throw new UnsupportedOperationException();
 	}
