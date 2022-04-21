@@ -1,25 +1,21 @@
 package client;
 
+import java.io.IOException;
+
 import ocsf.client.AbstractClient;
 
 public class Client extends AbstractClient
 {
-	private static Client instance = null;;
-
-	private Client(String host, int port)
+	public Client()
 	{
-		super(host, port);
-		
+		super(ClientProperties.getHostAddress(), ClientProperties.getHostPort());
 	}
-
-	public static Client getInstance()
-	{
-		if(instance == null)
-		{
-			instance = new Client(ClientProperties.getHostAddress(), ClientProperties.getHostPort());
-		}
-		return instance;
-	}
+//	
+//	private Client(String host, int port)
+//	{
+//		super(host, port);
+//		
+//	}
 
 	/**
 	 * 
@@ -43,8 +39,14 @@ public class Client extends AbstractClient
 
 	public void quit()
 	{
-		// TODO - implement Client.quit
-		throw new UnsupportedOperationException();
+		try
+		{
+			closeConnection();
+			System.exit(0);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 }

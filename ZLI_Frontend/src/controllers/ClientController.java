@@ -5,11 +5,20 @@ import client.Client;
 public class ClientController
 {
 
+	private static ClientController instance;
 	private Client client;
-
-	public ClientController()
+	
+	private ClientController()
 	{
-		client = Client.getInstance();
+		client = new Client();
+	}
+	
+	public static ClientController getInstance() {
+		if(instance == null)
+		{
+			instance = new ClientController();
+		}
+		return instance;
 	}
 	
 
