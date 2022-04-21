@@ -1,15 +1,21 @@
 package controllers;
 
-import client.Client;
+import java.time.Instant;
+import java.util.ArrayList;
+
+import entities.other.Branch;
 import entities.products.*;
+import entities.users.Order;
+import enums.OrderStatus;
+import utility.IResponse;
 
 public class OrderController
 {
 	private static OrderController instance;
-	private Client client;
+	private ClientController clientController;
 	
 	private OrderController() {
-		client = Client.getInstance();
+		clientController = ClientController.getInstance();
 	}
 	
 	public static OrderController getInstance()
@@ -60,6 +66,17 @@ public class OrderController
 	{
 		// TODO - implement OrderController.isProduct
 		throw new UnsupportedOperationException();
+	}
+
+	public void getAllOrders(IResponse<ArrayList<Order>> response)
+	{
+		// TODO - Change from dummy data to server data
+		ArrayList<Order> orders = new ArrayList<Order>();
+		orders.add(new Order(null, "hello", null, null, Instant.now().plusSeconds(60000),100, 
+				OrderStatus.Accepted, new Branch(null, null, "Haifa", null), null));
+		orders.add(new Order(null, "goodbye", null, null, Instant.now().plusSeconds(600000),200, 
+				OrderStatus.Delivered, new Branch(null, null, "Karmiel", null), null));
+		response.executeAfterResponse(orders);
 	}
 
 }
