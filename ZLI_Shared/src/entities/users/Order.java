@@ -7,6 +7,7 @@ import entities.other.Branch;
 import entities.products.Item;
 import entities.products.Product;
 import enums.OrderStatus;
+import utility.DateFormatter;
 
 public class Order
 {
@@ -210,4 +211,15 @@ public class Order
 		}
 		return true;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Order #" + orderId + ", deliveryDetails=" + deliveryDetails + ", greetingCard=" + greetingCard
+				+ ", products=" + products + ", items=" + items + ", orderDate=" + DateFormatter.formatInstant(orderDate, true) + ", deliveryDate="
+				+ DateFormatter.formatInstant(deliveryDate, true) + ", totalCost=" + totalCost + ", orderStatus=" + orderStatus + ", branch=" + branch.getBranchName()
+				+ ", customer=" + customer + "]";
+	}
+	
+	
 }
