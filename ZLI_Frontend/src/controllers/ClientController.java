@@ -1,12 +1,17 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import client.Client;
+import entities.users.Order;
 import gui.ClientUI;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import requests.Request;
+import utility.IResponse;
 
 public class ClientController
 {
@@ -47,6 +52,11 @@ public class ClientController
 	public static Pane getRoot()
 	{
 		return clientUI.getRoot();
+	}
+
+	public <T> void sendRequest(Object message, Request request, IResponse<T> response)
+	{
+		client.handleMessageFromClientUI(message, request, response);
 	}
 
 }

@@ -3,9 +3,14 @@ package client;
 import java.io.IOException;
 
 import ocsf.client.AbstractClient;
+import requests.Request;
+import utility.IResponse;
 
 public class Client extends AbstractClient
 {
+	private boolean awaitResponse;
+	private IResponse<?> response;
+	
 	public Client()
 	{
 		super(ClientProperties.getHostAddress(), ClientProperties.getHostPort());
@@ -23,18 +28,48 @@ public class Client extends AbstractClient
 	 */
 	protected void handleMessageFromServer(Object message)
 	{
-		// TODO - implement Client.handleMessageFromServer
-		throw new UnsupportedOperationException();
+		System.out.println("--> handleMessageFromServer");
+
+		awaitResponse = false;
+		if (response != null)
+		{
+			response.executeAfterResponse(message);
+			response = null;
+		}
 	}
 
 	/**
 	 * 
+	 * @param <T>
 	 * @param message
 	 */
-	protected void handleMessageFromClientUI(String message)
+	public <T> void handleMessageFromClientUI(Object message, Request request, IResponse<T> response)
 	{
-		// TODO - implement Client.handleMessageFromClientUI
-		throw new UnsupportedOperationException();
+		try
+		{
+			openConnection();// in order to send more than one message
+			awaitResponse = true;
+			this.response = response;
+			sendToServer(message);
+			// wait for response
+			while (awaitResponse)
+			{
+				try
+				{
+					Thread.sleep(100);
+				} catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+			this.response = null;
+			this.awaitResponse = false;
+//			clientUI.display("Could not send message to server: Terminating client." + e);
+			quit();
+		}
 	}
 
 	public void quit()
