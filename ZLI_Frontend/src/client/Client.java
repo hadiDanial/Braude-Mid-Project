@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import ocsf.client.AbstractClient;
 import requests.Request;
+import requests.RequestType;
 import utility.IResponse;
 
 public class Client extends AbstractClient
@@ -43,14 +44,14 @@ public class Client extends AbstractClient
 	 * @param <T>
 	 * @param message
 	 */
-	public <T> void handleMessageFromClientUI(Object message, Request request, IResponse<T> response)
+	public <T> void handleMessageFromClientUI(Request request, IResponse<T> response)
 	{
 		try
 		{
 			openConnection();// in order to send more than one message
 			awaitResponse = true;
 			this.response = response;
-			sendToServer(message);
+			sendToServer(request);
 			// wait for response
 			while (awaitResponse)
 			{

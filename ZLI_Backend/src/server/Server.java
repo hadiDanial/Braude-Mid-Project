@@ -4,6 +4,7 @@ import java.net.InetAddress;
 
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
+import requests.Request;
 
 public class Server extends AbstractServer {
 
@@ -76,7 +77,11 @@ public class Server extends AbstractServer {
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		// TODO start parsing message and save client if not saved
 		// ? maybe send to CommunicationController class
-		System.out.println("Message received: " + msg + " from " + client);
+		if(!(msg instanceof Request))
+			return;
+		Request req = (Request) msg;
+		System.out.println(req.getRequestType() + " message received: " + req.getMessage() + " from " + client);
+		
 		this.sendToAllClients(msg);
 	}
 

@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import requests.Request;
+import requests.RequestType;
 import utility.IResponse;
 
 public class ClientController
@@ -54,9 +55,9 @@ public class ClientController
 		return clientUI.getRoot();
 	}
 
-	public <T> void sendRequest(Object message, Request request, IResponse<T> response)
+	public <T> void sendRequest(Request request, IResponse<T> response)
 	{
-		client.handleMessageFromClientUI(message, request, response);
+		client.handleMessageFromClientUI(request, response);
 	}
 
 }

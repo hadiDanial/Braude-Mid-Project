@@ -8,6 +8,7 @@ import entities.products.*;
 import entities.users.Order;
 import enums.OrderStatus;
 import requests.Request;
+import requests.RequestType;
 import utility.IResponse;
 
 public class OrderController
@@ -78,8 +79,8 @@ public class OrderController
 		orders.add(new Order(null, "goodbye", null, null, Instant.now().plusSeconds(600000),200, 
 				OrderStatus.Delivered, new Branch(null, null, "Karmiel", null), null));
 		response.executeAfterResponse(orders);
-		
-		clientController.sendRequest(null, Request.GetAllOrders, response);
+		Request request = new Request(RequestType.GetAllOrders, "Hello World!");
+		clientController.sendRequest(request, response);
 	}
 
 }
