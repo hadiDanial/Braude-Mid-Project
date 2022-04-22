@@ -2,24 +2,18 @@ package gui.orders;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import client.ClientProperties;
-import controllers.ClientController;
 import controllers.OrderController;
 import entities.users.Order;
 import enums.Color;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -28,13 +22,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 public class OrdersPage implements Initializable
 {
 	private OrderController orderController;
 	private ArrayList<Order> orders;
-
+	private double tableWidth;
+	
 	@FXML
 	private TableView<Order> ordersTable;
 
@@ -60,22 +54,25 @@ public class OrdersPage implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		orderController = OrderController.getInstance();
+		parent.setPrefHeight(ClientProperties.getClientHeight());
+		parent.setPrefWidth(ClientProperties.getClientWidth());
 		generateTableColumns();
 		setTableSettings();
 		orderController.getAllOrders(arr -> {
-			orders = arr;
+			orders = (ArrayList<Order>) arr;
 			ordersTable.getItems().addAll(orders);
 		});
 	}
 
+	/**
+	 * Sets the table settings - width, anchors
+	 */
 	private void setTableSettings()
 	{
-		parent.setPrefHeight(ClientProperties.getClientHeight());
-		parent.setPrefWidth(ClientProperties.getClientWidth());
+		
 		StackPane pane = new StackPane();
 		pane.getChildren().add(ordersTable);
 		parent.getChildren().add(pane);
-		double tableWidth = parent.getPrefWidth() * 7 / 8;
 		ordersTable.setPrefWidth(tableWidth);
 		ordersTable.setMinWidth(tableWidth * 0.5);
 		double left = (parent.getPrefWidth() - tableWidth) / 2;
@@ -90,35 +87,48 @@ public class OrdersPage implements Initializable
 		pane.setAlignment(Pos.CENTER);
 	}
 
+	/**
+	 * Generates the following table columns:<br>
+	 * Order number, price, color, details, greeting, branch, delivery date, order date, and edit order button.
+	 */
 	private void generateTableColumns()
 	{
-		ordersTable = new TableView<Order>();
-		TableColumn<Order, Integer> orderNumberColumn = new TableColumn<Order, Integer>("#");
+		ordersTable = new TableView<>();
+		tableWidth = parent.getPrefWidth() * 7 / 8;
+		double width = 0.997 * tableWidth;
+		TableColumn<Order, Integer> orderNumberColumn = new TableColumn<>("#");
 		orderNumberColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("orderId"));
-		TableColumn<Order, Float> priceColumn = new TableColumn<Order, Float>("Price");
+		orderNumberColumn.setPrefWidth(width * 0.05);
+		TableColumn<Order, Float> priceColumn = new TableColumn<>("Price");
 		priceColumn.setCellValueFactory(new PropertyValueFactory<Order, Float>("price"));
-		TableColumn<Order, Color> colorColumn = new TableColumn<Order, Color>("Color");
+		priceColumn.setPrefWidth(width * 0.05);
+		TableColumn<Order, Color> colorColumn = new TableColumn<>("Color");
 		colorColumn.setCellValueFactory(new PropertyValueFactory<Order, Color>("color"));
-		TableColumn<Order, String> detailsColumn = new TableColumn<Order, String>("Details");
+		colorColumn.setPrefWidth(width * 0.1);
+		TableColumn<Order, String> detailsColumn = new TableColumn<>("Details");
 		detailsColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("details"));
-		detailsColumn.setPrefWidth(300.0);
-		TableColumn<Order, String> greetingColumn = new TableColumn<Order, String>("Greeting");
+		detailsColumn.setPrefWidth(width * 0.2);
+		TableColumn<Order, String> greetingColumn = new TableColumn<>("Greeting");
 		greetingColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("greeting"));
-		greetingColumn.setPrefWidth(300.0);
-		TableColumn<Order, String> branchColumn = new TableColumn<Order, String>("Branch");
+		greetingColumn.setPrefWidth(width * 0.2);
+		TableColumn<Order, String> branchColumn = new TableColumn<>("Branch");
 		branchColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("branchName"));
-		TableColumn<Order, String> deliveryDateColumn = new TableColumn<Order, String>("Delivery Date");
+		branchColumn.setPrefWidth(width * 0.1);
+		TableColumn<Order, String> deliveryDateColumn = new TableColumn<>("Delivery Date");
 		deliveryDateColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("formattedDeliveryDate"));
-		TableColumn<Order, String> orderDateColumn = new TableColumn<Order, String>("Order Date");
+		deliveryDateColumn.setPrefWidth(width * 0.1);
+		TableColumn<Order, String> orderDateColumn = new TableColumn<>("Order Date");
 		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("formattedOrderDate"));
-		
+		orderDateColumn.setPrefWidth(width * 0.1);
+
+		// Edit button column
 		TableColumn<Order, Order> editBtnCol = new TableColumn<>("Edit");
 		editBtnCol.setCellValueFactory(
 		    param -> new ReadOnlyObjectWrapper<>(param.getValue())
 		);
 		editBtnCol.setCellFactory(param -> new TableCell<Order, Order>() {
 		    private final Button editButton = new Button("Edit");
-
+		    
 		    @Override
 		    protected void updateItem(Order order, boolean empty) {
 		        super.updateItem(order, empty);
@@ -127,13 +137,14 @@ public class OrdersPage implements Initializable
 		            setGraphic(null);
 		            return;
 		        }
-
+		        editButton.setPrefWidth(width * 0.09);
 		        setGraphic(editButton);
 		        editButton.setOnAction(
-		            event -> 
+		            event ->
 		            {
 		            	try
 						{
+		            		// Load Update Order Page and set the order to edit
 							FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/orders/OrderUpdatePage.fxml"));
 							Pane pane = loader.load();
 							UpdateOrder updatePage = loader.getController();
@@ -149,7 +160,9 @@ public class OrdersPage implements Initializable
 		        );
 		    }
 		});
-		
+		editBtnCol.setPrefWidth(width * 0.1);
+
+		// Add columns to table
 		ordersTable.getColumns().add(orderNumberColumn);
 		ordersTable.getColumns().add(priceColumn);
 		ordersTable.getColumns().add(colorColumn);
@@ -159,8 +172,5 @@ public class OrdersPage implements Initializable
 		ordersTable.getColumns().add(deliveryDateColumn);
 		ordersTable.getColumns().add(orderDateColumn);
 		ordersTable.getColumns().add(editBtnCol);
-
-		
 	}
-
 }
