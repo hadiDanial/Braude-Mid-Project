@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="541.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.OrdersPage">
+<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="541.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.OrdersPage">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="52.0" layoutY="34.0" minWidth="70.0" prefHeight="45.0" prefWidth="890.0" scaleShape="false" text="Orders" textAlignment="CENTER" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="34.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="ordersTable" layoutX="55.0" layoutY="114.0" maxWidth="890.0" minWidth="890.0" prefHeight="429.0" prefWidth="890.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="114.0">
+      <!-- <TableView fx:id="ordersTable" layoutX="55.0" layoutY="114.0" maxWidth="890.0" minWidth="890.0" prefHeight="429.0" prefWidth="890.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="114.0">
         <columns>
           <TableColumn prefWidth="43.0" text="#" />
           <TableColumn maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Price" />
@@ -25,6 +24,6 @@
             <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Delivery Date" />
             <TableColumn editable="false" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" resizable="false" sortable="false" text="Edit" />
         </columns>
-      </TableView>
+      </TableView> -->
    </children>
 </AnchorPane>
