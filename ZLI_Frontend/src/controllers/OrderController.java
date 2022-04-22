@@ -7,6 +7,7 @@ import entities.other.Branch;
 import entities.products.*;
 import entities.users.Order;
 import enums.OrderStatus;
+import requests.Request;
 import utility.IResponse;
 
 public class OrderController
@@ -77,6 +78,8 @@ public class OrderController
 		orders.add(new Order(null, "goodbye", null, null, Instant.now().plusSeconds(600000),200, 
 				OrderStatus.Delivered, new Branch(null, null, "Karmiel", null), null));
 		response.executeAfterResponse(orders);
+		
+		clientController.sendRequest(null, Request.GetAllOrders, response);
 	}
 
 }
