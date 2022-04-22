@@ -83,7 +83,14 @@ public class Order
 	{
 		return orderDate;
 	}
-	
+	public String getFormattedOrderDate()
+	{
+		return DateFormatter.formatInstant(orderDate, true);
+	}
+	public String getFormattedDeliveryDate()
+	{
+		return DateFormatter.formatInstant(deliveryDate, true);
+	}
 	public void setOrderDate(Instant orderDate)
 	{
 		this.orderDate = orderDate;
@@ -128,7 +135,10 @@ public class Order
 	{
 		this.branch = branch;
 	}
-	
+	public String getBranchName()
+	{
+		return branch.getBranchName();
+	}
 	public ArrayList<Product> getProducts()
 	{
 		return products;
