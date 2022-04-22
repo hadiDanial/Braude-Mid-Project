@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class ClientUI extends Application
@@ -27,12 +28,13 @@ public class ClientUI extends Application
 	public void start(Stage primaryStage)
 	{
 		window = primaryStage;
-		AnchorPane anchor;
+		//AnchorPane anchor;
+		Pane pane;
 		try
 		{
-			anchor = FXMLLoader.load(getClass().getResource("/gui/orders/OrdersPage.fxml"));
-			Scene scene = new Scene(anchor);
-			window.setTitle("Orders");
+			pane = FXMLLoader.load(getClass().getResource("/gui/orders/OrderUpdatePage.fxml"));
+			Scene scene = new Scene(pane);
+			window.setTitle("UpdateOrder");
 			window.setScene(scene);
 			window.show();
 		} catch (IOException e1)

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import entities.other.Branch;
 import entities.products.Item;
 import entities.products.Product;
+import enums.Color;
 import enums.OrderStatus;
 import utility.DateFormatter;
 
@@ -22,6 +23,7 @@ public class Order
 	private OrderStatus orderStatus;
 	private Branch branch;
 	private User customer;
+	private Color color;
 	
 	public Order(){	}
 	
@@ -40,7 +42,13 @@ public class Order
 		this.branch = branch;
 		this.customer = customer;
 	}
-	
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
 	public int getOrderId()
 	{
 		return orderId;

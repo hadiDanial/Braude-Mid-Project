@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ClientUI",
+            "request": "launch",
+            "mainClass": "gui.ClientUI",
+            "projectName": "ZLI_Frontend"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
