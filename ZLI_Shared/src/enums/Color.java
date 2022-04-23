@@ -24,6 +24,7 @@ public enum Color
 	@Override
 	public String toString()
 	{
+		if(this == Bridal || this == Mixed) return this.name();
 		return this.name() + ": " + this.hexCode;
 	}
 }
