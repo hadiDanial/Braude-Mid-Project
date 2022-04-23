@@ -1,22 +1,27 @@
 package server;
 
+import java.io.IOException;
 import java.net.InetAddress;
 
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 import requests.Request;
 
-public class Server extends AbstractServer {
+public class Server extends AbstractServer
+{
 
 	private String hostAddress;
 	private static Server instance = null;
 
-	public Server(int port) {
+	public Server(int port)
+	{
 		super(port);
 
-		try {
+		try
+		{
 			this.hostAddress = InetAddress.getLocalHost().getHostAddress();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			System.out.println(e);
 		}
 	}
@@ -32,57 +37,76 @@ public class Server extends AbstractServer {
 	 * 
 	 * @param String
 	 */
-	public Server runServer(int String) {
+	public Server runServer(int String)
+	{
 		// TODO - implement Server.runServer
 		throw new UnsupportedOperationException();
 	}
 
-	protected void serverStarted() {
+	protected void serverStarted()
+	{
 		System.out.println("Server listening for connections on port " + getPort());
 	}
 
-	protected void serverStopped() {
+	protected void serverStopped()
+	{
 		System.out.println("Server has stopped listening for connections.");
 	}
 
-	public static Server runServer(String p) {
+	public static Server runServer(String p)
+	{
 		int port = 0; // Port to listen on
 
-		try {
+		try
+		{
 			port = Integer.parseInt(p);
-		} catch (Throwable t) {
+		} catch (Throwable t)
+		{
 			port = ServerProperties.DEFAULT_PORT; // Set port to 5555
 		}
 
 		Server sv = new Server(port);
 
-		try {
+		try
+		{
 			sv.listen(); // Start listening for connections
-		} catch (Exception ex) {
+		} catch (Exception ex)
+		{
 			System.out.println("ERROR - Could not listen for clients!");
 		}
 		return sv;
 	}
 
-	public String getHostAddress() {
+	public String getHostAddress()
+	{
 		return this.hostAddress;
 	}
 
-	public void sendToClient(Object message, ConnectionToClient client) {
-		// TODO - implement Server.sendToClient
-		throw new UnsupportedOperationException();
+	public void sendToClient(Object message, ConnectionToClient client)
+	{
+		try
+		{
+			client.sendToClient(message);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
-	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
+	protected void handleMessageFromClient(Object msg, ConnectionToClient client)
+	{
 		// TODO start parsing message and save client if not saved
 		// ? maybe send to CommunicationController class
-		if(!(msg instanceof Request))
+		if (!(msg instanceof Request))
 			return;
 		Request req = (Request) msg;
 		System.out.println(req.getRequestType() + " message received: " + req.getMessage() + " from " + client);
-		
-		this.sendToAllClients(msg);
+		Object response = MessageParser.parse(req);
+		sendToClient(response, client);
+
+		// this.sendToAllClients(msg);
 	}
 
 }

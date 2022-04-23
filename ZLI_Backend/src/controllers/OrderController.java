@@ -1,10 +1,25 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import entities.products.*;
+import entities.users.Order;
+import requests.UpdateOrderRequest;
 
 public class OrderController
 {
-
+	private static OrderController instance;
+	
+	private OrderController() {	}
+	
+	public static OrderController getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new OrderController();
+		}
+		return instance;
+	}
 	/**
 	 * 
 	 * @param product
@@ -46,5 +61,14 @@ public class OrderController
 		// TODO - implement OrderController.isProduct
 		throw new UnsupportedOperationException();
 	}
+	
+	public ArrayList<Order> getAllOrders()
+	{
+		return null;
+	}
 
+	public boolean updateOrder(UpdateOrderRequest req)
+	{
+		return false;
+	}
 }
