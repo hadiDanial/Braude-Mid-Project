@@ -1,10 +1,11 @@
 package entities.other;
 
+import java.io.Serializable;
 import java.util.*;
 
 import entities.users.User;
 
-public class Branch
+public class Branch implements Serializable
 {
 
 	private int branchId;

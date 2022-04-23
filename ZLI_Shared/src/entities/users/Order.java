@@ -1,5 +1,6 @@
 package entities.users;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 
@@ -10,8 +11,12 @@ import enums.Color;
 import enums.OrderStatus;
 import utility.DateFormatter;
 
-public class Order
+public class Order implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2345501089755051123L;
 	private int orderId;
 	private OrderDelivery deliveryDetails;
 	private String greetingCard;
