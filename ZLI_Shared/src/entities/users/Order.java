@@ -24,24 +24,33 @@ public class Order
 	private Branch branch;
 	private User customer;
 	private Color color;
+
+	// Demo only
+	private String orderDetails;
+	
+	
 	
 	public Order(){	}
 	
-	public Order(OrderDelivery deliveryDetails, String greetingCard, ArrayList<Product> products, ArrayList<Item> items,
-			Instant deliveryDate, float totalCost, OrderStatus orderStatus, Branch branch, User customer)
+
+	
+	public Order(int orderId, String greetingCard, Instant deliveryDate, float totalCost, OrderStatus orderStatus,
+			Branch branch, Color color, String orderDetails)
 	{
 		super();
-		this.deliveryDetails = deliveryDetails;
+		this.orderId = orderId;
 		this.greetingCard = greetingCard;
-		this.products = products;
-		this.items = items;
 		this.deliveryDate = deliveryDate;
 		this.orderDate = Instant.now();
 		this.totalCost = totalCost;
 		this.orderStatus = orderStatus;
 		this.branch = branch;
-		this.customer = customer;
+		this.color = color;
+		this.orderDetails = orderDetails;
 	}
+
+
+
 	public Color getColor() {
 		return color;
 	}
@@ -167,6 +176,16 @@ public class Order
 	public void setCustomer(User customer)
 	{
 		this.customer = customer;
+	}
+
+	public String getOrderDetails()
+	{
+		return orderDetails;
+	}
+
+	public void setOrderDetails(String orderDetails)
+	{
+		this.orderDetails = orderDetails;
 	}
 
 	@Override
