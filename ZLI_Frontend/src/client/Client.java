@@ -16,12 +16,6 @@ public class Client extends AbstractClient
 	{
 		super(ClientProperties.getHostAddress(), ClientProperties.getHostPort());
 	}
-//	
-//	private Client(String host, int port)
-//	{
-//		super(host, port);
-//		
-//	}
 
 	/**
 	 * 
