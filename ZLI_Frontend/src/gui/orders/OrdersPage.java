@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -40,7 +41,10 @@ public class OrdersPage implements Initializable
 
 	@FXML
 	private Button refreshBtn;
-
+	
+	@FXML
+	private Label ordersTitle;
+	
 	private StackPane pane;
 	private Pane updatePagePane;
 	private UpdateOrder updatePage = null;
@@ -83,6 +87,7 @@ public class OrdersPage implements Initializable
 		} else
 		{
 			parent.getChildren().clear();
+			parent.getChildren().add(ordersTitle);
 			parent.getChildren().add(refreshBtn);
 			parent.getChildren().add(pane);
 			updateTableItems();
