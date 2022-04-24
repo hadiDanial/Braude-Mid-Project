@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 import entities.other.Branch;
 import entities.users.Order;
-import enums.Color;
+import enums.ColorEnum;
 import gui.ServerUI;
 
 public class DatabaseConnection

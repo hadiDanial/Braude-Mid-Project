@@ -5,9 +5,9 @@ import enums.*;
 public class Item extends BaseProduct
 {
 	private ItemType itemType;
-	private Color primaryColor;
+	private ColorEnum primaryColor;
 	public Item(String productName, float price, byte[] image, int quantityInStock, ItemType itemType,
-			Color primaryColor)
+			ColorEnum primaryColor)
 	{
 		super(productName, price, image, quantityInStock);
 		this.itemType = itemType;
@@ -21,11 +21,11 @@ public class Item extends BaseProduct
 	{
 		this.itemType = itemType;
 	}
-	public Color getPrimaryColor()
+	public ColorEnum getPrimaryColor()
 	{
 		return primaryColor;
 	}
-	public void setPrimaryColor(Color primaryColor)
+	public void setPrimaryColor(ColorEnum primaryColor)
 	{
 		this.primaryColor = primaryColor;
 	}

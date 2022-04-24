@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 import controllers.OrderController;
 import entities.users.Order;
-import enums.Color;
+import enums.ColorEnum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

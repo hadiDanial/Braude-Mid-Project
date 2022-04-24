@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import entities.other.Branch;
 import entities.products.Item;
 import entities.products.Product;
-import enums.Color;
+import enums.ColorEnum;
 import enums.OrderStatus;
 import utility.DateFormatter;
 
@@ -27,7 +27,7 @@ public class Order implements Serializable {
 	private OrderStatus orderStatus;
 	private Branch branch;
 	private User customer;
-	private Color color;
+	private ColorEnum colorEnum;
 
 	// Demo only
 	private String orderDetails;
@@ -36,7 +36,7 @@ public class Order implements Serializable {
 	}
 
 	public Order(int orderId, String greetingCard, Instant deliveryDate, float totalCost, OrderStatus orderStatus,
-			Branch branch, Color color, String orderDetails) {
+			Branch branch, ColorEnum colorEnum, String orderDetails) {
 		super();
 		this.orderId = orderId;
 		this.greetingCard = greetingCard;
@@ -45,12 +45,12 @@ public class Order implements Serializable {
 		this.totalCost = totalCost;
 		this.orderStatus = orderStatus;
 		this.branch = branch;
-		this.color = color;
+		this.colorEnum = colorEnum;
 		this.orderDetails = orderDetails;
 	}
 
 	public Order(int orderId, String greetingCard, Instant deliveryDate, float totalCost, OrderStatus orderStatus,
-			Branch branch, Color color, String orderDetails, Instant orderDate) {
+			Branch branch, ColorEnum colorEnum, String orderDetails, Instant orderDate) {
 		super();
 		this.orderId = orderId;
 		this.greetingCard = greetingCard;
@@ -59,16 +59,16 @@ public class Order implements Serializable {
 		this.totalCost = totalCost;
 		this.orderStatus = orderStatus;
 		this.branch = branch;
-		this.color = color;
+		this.colorEnum = colorEnum;
 		this.orderDetails = orderDetails;
 	}
 
-	public Color getColor() {
-		return color;
+	public ColorEnum getColor() {
+		return colorEnum;
 	}
 
-	public void setColor(Color color) {
-		this.color = color;
+	public void setColor(ColorEnum colorEnum) {
+		this.colorEnum = colorEnum;
 	}
 
 	public int getOrderId() {

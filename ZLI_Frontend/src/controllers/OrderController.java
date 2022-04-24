@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import entities.other.Branch;
 import entities.products.*;
 import entities.users.Order;
-import enums.Color;
+import enums.ColorEnum;
 import enums.OrderStatus;
 import requests.Request;
 import requests.RequestType;

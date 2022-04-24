@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import client.ClientProperties;
 import controllers.OrderController;
 import entities.users.Order;
-import enums.Color;
+import enums.ColorEnum;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 
 public class OrdersPage implements Initializable
 {
@@ -84,6 +85,8 @@ public class OrdersPage implements Initializable
 		StackPane pane = new StackPane();
 		pane.getChildren().add(ordersTable);
 		parent.getChildren().add(pane);
+		Rectangle rect = new Rectangle(20, 20, ColorEnum.Blue.HexToColor());
+		parent.getChildren().add(rect);
 		ordersTable.setPrefWidth(tableWidth);
 		ordersTable.setMinWidth(tableWidth * 0.5);
 		double left = (parent.getPrefWidth() - tableWidth) / 2;
@@ -114,8 +117,8 @@ public class OrdersPage implements Initializable
 		TableColumn<Order, Float> priceColumn = new TableColumn<>("Price");
 		priceColumn.setCellValueFactory(new PropertyValueFactory<Order, Float>("totalCost"));
 		priceColumn.setPrefWidth(width * 0.05);
-		TableColumn<Order, Color> colorColumn = new TableColumn<>("Color");
-		colorColumn.setCellValueFactory(new PropertyValueFactory<Order, Color>("color"));
+		TableColumn<Order, ColorEnum> colorColumn = new TableColumn<>("Color");
+		colorColumn.setCellValueFactory(new PropertyValueFactory<Order, ColorEnum>("color"));
 		colorColumn.setPrefWidth(width * 0.1);
 		TableColumn<Order, String> detailsColumn = new TableColumn<>("Details");
 		detailsColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderDetails"));

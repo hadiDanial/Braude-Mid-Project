@@ -9,7 +9,7 @@ import database.DatabaseConnection;
 import database.IResultSetToObject;
 import entities.other.Branch;
 import entities.users.Order;
-import enums.Color;
+import enums.ColorEnum;
 import enums.OrderStatus;
 import requests.UpdateOrderRequest;
 
@@ -36,7 +36,7 @@ public class OrderController
 					order.setOrderId(rs.getInt("orderNumber"));
 					order.setTotalCost(rs.getFloat("price"));
 					order.setGreetingCard(rs.getString("greetingCard"));
-					order.setColor(Color.valueOf(rs.getString("color")));
+					order.setColor(ColorEnum.valueOf(rs.getString("color")));
 					order.setOrderDetails(rs.getString("dOrder"));
 					order.setBranch(new Branch(rs.getString("shop")));
 					order.setDeliveryDate(rs.getTimestamp("date").toInstant());
@@ -64,7 +64,7 @@ public class OrderController
 	{
 		Order order = new Order(Integer.parseInt(orderData.get("orderNumber")), orderData.get("greetingCard"),
 				Instant.parse(orderData.get("date")), Float.parseFloat(orderData.get("price")), OrderStatus.Confirmed,
-				new Branch(orderData.get("shop")), Color.valueOf(orderData.get("color")), orderData.get("dOrder"),
+				new Branch(orderData.get("shop")), ColorEnum.valueOf(orderData.get("color")), orderData.get("dOrder"),
 				Instant.parse(orderData.get("orderDate")));
 		return order;
 	}
