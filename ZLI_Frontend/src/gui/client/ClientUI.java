@@ -16,7 +16,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class ClientUI extends Application
 {
@@ -59,7 +62,7 @@ public class ClientUI extends Application
 			anchor.setPrefWidth(ClientProperties.getClientWidth());
 			updateSceneRoot(anchor, "ZLI");
 			AnchorPane orders = FXMLLoader.load(getClass().getResource("/gui/orders/OrdersPage.fxml"));
-			anchor.getChildren().add(orders);
+			anchor.getChildren().add(0, orders);
 		} catch (IOException e1)
 		{
 			e1.printStackTrace();

@@ -40,7 +40,6 @@
 
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="375.0" prefWidth="747.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ClientUI">
    <children>
-      <!--
       <Button fx:id="settingsBtn" accessibleText="Settings" alignment="TOP_RIGHT" contentDisplay="GRAPHIC_ONLY" layoutX="588.0" layoutY="2.0" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: rgb(0,0,0,0);" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font size="1.0" />
@@ -52,6 +51,6 @@
                </image>
             </ImageView>
          </graphic>
-      </Button>-->
+      </Button>
    </children>
 </AnchorPane>

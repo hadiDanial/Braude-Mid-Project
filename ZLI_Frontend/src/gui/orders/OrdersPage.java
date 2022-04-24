@@ -10,6 +10,8 @@ import controllers.ClientController;
 import controllers.OrderController;
 import entities.users.Order;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +33,7 @@ import utility.IEventListener;
 public class OrdersPage implements Initializable
 {
 	private OrderController orderController;
-	private ArrayList<Order> orders;
+	private ObservableList<Order> orders;
 	private double tableWidth;
 
 	@FXML
@@ -58,25 +60,18 @@ public class OrdersPage implements Initializable
 		updateTableItems();
 	}
 
-	public ArrayList<Order> getOrders()
-	{
-		return orders;
-	}
-
-	public void setOrders(ArrayList<Order> orders)
-	{
-		this.orders = orders;
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		orders = FXCollections.observableArrayList();
 		orderController = OrderController.getInstance();
 		parent.setPrefHeight(ClientProperties.getClientHeight());
 		parent.setPrefWidth(ClientProperties.getClientWidth());
 		generateTableColumns();
 		setTableSettings();
 		updateTableItems();
+		ordersTable.setItems(orders);
 		ClientController.getInstance().registerConnectionListener(new IEventListener()
 		{
 			@Override
@@ -108,10 +103,10 @@ public class OrdersPage implements Initializable
 	public void updateTableItems()
 	{
 		orderController.getAllOrders(arr -> {
-
-			orders = (ArrayList<Order>) arr;
-			ordersTable.getItems().clear();
-			ordersTable.getItems().addAll(orders);
+			orders.clear();
+			orders.addAll((ArrayList<Order>) arr);
+//			ordersTable.getItems().clear();
+//			ordersTable.getItems().addAll(orders);
 		});
 	}
 
@@ -169,6 +164,8 @@ public class OrdersPage implements Initializable
 				if (order == null)
 				{
 					setGraphic(null);
+					setDisable(false);
+					setText("");
 					return;
 				}
 
