@@ -83,6 +83,7 @@ public class OrdersPage implements Initializable
 		} else
 		{
 			parent.getChildren().clear();
+			parent.getChildren().add(refreshBtn);
 			parent.getChildren().add(pane);
 			updateTableItems();
 		}
