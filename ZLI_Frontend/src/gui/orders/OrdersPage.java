@@ -3,9 +3,11 @@ package gui.orders;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.ResourceBundle;
 
 import client.ClientProperties;
+import controllers.ClientController;
 import controllers.OrderController;
 import entities.users.Order;
 import enums.ColorEnum;
@@ -26,6 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import utility.IEventListener;
 
 public class OrdersPage implements Initializable
 {
@@ -52,7 +55,7 @@ public class OrdersPage implements Initializable
 	private double left;
 	private double right;
 
-	void getOrders(ActionEvent event)
+	public void onRefreshBtnClick(ActionEvent event)
 	{
 		updateTableItems();
 	}
@@ -76,6 +79,16 @@ public class OrdersPage implements Initializable
 		generateTableColumns();
 		setTableSettings();
 		updateTableItems();
+		ClientController.getInstance().registerConnectionListener(new IEventListener()
+		{
+			@Override
+			public void invoke()
+			{
+//				System.out.println("Listener called: Refreshing orders table");
+				updateTableItems();
+			}
+		});
+		
 	}
 
 	public void toggleUpdatePageVisibility(boolean isVisible)

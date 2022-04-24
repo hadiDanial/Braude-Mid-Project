@@ -12,7 +12,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="refreshBtn" layoutX="890.0" layoutY="44.0" mnemonicParsing="false" onAction="#getOrders" text="Refresh" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="44.0" />
+      <Button fx:id="refreshBtn" layoutX="890.0" layoutY="44.0" mnemonicParsing="false" onAction="#onRefreshBtnClick" text="Refresh" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="44.0" />
       <!-- <TableView fx:id="ordersTable" layoutX="55.0" layoutY="114.0" maxWidth="890.0" minWidth="890.0" prefHeight="429.0" prefWidth="890.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="114.0">
         <columns>
           <TableColumn prefWidth="43.0" text="#" />

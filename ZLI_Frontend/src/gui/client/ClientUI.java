@@ -107,7 +107,6 @@ public class ClientUI extends Application
 			Scene scene = new Scene(pane);
 			settings.setScene(scene);
 			settings.show();
-			System.out.println("SETTINGS");
 		} catch (IOException e)
 		{
 			e.printStackTrace();

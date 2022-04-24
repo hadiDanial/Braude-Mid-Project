@@ -1,18 +1,15 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import client.Client;
-import entities.users.Order;
 import gui.client.ClientUI;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import requests.Request;
-import requests.RequestType;
+import utility.IEventListener;
 import utility.IResponse;
 
 public class ClientController
@@ -21,10 +18,12 @@ public class ClientController
 	private static ClientController instance;
 	private static ClientUI clientUI;
 	private Client client;
+	public static HashSet<IEventListener> connectionListeners;
 	
 	private ClientController()
 	{
 		client = new Client();
+		connectionListeners = new HashSet<IEventListener>();
 	}
 	
 	public static ClientController getInstance() 
@@ -66,6 +65,7 @@ public class ClientController
 		{
 			client.closeConnection();
 			client = new Client();
+			invokeConnectionListeners();
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -83,5 +83,17 @@ public class ClientController
 		{
 			client.quit();
 		}
+	}
+	
+	public void registerConnectionListener(IEventListener listener){
+	    connectionListeners.add(listener);
+	}
+	public void removeConnectionListener(IEventListener listener){
+		connectionListeners.remove(listener);
+	}
+	private void invokeConnectionListeners(){
+	    for(IEventListener listener:connectionListeners){
+	        listener.invoke();
+	    }
 	}
 }
