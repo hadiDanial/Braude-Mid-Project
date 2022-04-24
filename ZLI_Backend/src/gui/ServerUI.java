@@ -1,25 +1,37 @@
 package gui;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import database.DataBase;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import server.ConnectedClient;
+import server.ConsoleString;
 import server.Server;
 
-public class ServerUI extends Application {
+public class ServerUI extends Application implements Initializable {
 	private Server sv;
 
-	public static ArrayList<String> consoleTxtList = new ArrayList<String>();
+	// ? usage ServerUI.consoleTxtList.add(new ConsoleString("e"));
+	public static ObservableList<ConsoleString> consoleTxtList = FXCollections.observableArrayList();
+	public static ObservableList<ConnectedClient> clients = FXCollections.observableArrayList();
 
 	@FXML
 	private Button exitBtn;
@@ -34,7 +46,7 @@ public class ServerUI extends Application {
 	private TextField hostField;
 
 	@FXML
-	private TextField passwordField;
+	private PasswordField passwordField;
 
 	@FXML
 	private TextField userField;
@@ -52,17 +64,26 @@ public class ServerUI extends Application {
 	private TextField dbField;
 
 	@FXML
-	private TableColumn<String, String> ipColumn;
+	private TableColumn<ConnectedClient, String> ipColumn;
 
 	@FXML
-	private TableColumn<String, String> hostColumn;
+	private TableColumn<ConnectedClient, String> hostColumn;
 
 	@FXML
-	private TableColumn<String, String> statusColumn;
+	private TableColumn<ConnectedClient, String> statusColumn;
+
+	@FXML
+	private TableView<ConnectedClient> clientsTable;
+
+	@FXML
+	private TableView<ConsoleString> consoleTable;
+
+	@FXML
+	private TableColumn<ConsoleString, String> consoleColumn;
 
 	private void disconnectServer() {
 		try {
-			sv.close();
+			sv.closeServer();
 		} catch (Exception e) {
 
 		}
@@ -74,7 +95,7 @@ public class ServerUI extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/ServerUI.fxml"));
 
 		Scene scene = new Scene(root);
-		// scene.getStylesheets().add(getClass().getResource("/gui/ServerUI.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/gui/ServerUI.css").toExternalForm());
 		primaryStage.setTitle("Client");
 		primaryStage.setScene(scene);
 
@@ -89,13 +110,11 @@ public class ServerUI extends Application {
 
 	@FXML
 	public void onConnectBtn(ActionEvent event) throws Exception {
-
 		try {
 			DataBase.getInstance().connectToDB(hostField.getText(), dbField.getText(), userField.getText(),
 					passwordField.getText());
 
 		} catch (Exception e) {
-			updateConsole();
 			throw e;
 		}
 		try {
@@ -104,10 +123,8 @@ public class ServerUI extends Application {
 
 			connectBtn.setDisable(true);
 			disconnectBtn.setDisable(false);
-			updateConsole();
 
 		} catch (Exception e) {
-			updateConsole();
 			throw e;
 		}
 	}
@@ -115,19 +132,28 @@ public class ServerUI extends Application {
 	@FXML
 	public void onDisconnectBtn(ActionEvent event) {
 		disconnectServer();
-
 		connectBtn.setDisable(false);
 		disconnectBtn.setDisable(true);
-		updateConsole();
 	}
 
-	public void updateConsole() {
-		// console.setText("");
+	public void disableConsole() {
+		try {
 
-		for (String string : consoleTxtList) {
-			console.appendText(string + "\n");
+			console.appendText("Hello User\n");
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		consoleTxtList.clear();
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ipColumn.setCellValueFactory(new PropertyValueFactory<>("ip"));
+		hostColumn.setCellValueFactory(new PropertyValueFactory<>("host"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+		clientsTable.setItems(clients);
+
+		consoleColumn.setCellValueFactory(new PropertyValueFactory<>("str"));
+		consoleTable.setItems(consoleTxtList);
 	}
 
 	public static void main(String[] args) {
