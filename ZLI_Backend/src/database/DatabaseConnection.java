@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import entities.other.Branch;
 import entities.users.Order;
@@ -154,7 +155,33 @@ public class DatabaseConnection
 			return null;
 		}
 	}
-	
+
+	public <T> boolean updateInDB(int id, String idFieldName, String tableName, ArrayList<String> keys, 
+			IObjectToPreparedStatementParameters<T> objToPS)
+	{
+		PreparedStatement ps;
+		try
+		{
+			StringBuilder sb = new StringBuilder();
+			sb.append("UPDATE " +  tableName + " SET ");
+			
+			for(String key : keys)
+			{
+				sb.append(key + "=?, ");
+			}
+			sb.delete(sb.length() - 2, sb.length());
+			sb.append(" WHERE " + idFieldName + "=" + id + ";");
+			ps = conn.prepareStatement(sb.toString());
+			objToPS.convertObjectToPSQuery(ps);
+			System.out.println("Update:\n" + sb.toString());
+			return ps.executeUpdate() == 1;
+		} catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		return false;
+	}
 	public void updateOrderInDB(String orderID, ArrayList<String> data)
 	{
 		PreparedStatement ps;
@@ -259,11 +286,12 @@ public class DatabaseConnection
 					+ "`color` varchar(32)," 
 					+ "`dOrder` varchar(256),"
 					+ "`shop` varchar(32)," 
-					+ "`date` datetime," 
-					+ "`orderDate` datetime);");
+					+ "`date` timestamp," 
+					+ "`orderDate` timestamp);");
 		} catch (Exception e)
 		{
 			System.out.println(e);
 		}
 	}
+
 }

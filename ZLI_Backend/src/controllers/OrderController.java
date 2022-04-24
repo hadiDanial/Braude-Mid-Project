@@ -1,11 +1,16 @@
 package controllers;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import database.DatabaseConnection;
+import database.IObjectToPreparedStatementParameters;
 import database.IResultSetToObject;
 import entities.other.Branch;
 import entities.users.Order;
@@ -94,7 +99,23 @@ public class OrderController
 
 	public boolean updateOrder(Order orderToUpdate)
 	{
-		return false;
+//		HashMap<String, String> valuesToUpdate = new HashMap<>();
+//		valuesToUpdate.put("date", Timestamp.from(orderToUpdate.getDeliveryDate()));
+//		valuesToUpdate.put("color", orderToUpdate.getColor().name());
+		ArrayList<String> keys = new ArrayList<String>();
+		keys.add("date");
+		keys.add("color");
+		return databaseConnection.updateInDB(orderToUpdate.getOrderId(), ID_FIELD_NAME, TABLE_NAME,
+					keys, new IObjectToPreparedStatementParameters<Order>()
+		{
+
+			@Override
+			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+			{
+				statementToPrepare.setTimestamp(1,Timestamp.from(orderToUpdate.getDeliveryDate()));
+				statementToPrepare.setString(2, orderToUpdate.getColor().name());
+			}
+		});
 	}
 
 }
