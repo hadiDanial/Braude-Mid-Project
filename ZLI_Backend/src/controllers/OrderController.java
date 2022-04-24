@@ -11,7 +11,6 @@ import entities.other.Branch;
 import entities.users.Order;
 import enums.ColorEnum;
 import enums.OrderStatus;
-import requests.UpdateOrderRequest;
 
 public class OrderController
 {
@@ -93,7 +92,7 @@ public class OrderController
 		return databaseConnection.getByID(orderId, TABLE_NAME, ID_FIELD_NAME, rsToOrder);
 	}
 
-	public boolean updateOrder(UpdateOrderRequest req)
+	public boolean updateOrder(Order orderToUpdate)
 	{
 		return false;
 	}

@@ -10,7 +10,6 @@ import enums.ColorEnum;
 import enums.OrderStatus;
 import requests.Request;
 import requests.RequestType;
-import requests.UpdateOrderRequest;
 import utility.IResponse;
 
 public class OrderController
@@ -78,10 +77,9 @@ public class OrderController
 		clientController.sendRequest(request, response);
 	}
 	
-	public void updateOrder(int orderId, Order updatedOrder, IResponse<Boolean> response)
+	public void updateOrder(Order updatedOrder, IResponse<Boolean> response)
 	{
-		UpdateOrderRequest updateOrderRequest = new UpdateOrderRequest(orderId, updatedOrder);
-		Request request = new Request(RequestType.UpdateOrder, updateOrderRequest);
+		Request request = new Request(RequestType.UpdateOrder, updatedOrder);
 		clientController.sendRequest(request, response);
 	}
 

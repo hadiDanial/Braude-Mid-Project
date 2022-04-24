@@ -1,10 +1,9 @@
 package server;
 
 import controllers.OrderController;
-
+import entities.users.Order;
 import requests.Request;
 import requests.RequestType;
-import requests.UpdateOrderRequest;
 
 public class MessageParser {
 
@@ -18,7 +17,7 @@ public class MessageParser {
                 return OrderController.getInstance().getAllOrders();
             }
             case UpdateOrder: {
-                return OrderController.getInstance().updateOrder((UpdateOrderRequest) req.getMessage());
+                return OrderController.getInstance().updateOrder((Order) req.getMessage());
             }
             case Login: {
 
