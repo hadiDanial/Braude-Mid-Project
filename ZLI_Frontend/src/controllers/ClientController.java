@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import client.Client;
@@ -59,5 +60,20 @@ public class ClientController
 	{
 		client.handleMessageFromClientUI(request, response);
 	}
+	public void reconnectToServer()
+	{
+		try
+		{
+			client.closeConnection();
+			client = new Client();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
+	public void openSettingsPage()
+	{
+		clientUI.openSettingsPage();
+	}
 }

@@ -2,6 +2,7 @@ package client;
 
 import java.io.IOException;
 
+import controllers.ClientController;
 import ocsf.client.AbstractClient;
 import requests.Request;
 import requests.RequestType;
@@ -23,8 +24,6 @@ public class Client extends AbstractClient
 	 */
 	protected void handleMessageFromServer(Object message)
 	{
-		System.out.println("--> handleMessageFromServer");
-
 		awaitResponse = false;
 		if (response != null)
 		{
@@ -59,11 +58,12 @@ public class Client extends AbstractClient
 			}
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+//			e.printStackTrace();
 			this.response = null;
 			this.awaitResponse = false;
+			ClientController.getInstance().openSettingsPage();
 //			clientUI.display("Could not send message to server: Terminating client." + e);
-			quit();
+//			quit();
 		}
 	}
 

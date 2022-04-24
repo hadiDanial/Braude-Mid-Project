@@ -7,7 +7,9 @@ import client.ClientProperties;
 import controllers.ClientController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,6 +23,11 @@ public class ClientUI extends Application
 	private static Stage window;
 	private static Scene scene;
 	private static AnchorPane root;
+	
+	@FXML
+	private Button settingsBtn;
+	
+	
 	public static void main(String[] args)
 	{
 		launch(args);
@@ -67,13 +74,33 @@ public class ClientUI extends Application
 	
 	public void onSettingsButtonClicked(ActionEvent event) throws IOException
 	{
-		AnchorPane anchor = FXMLLoader.load(getClass().getResource("/gui/orders/OrdersPage.fxml"));
-		updateSceneRoot(anchor, "Orders");
+		openSettingsPage();
 	}
 
 	public Pane getRoot()
 	{
 		return root;
 	}
-
+	public void openSettingsPage()
+	{
+		Stage settings = new Stage();
+		settings.initModality(Modality.APPLICATION_MODAL);
+		settings.setTitle("Settings");
+		Pane pane;
+		try
+		{
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/client/SettingsPage.fxml"));
+			pane = loader.load();
+			SettingsPage settingsPage = loader.getController();
+			settingsPage.setStage(settings);
+			Scene scene = new Scene(pane);
+			settings.setScene(scene);
+			settings.show();
+			System.out.println("SETTINGS");
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
 }
