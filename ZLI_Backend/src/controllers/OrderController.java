@@ -98,9 +98,6 @@ public class OrderController
 
 	public boolean updateOrder(Order orderToUpdate)
 	{
-//		HashMap<String, String> valuesToUpdate = new HashMap<>();
-//		valuesToUpdate.put("date", Timestamp.from(orderToUpdate.getDeliveryDate()));
-//		valuesToUpdate.put("color", orderToUpdate.getColor().name());
 		ArrayList<String> keys = new ArrayList<String>();
 		keys.add("date");
 		keys.add("color");
