@@ -1,4 +1,4 @@
-package gui;
+package gui.client;
 
 import java.io.IOException;
 import java.net.URL;

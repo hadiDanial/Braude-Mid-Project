@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import client.Client;
 import entities.users.Order;
-import gui.ClientUI;
+import gui.client.ClientUI;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
