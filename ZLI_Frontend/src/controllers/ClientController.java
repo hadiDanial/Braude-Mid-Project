@@ -76,4 +76,12 @@ public class ClientController
 	{
 		clientUI.openSettingsPage();
 	}
+
+	public void closeConnection()
+	{
+		if(client != null)
+		{
+			client.quit();
+		}
+	}
 }

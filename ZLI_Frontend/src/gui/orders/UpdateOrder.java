@@ -105,7 +105,6 @@ public class UpdateOrder implements Initializable
 		LocalDate localDate = LocalDateTime.ofInstant(order.getDeliveryDate(), ZoneOffset.UTC).toLocalDate();
 		datePicker.setValue(localDate);
 		colorList.setValue(order.getColor());
-		System.out.println(this.order);
 	}
 
 	private void setOrderDetailsText()

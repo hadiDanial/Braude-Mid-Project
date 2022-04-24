@@ -7,10 +7,12 @@ import client.ClientProperties;
 import controllers.ClientController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -45,6 +47,15 @@ public class ClientUI extends Application
 		AnchorPane anchor;
 		try
 		{
+			window.setOnCloseRequest(new EventHandler<WindowEvent>()
+			{
+				
+				@Override
+				public void handle(WindowEvent event)
+				{
+			        ClientController.getInstance().closeConnection();
+				}
+			});
 			anchor = FXMLLoader.load(getClass().getResource("/gui/client/ClientUI.fxml"));
 			anchor.setPrefHeight(ClientProperties.getClientHeight());
 			anchor.setPrefWidth(ClientProperties.getClientWidth());

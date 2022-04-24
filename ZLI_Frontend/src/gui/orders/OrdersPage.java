@@ -111,7 +111,7 @@ public class OrdersPage implements Initializable
 		ordersTable.setMinWidth(tableWidth * 0.5);
 		left = (parent.getPrefWidth() - tableWidth) / 2;
 		right = ClientProperties.getClientWidth() - ((parent.getPrefWidth() - tableWidth) / 2 + tableWidth);
-		System.out.println(parent.getPrefWidth() + " " + left + " " + right);
+//		System.out.println(parent.getPrefWidth() + " " + left + " " + right);
 		AnchorPane.setLeftAnchor(pane, left);
 		AnchorPane.setRightAnchor(pane, right);
 		AnchorPane.setTopAnchor(pane, 100.0);
