@@ -3,7 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import database.DataBase;
+import database.DatabaseConnection;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -95,7 +95,7 @@ public class ServerUI extends Application implements Initializable {
 
 		Scene scene = new Scene(root);
 		// scene.getStylesheets().add(getClass().getResource("/gui/ServerUI.css").toExternalForm());
-		primaryStage.setTitle("Client");
+		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);
 
 		primaryStage.show();
@@ -110,7 +110,7 @@ public class ServerUI extends Application implements Initializable {
 	@FXML
 	public void onConnectBtn(ActionEvent event) throws Exception {
 		try {
-			DataBase.getInstance().connectToDB(hostField.getText(), dbField.getText(), userField.getText(),
+			DatabaseConnection.getInstance().connectToDB(hostField.getText(), dbField.getText(), userField.getText(),
 					passwordField.getText());
 
 		} catch (Exception e) {
