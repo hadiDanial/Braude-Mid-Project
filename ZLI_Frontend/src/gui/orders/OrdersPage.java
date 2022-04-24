@@ -179,6 +179,7 @@ public class OrdersPage implements Initializable
 							Pane pane = loader.load();
 							UpdateOrder updatePage = loader.getController();
 							updatePage.setOrderToUpdate(order);
+							updatePage.setParent(parent);
 							parent.getChildren().clear();
 							parent.getChildren().add(pane);
 						} catch (IOException e)

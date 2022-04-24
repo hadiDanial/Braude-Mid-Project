@@ -4,15 +4,17 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.UpdateOrder">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.UpdateOrder">
    <children>
-      <Button id="UpdateBttn" layoutX="221.0" layoutY="136.0" mnemonicParsing="false" onAction="#setOrder" prefHeight="25.0" prefWidth="125.0" text="Update" />
-      <Label id="NewColorLBL" layoutX="79.0" layoutY="89.0" text="New Color:" />
-      <Label id="NewDateLBL" layoutX="79.0" layoutY="36.0" prefHeight="18.0" prefWidth="65.0" text="New Date:" />
-      <DatePicker id="DatePicker" layoutX="172.0" layoutY="32.0" />
-      <Button id="xCancelBttn" layoutX="82.0" layoutY="136.0" mnemonicParsing="false" text="Cancel" />
-      <ChoiceBox id="ColorChocBox" layoutX="172.0" layoutY="85.0" prefHeight="25.0" prefWidth="174.0" />
+      <Button id="UpdateBttn" fx:id="updateBtn" layoutX="225.0" layoutY="276.0" mnemonicParsing="false" onAction="#onUpdateBtnClicked" prefHeight="25.0" prefWidth="125.0" text="Update" />
+      <Label id="NewColorLBL" layoutX="83.0" layoutY="229.0" text="New Color:" />
+      <Label id="NewDateLBL" layoutX="83.0" layoutY="176.0" prefHeight="18.0" prefWidth="65.0" text="New Date:" />
+      <DatePicker id="DatePicker" fx:id="datePicker" layoutX="176.0" layoutY="172.0" onInputMethodTextChanged="#checkValidDate" />
+      <Button id="xCancelBttn" fx:id="cancelBtn" layoutX="83.0" layoutY="276.0" mnemonicParsing="false" onAction="#onCancelBtnClicked" text="Cancel" />
+      <ChoiceBox id="ColorChocBox" fx:id="colorList" layoutX="176.0" layoutY="225.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextArea fx:id="orderDetails" editable="false" layoutX="82.0" layoutY="29.0" prefHeight="109.0" prefWidth="270.0" />
    </children>
 </Pane>
