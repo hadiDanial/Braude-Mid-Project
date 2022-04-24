@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="541.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.OrdersPage">
+<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="541.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.OrdersPage">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="52.0" layoutY="34.0" minWidth="70.0" prefHeight="45.0" prefWidth="890.0" scaleShape="false" text="Orders" textAlignment="CENTER" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="34.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="refreshBtn" layoutX="890.0" layoutY="44.0" mnemonicParsing="false" onAction="#getOrders" text="Refresh" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="44.0" />
       <!-- <TableView fx:id="ordersTable" layoutX="55.0" layoutY="114.0" maxWidth="890.0" minWidth="890.0" prefHeight="429.0" prefWidth="890.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="114.0">
         <columns>
           <TableColumn prefWidth="43.0" text="#" />

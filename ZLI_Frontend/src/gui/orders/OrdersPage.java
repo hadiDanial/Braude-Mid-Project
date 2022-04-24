@@ -10,6 +10,7 @@ import controllers.OrderController;
 import entities.users.Order;
 import enums.Color;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,10 +35,13 @@ public class OrdersPage implements Initializable
 
 	@FXML
 	private AnchorPane parent;
+	
+	@FXML
+	private Button refreshBtn;
 
-	public OrdersPage()
-	{
-
+	@FXML
+	void getOrders(ActionEvent event) {
+		updateTableItems();
 	}
 
 	public ArrayList<Order> getOrders()
@@ -58,8 +62,15 @@ public class OrdersPage implements Initializable
 		parent.setPrefWidth(ClientProperties.getClientWidth());
 		generateTableColumns();
 		setTableSettings();
+		updateTableItems();
+	}
+
+	private void updateTableItems()
+	{
 		orderController.getAllOrders(arr -> {
+			
 			orders = (ArrayList<Order>) arr;
+			ordersTable.getItems().clear();
 			ordersTable.getItems().addAll(orders);
 		});
 	}
