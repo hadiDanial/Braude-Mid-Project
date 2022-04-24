@@ -23,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class OrdersPage implements Initializable
@@ -30,18 +31,25 @@ public class OrdersPage implements Initializable
 	private OrderController orderController;
 	private ArrayList<Order> orders;
 	private double tableWidth;
-	
+
 	@FXML
 	private TableView<Order> ordersTable;
 
 	@FXML
 	private AnchorPane parent;
-	
+
 	@FXML
 	private Button refreshBtn;
 
-	@FXML
-	void getOrders(ActionEvent event) {
+	private StackPane pane;
+	private Pane updatePagePane;
+	private UpdateOrder updatePage = null;
+	private OrdersPage ordersPage = this;
+	private double left;
+	private double right;
+
+	void getOrders(ActionEvent event)
+	{
 		updateTableItems();
 	}
 
@@ -66,10 +74,24 @@ public class OrdersPage implements Initializable
 		updateTableItems();
 	}
 
+	public void toggleUpdatePageVisibility(boolean isVisible)
+	{
+		if (updatePage != null && isVisible)
+		{
+			parent.getChildren().clear();
+			parent.getChildren().add(updatePagePane);
+		} else
+		{
+			parent.getChildren().clear();
+			parent.getChildren().add(pane);
+			updateTableItems();
+		}
+	}
+
 	private void updateTableItems()
 	{
 		orderController.getAllOrders(arr -> {
-			
+
 			orders = (ArrayList<Order>) arr;
 			ordersTable.getItems().clear();
 			ordersTable.getItems().addAll(orders);
@@ -81,14 +103,14 @@ public class OrdersPage implements Initializable
 	 */
 	private void setTableSettings()
 	{
-		
-		StackPane pane = new StackPane();
+
+		pane = new StackPane();
 		pane.getChildren().add(ordersTable);
 		parent.getChildren().add(pane);
 		ordersTable.setPrefWidth(tableWidth);
 		ordersTable.setMinWidth(tableWidth * 0.5);
-		double left = (parent.getPrefWidth() - tableWidth) / 2;
-		double right = ClientProperties.getClientWidth() - ((parent.getPrefWidth() - tableWidth) / 2 + tableWidth);
+		left = (parent.getPrefWidth() - tableWidth) / 2;
+		right = ClientProperties.getClientWidth() - ((parent.getPrefWidth() - tableWidth) / 2 + tableWidth);
 		System.out.println(parent.getPrefWidth() + " " + left + " " + right);
 		AnchorPane.setLeftAnchor(pane, left);
 		AnchorPane.setRightAnchor(pane, right);
@@ -101,7 +123,8 @@ public class OrdersPage implements Initializable
 
 	/**
 	 * Generates the following table columns:<br>
-	 * Order number, price, color, details, greeting, branch, delivery date, order date, and edit order button.
+	 * Order number, price, color, details, greeting, branch, delivery date, order
+	 * date, and edit order button.
 	 */
 	private void generateTableColumns()
 	{
@@ -111,28 +134,33 @@ public class OrdersPage implements Initializable
 		TableColumn<Order, Integer> orderNumberColumn = new TableColumn<>("#");
 		orderNumberColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("orderId"));
 		orderNumberColumn.setPrefWidth(width * 0.05);
-		orderNumberColumn.setStyle( "-fx-alignment: CENTER;");
+		orderNumberColumn.setStyle("-fx-alignment: CENTER;");
 		TableColumn<Order, Float> priceColumn = new TableColumn<>("Price");
 		priceColumn.setCellValueFactory(new PropertyValueFactory<Order, Float>("totalCost"));
 		priceColumn.setPrefWidth(width * 0.05);
 		TableColumn<Order, Order> colorColumn = new TableColumn<>("Color");
 		colorColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-		colorColumn.setCellFactory(param -> new TableCell<Order, Order>() {
-		    
-		    @Override
-		    protected void updateItem(Order order, boolean empty) {
-		        super.updateItem(order, empty);
-		       
-		        if (order == null) {
-		            setGraphic(null);
-		            return;
-		        }
-		        
-		        Rectangle rect = new Rectangle(20, 20, order.getColor().HexToColor());
-		        setText(order.getColor().name());
-		        setGraphic(rect);
-		        
-		    }
+		colorColumn.setCellFactory(param -> new TableCell<Order, Order>()
+		{
+
+			@Override
+			protected void updateItem(Order order, boolean empty)
+			{
+				super.updateItem(order, empty);
+
+				if (order == null)
+				{
+					setGraphic(null);
+					return;
+				}
+
+				Rectangle rect = new Rectangle(20, 20, order.getColor().HexToColor());
+				rect.setStroke(Color.BLACK);
+				rect.setStrokeWidth(1);
+				setText(order.getColor().name());
+				setGraphic(rect);
+
+			}
 		});
 		colorColumn.setPrefWidth(width * 0.1);
 		TableColumn<Order, String> detailsColumn = new TableColumn<>("Details");
@@ -153,43 +181,51 @@ public class OrdersPage implements Initializable
 
 		// Edit button column
 		TableColumn<Order, Order> editBtnCol = new TableColumn<>("Edit");
-		editBtnCol.setCellValueFactory(
-		    param -> new ReadOnlyObjectWrapper<>(param.getValue())
-		);
-		editBtnCol.setCellFactory(param -> new TableCell<Order, Order>() {
-		    private final Button editButton = new Button("Edit");
-		    
-		    @Override
-		    protected void updateItem(Order order, boolean empty) {
-		        super.updateItem(order, empty);
+		editBtnCol.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		editBtnCol.setCellFactory(param -> new TableCell<Order, Order>()
+		{
+			private final Button editButton = new Button("Edit");
 
-		        if (order == null) {
-		            setGraphic(null);
-		            return;
-		        }
-		        editButton.setPrefWidth(width * 0.09);
-		        setGraphic(editButton);
-		        editButton.setOnAction(
-		            event ->
-		            {
-		            	try
+			@Override
+			protected void updateItem(Order order, boolean empty)
+			{
+				super.updateItem(order, empty);
+
+				if (order == null)
+				{
+					setGraphic(null);
+					return;
+				}
+				editButton.setPrefWidth(width * 0.09);
+				setGraphic(editButton);
+				editButton.setOnAction(event -> {
+					try
+					{
+						// Load Update Order Page and set the order to edit
+						if (updatePage == null)
 						{
-		            		// Load Update Order Page and set the order to edit
-							FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/orders/OrderUpdatePage.fxml"));
-							Pane pane = loader.load();
-							UpdateOrder updatePage = loader.getController();
+							FXMLLoader loader = new FXMLLoader(
+									getClass().getResource("/gui/orders/OrderUpdatePage.fxml"));
+							updatePagePane = loader.load();
+							updatePage = loader.getController();
 							updatePage.setOrderToUpdate(order);
-							updatePage.setParent(parent);
+							updatePage.setup(parent, ordersPage);
 							parent.getChildren().clear();
-							parent.getChildren().add(pane);
-						} catch (IOException e)
+							parent.getChildren().add(updatePagePane);
+							AnchorPane.setLeftAnchor(editButton, left);
+							AnchorPane.setRightAnchor(editButton, right);
+						} else
 						{
-							e.printStackTrace();
+							updatePage.setOrderToUpdate(order);
+							toggleUpdatePageVisibility(true);
 						}
+					} catch (IOException e)
+					{
+						e.printStackTrace();
+					}
 
-		            }
-		        );
-		    }
+				});
+			}
 		});
 		editBtnCol.setPrefWidth(width * 0.1);
 

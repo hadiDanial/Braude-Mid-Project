@@ -72,7 +72,7 @@ public class ClientUI extends Application
 		return window;
 	}
 	
-	public void onSettingsButtonClicked(ActionEvent event) throws IOException
+	public void onSettingsButtonClicked(ActionEvent event)
 	{
 		openSettingsPage();
 	}

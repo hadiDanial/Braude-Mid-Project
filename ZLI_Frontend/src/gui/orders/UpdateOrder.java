@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.InputMethodEvent;
@@ -49,6 +50,7 @@ public class UpdateOrder implements Initializable
 	@FXML
 	private TextArea orderDetails;
 	private AnchorPane parent;
+	private OrdersPage ordersPage;
 
 	@FXML
 	void checkValidDate(InputMethodEvent event)
@@ -64,17 +66,7 @@ public class UpdateOrder implements Initializable
 
 	private void closeSceneAndOpenOrdersTable()
 	{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/orders/OrdersPage.fxml"));
-		AnchorPane pane;
-		try
-		{
-			pane = loader.load();
-			parent.getChildren().clear();
-			parent.getChildren().add(pane);
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		ordersPage.toggleUpdatePageVisibility(false);
 	}
 
 	@FXML
@@ -90,9 +82,13 @@ public class UpdateOrder implements Initializable
 			@Override
 			public void executeAfterResponse(Object message)
 			{
-				orderDetails.setText((Boolean)message ? "Order updated successfully." : "Failed to update!");
+				boolean result = (Boolean)message;
+				orderDetails.setText(result ? "Order updated successfully." : "Failed to update!");
+				if(result)
+					closeSceneAndOpenOrdersTable();
 			}
 		});
+		closeSceneAndOpenOrdersTable();
 	}
 
 	@Override
@@ -108,7 +104,6 @@ public class UpdateOrder implements Initializable
 		
 		LocalDate localDate = LocalDateTime.ofInstant(order.getDeliveryDate(), ZoneOffset.UTC).toLocalDate();
 		datePicker.setValue(localDate);
-		colorList.getItems().addAll(ColorEnum.values());
 		colorList.setValue(order.getColor());
 		System.out.println(this.order);
 	}
@@ -117,15 +112,17 @@ public class UpdateOrder implements Initializable
 	{
 		orderDetails.clear();
 		orderDetails.appendText("Order #" + order.getOrderId() + ":\n");
-		orderDetails.appendText("Ordered on " + order.getFormattedOrderDate() + " from Branch: " + order.getBranchName() + ".\n");
+		orderDetails.appendText("Ordered on " + order.getFormattedOrderDate() + "\nFrom Branch: " + order.getBranchName() + ".\n");
 		orderDetails.appendText("For delivery on" + order.getFormattedDeliveryDate() + ".\n");
 		orderDetails.appendText("Order color is " + order.getColor().name() + ", details:\n");
 		orderDetails.appendText(order.getOrderDetails() + "\n");
 	}
 
-	public void setParent(AnchorPane parent)
+	public void setup(AnchorPane parent, OrdersPage ordersPage)
 	{
 		this.parent = parent;
+		this.ordersPage = ordersPage;
+		colorList.getItems().addAll(ColorEnum.values());
 	}
 
 }

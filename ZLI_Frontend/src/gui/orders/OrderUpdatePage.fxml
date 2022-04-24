@@ -15,6 +15,6 @@
       <DatePicker id="DatePicker" fx:id="datePicker" layoutX="176.0" layoutY="172.0" onInputMethodTextChanged="#checkValidDate" />
       <Button id="xCancelBttn" fx:id="cancelBtn" layoutX="83.0" layoutY="276.0" mnemonicParsing="false" onAction="#onCancelBtnClicked" text="Cancel" />
       <ChoiceBox id="ColorChocBox" fx:id="colorList" layoutX="176.0" layoutY="225.0" prefHeight="25.0" prefWidth="174.0" />
-      <TextArea fx:id="orderDetails" editable="false" layoutX="82.0" layoutY="29.0" prefHeight="109.0" prefWidth="270.0" />
+      <TextArea fx:id="orderDetails" editable="false" layoutX="66.0" layoutY="29.0" prefHeight="130.0" prefWidth="318.0" />
    </children>
 </Pane>
