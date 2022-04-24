@@ -85,8 +85,6 @@ public class UpdateOrder implements Initializable
 		int min = minuteSpinner.getValue();
 		Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant().plusSeconds(hour * 60 * 60 + min * 60);
 		order.setDeliveryDate(instant);
-		System.out.println("Hour:Min " + hour + " " + min);
-		System.out.println(instant);
 		waitingForResponse = true;
 		orderController.updateOrder(order, new IResponse<Boolean>()
 		{
@@ -154,7 +152,7 @@ public class UpdateOrder implements Initializable
 		orderDetails.clear();
 		orderDetails.appendText("Order #" + order.getOrderId() + ":\n");
 		orderDetails.appendText("Ordered on " + order.getFormattedOrderDate() + "\nFrom Branch: " + order.getBranchName() + ".\n");
-		orderDetails.appendText("For delivery on" + order.getFormattedDeliveryDate() + ".\n");
+		orderDetails.appendText("For delivery on " + order.getFormattedDeliveryDate() + ".\n");
 		orderDetails.appendText("Order color is " + order.getColor().name() + ", details:\n");
 		orderDetails.appendText(order.getOrderDetails() + "\n");
 	}

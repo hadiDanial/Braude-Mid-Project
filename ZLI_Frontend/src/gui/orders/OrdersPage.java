@@ -159,6 +159,7 @@ public class OrdersPage implements Initializable
 			@Override
 			protected void updateItem(Order order, boolean empty)
 			{
+				final Rectangle rect = new Rectangle(20, 20);
 				super.updateItem(order, empty);
 
 				if (order == null)
@@ -169,8 +170,8 @@ public class OrdersPage implements Initializable
 					return;
 				}
 
-				Rectangle rect = new Rectangle(20, 20, order.getColor().HexToColor());
 				rect.setStroke(Color.BLACK);
+				rect.setFill(order.getColor().HexToColor());
 				rect.setStrokeWidth(1);
 				setText(order.getColor().name());
 				setGraphic(rect);
