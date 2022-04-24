@@ -12,7 +12,7 @@ import requests.Request;
 
 public class Server extends AbstractServer {
 
-	private String hostAddress;
+	private String hostAddress = null;
 	private static Server instance = null;
 	private Timer timer = new Timer();
 
@@ -34,14 +34,13 @@ public class Server extends AbstractServer {
 	}
 
 	protected void serverStarted() {
-		// ! ServerUI.consoleTxtList.add("Server listening for connections on port " +
-		// ! getPort());
+		ServerUI.consoleTxtList.add(new ConsoleString("Server listening for connections on port " + getPort()));
+
 		System.out.println("Server listening for connections on port " + getPort());
 	}
 
 	protected void serverStopped() {
-		// ! ServerUI.consoleTxtList.add("Server has stopped listening for
-		// ! connections.");
+		ServerUI.consoleTxtList.add(new ConsoleString("Server has stopped listening for connections."));
 		System.out.println("Server has stopped listening for connections.");
 	}
 
@@ -56,6 +55,7 @@ public class Server extends AbstractServer {
 		try {
 			sv.listen(); // Start listening for connections
 		} catch (Exception ex) {
+			ServerUI.consoleTxtList.add(new ConsoleString("ERROR - Could not listen for clients!"));
 			System.out.println("ERROR - Could not listen for clients!");
 		}
 		sv.setCheckClientConnection();
@@ -79,6 +79,13 @@ public class Server extends AbstractServer {
 	}
 
 	public String getHostAddress() {
+		if (hostAddress == null) {
+			try {
+				this.hostAddress = InetAddress.getLocalHost().getHostAddress();
+			} catch (Exception e) {
+				System.out.println("Cant get host Address");
+			}
+		}
 		return this.hostAddress;
 	}
 
