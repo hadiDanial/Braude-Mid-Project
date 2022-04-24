@@ -8,6 +8,7 @@ import java.util.TimerTask;
 import gui.ServerUI;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
+import requests.Request;
 
 public class Server extends AbstractServer {
 
@@ -93,6 +94,14 @@ public class Server extends AbstractServer {
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		try {
 			// MessageParser.parseMessage(msg, client);
+			Request request;
+			if (msg instanceof Request) {
+				request = (Request) msg;
+				Object response = MessageParser.handleRequest(request);
+				sendToClient(response, client);
+			} else {
+				return;
+			}
 		} catch (Exception e) {
 
 		}

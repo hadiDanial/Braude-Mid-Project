@@ -86,7 +86,7 @@ public class DataBase {
         }
     }
 
-    public void updateColorDateOrderInDB(String orderID, ArrayList<String> data) {
+    public void updateOrderInDB(String orderID, ArrayList<String> data) {
         PreparedStatement ps;
         try {
             if (data.size() != 2)
@@ -98,38 +98,6 @@ public class DataBase {
                 ps.setString(i + 1, data.get(i));
             }
             ps.setString(3, orderID);
-            ps.executeUpdate();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public void updateColorOrderInDB(String orderID, String data) {
-        PreparedStatement ps;
-        try {
-            ps = conn.prepareStatement(
-                    "UPDATE  Orders SET color= ? WHERE orderNumber=?" + orderID + ";");
-
-            ps.setString(1, data);
-
-            ps.setString(2, orderID);
-            ps.executeUpdate();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public void updateDateOrderInDB(String orderID, String data) {
-        PreparedStatement ps;
-        try {
-            ps = conn.prepareStatement(
-                    "UPDATE  Orders SET date= ? WHERE orderNumber=?" + orderID + ";");
-
-            ps.setString(1, data);
-
-            ps.setString(2, orderID);
             ps.executeUpdate();
 
         } catch (Exception e) {
@@ -152,6 +120,7 @@ public class DataBase {
                 data.put("shop", rs.getString("shop"));
                 data.put("date", rs.getString("date"));
                 data.put("orderDate", rs.getString("orderDate"));
+
             }
             rs.close();
             return data;
@@ -166,7 +135,7 @@ public class DataBase {
             st = conn.createStatement();
             boolean rs = st.execute("DROP TABLE IF EXISTS `Orders`;"
                     + "create table `Orders`("
-                    + "`orderNumber` int primary key,"
+                    + "`orderNumber` int primary key AUTO_INCREMENT,"
                     + "`price` float,"
                     + "`greetingCard` varchar(256),"
                     + "`color` varchar(32),"

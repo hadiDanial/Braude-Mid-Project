@@ -39,14 +39,7 @@ public class DBController {
         ArrayList<String> data = new ArrayList<String>();
         data.add(color);
         data.add(date);
-        DataBase.getInstance().updateColorDateOrderInDB(orderID, data);
+        DataBase.getInstance().updateOrderInDB(orderID, data);
     }
 
-    public static void updateColorOrderInDB(String orderID, String color) {
-        DataBase.getInstance().updateColorOrderInDB(orderID, color);
-    }
-
-    public static void updateDateOrderInDB(String orderID, String date) {
-        DataBase.getInstance().updateDateOrderInDB(orderID, date);
-    }
 }

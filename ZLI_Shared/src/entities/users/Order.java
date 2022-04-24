@@ -11,8 +11,7 @@ import enums.Color;
 import enums.OrderStatus;
 import utility.DateFormatter;
 
-public class Order implements Serializable
-{
+public class Order implements Serializable {
 	/**
 	 * 
 	 */
@@ -32,16 +31,12 @@ public class Order implements Serializable
 
 	// Demo only
 	private String orderDetails;
-	
-	
-	
-	public Order(){	}
-	
 
-	
+	public Order() {
+	}
+
 	public Order(int orderId, String greetingCard, Instant deliveryDate, float totalCost, OrderStatus orderStatus,
-			Branch branch, Color color, String orderDetails)
-	{
+			Branch branch, Color color, String orderDetails) {
 		super();
 		this.orderId = orderId;
 		this.greetingCard = greetingCard;
@@ -54,7 +49,19 @@ public class Order implements Serializable
 		this.orderDetails = orderDetails;
 	}
 
-
+	public Order(int orderId, String greetingCard, Instant deliveryDate, float totalCost, OrderStatus orderStatus,
+			Branch branch, Color color, String orderDetails, Instant orderDate) {
+		super();
+		this.orderId = orderId;
+		this.greetingCard = greetingCard;
+		this.deliveryDate = deliveryDate;
+		this.orderDate = orderDate;
+		this.totalCost = totalCost;
+		this.orderStatus = orderStatus;
+		this.branch = branch;
+		this.color = color;
+		this.orderDetails = orderDetails;
+	}
 
 	public Color getColor() {
 		return color;
@@ -63,139 +70,117 @@ public class Order implements Serializable
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	public int getOrderId()
-	{
+
+	public int getOrderId() {
 		return orderId;
 	}
-	
-	public void setOrderId(int orderId)
-	{
+
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
-	
-	public OrderDelivery getDeliveryDetails()
-	{
+
+	public OrderDelivery getDeliveryDetails() {
 		return deliveryDetails;
 	}
-	
-	public void setDeliveryDetails(OrderDelivery deliveryDetails)
-	{
+
+	public void setDeliveryDetails(OrderDelivery deliveryDetails) {
 		this.deliveryDetails = deliveryDetails;
 	}
-	
-	public String getGreetingCard()
-	{
+
+	public String getGreetingCard() {
 		return greetingCard;
 	}
-	
-	public void setGreetingCard(String greetingCard)
-	{
+
+	public void setGreetingCard(String greetingCard) {
 		this.greetingCard = greetingCard;
 	}
-	
-	public Instant getOrderDate()
-	{
+
+	public Instant getOrderDate() {
 		return orderDate;
 	}
-	public String getFormattedOrderDate()
-	{
+
+	public String getFormattedOrderDate() {
 		return DateFormatter.formatInstant(orderDate, true);
 	}
-	public String getFormattedDeliveryDate()
-	{
+
+	public String getFormattedDeliveryDate() {
 		return DateFormatter.formatInstant(deliveryDate, true);
 	}
-	public void setOrderDate(Instant orderDate)
-	{
+
+	public void setOrderDate(Instant orderDate) {
 		this.orderDate = orderDate;
 	}
-	
-	public Instant getDeliveryDate()
-	{
+
+	public Instant getDeliveryDate() {
 		return deliveryDate;
 	}
-	
-	public void setDeliveryDate(Instant deliveryDate)
-	{
+
+	public void setDeliveryDate(Instant deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
-	
-	public float getTotalCost()
-	{
+
+	public float getTotalCost() {
 		return totalCost;
 	}
-	
-	public void setTotalCost(float totalCost)
-	{
+
+	public void setTotalCost(float totalCost) {
 		this.totalCost = totalCost;
 	}
-	
-	public OrderStatus getOrderStatus()
-	{
+
+	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
-	
-	public void setOrderStatus(OrderStatus orderStatus)
-	{
+
+	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	
-	public Branch getBranch()
-	{
+
+	public Branch getBranch() {
 		return branch;
 	}
-	
-	public void setBranch(Branch branch)
-	{
+
+	public void setBranch(Branch branch) {
 		this.branch = branch;
 	}
-	public String getBranchName()
-	{
+
+	public String getBranchName() {
 		return branch.getBranchName();
 	}
-	public ArrayList<Product> getProducts()
-	{
+
+	public ArrayList<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(ArrayList<Product> products)
-	{
+	public void setProducts(ArrayList<Product> products) {
 		this.products = products;
 	}
 
-	public ArrayList<Item> getItems()
-	{
+	public ArrayList<Item> getItems() {
 		return items;
 	}
 
-	public void setItems(ArrayList<Item> items)
-	{
+	public void setItems(ArrayList<Item> items) {
 		this.items = items;
 	}
 
-	public User getCustomer()
-	{
+	public User getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(User customer)
-	{
+	public void setCustomer(User customer) {
 		this.customer = customer;
 	}
 
-	public String getOrderDetails()
-	{
+	public String getOrderDetails() {
 		return orderDetails;
 	}
 
-	public void setOrderDetails(String orderDetails)
-	{
+	public void setOrderDetails(String orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((branch == null) ? 0 : branch.hashCode());
@@ -204,64 +189,51 @@ public class Order implements Serializable
 		result = prime * result + orderId;
 		return result;
 	}
-	
+
 	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Order))
-		{
+		if (!(obj instanceof Order)) {
 			return false;
 		}
 		Order other = (Order) obj;
-		if (branch == null)
-		{
-			if (other.branch != null)
-			{
+		if (branch == null) {
+			if (other.branch != null) {
 				return false;
 			}
-		} else if (!branch.equals(other.branch))
-		{
+		} else if (!branch.equals(other.branch)) {
 			return false;
 		}
-		if (deliveryDate == null)
-		{
-			if (other.deliveryDate != null)
-			{
+		if (deliveryDate == null) {
+			if (other.deliveryDate != null) {
 				return false;
 			}
-		} else if (!deliveryDate.equals(other.deliveryDate))
-		{
+		} else if (!deliveryDate.equals(other.deliveryDate)) {
 			return false;
 		}
-		if (orderDate == null)
-		{
-			if (other.orderDate != null)
-			{
+		if (orderDate == null) {
+			if (other.orderDate != null) {
 				return false;
 			}
-		} else if (!orderDate.equals(other.orderDate))
-		{
+		} else if (!orderDate.equals(other.orderDate)) {
 			return false;
 		}
-		if (orderId != other.orderId)
-		{
+		if (orderId != other.orderId) {
 			return false;
 		}
 		return true;
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Order #" + orderId + ", deliveryDetails=" + deliveryDetails + ", greetingCard=" + greetingCard
-				+ ", products=" + products + ", items=" + items + ", orderDate=" + DateFormatter.formatInstant(orderDate, true) + ", deliveryDate="
-				+ DateFormatter.formatInstant(deliveryDate, true) + ", totalCost=" + totalCost + ", orderStatus=" + orderStatus + ", branch=" + branch.getBranchName()
+				+ ", products=" + products + ", items=" + items + ", orderDate="
+				+ DateFormatter.formatInstant(orderDate, true) + ", deliveryDate="
+				+ DateFormatter.formatInstant(deliveryDate, true) + ", totalCost=" + totalCost + ", orderStatus="
+				+ orderStatus + ", branch=" + branch.getBranchName()
 				+ ", customer=" + customer + "]";
 	}
-	
-	
+
 }
