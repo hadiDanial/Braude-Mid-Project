@@ -3,14 +3,12 @@ package gui.orders;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.ResourceBundle;
 
 import client.ClientProperties;
 import controllers.ClientController;
 import controllers.OrderController;
 import entities.users.Order;
-import enums.ColorEnum;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -228,7 +226,7 @@ public class OrdersPage implements Initializable
 							updatePagePane = loader.load();
 							updatePage = loader.getController();
 							updatePage.setOrderToUpdate(order);
-							updatePage.setup(parent, ordersPage);
+							updatePage.setup(ordersPage);
 							parent.getChildren().clear();
 							parent.getChildren().add(updatePagePane);
 							AnchorPane.setLeftAnchor(editButton, left);

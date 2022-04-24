@@ -1,7 +1,5 @@
 package entities.surveys;
 
-import java.util.*;
-
 import entities.users.Order;
 import entities.users.User;
 import exceptions.SurveyException;

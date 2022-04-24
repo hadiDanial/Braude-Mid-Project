@@ -1,15 +1,11 @@
 package gui.orders;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import controllers.OrderController;
@@ -17,17 +13,12 @@ import entities.users.Order;
 import enums.ColorEnum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.InputMethodEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import utility.IResponse;
 
 public class UpdateOrder implements Initializable
@@ -49,7 +40,7 @@ public class UpdateOrder implements Initializable
 
 	@FXML
 	private TextArea orderDetails;
-	private AnchorPane parent;
+
 	private OrdersPage ordersPage;
 
 	@FXML
@@ -66,6 +57,7 @@ public class UpdateOrder implements Initializable
 
 	private void closeSceneAndOpenOrdersTable()
 	{
+		colorList.getItems().clear();
 		ordersPage.toggleUpdatePageVisibility(false);
 	}
 
@@ -101,7 +93,7 @@ public class UpdateOrder implements Initializable
 	{
 		this.order = order;
 		setOrderDetailsText();
-		
+		colorList.getItems().addAll(ColorEnum.values());
 		LocalDate localDate = LocalDateTime.ofInstant(order.getDeliveryDate(), ZoneOffset.UTC).toLocalDate();
 		datePicker.setValue(localDate);
 		colorList.setValue(order.getColor());
@@ -117,11 +109,9 @@ public class UpdateOrder implements Initializable
 		orderDetails.appendText(order.getOrderDetails() + "\n");
 	}
 
-	public void setup(AnchorPane parent, OrdersPage ordersPage)
+	public void setup(OrdersPage ordersPage)
 	{
-		this.parent = parent;
 		this.ordersPage = ordersPage;
-		colorList.getItems().addAll(ColorEnum.values());
 	}
 
 }

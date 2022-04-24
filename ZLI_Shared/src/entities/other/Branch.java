@@ -5,8 +5,10 @@ import java.util.*;
 
 import entities.users.User;
 
-public class Branch implements Serializable {
-
+public class Branch implements Serializable 
+{
+	private static final long serialVersionUID = -2126843022488313129L;
+	
 	private int branchId;
 	private User manager;
 	private ArrayList<User> workers;
