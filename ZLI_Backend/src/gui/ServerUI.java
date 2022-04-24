@@ -1,7 +1,6 @@
 package gui;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import database.DataBase;
@@ -95,7 +94,7 @@ public class ServerUI extends Application implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/ServerUI.fxml"));
 
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/gui/ServerUI.css").toExternalForm());
+		// scene.getStylesheets().add(getClass().getResource("/gui/ServerUI.css").toExternalForm());
 		primaryStage.setTitle("Client");
 		primaryStage.setScene(scene);
 

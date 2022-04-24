@@ -51,6 +51,7 @@ public class ConnectedClient {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((client == null) ? 0 : client.hashCode());
         result = prime * result + ((host == null) ? 0 : host.hashCode());
         result = prime * result + ((ip == null) ? 0 : ip.hashCode());
         return result;
@@ -65,6 +66,11 @@ public class ConnectedClient {
         if (getClass() != obj.getClass())
             return false;
         ConnectedClient other = (ConnectedClient) obj;
+        if (client == null) {
+            if (other.client != null)
+                return false;
+        } else if (!client.equals(other.client))
+            return false;
         if (host == null) {
             if (other.host != null)
                 return false;
