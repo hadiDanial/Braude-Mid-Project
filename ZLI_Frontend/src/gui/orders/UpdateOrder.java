@@ -42,6 +42,7 @@ public class UpdateOrder implements Initializable
 	private TextArea orderDetails;
 
 	private OrdersPage ordersPage;
+	protected boolean waitingForResponse;
 
 	@FXML
 	void checkValidDate(InputMethodEvent event)
@@ -68,6 +69,7 @@ public class UpdateOrder implements Initializable
 		LocalDate date = datePicker.getValue();
 		Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
 		order.setDeliveryDate(instant);
+		waitingForResponse = true;
 		orderController.updateOrder(order, new IResponse<Boolean>()
 		{
 
@@ -76,11 +78,23 @@ public class UpdateOrder implements Initializable
 			{
 				boolean result = (Boolean)message;
 				orderDetails.setText(result ? "Order updated successfully." : "Failed to update!");
-				if(result)
-					closeSceneAndOpenOrdersTable();
+				waitingForResponse = false;
+//				if(result)
+//					ordersPage.updateTableItems();
 			}
 		});
-		closeSceneAndOpenOrdersTable();
+		try
+		{
+			while (waitingForResponse)
+			{
+				Thread.sleep(25);
+			}				
+			Thread.sleep(100);
+			closeSceneAndOpenOrdersTable();
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override

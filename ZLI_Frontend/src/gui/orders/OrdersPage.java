@@ -105,7 +105,7 @@ public class OrdersPage implements Initializable
 		}
 	}
 
-	private void updateTableItems()
+	public void updateTableItems()
 	{
 		orderController.getAllOrders(arr -> {
 

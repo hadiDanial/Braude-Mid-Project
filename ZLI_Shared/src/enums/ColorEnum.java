@@ -3,6 +3,7 @@ package enums;
 import javafx.scene.paint.Color;
 
 public enum ColorEnum {
+	None("#00000000"),
 	Mixed,
 	Red("#FE0000"),
 	Purple("#8710FE"),
