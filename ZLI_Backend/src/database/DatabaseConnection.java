@@ -67,6 +67,14 @@ public class DatabaseConnection {
 		}
 	}
 
+	public void disconnect() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public int insertToDatabase(ArrayList<String> data, String tableName) {
 		PreparedStatement ps;
 		StringBuilder sb = new StringBuilder();

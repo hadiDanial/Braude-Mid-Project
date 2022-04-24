@@ -82,6 +82,7 @@ public class ServerUI extends Application implements Initializable {
 
 	private void disconnectServer() {
 		try {
+			DatabaseConnection.getInstance().disconnect();
 			sv.closeServer();
 		} catch (Exception e) {
 
