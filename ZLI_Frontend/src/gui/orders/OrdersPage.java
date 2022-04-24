@@ -85,8 +85,6 @@ public class OrdersPage implements Initializable
 		StackPane pane = new StackPane();
 		pane.getChildren().add(ordersTable);
 		parent.getChildren().add(pane);
-		Rectangle rect = new Rectangle(20, 20, ColorEnum.Blue.HexToColor());
-		parent.getChildren().add(rect);
 		ordersTable.setPrefWidth(tableWidth);
 		ordersTable.setMinWidth(tableWidth * 0.5);
 		double left = (parent.getPrefWidth() - tableWidth) / 2;
@@ -117,8 +115,25 @@ public class OrdersPage implements Initializable
 		TableColumn<Order, Float> priceColumn = new TableColumn<>("Price");
 		priceColumn.setCellValueFactory(new PropertyValueFactory<Order, Float>("totalCost"));
 		priceColumn.setPrefWidth(width * 0.05);
-		TableColumn<Order, ColorEnum> colorColumn = new TableColumn<>("Color");
-		colorColumn.setCellValueFactory(new PropertyValueFactory<Order, ColorEnum>("color"));
+		TableColumn<Order, Order> colorColumn = new TableColumn<>("Color");
+		colorColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		colorColumn.setCellFactory(param -> new TableCell<Order, Order>() {
+		    
+		    @Override
+		    protected void updateItem(Order order, boolean empty) {
+		        super.updateItem(order, empty);
+		       
+		        if (order == null) {
+		            setGraphic(null);
+		            return;
+		        }
+		        
+		        Rectangle rect = new Rectangle(20, 20, order.getColor().HexToColor());
+		        setText(order.getColor().name());
+		        setGraphic(rect);
+		        
+		    }
+		});
 		colorColumn.setPrefWidth(width * 0.1);
 		TableColumn<Order, String> detailsColumn = new TableColumn<>("Details");
 		detailsColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderDetails"));
