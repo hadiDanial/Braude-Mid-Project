@@ -97,6 +97,7 @@ public class ServerUI extends Application implements Initializable {
 		// scene.getStylesheets().add(getClass().getResource("/gui/ServerUI.css").toExternalForm());
 		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 
 		primaryStage.show();
 	}
@@ -123,6 +124,12 @@ public class ServerUI extends Application implements Initializable {
 			connectBtn.setDisable(true);
 			disconnectBtn.setDisable(false);
 
+			portField.setDisable(true);
+			hostField.setDisable(true);
+			dbField.setDisable(true);
+			userField.setDisable(true);
+			passwordField.setDisable(true);
+
 		} catch (Exception e) {
 			throw e;
 		}
@@ -133,19 +140,18 @@ public class ServerUI extends Application implements Initializable {
 		disconnectServer();
 		connectBtn.setDisable(false);
 		disconnectBtn.setDisable(true);
-	}
 
-	public void disableConsole() {
-		try {
-
-			console.appendText("Hello User\n");
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		portField.setDisable(false);
+		hostField.setDisable(false);
+		dbField.setDisable(false);
+		userField.setDisable(false);
+		passwordField.setDisable(false);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		ipField.setText(Server.getInstance().getHostAddress());
+
 		ipColumn.setCellValueFactory(new PropertyValueFactory<>("ip"));
 		hostColumn.setCellValueFactory(new PropertyValueFactory<>("host"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
