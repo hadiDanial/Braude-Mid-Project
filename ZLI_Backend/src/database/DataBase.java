@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import gui.ServerUI;
 
@@ -136,21 +137,21 @@ public class DataBase {
         }
     }
 
-    public ArrayList<String> getOrderFromDB(String orderID) {
+    public HashMap<String, String> getOrderFromDB(String orderID) {
         Statement stmt;
-        ArrayList<String> data = new ArrayList<String>();
+        HashMap<String, String> data = new HashMap<String, String>();
         try {
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT FROM Orders WHERE orderNumber=" + orderID + ";");
             while (rs.next()) {
-                data.add(rs.getString(1));
-                data.add(rs.getString(2));
-                data.add(rs.getString(3));
-                data.add(rs.getString(4));
-                data.add(rs.getString(5));
-                data.add(rs.getString(6));
-                data.add(rs.getString(7));
-                data.add(rs.getString(8));
+                data.put("orderNumber", rs.getString("orderNumber"));
+                data.put("price", rs.getString("price"));
+                data.put("greetingCard", rs.getString("greetingCard"));
+                data.put("color", rs.getString("color"));
+                data.put("dOrder", rs.getString("dOrder"));
+                data.put("shop", rs.getString("shop"));
+                data.put("date", rs.getString("date"));
+                data.put("orderDate", rs.getString("orderDate"));
             }
             rs.close();
             return data;
@@ -176,6 +177,9 @@ public class DataBase {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public void getAllOrdersFromDB() {
     }
 
 }

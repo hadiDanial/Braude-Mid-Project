@@ -1,33 +1,38 @@
 package database;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import entities.Order;
+import controllers.OrderController;
+import entities.users.Order;
 
 public class DBController {
     public static void sendNewOrderToDB(Order order) {
         // ? may change to receive Order instead of Object
         // * will change to use the true values of the Order class
         ArrayList<String> data = new ArrayList<String>();
-        data.add("" + order.orderId);
-        data.add("" + order.totalCost);
-        data.add(order.greetingCard);
-        data.add(order.color);
-        data.add(order.dOrder);
-        data.add(order.branch);
-        data.add(order.deliveryDate);
-        data.add(order.orderDate);
+        data.add("" + order.getOrderId());
+        data.add("" + order.getTotalCost());
+        data.add(order.getGreetingCard());
+        data.add(order.getColor().toString());
+        data.add(order.getOrderDetails());
+        data.add(order.getBranchName());
+        data.add(order.getDeliveryDate().toString());
+        data.add(order.getOrderDate().toString());
 
         DataBase.getInstance().sendNewOrderToDB(data);
     }
 
     public static Order getOrderFromDB(String orderID) {
-        ArrayList<String> orderData = new ArrayList<String>();
+        HashMap<String, String> orderData = new HashMap<String, String>();
         orderData = DataBase.getInstance().getOrderFromDB(orderID);
-        Order order = new Order(Integer.parseInt(orderData.get(0)), Float.parseFloat(orderData.get(1)),
-                orderData.get(2), orderData.get(3), orderData.get(4), orderData.get(5), orderData.get(6),
-                orderData.get(7));
+        Order order = OrderController.createNewOrderFromDBArrStr(orderData);
         return order;
+    }
+
+    public static ArrayList<Order> getAllOrdersFromDB() {
+        DataBase.getInstance().getAllOrdersFromDB();
+        return null;
     }
 
     public static void updateColorDateOrderInDB(String orderID, String color, String date) {
