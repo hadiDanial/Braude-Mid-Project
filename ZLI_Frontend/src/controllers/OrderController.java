@@ -10,6 +10,7 @@ import enums.Color;
 import enums.OrderStatus;
 import requests.Request;
 import requests.RequestType;
+import requests.UpdateOrderRequest;
 import utility.IResponse;
 
 public class OrderController
@@ -73,12 +74,14 @@ public class OrderController
 
 	public void getAllOrders(IResponse<ArrayList<Order>> response)
 	{
-		// TODO - Change from dummy data to server data
-		ArrayList<Order> orders = new ArrayList<Order>();
-		orders.add(new Order(1, "Hello!", Instant.now().plusSeconds(60000),100, OrderStatus.Accepted, new Branch(null, null, "Haifa", null), Color.Blue, "5 roses"));
-		orders.add(new Order(2, "goodbye", Instant.now().plusSeconds(600000),1200, OrderStatus.Pending, new Branch(null, null, "Karmiel", null), Color.Bridal, "2 bridal bouquets"));
-		response.executeAfterResponse(orders);
-		Request request = new Request(RequestType.GetAllOrders, "Hello World!");
+		Request request = new Request(RequestType.GetAllOrders, null);
+		clientController.sendRequest(request, response);
+	}
+	
+	public void updateOrder(int orderId, Order updatedOrder, IResponse<Boolean> response)
+	{
+		UpdateOrderRequest updateOrderRequest = new UpdateOrderRequest(orderId, updatedOrder);
+		Request request = new Request(RequestType.UpdateOrder, updateOrderRequest);
 		clientController.sendRequest(request, response);
 	}
 
