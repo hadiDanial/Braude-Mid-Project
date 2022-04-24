@@ -47,7 +47,7 @@ public class OrdersPage implements Initializable
 	private Label ordersTitle;
 	
 	private StackPane pane;
-	private Pane updatePagePane;
+	private AnchorPane updatePagePane;
 	private UpdateOrder updatePage = null;
 	private OrdersPage ordersPage = this;
 	private double left;
@@ -126,6 +126,7 @@ public class OrdersPage implements Initializable
 		parent.getChildren().add(pane);
 		ordersTable.setPrefWidth(tableWidth);
 		ordersTable.setMinWidth(tableWidth * 0.5);
+		ordersTable.setPrefHeight(0.8 * ClientProperties.getClientHeight());
 		left = (parent.getPrefWidth() - tableWidth) / 2;
 		right = ClientProperties.getClientWidth() - ((parent.getPrefWidth() - tableWidth) / 2 + tableWidth);
 //		System.out.println(parent.getPrefWidth() + " " + left + " " + right);
@@ -229,8 +230,8 @@ public class OrdersPage implements Initializable
 							updatePage.setup(ordersPage);
 							parent.getChildren().clear();
 							parent.getChildren().add(updatePagePane);
-							AnchorPane.setLeftAnchor(editButton, left);
-							AnchorPane.setRightAnchor(editButton, right);
+							AnchorPane.setLeftAnchor(updatePagePane, left);
+							AnchorPane.setRightAnchor(updatePagePane, right);
 						} else
 						{
 							updatePage.setOrderToUpdate(order);
