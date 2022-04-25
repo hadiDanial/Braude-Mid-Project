@@ -104,8 +104,6 @@ public class OrdersPage implements Initializable
 		orderController.getAllOrders(arr -> {
 			orders.clear();
 			orders.addAll((ArrayList<Order>) arr);
-//			ordersTable.getItems().clear();
-//			ordersTable.getItems().addAll(orders);
 		});
 	}
 

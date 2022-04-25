@@ -60,6 +60,7 @@ public class ClientUI extends Application
 			anchor = FXMLLoader.load(getClass().getResource("/gui/client/ClientUI.fxml"));
 			anchor.setPrefHeight(ClientProperties.getClientHeight());
 			anchor.setPrefWidth(ClientProperties.getClientWidth());
+			window.setResizable(false);
 			updateSceneRoot(anchor, "ZLI");
 			AnchorPane orders = FXMLLoader.load(getClass().getResource("/gui/orders/OrdersPage.fxml"));
 			anchor.getChildren().add(0, orders);
