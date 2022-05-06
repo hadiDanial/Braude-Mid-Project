@@ -86,16 +86,40 @@ public class DatabaseConnection
 		}
 	}
 
-	public int insertToDatabase(ArrayList<String> data, String tableName)
+	/**
+	 * Insert an entity to a table.
+	 * 
+	 * @param <T>         Class type for the entity that matches the table.
+	 * @param tableName   Name of the table.
+	 * @param columnNames The names of the columns of the table that will have
+	 *                    values to be inserted.
+	 * @param objToPS     An instance of
+	 *                    <code>IObjectToPreparedStatementParameters</code> that
+	 *                    describes how to insert the object data into a
+	 *                    <code>PreparedStatement</code>. <b>Must insert the data in
+	 *                    the same order as the column names in the
+	 *                    <code>columnNames</code> array.</b>
+	 * @return Number of records modified (should be 1) or -1 on failure.
+	 */
+	public <T> int insertToDatabase(String tableName, String[] columnNames,
+			IObjectToPreparedStatementParameters<T> objToPS)
 	{
 		PreparedStatement ps;
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO ");
 		sb.append(tableName);
-		sb.append(" VALUES(");
-		for (int i = 0; i < data.size(); i++)
+		sb.append(" (");
+		for (int i = 0; i < columnNames.length; i++)
 		{
-			if (i == data.size() - 1)
+			if (i == columnNames.length - 1)
+				sb.append(columnNames[i]);
+			else
+				sb.append(columnNames[i] + ",");
+		}
+		sb.append(") VALUES(");
+		for (int i = 0; i < columnNames.length; i++)
+		{
+			if (i == columnNames.length - 1)
 				sb.append("?");
 			else
 				sb.append("?,");
@@ -105,10 +129,7 @@ public class DatabaseConnection
 		try
 		{
 			ps = conn.prepareStatement(sb.toString());
-			for (int i = 0; i < data.size(); i++)
-			{
-				ps.setString(i + 1, data.get(i));
-			}
+			objToPS.convertObjectToPSQuery(ps);
 			return ps.executeUpdate();
 
 		} catch (Exception e)
@@ -222,24 +243,41 @@ public class DatabaseConnection
 
 	/**
 	 * Appends the keys list and condition to the query string builder.
-	 * @param sb StringBuilder object that contains the query.
-	 * @param keys List of field names for the data to be inserted to the <code>PreparedStatement</code>.
-	 * @param conditions Conditions for the query (<code>WHERE ...</code>). Can be null or empty.
+	 * 
+	 * @param sb         StringBuilder object that contains the query.
+	 * @param keys       List of field names for the data to be inserted to the
+	 *                   <code>PreparedStatement</code>.
+	 * @param conditions Conditions for the query (<code>WHERE ...</code>). Can be
+	 *                   null or empty.
 	 */
 	private void appendToQueryString(StringBuilder sb, ArrayList<String> keys, String conditions)
+	{
+		appendKeys(sb, keys);
+		if (conditions == null || conditions.isEmpty())
+		{
+			sb.append(";");
+		} else
+		{
+			sb.append(" WHERE " + conditions + ";");
+		}
+	}
+
+	/**
+	 * Appends the keys to the string builder.
+	 * 
+	 * @param sb   StringBuilder object that contains the query.
+	 * @param keys List of field names for the data to be inserted to the
+	 *             <code>PreparedStatement</code>.
+	 */
+	private void appendKeys(StringBuilder sb, ArrayList<String> keys)
 	{
 		for (String key : keys)
 		{
 			sb.append(key + "=?, ");
 		}
-		sb.delete(sb.length() - 2, sb.length());
-		if(conditions == null || conditions.isEmpty())
+		if (sb.length() > 2)
 		{
-			sb.append(";");
-		}
-		else
-		{
-			sb.append(" WHERE " + conditions + ";");				
+			sb.delete(sb.length() - 2, sb.length());
 		}
 	}
 

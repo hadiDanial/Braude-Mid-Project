@@ -24,6 +24,8 @@ public class OrderController
 	private static final String TABLE_NAME = "Orders";
 	private static final String ID_FIELD_NAME = "orderNumber";
 	private IResultSetToObject<Order> rsToOrder;
+	private static final String[] allColumnNames =
+	{ "price", "greetingCard", "color", "dOrder", "shop", "date", "orderDate" };
 
 	private OrderController()
 	{
@@ -63,26 +65,24 @@ public class OrderController
 		return instance;
 	}
 
-	public static Order createNewOrderFromDBArrStr(HashMap<String, String> orderData)
-	{
-		Order order = new Order(Integer.parseInt(orderData.get("orderNumber")), orderData.get("greetingCard"),
-				Instant.parse(orderData.get("date")), Float.parseFloat(orderData.get("price")), OrderStatus.Confirmed,
-				new Branch(orderData.get("shop")), ColorEnum.valueOf(orderData.get("color")), orderData.get("dOrder"),
-				Instant.parse(orderData.get("orderDate")));
-		return order;
-	}
-
 	public boolean createNewOrder(Order order)
 	{
-		ArrayList<String> data = new ArrayList<String>();
-		data.add("" + order.getTotalCost());
-		data.add(order.getGreetingCard());
-		data.add(order.getColor().toString());
-		data.add(order.getOrderDetails());
-		data.add(order.getBranchName());
-		data.add(order.getDeliveryDate().toString());
-		data.add(order.getOrderDate().toString());
-		int res = databaseConnection.insertToDatabase(data, TABLE_NAME);
+		int res = databaseConnection.insertToDatabase(TABLE_NAME, allColumnNames, new IObjectToPreparedStatementParameters<Order>()
+		{
+
+			@Override
+			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+			{
+				// 	{ "price", "greetingCard", "color", "dOrder", "shop", "date", "orderDate" };
+				statementToPrepare.setFloat(1, order.getTotalCost());
+				statementToPrepare.setString(2, order.getGreetingCard());
+				statementToPrepare.setString(3, order.getColor().name());
+				statementToPrepare.setString(4, order.getOrderDetails());
+				statementToPrepare.setString(5, order.getBranchName());
+				statementToPrepare.setTimestamp(6, Timestamp.from(order.getDeliveryDate()));
+				statementToPrepare.setTimestamp(7, Timestamp.from(order.getOrderDate()));
+			}
+		});
 		return res == 1;
 	}
 
@@ -90,7 +90,7 @@ public class OrderController
 	{
 		return databaseConnection.getAll(TABLE_NAME, rsToOrder);
 	}
-	
+
 	public Order getOrder(int orderId)
 	{
 		return databaseConnection.getByID(orderId, TABLE_NAME, ID_FIELD_NAME, rsToOrder);
@@ -101,17 +101,33 @@ public class OrderController
 		ArrayList<String> keys = new ArrayList<String>();
 		keys.add("date");
 		keys.add("color");
-		return databaseConnection.updateInDB(orderToUpdate.getOrderId(), ID_FIELD_NAME, TABLE_NAME,
-					keys, new IObjectToPreparedStatementParameters<Order>()
-		{
+		return databaseConnection.updateInDB(orderToUpdate.getOrderId(), ID_FIELD_NAME, TABLE_NAME, keys,
+				new IObjectToPreparedStatementParameters<Order>()
+				{
 
-			@Override
-			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
-			{
-				statementToPrepare.setTimestamp(1,Timestamp.from(orderToUpdate.getDeliveryDate()));
-				statementToPrepare.setString(2, orderToUpdate.getColor().name());
-			}
-		});
+					@Override
+					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+					{
+						statementToPrepare.setTimestamp(1, Timestamp.from(orderToUpdate.getDeliveryDate()));
+						statementToPrepare.setString(2, orderToUpdate.getColor().name());
+					}
+				});
+	}
+
+	/**
+	 * 
+	 */
+	private void testCreateOrder()
+	{
+		Order o = new Order();
+		o.setBranch(new Branch("TEST"));
+		o.setTotalCost(100);
+		o.setGreetingCard("Hello create tests");
+		o.setColor(ColorEnum.Purple);
+		o.setOrderDetails("This is a newly created order to test if adding works...");
+		o.setDeliveryDate(Instant.now());
+		o.setOrderDate(Instant.now());
+		createNewOrder(o);
 	}
 
 }
