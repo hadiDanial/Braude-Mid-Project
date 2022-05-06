@@ -160,7 +160,7 @@ public class DatabaseConnection
 	 *                   convert a record to the entity class.
 	 * @return An ArrayList containing all the records in the database.
 	 */
-	public <T> ArrayList<T> getAllFromDB(String tableName, IResultSetToObject<T> rsToObject)
+	public <T> ArrayList<T> getAll(String tableName, IResultSetToObject<T> rsToObject)
 	{
 		Statement stmt;
 		ArrayList<T> list = new ArrayList<T>();

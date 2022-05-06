@@ -88,7 +88,7 @@ public class OrderController
 
 	public ArrayList<Order> getAllOrders()
 	{
-		return databaseConnection.getAllFromDB(TABLE_NAME, rsToOrder);
+		return databaseConnection.getAll(TABLE_NAME, rsToOrder);
 	}
 	
 	public Order getOrder(int orderId)
