@@ -33,7 +33,7 @@ public class OrderController
 		clientController.sendRequest(request, response);
 	}
 	
-	public void updateOrder(Order updatedOrder, IResponse<Boolean> response)
+	public void updateOrder(IResponse<Boolean> response, Order updatedOrder)
 	{
 		Request request = new Request(RequestType.UpdateOrder, updatedOrder);
 		clientController.sendRequest(request, response);

@@ -85,7 +85,7 @@ public class UpdateOrder implements Initializable
 		Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant().plusSeconds(hour * 60 * 60 + min * 60);
 		order.setDeliveryDate(instant);
 		waitingForResponse = true;
-		orderController.updateOrder(order, new IResponse<Boolean>()
+		orderController.updateOrder(new IResponse<Boolean>()
 		{
 
 			@Override
@@ -97,7 +97,7 @@ public class UpdateOrder implements Initializable
 //				if(result)
 //					ordersPage.updateTableItems();
 			}
-		});
+		}, order);
 		try
 		{
 			while (waitingForResponse)
