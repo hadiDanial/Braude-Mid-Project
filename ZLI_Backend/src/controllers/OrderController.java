@@ -101,7 +101,7 @@ public class OrderController
 		ArrayList<String> keys = new ArrayList<String>();
 		keys.add("date");
 		keys.add("color");
-		return databaseConnection.updateInDB(orderToUpdate.getOrderId(), ID_FIELD_NAME, TABLE_NAME, keys,
+		return databaseConnection.updateById(orderToUpdate.getOrderId(), ID_FIELD_NAME, TABLE_NAME, keys,
 				new IObjectToPreparedStatementParameters<Order>()
 				{
 
