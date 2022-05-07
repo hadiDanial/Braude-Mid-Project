@@ -7,7 +7,7 @@ import enums.UserRole;
 
 public class User
 {
-//	ArrayList<Order> PendingOrder;
+	
 	private int userId;
 	private String username;
 	private String password;
@@ -18,6 +18,16 @@ public class User
 	private UserRole role;
 	private AccountStatus accountStatus;
 	private float credit;
+	private boolean isLoggedIn=false;
+	private ArrayList<Order> Orders;
+
+	public ArrayList<Order> getOrders() {
+		return Orders;
+	}
+
+	public void setOrders(ArrayList<Order> orders) {
+		Orders = orders;
+	}
 	
 	public User()
 	{
@@ -41,6 +51,13 @@ public class User
 		this.credit = credit;
 	}
 
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
 	public int getUserId()
 	{
 		return userId;
