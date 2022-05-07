@@ -203,7 +203,7 @@ public class DatabaseConnection
 	}
 
 	/**
-	 * Updates a single record in the database.
+	 * Updates a single record in the database by its PK.
 	 * 
 	 * @param <T>         The class of the entity to update.
 	 * @param id          Primary key of the record.
@@ -218,7 +218,7 @@ public class DatabaseConnection
 	 *                    list.</b>
 	 * @return True if the record was successfully updated.
 	 */
-	public <T> boolean updateInDB(int id, String idFieldName, String tableName, ArrayList<String> keys,
+	public <T> boolean updateById(int id, String idFieldName, String tableName, ArrayList<String> keys,
 			IObjectToPreparedStatementParameters<T> objToPS)
 	{
 		PreparedStatement ps;
@@ -233,6 +233,48 @@ public class DatabaseConnection
 			objToPS.convertObjectToPSQuery(ps);
 			System.out.println("Update:\n" + sb.toString());
 			return ps.executeUpdate() == 1;
+		} catch (Exception e)
+		{
+			System.out.println(e);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Updates records in the database matching the condition set as the last
+	 * parameter in the <code>PreparedStatement</code> prepared by the
+	 * <code>IObjectToPreparedStatementParameters</code>.
+	 * 
+	 * @param <T>                The class of the entity to update.
+	 * @param conditionFieldName Name of the field where the condition must match.
+	 * @param tableName          Name of the table.
+	 * @param keys               Names of the fields that need updating.
+	 * @param objToPS            An instance of
+	 *                           <code>IObjectToPreparedStatementParameters</code>
+	 *                           that describes how to insert the object data into a
+	 *                           <code>PreparedStatement</code>. <b>Must insert the
+	 *                           data in the same order as the objects in the
+	 *                           <code>keys</code> list. Last parameter must be the
+	 *                           condition for the <code>conditionFieldName</code>
+	 *                           column.</b>
+	 * @return
+	 */
+	public <T> boolean updateAllMatchingCondition(String conditionFieldName, String tableName, ArrayList<String> keys,
+			IObjectToPreparedStatementParameters<T> objToPS)
+	{
+		PreparedStatement ps;
+		try
+		{
+			StringBuilder sb = new StringBuilder();
+			String condition = conditionFieldName + "=?";
+			sb.append("UPDATE " + tableName + " SET ");
+
+			appendToQueryString(sb, keys, condition);
+			ps = conn.prepareStatement(sb.toString());
+			objToPS.convertObjectToPSQuery(ps);
+			System.out.println(sb.toString());
+			return ps.executeUpdate() > 0;
 		} catch (Exception e)
 		{
 			System.out.println(e);
