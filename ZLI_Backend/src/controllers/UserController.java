@@ -53,12 +53,6 @@ public class UserController {
 					return null;
 				}
 			}
-
-            @Override
-            public User convertToObject(ResultSet rs) {
-                // TODO Auto-generated method stub
-                return null;
-            }
 		};
 		
 	}
@@ -78,21 +72,22 @@ public class UserController {
 		ArrayList <User> returnedUser = new ArrayList<User>();
 		String query = "SELECT * FROM member WHERE ID=? AND Password=?";
 
-		try {
-
-        }catch(SQLException sqlException)
-        {
-
-        }
+//		try {
+//
+//        }catch(SQLException sqlException)
+//        {
+//
+//        }
+		return null;
 
     }
     public boolean Logout()
     {
-        
+        return false;
     }
     public boolean Register()
     {
-        
+        return false;
     }
 
 }
