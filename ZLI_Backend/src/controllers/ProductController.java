@@ -1,49 +1,40 @@
 package controllers;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import database.DatabaseConnection;
 import database.IResultSetToObject;
-
+import entities.products.BaseProduct;
 public class ProductController {
     private static ProductController instance;
 	private final DatabaseConnection databaseConnection;
-	private static final String TABLE_NAME = "baseProduct";
-	private IResultSetToObject<baseProduct> rsToProduct;
+	private static final String TABLE_NAME = "BaseProduct";
+	private IResultSetToObject<BaseProduct> rsToProduct;
 
 	private ProductController()
 	{
 		databaseConnection = DatabaseConnection.getInstance();
-		rsToProduct = new IResultSetToObject<baseProduct>()
+		rsToProduct = new IResultSetToObject<BaseProduct>()
 		{
 			@Override
-			public baseProduct convertToObject(ResultSet rs)
+			public BaseProduct convertToObject(ResultSet rs)
 			{
 				try
 				{
-					baseProduct baseProduct = new baseProduct();
-					baseProduct.setOrderId(rs.getInt("orderNumber"));
-					baseProduct.setTotalCost(rs.getFloat("price"));
-					baseProduct.setGreetingCard(rs.getString("greetingCard"));
-					baseProduct.setColor(ColorEnum.valueOf(rs.getString("color")));
-					baseProduct.setOrderDetails(rs.getString("dOrder"));
-					baseProduct.setBranch(new Branch(rs.getString("shop")));
-					baseProduct.setDeliveryDate(rs.getTimestamp("date").toInstant());
-					baseProduct.setOrderDate(rs.getTimestamp("orderDate").toInstant());
-					return baseProduct;
+					BaseProduct BaseProduct = new BaseProduct();
+					BaseProduct.setProductId(rs.getInt("orderNumber"));
+					BaseProduct.setProductName(rs.getString("productName"));
+					BaseProduct.setPrice(rs.getFloat("price"));
+					BaseProduct.setImage(rs.getBytes("image"));
+					return BaseProduct;
 				} catch (Exception e)
 				{
 					e.printStackTrace();
 					return null;
 				}
 			}
-
-            @Override
-            public baseProduct convertToObject(ResultSet rs) {
-                // TODO Auto-generated method stub
-                return null;
-            }
-		};
+		}
 	}
 
 	public static ProductController getInstance()
@@ -55,9 +46,9 @@ public class ProductController {
 		return instance;
 	}
 
-    public ArrayList<baseProduct> getAllProducts()
+    public ArrayList<BaseProduct> getAllProducts()
 	{
-		return databaseConnection.getAllFromDB(TABLE_NAME, rsToProduct);
+		return databaseConnection.getAll(TABLE_NAME, rsToProduct);
 	}
 
 }
