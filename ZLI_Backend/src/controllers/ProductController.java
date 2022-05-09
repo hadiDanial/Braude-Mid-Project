@@ -8,29 +8,29 @@ import database.IResultSetToObject;
 public class ProductController {
     private static ProductController instance;
 	private final DatabaseConnection databaseConnection;
-	private static final String TABLE_NAME = "Products";
-	private IResultSetToObject<Products> rsToProduct;
+	private static final String TABLE_NAME = "baseProduct";
+	private IResultSetToObject<baseProduct> rsToProduct;
 
 	private ProductController()
 	{
 		databaseConnection = DatabaseConnection.getInstance();
-		rsToProduct = new IResultSetToObject<Products>()
+		rsToProduct = new IResultSetToObject<baseProduct>()
 		{
 			@Override
-			public Products convertToObject(ResultSet rs)
+			public baseProduct convertToObject(ResultSet rs)
 			{
 				try
 				{
-					Products Products = new Products();
-					Products.setOrderId(rs.getInt("orderNumber"));
-					Products.setTotalCost(rs.getFloat("price"));
-					Products.setGreetingCard(rs.getString("greetingCard"));
-					Products.setColor(ColorEnum.valueOf(rs.getString("color")));
-					Products.setOrderDetails(rs.getString("dOrder"));
-					Products.setBranch(new Branch(rs.getString("shop")));
-					Products.setDeliveryDate(rs.getTimestamp("date").toInstant());
-					Products.setOrderDate(rs.getTimestamp("orderDate").toInstant());
-					return Products;
+					baseProduct baseProduct = new baseProduct();
+					baseProduct.setOrderId(rs.getInt("orderNumber"));
+					baseProduct.setTotalCost(rs.getFloat("price"));
+					baseProduct.setGreetingCard(rs.getString("greetingCard"));
+					baseProduct.setColor(ColorEnum.valueOf(rs.getString("color")));
+					baseProduct.setOrderDetails(rs.getString("dOrder"));
+					baseProduct.setBranch(new Branch(rs.getString("shop")));
+					baseProduct.setDeliveryDate(rs.getTimestamp("date").toInstant());
+					baseProduct.setOrderDate(rs.getTimestamp("orderDate").toInstant());
+					return baseProduct;
 				} catch (Exception e)
 				{
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class ProductController {
 			}
 
             @Override
-            public Products convertToObject(ResultSet rs) {
+            public baseProduct convertToObject(ResultSet rs) {
                 // TODO Auto-generated method stub
                 return null;
             }
@@ -55,7 +55,7 @@ public class ProductController {
 		return instance;
 	}
 
-    public ArrayList<Products> getAllProducts()
+    public ArrayList<baseProduct> getAllProducts()
 	{
 		return databaseConnection.getAllFromDB(TABLE_NAME, rsToProduct);
 	}
