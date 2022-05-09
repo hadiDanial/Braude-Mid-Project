@@ -5,28 +5,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.Instant;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
-import entities.other.Branch;
-import entities.users.Order;
-import enums.ColorEnum;
 import gui.ServerUI;
+import server.ConsoleString;
 
 public class DatabaseConnection
 {
-	// TODO implement the DataBase class
-
 	private static Connection conn = null;
-
 	private static DatabaseConnection instance = null;
 
-	public DatabaseConnection()
+	private DatabaseConnection()
 	{
-		instance = this;
 	}
 
 	public static DatabaseConnection getInstance()
@@ -39,43 +30,41 @@ public class DatabaseConnection
 	}
 
 	/**
-	 * this function connects to the data base
+	 * Connect to the database
 	 * 
-	 * @param hostIP     the ip of the SQL data base usually it is localhost
-	 * @param serverName the data base name
-	 * @param user       the user that connects to the data base
-	 * @param password   the password used to connect to the data base
-	 * @throws Exception exceptions of type Exception and SQLException
+	 * @param hostIP     IP address of the SQL database (usually localhost)
+	 * @param serverName Database schema name
+	 * @param user       User that connects to the database
+	 * @param password   Password used to connect to the data base
+	 * @throws Exception Exceptions of type Exception and SQLException
 	 */
 	public void connectToDB(String hostIP, String serverName, String user, String password) throws Exception
 	{
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-
-			// ! ServerUI.consoleTxtList.add("Driver definition succeed");
-
+			ServerUI.consoleTxtList.add(new ConsoleString("Driver definition succeed"));
 			System.out.println("Driver definition succeed");
 		} catch (Exception e)
 		{
+			ServerUI.consoleTxtList.add(new ConsoleString("Driver definition failed"));
 			System.out.println("Driver definition failed");
 			throw e;
 		}
 
 		try
 		{
-			// * ("jdbc:mysql://192.168.3.68/test?serverTimezone=IST","root","password")
-			// * ("jdbc:mysql://localhost/test?serverTimezone=IST","root","password")
-
 			conn = DriverManager.getConnection("jdbc:mysql://" + hostIP + "/" + serverName + "?serverTimezone=IST",
 					user, password);
-
-			// ! ServerUI.consoleTxtList.add("SQL connection succeed");
-
+			ServerUI.consoleTxtList.add(new ConsoleString("SQL connection succeed"));
 			System.out.println("SQL connection succeed");
 
 		} catch (SQLException e)
 		{/* handle any errors */
+			ServerUI.consoleTxtList.add(new ConsoleString("SQLException: " + e.getMessage()));
+			ServerUI.consoleTxtList.add(new ConsoleString("SQLState: " + e.getSQLState()));
+			ServerUI.consoleTxtList.add(new ConsoleString("VendorError: " + e.getErrorCode()));
+			// TODO: Remove the print lines
 			System.out.println("SQLException: " + e.getMessage());
 			System.out.println("SQLState: " + e.getSQLState());
 			System.out.println("VendorError: " + e.getErrorCode());
@@ -83,29 +72,64 @@ public class DatabaseConnection
 		}
 	}
 
-	public int insertToDatabase(ArrayList<String> data, String tableName)
+	/**
+	 * Close the connection to the database.
+	 */
+	public void disconnect()
+	{
+		try
+		{
+			conn.close();
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Insert an entity to a table.
+	 * 
+	 * @param <T>         Class type for the entity that matches the table.
+	 * @param tableName   Name of the table.
+	 * @param columnNames The names of the columns of the table that will have
+	 *                    values to be inserted.
+	 * @param objToPS     An instance of
+	 *                    <code>IObjectToPreparedStatementParameters</code> that
+	 *                    describes how to insert the object data into a
+	 *                    <code>PreparedStatement</code>. <b>Must insert the data in
+	 *                    the same order as the column names in the
+	 *                    <code>columnNames</code> array.</b>
+	 * @return Number of records modified (should be 1) or -1 on failure.
+	 */
+	public <T> int insertToDatabase(String tableName, String[] columnNames,
+			IObjectToPreparedStatementParameters<T> objToPS)
 	{
 		PreparedStatement ps;
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO ");
 		sb.append(tableName);
-		sb.append(" VALUES(");
-		for (int i = 0; i < data.size(); i++)
+		sb.append(" (");
+		for (int i = 0; i < columnNames.length; i++)
 		{
-			if (i == data.size() - 1)
+			if (i == columnNames.length - 1)
+				sb.append(columnNames[i]);
+			else
+				sb.append(columnNames[i] + ",");
+		}
+		sb.append(") VALUES(");
+		for (int i = 0; i < columnNames.length; i++)
+		{
+			if (i == columnNames.length - 1)
 				sb.append("?");
 			else
 				sb.append("?,");
 		}
 		sb.append(");");
-		
+
 		try
 		{
 			ps = conn.prepareStatement(sb.toString());
-			for (int i = 0; i < data.size(); i++)
-			{
-				ps.setString(i + 1, data.get(i));
-			}
+			objToPS.convertObjectToPSQuery(ps);
 			return ps.executeUpdate();
 
 		} catch (Exception e)
@@ -114,7 +138,19 @@ public class DatabaseConnection
 			return -1;
 		}
 	}
-	
+
+	/**
+	 * Returns a record from the given table with a specific primary key.
+	 * 
+	 * @param <T>         Class type for the entity that matches the table.
+	 * @param id          Primary key for the requested record.
+	 * @param idFieldName Name of the field containing the primary key of the table.
+	 * @param tableName   Name of the table.
+	 * @param rsToObject  An <code>IResultSetToObject</code> that describes how to
+	 *                    convert a record to the entity class.
+	 * @return Entity object of type <code>T</code> if a record with the PK is
+	 *         found, otherwise <code>NULL</code>.
+	 */
 	public <T> T getByID(int id, String tableName, String idFieldName, IResultSetToObject<T> rsToObject)
 	{
 		Statement stmt;
@@ -123,19 +159,29 @@ public class DatabaseConnection
 		{
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT FROM " + tableName + " WHERE " + idFieldName + "=" + id + ";");
-			if(rs.next())
+			if (rs.next())
 			{
 				item = rsToObject.convertToObject(rs);
 			}
 			rs.close();
-			return item;
 		} catch (Exception e)
 		{
 			e.printStackTrace();
-			return null;
+			item = null;
 		}
+		return item;
 	}
-	public <T> ArrayList<T> getAllFromDB(String tableName, IResultSetToObject<T> rsToObject)
+
+	/**
+	 * Returns all records from the given table.
+	 * 
+	 * @param <T>        Class type for the entity that matches the table.
+	 * @param tableName  Name of the table.
+	 * @param rsToObject An <code>IResultSetToObject</code> that describes how to
+	 *                   convert a record to the entity class.
+	 * @return An ArrayList containing all the records in the database.
+	 */
+	public <T> ArrayList<T> getAll(String tableName, IResultSetToObject<T> rsToObject)
 	{
 		Statement stmt;
 		ArrayList<T> list = new ArrayList<T>();
@@ -143,7 +189,7 @@ public class DatabaseConnection
 		{
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName + ";");
-			while(rs.next())
+			while (rs.next())
 			{
 				list.add(rsToObject.convertToObject(rs));
 			}
@@ -156,21 +202,33 @@ public class DatabaseConnection
 		}
 	}
 
-	public <T> boolean updateInDB(int id, String idFieldName, String tableName, ArrayList<String> keys, 
+	/**
+	 * Updates a single record in the database by its PK.
+	 * 
+	 * @param <T>         The class of the entity to update.
+	 * @param id          Primary key of the record.
+	 * @param idFieldName Name of the primary key field in the table.
+	 * @param tableName   Name of the table in the schema.
+	 * @param keys        Names of the fields that need updating.
+	 * @param objToPS     An instance of
+	 *                    <code>IObjectToPreparedStatementParameters</code> that
+	 *                    describes how to insert the object data into a
+	 *                    <code>PreparedStatement</code>. <b>Must insert the data in
+	 *                    the same order as the objects in the <code>keys</code>
+	 *                    list.</b>
+	 * @return True if the record was successfully updated.
+	 */
+	public <T> boolean updateById(int id, String idFieldName, String tableName, ArrayList<String> keys,
 			IObjectToPreparedStatementParameters<T> objToPS)
 	{
 		PreparedStatement ps;
 		try
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.append("UPDATE " +  tableName + " SET ");
-			
-			for(String key : keys)
-			{
-				sb.append(key + "=?, ");
-			}
-			sb.delete(sb.length() - 2, sb.length());
-			sb.append(" WHERE " + idFieldName + "=" + id + ";");
+			String condition = idFieldName + "=" + id;
+			sb.append("UPDATE " + tableName + " SET ");
+
+			appendToQueryString(sb, keys, condition);
 			ps = conn.prepareStatement(sb.toString());
 			objToPS.convertObjectToPSQuery(ps);
 			System.out.println("Update:\n" + sb.toString());
@@ -179,115 +237,105 @@ public class DatabaseConnection
 		{
 			System.out.println(e);
 		}
-		
+
 		return false;
 	}
-	public void updateOrderInDB(String orderID, ArrayList<String> data)
+
+	/**
+	 * Updates records in the database matching the condition set as the last
+	 * parameter in the <code>PreparedStatement</code> prepared by the
+	 * <code>IObjectToPreparedStatementParameters</code>.
+	 * 
+	 * @param <T>                The class of the entity to update.
+	 * @param conditionFieldName Name of the field where the condition must match.
+	 * @param tableName          Name of the table.
+	 * @param keys               Names of the fields that need updating.
+	 * @param objToPS            An instance of
+	 *                           <code>IObjectToPreparedStatementParameters</code>
+	 *                           that describes how to insert the object data into a
+	 *                           <code>PreparedStatement</code>. <b>Must insert the
+	 *                           data in the same order as the objects in the
+	 *                           <code>keys</code> list. Last parameter must be the
+	 *                           condition for the <code>conditionFieldName</code>
+	 *                           column.</b>
+	 * @return
+	 */
+	public <T> boolean updateAllMatchingCondition(String conditionFieldName, String tableName, ArrayList<String> keys,
+			IObjectToPreparedStatementParameters<T> objToPS)
 	{
 		PreparedStatement ps;
 		try
 		{
-			if (data.size() != 2)
-				throw new Exception("data size is not compatible");
-			ps = conn.prepareStatement("UPDATE  Orders SET color= ?, date= ? WHERE orderNumber=?" + orderID + ";");
-			for (int i = 0; i < data.size(); i++)
-			{
-				ps.setString(i + 1, data.get(i));
-			}
-			ps.setString(3, orderID);
-			ps.executeUpdate();
+			StringBuilder sb = new StringBuilder();
+			String condition = conditionFieldName + "=?";
+			sb.append("UPDATE " + tableName + " SET ");
 
+			appendToQueryString(sb, keys, condition);
+			ps = conn.prepareStatement(sb.toString());
+			objToPS.convertObjectToPSQuery(ps);
+			System.out.println(sb.toString());
+			return ps.executeUpdate() > 0;
 		} catch (Exception e)
 		{
 			System.out.println(e);
 		}
-	}
-/**
-	public void sendNewOrderToDB(ArrayList<String> data)
-	{
-		PreparedStatement ps;
-		try
-		{
-			if (data.size() != 8)
-				throw new Exception("data size is not compatible");
-			ps = conn.prepareStatement("INSERT INTO  Orders VALUES(?,?,?,?,?,?,?,?);");
-			for (int i = 0; i < data.size(); i++)
-			{
-				ps.setString(i + 1, data.get(i));
-			}
-			ps.executeUpdate();
 
-		} catch (Exception e)
+		return false;
+	}
+
+	/**
+	 * Appends the keys list and condition to the query string builder.
+	 * 
+	 * @param sb         StringBuilder object that contains the query.
+	 * @param keys       List of field names for the data to be inserted to the
+	 *                   <code>PreparedStatement</code>.
+	 * @param conditions Conditions for the query (<code>WHERE ...</code>). Can be
+	 *                   null or empty.
+	 */
+	private void appendToQueryString(StringBuilder sb, ArrayList<String> keys, String conditions)
+	{
+		appendKeys(sb, keys);
+		if (conditions == null || conditions.isEmpty())
 		{
-			System.out.println(e);
+			sb.append(";");
+		} else
+		{
+			sb.append(" WHERE " + conditions + ";");
 		}
 	}
 
-	public ArrayList<Order> getAllOrdersFromDB(IResultSetToObject<Order> rsToOrder)
+	/**
+	 * Appends the keys to the string builder.
+	 * 
+	 * @param sb   StringBuilder object that contains the query.
+	 * @param keys List of field names for the data to be inserted to the
+	 *             <code>PreparedStatement</code>.
+	 */
+	private void appendKeys(StringBuilder sb, ArrayList<String> keys)
 	{
-		Statement stmt;
-		ArrayList<Order> orders = new ArrayList<Order>();
-		try
+		for (String key : keys)
 		{
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM Orders;");
-			while(rs.next())
-			{
-				orders.add(rsToOrder.convertToObject(rs));
-			}
-			rs.close();
-			return orders;
-		} catch (Exception e)
+			sb.append(key + "=?, ");
+		}
+		if (sb.length() > 2)
 		{
-			return null;
+			sb.delete(sb.length() - 2, sb.length());
 		}
 	}
 
-	public HashMap<String, String> getOrderFromDB(String orderID)
-	{
-		Statement stmt;
-		HashMap<String, String> data = new HashMap<String, String>();
-		try
-		{
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT FROM Orders WHERE orderNumber=" + orderID + ";");
-			while (rs.next())
-			{
-				data.put("orderNumber", rs.getString("orderNumber"));
-				data.put("price", rs.getString("price"));
-				data.put("greetingCard", rs.getString("greetingCard"));
-				data.put("color", rs.getString("color"));
-				data.put("dOrder", rs.getString("dOrder"));
-				data.put("shop", rs.getString("shop"));
-				data.put("date", rs.getString("date"));
-				data.put("orderDate", rs.getString("orderDate"));
-
-			}
-			rs.close();
-			return data;
-		} catch (Exception e)
-		{
-			return null;
-		}
-	}
-*/
-	
+	/**
+	 * Resets the Orders table in the database.
+	 */
 	private void resetOrdersTable()
 	{
 		Statement st;
 		try
 		{
 			st = conn.createStatement();
-			boolean rs = st.execute("DROP TABLE IF EXISTS `Orders`;" 
-					+ "create table `Orders`("
-					+ "`orderNumber` int primary key AUTO_INCREMENT," 
-					+ "`price` float,"
-					+ "`greetingCard` varchar(256)," 
-					+ "`color` varchar(32)," 
-					+ "`dOrder` varchar(256),"
-					+ "`shop` varchar(32)," 
-					+ "`date` timestamp," 
-					+ "`orderDate` timestamp);");
+			boolean rs = st.execute("DROP TABLE IF EXISTS `Orders`;" + "create table `Orders`("
+					+ "`orderNumber` int primary key AUTO_INCREMENT," + "`price` float,"
+					+ "`greetingCard` varchar(256)," + "`color` varchar(32)," + "`dOrder` varchar(256),"
+					+ "`shop` varchar(32)," + "`date` timestamp," + "`orderDate` timestamp);");
 		} catch (Exception e)
 		{
 			System.out.println(e);

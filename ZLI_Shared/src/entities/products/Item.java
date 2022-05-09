@@ -6,10 +6,12 @@ public class Item extends BaseProduct
 {
 	private ItemType itemType;
 	private ColorEnum primaryColor;
-	public Item(String productName, float price, byte[] image, int quantityInStock, ItemType itemType,
-			ColorEnum primaryColor)
+	
+	private static final long serialVersionUID = -5139650780449358616L;
+
+	public Item(String productName, float price, byte[] image, ItemType itemType, ColorEnum primaryColor)
 	{
-		super(productName, price, image, quantityInStock);
+		super(productName, price, image, ITEM_DISCRIMINATOR);
 		this.itemType = itemType;
 		this.primaryColor = primaryColor;
 	}

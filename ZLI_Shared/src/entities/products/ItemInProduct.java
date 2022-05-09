@@ -3,10 +3,10 @@ package entities.products;
 public class ItemInProduct
 {
 	private Product product;
-	private Item item;
+	private BaseProduct item;
 	private int itemQuantityInProduct;
 	
-	public ItemInProduct(Product product, Item item, int itemQuantityInProduct)
+	public ItemInProduct(Product product, BaseProduct item, int itemQuantityInProduct)
 	{
 		super();
 		this.product = product;
@@ -24,12 +24,12 @@ public class ItemInProduct
 		this.product = product;
 	}
 
-	public Item getItem()
+	public BaseProduct getItem()
 	{
 		return item;
 	}
 
-	public void setItem(Item item)
+	public void setItem(BaseProduct item)
 	{
 		this.item = item;
 	}

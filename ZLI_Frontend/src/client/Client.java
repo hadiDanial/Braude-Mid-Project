@@ -5,7 +5,6 @@ import java.io.IOException;
 import controllers.ClientController;
 import ocsf.client.AbstractClient;
 import requests.Request;
-import requests.RequestType;
 import utility.IResponse;
 
 public class Client extends AbstractClient

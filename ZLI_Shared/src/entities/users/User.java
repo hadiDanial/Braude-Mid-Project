@@ -1,5 +1,6 @@
 package entities.users;
 
+import java.time.Instant;
 import java.util.*;
 
 import enums.AccountStatus;
@@ -7,7 +8,7 @@ import enums.UserRole;
 
 public class User
 {
-//	ArrayList<Order> PendingOrder;
+	
 	private int userId;
 	private String username;
 	private String password;
@@ -18,7 +19,10 @@ public class User
 	private UserRole role;
 	private AccountStatus accountStatus;
 	private float credit;
-	
+	private boolean isLoggedIn = false;
+	private Instant lastLoginDate;
+	private ArrayList<Order> Orders;
+
 	public User()
 	{
 		super();
@@ -41,6 +45,13 @@ public class User
 		this.credit = credit;
 	}
 
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
 	public int getUserId()
 	{
 		return userId;
@@ -139,6 +150,24 @@ public class User
 	public void setCredit(float credit)
 	{
 		this.credit = credit;
+	}
+
+	public ArrayList<Order> getOrders() {
+		return Orders;
+	}
+
+	public void setOrders(ArrayList<Order> orders) {
+		Orders = orders;
+	}
+	
+	public Instant getLastLoginDate()
+	{
+		return lastLoginDate;
+	}
+
+	public void setLastLoginDate(Instant lastLoginDate)
+	{
+		this.lastLoginDate = lastLoginDate;
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package gui.client;
 
 import java.io.IOException;
-import java.net.URL;
 
 import client.ClientProperties;
 import controllers.ClientController;
@@ -17,8 +16,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class ClientUI extends Application
 {
@@ -59,9 +60,10 @@ public class ClientUI extends Application
 			anchor = FXMLLoader.load(getClass().getResource("/gui/client/ClientUI.fxml"));
 			anchor.setPrefHeight(ClientProperties.getClientHeight());
 			anchor.setPrefWidth(ClientProperties.getClientWidth());
+			window.setResizable(false);
 			updateSceneRoot(anchor, "ZLI");
 			AnchorPane orders = FXMLLoader.load(getClass().getResource("/gui/orders/OrdersPage.fxml"));
-			anchor.getChildren().add(orders);
+			anchor.getChildren().add(0, orders);
 		} catch (IOException e1)
 		{
 			e1.printStackTrace();
@@ -107,7 +109,6 @@ public class ClientUI extends Application
 			Scene scene = new Scene(pane);
 			settings.setScene(scene);
 			settings.show();
-			System.out.println("SETTINGS");
 		} catch (IOException e)
 		{
 			e.printStackTrace();

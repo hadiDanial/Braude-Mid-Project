@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.UpdateOrder">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.UpdateOrder">
    <children>
-      <Button id="UpdateBttn" fx:id="updateBtn" layoutX="225.0" layoutY="276.0" mnemonicParsing="false" onAction="#onUpdateBtnClicked" prefHeight="25.0" prefWidth="125.0" text="Update" />
-      <Label id="NewColorLBL" layoutX="83.0" layoutY="229.0" text="New Color:" />
-      <Label id="NewDateLBL" layoutX="83.0" layoutY="176.0" prefHeight="18.0" prefWidth="65.0" text="New Date:" />
-      <DatePicker id="DatePicker" fx:id="datePicker" layoutX="176.0" layoutY="172.0" onInputMethodTextChanged="#checkValidDate" />
-      <Button id="xCancelBttn" fx:id="cancelBtn" layoutX="83.0" layoutY="276.0" mnemonicParsing="false" onAction="#onCancelBtnClicked" text="Cancel" />
-      <ChoiceBox id="ColorChocBox" fx:id="colorList" layoutX="176.0" layoutY="225.0" prefHeight="25.0" prefWidth="174.0" />
-      <TextArea fx:id="orderDetails" editable="false" layoutX="66.0" layoutY="29.0" prefHeight="130.0" prefWidth="318.0" />
+      <TextArea fx:id="orderDetails" editable="false" layoutX="62.0" layoutY="40.0" prefHeight="130.0" prefWidth="380.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0" />
+      <AnchorPane layoutX="112.0" layoutY="190.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="112.0">
+         <children>
+            <Label id="NewColorLBL" layoutY="74.0" text="New Color:" />
+            <Label id="NewDateLBL" layoutY="4.0" prefHeight="18.0" prefWidth="104.0" text="Delivery Date:" />
+            <Label id="NewColorLBL" layoutY="39.0" text="Hour:" />
+            <DatePicker id="DatePicker" fx:id="datePicker" layoutX="100.0" onAction="#checkValidDate" onInputMethodTextChanged="#checkValidDate" />
+            <Group layoutX="100.0" layoutY="31.0">
+               <children>
+                  <Spinner fx:id="hourSpinner" editable="true" layoutY="1.0" prefHeight="25.0" prefWidth="81.0" />
+                  <Spinner fx:id="minuteSpinner" editable="true" layoutX="95.0" layoutY="1.0" prefHeight="25.0" prefWidth="81.0" />
+                  <Label id="NewColorLBL" layoutX="87.0" text=":">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <ChoiceBox id="ColorChocBox" fx:id="colorList" layoutX="100.0" layoutY="70.0" prefHeight="25.0" prefWidth="174.0" />
+            <Button id="xCancelBttn" fx:id="cancelBtn" layoutY="121.0" mnemonicParsing="false" onAction="#onCancelBtnClicked" prefHeight="25.0" prefWidth="125.0" text="Cancel" />
+            <Button id="UpdateBttn" fx:id="updateBtn" layoutX="151.0" layoutY="121.0" mnemonicParsing="false" onAction="#onUpdateBtnClicked" prefHeight="25.0" prefWidth="125.0" text="Update" />
+         </children>
+      </AnchorPane>
    </children>
-</Pane>
+</AnchorPane>

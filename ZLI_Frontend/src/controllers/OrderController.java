@@ -1,13 +1,9 @@
 package controllers;
 
-import java.time.Instant;
 import java.util.ArrayList;
 
-import entities.other.Branch;
 import entities.products.*;
 import entities.users.Order;
-import enums.ColorEnum;
-import enums.OrderStatus;
 import requests.Request;
 import requests.RequestType;
 import utility.IResponse;
@@ -29,6 +25,21 @@ public class OrderController
 		}
 		return instance;
 	}
+	
+
+	public void getAllOrders(IResponse<ArrayList<Order>> response)
+	{
+		Request request = new Request(RequestType.GetAllOrders, null);
+		clientController.sendRequest(request, response);
+	}
+	
+	public void updateOrder(IResponse<Boolean> response, Order updatedOrder)
+	{
+		Request request = new Request(RequestType.UpdateOrder, updatedOrder);
+		clientController.sendRequest(request, response);
+	}
+
+	
 	/**
 	 * 
 	 * @param product
@@ -70,17 +81,4 @@ public class OrderController
 		// TODO - implement OrderController.isProduct
 		throw new UnsupportedOperationException();
 	}
-
-	public void getAllOrders(IResponse<ArrayList<Order>> response)
-	{
-		Request request = new Request(RequestType.GetAllOrders, null);
-		clientController.sendRequest(request, response);
-	}
-	
-	public void updateOrder(Order updatedOrder, IResponse<Boolean> response)
-	{
-		Request request = new Request(RequestType.UpdateOrder, updatedOrder);
-		clientController.sendRequest(request, response);
-	}
-
 }

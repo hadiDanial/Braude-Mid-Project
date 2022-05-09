@@ -6,30 +6,33 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import client.ClientProperties;
+import controllers.ClientController;
 import controllers.OrderController;
 import entities.users.Order;
-import enums.ColorEnum;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import utility.IEventListener;
 
 public class OrdersPage implements Initializable
 {
 	private OrderController orderController;
-	private ArrayList<Order> orders;
+	private ObservableList<Order> orders;
 	private double tableWidth;
 
 	@FXML
@@ -40,38 +43,44 @@ public class OrdersPage implements Initializable
 
 	@FXML
 	private Button refreshBtn;
-
+	
+	@FXML
+	private Label ordersTitle;
+	
 	private StackPane pane;
-	private Pane updatePagePane;
+	private AnchorPane updatePagePane;
 	private UpdateOrder updatePage = null;
 	private OrdersPage ordersPage = this;
 	private double left;
 	private double right;
 
-	void getOrders(ActionEvent event)
+	public void onRefreshBtnClick(ActionEvent event)
 	{
 		updateTableItems();
 	}
 
-	public ArrayList<Order> getOrders()
-	{
-		return orders;
-	}
-
-	public void setOrders(ArrayList<Order> orders)
-	{
-		this.orders = orders;
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		orders = FXCollections.observableArrayList();
 		orderController = OrderController.getInstance();
 		parent.setPrefHeight(ClientProperties.getClientHeight());
 		parent.setPrefWidth(ClientProperties.getClientWidth());
 		generateTableColumns();
 		setTableSettings();
 		updateTableItems();
+		ordersTable.setItems(orders);
+		ClientController.getInstance().registerConnectionListener(new IEventListener()
+		{
+			@Override
+			public void invoke()
+			{
+//				System.out.println("Listener called: Refreshing orders table");
+				updateTableItems();
+			}
+		});
+		
 	}
 
 	public void toggleUpdatePageVisibility(boolean isVisible)
@@ -83,18 +92,18 @@ public class OrdersPage implements Initializable
 		} else
 		{
 			parent.getChildren().clear();
+			parent.getChildren().add(ordersTitle);
+			parent.getChildren().add(refreshBtn);
 			parent.getChildren().add(pane);
 			updateTableItems();
 		}
 	}
 
-	private void updateTableItems()
+	public void updateTableItems()
 	{
 		orderController.getAllOrders(arr -> {
-
-			orders = (ArrayList<Order>) arr;
-			ordersTable.getItems().clear();
-			ordersTable.getItems().addAll(orders);
+			orders.clear();
+			orders.addAll((ArrayList<Order>) arr);
 		});
 	}
 
@@ -109,6 +118,7 @@ public class OrdersPage implements Initializable
 		parent.getChildren().add(pane);
 		ordersTable.setPrefWidth(tableWidth);
 		ordersTable.setMinWidth(tableWidth * 0.5);
+		ordersTable.setPrefHeight(0.8 * ClientProperties.getClientHeight());
 		left = (parent.getPrefWidth() - tableWidth) / 2;
 		right = ClientProperties.getClientWidth() - ((parent.getPrefWidth() - tableWidth) / 2 + tableWidth);
 //		System.out.println(parent.getPrefWidth() + " " + left + " " + right);
@@ -146,16 +156,19 @@ public class OrdersPage implements Initializable
 			@Override
 			protected void updateItem(Order order, boolean empty)
 			{
+				final Rectangle rect = new Rectangle(20, 20);
 				super.updateItem(order, empty);
 
 				if (order == null)
 				{
 					setGraphic(null);
+					setDisable(false);
+					setText("");
 					return;
 				}
 
-				Rectangle rect = new Rectangle(20, 20, order.getColor().HexToColor());
 				rect.setStroke(Color.BLACK);
+				rect.setFill(order.getColor().HexToColor());
 				rect.setStrokeWidth(1);
 				setText(order.getColor().name());
 				setGraphic(rect);
@@ -209,11 +222,11 @@ public class OrdersPage implements Initializable
 							updatePagePane = loader.load();
 							updatePage = loader.getController();
 							updatePage.setOrderToUpdate(order);
-							updatePage.setup(parent, ordersPage);
+							updatePage.setup(ordersPage);
 							parent.getChildren().clear();
 							parent.getChildren().add(updatePagePane);
-							AnchorPane.setLeftAnchor(editButton, left);
-							AnchorPane.setRightAnchor(editButton, right);
+							AnchorPane.setLeftAnchor(updatePagePane, left);
+							AnchorPane.setRightAnchor(updatePagePane, right);
 						} else
 						{
 							updatePage.setOrderToUpdate(order);

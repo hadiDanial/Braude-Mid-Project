@@ -1,35 +1,41 @@
 package entities.products;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public abstract class BaseProduct
+
+public abstract class BaseProduct implements Serializable
 {
+
 	private int productId;
 	private String productName;
-	private float originalPrice, currentPrice;
+	private float price;
 	private byte[] image;
-	private int quantityInStock;
-	private boolean isOnSale = false;
 
 	private static final String NEW_PRODUCT_NAME = "New Product";
+	private static final long serialVersionUID = 5869287229470090229L;
 	
-	public BaseProduct(String productName, float price, byte[] image, int quantityInStock)
+	public static final String PRODUCT_DISCRIMINATOR = "P";
+	public static final String ITEM_DISCRIMINATOR = "I";
+	
+	protected final String type;
+	
+	public BaseProduct(String productName, float price, byte[] image, String type)
 	{
 		super();
 		this.productName = productName;
-		this.originalPrice = price;
-		this.currentPrice = originalPrice;
+		this.price = price;
 		this.image = image;
-		this.quantityInStock = quantityInStock;
+		this.type = type;
 	}
 	
-	public BaseProduct()
+	public BaseProduct(String type)
 	{
 		super();
-		quantityInStock = 0;
 		productName = NEW_PRODUCT_NAME;
+		this.type = type;
 	}
-	
+
 	public int getProductId()
 	{
 		return productId;
@@ -50,26 +56,16 @@ public abstract class BaseProduct
 		this.productName = productName;
 	}
 	
-	public float getOriginalPrice()
+	public float getPrice()
 	{
-		return originalPrice;
+		return price;
 	}
 	
-	public void setOriginalPrice(float price)
+	public void setPrice(float price)
 	{
-		this.originalPrice = price;
+		this.price = price;
 	}
-	
-	public float getCurrentPrice()
-	{
-		return currentPrice;
-	}
-	
-	public void setCurrentPrice(float currentPrice)
-	{
-		this.currentPrice = currentPrice;
-	}
-	
+
 	public byte[] getImage()
 	{
 		return image;
@@ -80,30 +76,16 @@ public abstract class BaseProduct
 		this.image = image;
 	}
 	
-	public int getQuantityInStock()
+	public boolean isProduct()
 	{
-		return quantityInStock;
+		return type.equals(PRODUCT_DISCRIMINATOR);
 	}
 	
-	public void setQuantityInStock(int quantityInStock)
+	public boolean isItem()
 	{
-		this.quantityInStock = quantityInStock;
+		return type.equals(ITEM_DISCRIMINATOR);
 	}
 	
-	public boolean isOnSale()
-	{
-		return isOnSale;
-	}
-	
-	public void setOnSale(boolean isOnSale)
-	{
-		this.isOnSale = isOnSale;
-	}
-	
-	public boolean isInStock()
-	{
-		return quantityInStock > 0;
-	}
 	@Override
 	public int hashCode()
 	{
@@ -144,9 +126,8 @@ public abstract class BaseProduct
 	@Override
 	public String toString()
 	{
-		return "BaseProduct [productId=" + productId + ", productName=" + productName + ", originalPrice="
-				+ originalPrice + ", currentPrice=" + currentPrice + ", image=" + Arrays.toString(image)
-				+ ", quantityInStock=" + quantityInStock + "]";
+		return "BaseProduct [productId=" + productId + ", productName=" + productName + ", price="
+				+ price + ", image=" + Arrays.toString(image) + "]";
 	}
 
 	
