@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import database.DatabaseConnection;
 import database.IResultSetToObject;
 import entities.products.BaseProduct;
+import entities.products.Item;
+import entities.products.Product;
+import enums.ColorEnum;
+import enums.ItemType;
+import enums.ProductType;
 public class ProductController {
     private static ProductController instance;
 	private final DatabaseConnection databaseConnection;
@@ -22,19 +27,32 @@ public class ProductController {
 			{
 				try
 				{
-					BaseProduct BaseProduct = new BaseProduct();
-					BaseProduct.setProductId(rs.getInt("orderNumber"));
-					BaseProduct.setProductName(rs.getString("productName"));
-					BaseProduct.setPrice(rs.getFloat("price"));
-					BaseProduct.setImage(rs.getBytes("image"));
-					return BaseProduct;
+					if(rs.getString("productOrItem") == BaseProduct.ITEM_DISCRIMINATOR){
+						Item baseProduct = new Item();
+						baseProduct.setProductId(rs.getInt("orderNumber"));
+						baseProduct.setProductName(rs.getString("productName"));
+						baseProduct.setPrice(rs.getFloat("price"));
+						baseProduct.setImage(rs.getBytes("image"));
+						baseProduct.setItemType(ItemType.valueOf(rs.getString("type")));
+						baseProduct.setPrimaryColor(ColorEnum.valueOf(rs.getString("primaryColor")));
+						return baseProduct;
+					}
+					else{
+						Product baseProduct = new Product();
+						baseProduct.setProductId(rs.getInt("orderNumber"));
+						baseProduct.setProductName(rs.getString("productName"));
+						baseProduct.setPrice(rs.getFloat("price"));
+						baseProduct.setImage(rs.getBytes("image"));
+						baseProduct.setProductType(ProductType.valueOf(rs.getString("type")));
+						return baseProduct;
+					}
 				} catch (Exception e)
 				{
 					e.printStackTrace();
 					return null;
 				}
 			}
-		}
+		};
 	}
 
 	public static ProductController getInstance()

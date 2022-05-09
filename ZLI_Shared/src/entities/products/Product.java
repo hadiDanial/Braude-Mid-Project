@@ -13,6 +13,10 @@ public class Product extends BaseProduct
 		super(productName, price, image, PRODUCT_DISCRIMINATOR);
 		this.productType = productType;
 	}
+	public Product()
+	{
+		super(BaseProduct.PRODUCT_DISCRIMINATOR);
+	}
 
 	public ProductType getProductType()
 	{

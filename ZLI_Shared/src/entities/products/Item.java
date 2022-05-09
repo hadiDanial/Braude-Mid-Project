@@ -15,6 +15,10 @@ public class Item extends BaseProduct
 		this.itemType = itemType;
 		this.primaryColor = primaryColor;
 	}
+	public Item()
+	{
+		super(BaseProduct.ITEM_DISCRIMINATOR);
+	}
 	public ItemType getItemType()
 	{
 		return itemType;
