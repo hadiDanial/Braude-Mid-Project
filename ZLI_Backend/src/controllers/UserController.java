@@ -15,19 +15,21 @@ import enums.AccountStatus;
 import enums.ColorEnum;
 import enums.UserRole;
 
-public class UserController {
+public class UserController
+{
 	private static UserController instance;
 	private final DatabaseConnection databaseConnection;
-	private static final String TABLE_NAME = "users";
-	private static final String ID_FIELD_NAME = "userID";
-	private IResultSetToObject<User> rsToOrder;
+	private static final String TABLE_NAME = "Users";
+	private static final String ID_FIELD_NAME = "userId";
+	private IResultSetToObject<User> rsToUser;
 	private static final String[] allColumnNames =
-	{ "username", "password", "firstname", "lastname", "emailaddress", "phonenumber", "role","accountstatus","credit" };
+	{ "username", "password", "firstName", "lastName", "emailAddress", "phoneNumber", "role", "accountStatus", "credit",
+			"isLoggedIn", "lastLoginDate" };
 
 	private UserController(Message msg)
 	{
 		databaseConnection = DatabaseConnection.getInstance();
-        rsToOrder = new IResultSetToObject<User>()
+		rsToUser = new IResultSetToObject<User>()
 		{
 			@Override
 			public User convertToObject(ResultSet rs)
@@ -35,17 +37,17 @@ public class UserController {
 				try
 				{
 					User user = new User();
-					user.setUserId(rs.getInt("userid"));
+					user.setUserId(rs.getInt("userId"));
 					user.setUsername(rs.getString("username"));
 					user.setPassword(rs.getString("password"));
-					user.setFirstName(rs.getString("firstname"));
-					user.setLastName(rs.getString("lastname"));
-					user.setEmailAddress(rs.getString("emailaddress"));
-					user.setPhoneNumber(rs.getString("phonenumber"));
+					user.setFirstName(rs.getString("firstName"));
+					user.setLastName(rs.getString("lastName"));
+					user.setEmailAddress(rs.getString("emailAddress"));
+					user.setPhoneNumber(rs.getString("phoneNumber"));
 					user.setRole(UserRole.valueOf(rs.getString("role")));
-                    user.setAccountStatus(AccountStatus.valueOf(rs.getString("accountstatus")));
-					user.setLoggedIn(rs.getBoolean("isloggedin"));
-                    
+					user.setAccountStatus(AccountStatus.valueOf(rs.getString("accountStatus")));
+					user.setLoggedIn(rs.getBoolean("isLoggedIn"));
+					user.setLastLoginDate(rs.getTimestamp("lastLoginDate").toInstant());
 					return user;
 				} catch (Exception e)
 				{
@@ -54,7 +56,7 @@ public class UserController {
 				}
 			}
 		};
-		
+
 	}
 
 	public static UserController getInstance(Message msg)
@@ -65,11 +67,12 @@ public class UserController {
 		}
 		return instance;
 	}
-    public User Login()
-    {
-        Object returnObj;
+
+	public User Login()
+	{
+		Object returnObj;
 		Message msgToClient;
-		ArrayList <User> returnedUser = new ArrayList<User>();
+		ArrayList<User> returnedUser = new ArrayList<User>();
 		String query = "SELECT * FROM member WHERE ID=? AND Password=?";
 
 //		try {
@@ -80,14 +83,16 @@ public class UserController {
 //        }
 		return null;
 
-    }
-    public boolean Logout()
-    {
-        return false;
-    }
-    public boolean Register()
-    {
-        return false;
-    }
+	}
+
+	public boolean Logout()
+	{
+		return false;
+	}
+
+	public boolean Register()
+	{
+		return false;
+	}
 
 }

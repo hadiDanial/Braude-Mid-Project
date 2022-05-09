@@ -1,5 +1,6 @@
 package entities.users;
 
+import java.time.Instant;
 import java.util.*;
 
 import enums.AccountStatus;
@@ -18,17 +19,10 @@ public class User
 	private UserRole role;
 	private AccountStatus accountStatus;
 	private float credit;
-	private boolean isLoggedIn=false;
+	private boolean isLoggedIn = false;
+	private Instant lastLoginDate;
 	private ArrayList<Order> Orders;
 
-	public ArrayList<Order> getOrders() {
-		return Orders;
-	}
-
-	public void setOrders(ArrayList<Order> orders) {
-		Orders = orders;
-	}
-	
 	public User()
 	{
 		super();
@@ -156,6 +150,24 @@ public class User
 	public void setCredit(float credit)
 	{
 		this.credit = credit;
+	}
+
+	public ArrayList<Order> getOrders() {
+		return Orders;
+	}
+
+	public void setOrders(ArrayList<Order> orders) {
+		Orders = orders;
+	}
+	
+	public Instant getLastLoginDate()
+	{
+		return lastLoginDate;
+	}
+
+	public void setLastLoginDate(Instant lastLoginDate)
+	{
+		this.lastLoginDate = lastLoginDate;
 	}
 
 	@Override
