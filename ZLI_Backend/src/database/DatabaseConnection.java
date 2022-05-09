@@ -173,6 +173,42 @@ public class DatabaseConnection
 	}
 
 	/**
+	 * Returns a record from the given table with a specific simple condition
+	 * (string, one column).
+	 * 
+	 * @param <T>                Class type for the entity that matches the table.
+	 * @param conditionFieldName Name of the field containing the condition.
+	 * @param conditionValue     Value of the condition.
+	 * @param tableName          Name of the table.
+	 * @param rsToObject         An <code>IResultSetToObject</code> that describes
+	 *                           how to convert a record to the entity class.
+	 * @return Entity object of type <code>T</code> if a record with the condition
+	 *         is found, otherwise <code>NULL</code>.
+	 */
+	public <T> T getBySimpleCondition(String conditionFieldName, String conditionValue, String tableName,
+			IResultSetToObject<T> rsToObject)
+	{
+		Statement stmt;
+		T item = null;
+		try
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT FROM " + tableName + " WHERE " + conditionFieldName + "=" + conditionValue + ";");
+			if (rs.next())
+			{
+				item = rsToObject.convertToObject(rs);
+			}
+			rs.close();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			item = null;
+		}
+		return item;
+	}
+
+	/**
 	 * Returns all records from the given table.
 	 * 
 	 * @param <T>        Class type for the entity that matches the table.
