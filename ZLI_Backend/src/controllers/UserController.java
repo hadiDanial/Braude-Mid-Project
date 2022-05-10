@@ -3,12 +3,15 @@ package controllers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 
 import com.mysql.cj.protocol.Message;
 import com.mysql.cj.x.protobuf.Mysqlx.ClientMessages;
 
 import database.DatabaseConnection;
+import database.IObjectToPreparedStatementParameters;
 import database.IResultSetToObject;
 import entities.users.User;
 import enums.AccountStatus;
@@ -68,31 +71,69 @@ public class UserController
 		return instance;
 	}
 
-	public User Login()
+	public User Login(String username, String password)
 	{
-		Object returnObj;
-		Message msgToClient;
-		ArrayList<User> returnedUser = new ArrayList<User>();
-		String query = "SELECT * FROM member WHERE ID=? AND Password=?";
-
-//		try {
-//
-//        }catch(SQLException sqlException)
-//        {
-//
-//        }
+		User user =databaseConnection.getBySimpleCondition(allColumnNames[0],username, TABLE_NAME,rsToUser);
+		if(user==null)
+			return null;
+		if(password.equals(user.getPassword()) && !user.isLoggedIn()){
+			user.setLoggedIn(true);
+			user.setLastLoginDate(Instant.now());
+			ArrayList<String> keys = new ArrayList<String>();
+			keys.add("isLoggedIn");
+			keys.add("lastLoginDate");
+			databaseConnection.updateById(user.getUserId(), ID_FIELD_NAME, TABLE_NAME, keys,
+				new IObjectToPreparedStatementParameters<User>()
+				{
+					@Override
+					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+					{
+						statementToPrepare.setBoolean(1, true);
+						statementToPrepare.setTimestamp(2, Timestamp.from(user.getLastLoginDate()));
+					}
+				});
+			return user;
+		}
 		return null;
 
 	}
 
-	public boolean Logout()
+	public boolean Logout(int userId)
 	{
+		ArrayList<String> keys=new ArrayList<>();
+		keys.add("isLoggedIn");
+		databaseConnection.updateById(userId, ID_FIELD_NAME, TABLE_NAME,keys, new IObjectToPreparedStatementParameters<User>() {
+
+			@Override
+			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException {
+				statementToPrepare.setBoolean(1, false);
+			}
+		});
 		return false;
 	}
 
-	public boolean Register()
-	{
-		return false;
+	public boolean Register(User user)
+	{	//"username", "password", "firstName", "lastName", "emailAddress", "phoneNumber", "role", "accountStatus", "credit",
+	//"isLoggedIn", "lastLoginDate"
+		int res=databaseConnection.insertToDatabase(TABLE_NAME, allColumnNames, new IObjectToPreparedStatementParameters<User>() {
+
+			@Override
+			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException {
+					statementToPrepare.setBoolean(1,true);	
+					statementToPrepare.setString(1, user.getUsername());
+					statementToPrepare.setString(2, user.getPassword());
+					statementToPrepare.setString(3, user.getFirstName());
+					statementToPrepare.setString(4, user.getLastName());
+					statementToPrepare.setString(5, user.getEmailAddress());
+					statementToPrepare.setString(6, user.getPhoneNumber());
+					statementToPrepare.setString(7, user.getRole().name());
+					statementToPrepare.setString(8, user.getAccountStatus().name());
+					statementToPrepare.setFloat(9, user.getCredit());
+					statementToPrepare.setBoolean(10,false);	
+					statementToPrepare.setTimestamp(11,null);
+			}
+		});
+		return res==1;
 	}
 
 }
