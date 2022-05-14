@@ -24,10 +24,10 @@ public class UserController
 	private static final String ID_FIELD_NAME = "userId";
 	private IResultSetToObject<User> rsToUser;
 	private static final String[] allColumnNames =
-	{ "username", "password", "firstName", "lastName", "emailAddress", "phoneNumber", "role", "accountStatus", "credit",
+	{ "username", "password", "firstName", "lastName", "emailAddress", "phoneNumber", "role", "status", "credit",
 			"isLoggedIn", "lastLoginDate" };
 
-	private UserController(Message msg)
+	private UserController()
 	{
 		databaseConnection = DatabaseConnection.getInstance();
 		rsToUser = new IResultSetToObject<User>()
@@ -46,9 +46,10 @@ public class UserController
 					user.setEmailAddress(rs.getString("emailAddress"));
 					user.setPhoneNumber(rs.getString("phoneNumber"));
 					user.setRole(UserRole.valueOf(rs.getString("role")));
-					user.setAccountStatus(AccountStatus.valueOf(rs.getString("accountStatus")));
+					user.setAccountStatus(AccountStatus.valueOf(rs.getString("status")));
 					user.setLoggedIn(rs.getBoolean("isLoggedIn"));
-					user.setLastLoginDate(rs.getTimestamp("lastLoginDate").toInstant());
+					Timestamp lastLogin = rs.getTimestamp("lastLoginDate");
+					user.setLastLoginDate((lastLogin == null) ? null : lastLogin.toInstant());
 					return user;
 				} catch (Exception e)
 				{
@@ -60,78 +61,87 @@ public class UserController
 
 	}
 
-	public static UserController getInstance(Message msg)
+	public static UserController getInstance()
 	{
 		if (instance == null)
 		{
-			instance = new UserController(msg);
+			instance = new UserController();
 		}
 		return instance;
 	}
 
-	public User Login(String username, String password)
+	public User login(String username, String password)
 	{
-		User user =databaseConnection.getBySimpleCondition(allColumnNames[0],username, TABLE_NAME,rsToUser);
-		if(user==null)
+		User user = databaseConnection.getBySimpleCondition(allColumnNames[0], username, TABLE_NAME, rsToUser);
+		if (user == null || user.isLoggedIn())
 			return null;
-		if(password.equals(user.getPassword()) && !user.isLoggedIn()){
+		if (password.equals(user.getPassword()))
+		{
 			user.setLoggedIn(true);
 			user.setLastLoginDate(Instant.now());
 			ArrayList<String> keys = new ArrayList<String>();
 			keys.add("isLoggedIn");
 			keys.add("lastLoginDate");
 			databaseConnection.updateById(user.getUserId(), ID_FIELD_NAME, TABLE_NAME, keys,
-				new IObjectToPreparedStatementParameters<User>()
-				{
-					@Override
-					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+					new IObjectToPreparedStatementParameters<User>()
 					{
-						statementToPrepare.setBoolean(1, true);
-						statementToPrepare.setTimestamp(2, Timestamp.from(user.getLastLoginDate()));
-					}
-				});
+						@Override
+						public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+						{
+							statementToPrepare.setBoolean(1, true);
+							statementToPrepare.setTimestamp(2, Timestamp.from(user.getLastLoginDate()));
+						}
+					});
+			user.setPassword(""); // Client shouldn't have the user's password... we should hash it
 			return user;
 		}
 		return null;
 
 	}
 
-	public boolean Logout(int userId)
+	public boolean logout(int userId)
 	{
-		ArrayList<String> keys=new ArrayList<>();
+		ArrayList<String> keys = new ArrayList<>();
 		keys.add("isLoggedIn");
-		databaseConnection.updateById(userId, ID_FIELD_NAME, TABLE_NAME,keys, new IObjectToPreparedStatementParameters<User>() {
+		databaseConnection.updateById(userId, ID_FIELD_NAME, TABLE_NAME, keys,
+				new IObjectToPreparedStatementParameters<User>()
+				{
 
-			@Override
-			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException {
-				statementToPrepare.setBoolean(1, false);
-			}
-		});
+					@Override
+					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+					{
+						statementToPrepare.setBoolean(1, false);
+					}
+				});
 		return false;
 	}
 
-	public boolean Register(User user)
-	{	//"username", "password", "firstName", "lastName", "emailAddress", "phoneNumber", "role", "accountStatus", "credit",
-	//"isLoggedIn", "lastLoginDate"
-		int res=databaseConnection.insertToDatabase(TABLE_NAME, allColumnNames, new IObjectToPreparedStatementParameters<User>() {
+	public boolean register(User user)
+	{ // "username", "password", "firstName", "lastName", "emailAddress",
+		// "phoneNumber", "role", "accountStatus", "credit",
+		// "isLoggedIn", "lastLoginDate"
+		int res = databaseConnection.insertToDatabase(TABLE_NAME, allColumnNames,
+				new IObjectToPreparedStatementParameters<User>()
+				{
 
-			@Override
-			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException {
-					statementToPrepare.setBoolean(1,true);	
-					statementToPrepare.setString(1, user.getUsername());
-					statementToPrepare.setString(2, user.getPassword());
-					statementToPrepare.setString(3, user.getFirstName());
-					statementToPrepare.setString(4, user.getLastName());
-					statementToPrepare.setString(5, user.getEmailAddress());
-					statementToPrepare.setString(6, user.getPhoneNumber());
-					statementToPrepare.setString(7, user.getRole().name());
-					statementToPrepare.setString(8, user.getAccountStatus().name());
-					statementToPrepare.setFloat(9, user.getCredit());
-					statementToPrepare.setBoolean(10,false);	
-					statementToPrepare.setTimestamp(11,null);
-			}
-		});
-		return res==1;
+					@Override
+					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+					{
+						statementToPrepare.setBoolean(1, true);
+						statementToPrepare.setString(1, user.getUsername());
+						statementToPrepare.setString(2, user.getPassword());
+						statementToPrepare.setString(3, user.getFirstName());
+						statementToPrepare.setString(4, user.getLastName());
+						statementToPrepare.setString(5, user.getEmailAddress());
+						statementToPrepare.setString(6, user.getPhoneNumber());
+						statementToPrepare.setString(7, user.getRole().name());
+						statementToPrepare.setString(8, user.getAccountStatus().name());
+						statementToPrepare.setFloat(9, user.getCredit());
+						statementToPrepare.setBoolean(10, false);
+						statementToPrepare.setTimestamp(11, null);
+					}
+				});
+		return res == 1;
 	}
 
 }

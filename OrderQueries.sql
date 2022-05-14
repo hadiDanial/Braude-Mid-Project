@@ -65,7 +65,7 @@ INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, 
 INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, `productOrItem`) VALUES ('Bridal Flowers', '500', 'Bouquet', 'Red', 'P');
 INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, `productOrItem`) VALUES ('Lemon Sapling', '120', 'Seedling', 'None', 'I');
 insert into Users (username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('Hadi','bestpassword123','Hadi','Danial','hadi@gmail.com','05223113','CEO','Frozen');
-insert into Users (username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('Yosef','bestpassword456','Yosef','Awad','yosef@gmail.com','052231132','Manager','Active');
+insert into Users (username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('Yosef','bestpassword456','Yosef','Awad','yosef@gmail.com','052231132','BranchManager','Active');
 
 INSERT INTO Locations (city, zipCode, street) VALUES ('Haifa', 1234, '123 Street');
 INSERT INTO Locations (city, zipCode, street) VALUES ('Karmiel', 5678, 'Braude Street');

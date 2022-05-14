@@ -189,4 +189,13 @@ public class User
 		return userId == other.userId && Objects.equals(username, other.username);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", emailAddress=" + emailAddress + ", phoneNumber="
+				+ phoneNumber + ", role=" + role + ", accountStatus=" + accountStatus + ", credit=" + credit
+				+ ", isLoggedIn=" + isLoggedIn + ", lastLoginDate=" + lastLoginDate + "]";
+	}
+
 }

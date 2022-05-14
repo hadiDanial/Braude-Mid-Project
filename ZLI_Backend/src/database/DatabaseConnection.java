@@ -195,7 +195,7 @@ public class DatabaseConnection
 		{
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT FROM " + tableName + " WHERE " + conditionFieldName + "=" + conditionValue + ";");
+					"SELECT * FROM " + tableName + " WHERE " + conditionFieldName + "='" + conditionValue + "';");
 			if (rs.next())
 			{
 				item = rsToObject.convertToObject(rs);
