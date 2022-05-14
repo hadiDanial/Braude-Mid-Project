@@ -126,7 +126,7 @@ public abstract class BaseProduct implements Serializable
 	@Override
 	public String toString()
 	{
-		return "BaseProduct [productId=" + productId + ", productName=" + productName + ", price="
+		return (isProduct() ? "Product" : "Item") + " [productId=" + productId + ", productName=" + productName + ", price="
 				+ price + ", image=" + Arrays.toString(image) + "]";
 	}
 
