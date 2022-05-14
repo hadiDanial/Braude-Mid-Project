@@ -1,4 +1,4 @@
-package gui;
+package gui.guimanagement;
 
 import java.io.IOException;
 import java.util.EmptyStackException;
@@ -7,7 +7,6 @@ import java.util.Stack;
 import client.ClientProperties;
 import controllers.ClientController;
 import gui.client.ClientUI;
-import gui.client.SettingsPage;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

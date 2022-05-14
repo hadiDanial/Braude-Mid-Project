@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import client.Client;
-import gui.SceneManager;
 import gui.client.ClientUI;
+import gui.guimanagement.SceneManager;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;

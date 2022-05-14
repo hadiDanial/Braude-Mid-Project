@@ -1,7 +1,7 @@
 package gui.client;
 
 import controllers.ClientController;
-import gui.SceneManager;
+import gui.guimanagement.SceneManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

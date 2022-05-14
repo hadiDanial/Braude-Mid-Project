@@ -3,7 +3,7 @@ package client;
 import java.io.IOException;
 
 import controllers.ClientController;
-import gui.SceneManager;
+import gui.guimanagement.SceneManager;
 import ocsf.client.AbstractClient;
 import requests.Request;
 import utility.IResponse;

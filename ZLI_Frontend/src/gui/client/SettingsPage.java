@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import client.ClientProperties;
 import controllers.ClientController;
-import gui.GUIController;
+import gui.guimanagement.GUIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

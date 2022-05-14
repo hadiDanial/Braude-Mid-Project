@@ -1,4 +1,4 @@
-package gui;
+package gui.guimanagement;
 
 import gui.catalog.*;
 import gui.client.*;
