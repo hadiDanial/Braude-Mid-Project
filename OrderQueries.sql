@@ -18,7 +18,6 @@ create table `Users`(`userId` int primary key AUTO_INCREMENT, `username` varchar
 					  `firstName` varchar(20) NOT NULL,`lastName` varchar(20) NOT NULL, `emailAddress` varchar(32) NOT NULL, `phoneNumber` varchar(20) NOT NULL,
                       `role` varchar(30) NOT NULL, `status` varchar(20) NOT NULL, `credit` float default 0, `isLoggedIn` Boolean, `lastLoginDate` timestamp);
                       
-insert into Users (username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('Hadi','bestpassword123','Hadi','Danial','hadi@gmail.com','05223113','CEO','Frozen');
 Update Users SET isLoggedIn=true, lastLoginDate=now() WHERE username='Hadi';
 
 create table `User_Orders`(`userId` int NOT NULL, `orderId` int NOT NULL, PRIMARY KEY(userId, orderId),
@@ -55,15 +54,30 @@ create table `Orders_Discounts`(`orderId` int NOT NULL, `discountId` int NOT NUL
                               
                               
 
-   --                    
--- insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 50, 'Hello', 'Red', 'Valentines roses', 'Haifa', now(), DATE_ADD(NOW(), INTERVAL 30 MINUTE));
--- insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 20, 'Greetings', 'Yellow', 'Yellow', 'Karmiel', now(), DATE_ADD(NOW(), INTERVAL 7 DAY));
--- insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 9.99, 'DEAL', 'Purple', 'Royal', 'Haifa', now(), DATE_ADD(NOW(), INTERVAL 3 DAY));
--- insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 35, 'Happy birthday!', 'Mixed', 'Birthday flowers', 'Karmiel', now(), DATE_ADD(NOW(), INTERVAL 5 DAY));
--- insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 999, 'WEDDING!!!', 'Bridal', 'Bridal Bouquet', 'Karmiel', now(), DATE_ADD(NOW(), INTERVAL 30 DAY));
+              
+insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 50, 'Hello', 'Red', 'Valentines roses', 'Haifa', now(), DATE_ADD(NOW(), INTERVAL 30 MINUTE));
+insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 20, 'Greetings', 'Yellow', 'Yellow', 'Karmiel', now(), DATE_ADD(NOW(), INTERVAL 7 DAY));
+insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 9.99, 'DEAL', 'Purple', 'Royal', 'Haifa', now(), DATE_ADD(NOW(), INTERVAL 3 DAY));
+insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 35, 'Happy birthday!', 'Mixed', 'Birthday flowers', 'Karmiel', now(), DATE_ADD(NOW(), INTERVAL 5 DAY));
+insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 999, 'WEDDING!!!', 'Bridal', 'Bridal Bouquet', 'Karmiel', now(), DATE_ADD(NOW(), INTERVAL 30 DAY));
+INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, `productOrItem`) VALUES ('Rose', '5', 'Flower', 'Red', 'I');
+INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, `productOrItem`) VALUES ('Cactus', '199', 'FlowerPot', 'Green', 'P');
+INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, `productOrItem`) VALUES ('Bridal Flowers', '500', 'Bouquet', 'Red', 'P');
+INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, `productOrItem`) VALUES ('Lemon Sapling', '120', 'Seedling', 'None', 'I');
+insert into Users (username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('Hadi','bestpassword123','Hadi','Danial','hadi@gmail.com','05223113','CEO','Frozen');
+insert into Users (username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('Yosef','bestpassword456','Yosef','Awad','yosef@gmail.com','052231132','Manager','Active');
 
+INSERT INTO Locations (city, zipCode, street) VALUES ('Haifa', 1234, '123 Street');
+INSERT INTO Locations (city, zipCode, street) VALUES ('Karmiel', 5678, 'Braude Street');
+INSERT INTO Locations (city, zipCode, street) VALUES ('Tel-Aviv', 9012, 'Dizengoff');
+INSERT INTO Branches (managerId, branchName, locationId) VALUES (1, 'Haifa', 1);
+INSERT INTO Branches (managerId, branchName, locationId) VALUES (2, 'Karmiel', 2);
+INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (1,1,5);
+INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (3,1,9);
+INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (4,1,17);
+INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (1,2,3);
+insert into Orders (price, greetingCard, color, dOrder, shop, date, orderDate) values (94.9, 'refresh', 'Yellow', 'blaaaa', 'nazareth', now(), now());
+insert into User_Orders (userId, orderId) values (1, 5);
 
--- insert into Orders (price, greetingCard, color, dOrder, shop, date, orderDate) values (94.9, 'refresh', 'Yellow', 'blaaaa', 'nazareth', now(), now());
--- insert into User_Orders (userId, orderId) values (1, 5);
-
+SELECT * FROM catalog join catalogiteminbranch WHERE catalog.catalogId = catalogiteminbranch.catalogId AND catalogiteminbranch.branchId = 1 AND catalogiteminbranch.quantityInStock > 6;
 -- SELECT * FROM Orders;
