@@ -1,6 +1,5 @@
 package gui.orders;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -9,13 +8,14 @@ import client.ClientProperties;
 import controllers.ClientController;
 import controllers.OrderController;
 import entities.users.Order;
+import gui.GUIController;
+import gui.GUIPages;
+import gui.SceneManager;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -29,7 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import utility.IEventListener;
 
-public class OrdersPage implements Initializable
+public class OrdersPage extends GUIController
 {
 	private OrderController orderController;
 	private ObservableList<Order> orders;
@@ -43,14 +43,13 @@ public class OrdersPage implements Initializable
 
 	@FXML
 	private Button refreshBtn;
-	
+
 	@FXML
 	private Label ordersTitle;
-	
+
 	private StackPane pane;
 	private AnchorPane updatePagePane;
 	private UpdateOrder updatePage = null;
-	private OrdersPage ordersPage = this;
 	private double left;
 	private double right;
 
@@ -58,7 +57,6 @@ public class OrdersPage implements Initializable
 	{
 		updateTableItems();
 	}
-
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
@@ -80,23 +78,7 @@ public class OrdersPage implements Initializable
 				updateTableItems();
 			}
 		});
-		
-	}
 
-	public void toggleUpdatePageVisibility(boolean isVisible)
-	{
-		if (updatePage != null && isVisible)
-		{
-			parent.getChildren().clear();
-			parent.getChildren().add(updatePagePane);
-		} else
-		{
-			parent.getChildren().clear();
-			parent.getChildren().add(ordersTitle);
-			parent.getChildren().add(refreshBtn);
-			parent.getChildren().add(pane);
-			updateTableItems();
-		}
 	}
 
 	public void updateTableItems()
@@ -118,7 +100,7 @@ public class OrdersPage implements Initializable
 		parent.getChildren().add(pane);
 		ordersTable.setPrefWidth(tableWidth);
 		ordersTable.setMinWidth(tableWidth * 0.5);
-		ordersTable.setPrefHeight(0.8 * ClientProperties.getClientHeight());
+		ordersTable.setPrefHeight(0.7 * ClientProperties.getClientHeight());
 		left = (parent.getPrefWidth() - tableWidth) / 2;
 		right = ClientProperties.getClientWidth() - ((parent.getPrefWidth() - tableWidth) / 2 + tableWidth);
 //		System.out.println(parent.getPrefWidth() + " " + left + " " + right);
@@ -212,31 +194,11 @@ public class OrdersPage implements Initializable
 				editButton.setPrefWidth(width * 0.09);
 				setGraphic(editButton);
 				editButton.setOnAction(event -> {
-					try
-					{
-						// Load Update Order Page and set the order to edit
-						if (updatePage == null)
-						{
-							FXMLLoader loader = new FXMLLoader(
-									getClass().getResource("/gui/orders/OrderUpdatePage.fxml"));
-							updatePagePane = loader.load();
-							updatePage = loader.getController();
-							updatePage.setOrderToUpdate(order);
-							updatePage.setup(ordersPage);
-							parent.getChildren().clear();
-							parent.getChildren().add(updatePagePane);
-							AnchorPane.setLeftAnchor(updatePagePane, left);
-							AnchorPane.setRightAnchor(updatePagePane, right);
-						} else
-						{
-							updatePage.setOrderToUpdate(order);
-							toggleUpdatePageVisibility(true);
-						}
-					} catch (IOException e)
-					{
-						e.printStackTrace();
-					}
-
+					updatePage = (UpdateOrder) SceneManager.loadNewScene(GUIPages.UpdateOrder, true);
+					updatePage.setOrderToUpdate(order);
+					updatePagePane = (AnchorPane) updatePage.getRoot();
+					AnchorPane.setLeftAnchor(updatePagePane, left);
+					AnchorPane.setRightAnchor(updatePagePane, right);
 				});
 			}
 		});

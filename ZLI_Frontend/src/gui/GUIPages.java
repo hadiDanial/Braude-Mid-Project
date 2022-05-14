@@ -16,7 +16,8 @@ public enum GUIPages
 	StartupPage("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
 	Settings("client/SettingsPage.fxml", "Settings"),
 	Orders("orders/OrdersPage.fxml", "Orders"),
-	UpdateOrder("orders/OrderUpdatePage.fxml", "Update Order");
+	UpdateOrder("orders/OrderUpdatePage.fxml", "Update Order"), 
+	Loading("client/SettingsPage.fxml", "LOADING"); // TODO: Create loading page
 
 	private final String fxmlFile;
 //	private final Class<? extends GUIController> controllerClass;

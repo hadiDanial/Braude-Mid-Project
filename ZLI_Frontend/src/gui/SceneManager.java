@@ -2,7 +2,6 @@ package gui;
 
 import java.io.IOException;
 import java.util.EmptyStackException;
-import java.util.HashSet;
 import java.util.Stack;
 
 import client.ClientProperties;
@@ -28,7 +27,8 @@ public class SceneManager
 	private static AnchorPane containerAnchorPane;
 	private static VBox contentVBox;
 	private static Stack<HistoryState> history;
-
+	private static Stage loadingWindow;
+	
 	/**
 	 * Initialize the UI. This method should only be called <b>once!</b>
 	 * 
@@ -196,7 +196,7 @@ public class SceneManager
 	 * 
 	 * @param pageToLoad Page to load.
 	 */
-	public static GUIController loadModalWindow(GUIPages pageToLoad)
+	public static Stage loadModalWindow(GUIPages pageToLoad)
 	{
 		Stage modalWindow = new Stage();
 		GUIController guiController = null;
@@ -216,15 +216,27 @@ public class SceneManager
 		{
 			e.printStackTrace();
 		}
-		return guiController;
+		return modalWindow;
 	}
 
 	/**
 	 * Opens the settings page.
 	 */
-	public static SettingsPage openSettingsPage()
+	public static void openSettingsPage()
 	{
-		GUIPages settings = GUIPages.Settings;
-		return (SettingsPage) loadModalWindow(settings);
+		loadModalWindow(GUIPages.Settings);
+	}
+
+	public static void openLoadingWindow()
+	{
+		loadingWindow = loadModalWindow(GUIPages.Loading);
+	}
+	public static void closeLoadingWindow()
+	{
+		if(loadingWindow != null)
+		{
+			loadingWindow.close();
+			loadingWindow = null;
+		}
 	}
 }

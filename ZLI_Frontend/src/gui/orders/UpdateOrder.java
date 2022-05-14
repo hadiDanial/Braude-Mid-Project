@@ -11,9 +11,10 @@ import java.util.ResourceBundle;
 import controllers.OrderController;
 import entities.users.Order;
 import enums.ColorEnum;
+import gui.GUIController;
+import gui.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -22,7 +23,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import utility.IResponse;
 
-public class UpdateOrder implements Initializable
+public class UpdateOrder extends GUIController
 {
 	private OrderController orderController;
 	private Order order;
@@ -41,76 +42,14 @@ public class UpdateOrder implements Initializable
 
 	@FXML
 	private TextArea orderDetails;
-	
+
 	@FXML
 	private Spinner<Integer> minuteSpinner;
 
 	@FXML
 	private Spinner<Integer> hourSpinner;
 
-	private OrdersPage ordersPage;
 	protected boolean waitingForResponse;
-
-	@FXML
-	void checkValidDate(ActionEvent event)
-	{
-//		LocalDate d = datePicker.getValue();
-		if(datePicker.getValue().isBefore(LocalDate.now()))
-		{
-			datePicker.setValue(LocalDate.now());
-//			d = datePicker.getValue();
-		}
-	}
-
-	@FXML
-	void onCancelBtnClicked(ActionEvent event)
-	{
-		closeSceneAndOpenOrdersTable();
-	}
-
-	private void closeSceneAndOpenOrdersTable()
-	{
-		colorList.getItems().clear();
-		ordersPage.toggleUpdatePageVisibility(false);
-	}
-
-	@FXML
-	void onUpdateBtnClicked(ActionEvent event)
-	{
-		order.setColor(colorList.getValue());
-		LocalDate date = datePicker.getValue();
-		
-		int hour = hourSpinner.getValue();
-		int min = minuteSpinner.getValue();
-		Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant().plusSeconds(hour * 60 * 60 + min * 60);
-		order.setDeliveryDate(instant);
-		waitingForResponse = true;
-		orderController.updateOrder(new IResponse<Boolean>()
-		{
-
-			@Override
-			public void executeAfterResponse(Object message)
-			{
-				boolean result = (Boolean)message;
-				orderDetails.setText(result ? "Order updated successfully." : "Failed to update!");
-				waitingForResponse = false;
-//				if(result)
-//					ordersPage.updateTableItems();
-			}
-		}, order);
-		try
-		{
-			while (waitingForResponse)
-			{
-				Thread.sleep(25);
-			}				
-			Thread.sleep(100);
-			closeSceneAndOpenOrdersTable();
-		} catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
@@ -121,12 +60,14 @@ public class UpdateOrder implements Initializable
 		hourSpinner.setValueFactory(hourValueFactory);
 		minuteSpinner.setValueFactory(minValueFactory);
 		hourSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
-			  if (!newValue) {
-			    hourSpinner.increment(0);
-			  }
-			});
+			if (!newValue)
+			{
+				hourSpinner.increment(0);
+			}
+		});
 		minuteSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue) {
+			if (!newValue)
+			{
 				minuteSpinner.increment(0);
 			}
 		});
@@ -150,15 +91,69 @@ public class UpdateOrder implements Initializable
 	{
 		orderDetails.clear();
 		orderDetails.appendText("Order #" + order.getOrderId() + ":\n");
-		orderDetails.appendText("Ordered on " + order.getFormattedOrderDate() + "\nFrom Branch: " + order.getBranchName() + ".\n");
+		orderDetails.appendText("Ordered on " + order.getFormattedOrderDate() + "\n");
+		orderDetails.appendText("From Branch: " + order.getBranchName() + ".\n");
 		orderDetails.appendText("For delivery on " + order.getFormattedDeliveryDate() + ".\n");
 		orderDetails.appendText("Order color is " + order.getColor().name() + ", details:\n");
 		orderDetails.appendText(order.getOrderDetails() + "\n");
 	}
 
-	public void setup(OrdersPage ordersPage)
+	@FXML
+	void checkValidDate(ActionEvent event)
 	{
-		this.ordersPage = ordersPage;
+		if (datePicker.getValue().isBefore(LocalDate.now()))
+		{
+			datePicker.setValue(LocalDate.now());
+		}
 	}
 
+	private void closeSceneAndOpenOrdersTable(boolean update)
+	{
+		OrdersPage ordersPage = (OrdersPage) SceneManager.loadPreviousPage();
+		if(update)
+		{
+			ordersPage.updateTableItems();
+		}
+	}
+
+	@FXML
+	void onUpdateBtnClicked(ActionEvent event)
+	{
+		order.setColor(colorList.getValue());
+		LocalDate date = datePicker.getValue();
+
+		int hour = hourSpinner.getValue();
+		int min = minuteSpinner.getValue();
+		Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant().plusSeconds(hour * 60 * 60 + min * 60);
+		order.setDeliveryDate(instant);
+		waitingForResponse = true;
+		orderController.updateOrder(new IResponse<Boolean>()
+		{
+			@Override
+			public void executeAfterResponse(Object message)
+			{
+				boolean result = (Boolean) message;
+				orderDetails.setText(result ? "Order updated successfully." : "Failed to update!");
+				waitingForResponse = false;
+			}
+		}, order);
+		try
+		{
+			while (waitingForResponse)
+			{
+				Thread.sleep(25);
+			}
+			Thread.sleep(100);
+			closeSceneAndOpenOrdersTable(true);
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void onCancelBtnClicked(ActionEvent event)
+	{
+		closeSceneAndOpenOrdersTable(false);
+	}
 }

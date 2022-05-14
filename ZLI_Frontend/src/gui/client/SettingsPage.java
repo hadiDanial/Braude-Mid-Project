@@ -1,18 +1,19 @@
 package gui.client;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import client.ClientProperties;
 import controllers.ClientController;
+import gui.GUIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class SettingsPage implements Initializable
+public class SettingsPage extends GUIController
 {
 	@FXML
 	private TextField ipAddress;
@@ -22,8 +23,6 @@ public class SettingsPage implements Initializable
 
 	@FXML
 	private Button cancelBtn;
-
-	private Stage stage;
 
 	@FXML
 	void onCancelButtonClick(ActionEvent event)
@@ -39,10 +38,6 @@ public class SettingsPage implements Initializable
 		stage.close();
 	}
 
-	public void setStage(Stage settings)
-	{
-		this.stage = settings;
-	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

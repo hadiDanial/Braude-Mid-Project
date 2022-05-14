@@ -3,6 +3,7 @@ package client;
 import java.io.IOException;
 
 import controllers.ClientController;
+import gui.SceneManager;
 import ocsf.client.AbstractClient;
 import requests.Request;
 import utility.IResponse;
@@ -29,6 +30,8 @@ public class Client extends AbstractClient
 			response.executeAfterResponse(message);
 			response = null;
 		}
+		// TODO: This loading window is buggy - doesn't close. Fix it
+//		SceneManager.closeLoadingWindow();
 	}
 
 	/**
@@ -43,6 +46,7 @@ public class Client extends AbstractClient
 			openConnection();// in order to send more than one message
 			awaitResponse = true;
 			this.response = response;
+//			SceneManager.openLoadingWindow();
 			sendToServer(request);
 			// wait for response
 			while (awaitResponse)

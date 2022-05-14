@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import client.Client;
+import gui.SceneManager;
 import gui.client.ClientUI;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -39,21 +40,6 @@ public class ClientController
 	{
 		ClientController.clientUI = clientUI;
 	}
-	
-	public static Stage getStage()
-	{
-		return clientUI.getWindow();
-	}
-
-	public static void updateRoot(Node newRoot, String newTitle)
-	{
-		clientUI.updateSceneRoot(newRoot, newTitle);
-	}
-
-	public static Pane getRoot()
-	{
-		return clientUI.getRoot();
-	}
 
 	public <T> void sendRequest(Request request, IResponse<T> response)
 	{
@@ -74,7 +60,7 @@ public class ClientController
 
 	public void openSettingsPage()
 	{
-		clientUI.openSettingsPage();
+		SceneManager.openSettingsPage();
 	}
 
 	public void closeConnection()

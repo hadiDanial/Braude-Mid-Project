@@ -1,35 +1,29 @@
 package gui.client;
 
-import java.io.IOException;
-
-import client.ClientProperties;
 import controllers.ClientController;
+import gui.SceneManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 public class ClientUI extends Application
 {
-	private static Stage window;
-	private static Scene scene;
 	private static AnchorPane root;
 	
 	@FXML
 	private Button settingsBtn;
 	
+	@FXML
+	private AnchorPane content;
+	
+	@FXML
+	public ScrollPane scrollPane;
 	
 	public static void main(String[] args)
 	{
@@ -42,77 +36,24 @@ public class ClientUI extends Application
 	 */
 	public void start(Stage primaryStage)
 	{
-		root = new AnchorPane();
-		window = primaryStage;
 		ClientController.setClientUI(this);
-		AnchorPane anchor;
-		try
-		{
-			window.setOnCloseRequest(new EventHandler<WindowEvent>()
-			{
-				
-				@Override
-				public void handle(WindowEvent event)
-				{
-			        ClientController.getInstance().closeConnection();
-				}
-			});
-			anchor = FXMLLoader.load(getClass().getResource("/gui/client/ClientUI.fxml"));
-			anchor.setPrefHeight(ClientProperties.getClientHeight());
-			anchor.setPrefWidth(ClientProperties.getClientWidth());
-			window.setResizable(false);
-			updateSceneRoot(anchor, "ZLI");
-			AnchorPane orders = FXMLLoader.load(getClass().getResource("/gui/orders/OrdersPage.fxml"));
-			anchor.getChildren().add(0, orders);
-		} catch (IOException e1)
-		{
-			e1.printStackTrace();
-		}
-	}
-	public void updateSceneRoot(Node newRoot, String newTitle)
-	{
-		root = new AnchorPane();
-		root.getChildren().clear();
-		root.getChildren().add(newRoot);
-		scene = new Scene(root);
-//		window.close();
-		window.setTitle(newTitle);
-		window.setScene(scene);
-		window.show();
-	}
-	public Stage getWindow()
-	{
-		return window;
+		SceneManager.initUI(primaryStage);
+		
 	}
 	
 	public void onSettingsButtonClicked(ActionEvent event)
 	{
-		openSettingsPage();
+		SceneManager.openSettingsPage();
 	}
 
 	public Pane getRoot()
 	{
 		return root;
 	}
-	public void openSettingsPage()
+
+	public AnchorPane getContent()
 	{
-		Stage settings = new Stage();
-		settings.initModality(Modality.APPLICATION_MODAL);
-		settings.setTitle("Settings");
-		Pane pane;
-		try
-		{
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/client/SettingsPage.fxml"));
-			pane = loader.load();
-			SettingsPage settingsPage = loader.getController();
-			settingsPage.setStage(settings);
-			Scene scene = new Scene(pane);
-			settings.setScene(scene);
-			settings.show();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		
+		return content;
 	}
+	
 }
