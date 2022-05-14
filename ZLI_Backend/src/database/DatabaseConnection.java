@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import entities.products.BaseProduct;
 import gui.ServerUI;
 import server.ConsoleString;
 
@@ -239,6 +240,42 @@ public class DatabaseConnection
 	}
 
 	/**
+	 * Returns all records when joining the two tables with the given conditions.
+	 * 
+	 * @param <T>             Class type for the entity that matches the table.
+	 * @param firstTableName  First join table name.
+	 * @param secondTableName Second join table name.
+	 * @param conditions      The conditions of the join operation, for example:<br>
+	 *                        <code>firstTableName.firstTableId=secondTableName.secondTableId AND secondTabkeName.quantity > 10</code>.
+	 *                        Do not include WHERE or ; in the conditions.
+	 * @param rsToObject      An <code>IResultSetToObject</code> that describes how
+	 *                        to convert a record to the entity class.
+	 * @return An ArrayList containing all matching records from the join result.
+	 */
+	public <T> ArrayList<T> getJoinResultWithSimpleConditions(String firstTableName, String secondTableName,
+			String conditions, IResultSetToObject<T> rsToObject)
+	{
+		Statement stmt;
+		ArrayList<T> list = new ArrayList<T>();
+		try
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM " + firstTableName + " JOIN " + secondTableName + " WHERE " + conditions + ";");
+			while (rs.next())
+			{
+				list.add(rsToObject.convertToObject(rs));
+			}
+			rs.close();
+			return list;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
 	 * Updates a single record in the database by its PK.
 	 * 
 	 * @param <T>         The class of the entity to update.
@@ -377,5 +414,4 @@ public class DatabaseConnection
 			System.out.println(e);
 		}
 	}
-
 }

@@ -12,10 +12,12 @@ import enums.ColorEnum;
 import enums.ItemType;
 import enums.ProductType;
 
-public class ProductController {
-    private static ProductController instance;
+public class ProductController
+{
+	private static ProductController instance;
 	private final DatabaseConnection databaseConnection;
-	private static final String TABLE_NAME = "BaseProduct";
+	private static final String ALL_PRODUCTS_TABLE_NAME = "Catalog";
+	private static final String PRODUCTS_IN_BRANCH_TABLE_NAME = "CatalogItemInBranch";
 	private IResultSetToObject<BaseProduct> rsToProduct;
 
 	private ProductController()
@@ -28,24 +30,25 @@ public class ProductController {
 			{
 				try
 				{
-					if(rs.getString("productOrItem") == BaseProduct.ITEM_DISCRIMINATOR){
-						Item baseProduct = new Item();
-						baseProduct.setProductId(rs.getInt("orderNumber"));
-						baseProduct.setProductName(rs.getString("productName"));
-						baseProduct.setPrice(rs.getFloat("price"));
-						baseProduct.setImage(rs.getBytes("image"));
-						baseProduct.setItemType(ItemType.valueOf(rs.getString("type")));
-						baseProduct.setPrimaryColor(ColorEnum.valueOf(rs.getString("primaryColor")));
-						return baseProduct;
-					}
-					else{
-						Product baseProduct = new Product();
-						baseProduct.setProductId(rs.getInt("orderNumber"));
-						baseProduct.setProductName(rs.getString("productName"));
-						baseProduct.setPrice(rs.getFloat("price"));
-						baseProduct.setImage(rs.getBytes("image"));
-						baseProduct.setProductType(ProductType.valueOf(rs.getString("type")));
-						return baseProduct;
+					if (rs.getString("productOrItem").equals(BaseProduct.ITEM_DISCRIMINATOR))
+					{
+						Item item = new Item();
+						item.setProductId(rs.getInt("catalogId"));
+						item.setProductName(rs.getString("productName"));
+						item.setPrice(rs.getFloat("price"));
+						item.setImage(rs.getBytes("image"));
+						item.setItemType(ItemType.valueOf(rs.getString("type")));
+						item.setPrimaryColor(ColorEnum.valueOf(rs.getString("primaryColor")));
+						return item;
+					} else
+					{
+						Product product = new Product();
+						product.setProductId(rs.getInt("catalogId"));
+						product.setProductName(rs.getString("productName"));
+						product.setPrice(rs.getFloat("price"));
+						product.setImage(rs.getBytes("image"));
+						product.setProductType(ProductType.valueOf(rs.getString("type")));
+						return product;
 					}
 				} catch (Exception e)
 				{
@@ -65,10 +68,27 @@ public class ProductController {
 		return instance;
 	}
 
-    public ArrayList<BaseProduct> getAllProducts()
+	/**
+	 * Gets the entire catalog
+	 * 
+	 * @return
+	 */
+	public ArrayList<BaseProduct> getAllProducts()
 	{
-		return databaseConnection.getAll(TABLE_NAME, rsToProduct);
+		return databaseConnection.getAll(ALL_PRODUCTS_TABLE_NAME, rsToProduct);
+	}
+
+	/**
+	 * Gets the catalog by branch
+	 * 
+	 * @return
+	 */
+	public ArrayList<BaseProduct> getCatalogByBranch(int branchId)
+	{
+		String conditions = "catalog.catalogId = catalogiteminbranch.catalogId AND " + "catalogiteminbranch.branchId = "
+				+ branchId + " AND catalogiteminbranch.quantityInStock > 0";
+		return databaseConnection.getJoinResultWithSimpleConditions(PRODUCTS_IN_BRANCH_TABLE_NAME,
+				ALL_PRODUCTS_TABLE_NAME, conditions, rsToProduct);
 	}
 
 }
-    
