@@ -37,7 +37,7 @@ public class OrderController
 				try
 				{
 					Order order = new Order();
-					order.setOrderId(rs.getInt("orderNumber"));
+					order.setOrderId(rs.getInt("orderId"));
 					order.setTotalCost(rs.getFloat("price"));
 					order.setGreetingCard(rs.getString("greetingCard"));
 					order.setColor(ColorEnum.valueOf(rs.getString("color")));
