@@ -11,6 +11,7 @@ import entities.products.Product;
 import enums.ColorEnum;
 import enums.ItemType;
 import enums.ProductType;
+
 public class ProductController {
     private static ProductController instance;
 	private final DatabaseConnection databaseConnection;

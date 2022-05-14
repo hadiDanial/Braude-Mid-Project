@@ -8,14 +8,12 @@ import java.time.Instant;
 import java.util.ArrayList;
 
 import com.mysql.cj.protocol.Message;
-import com.mysql.cj.x.protobuf.Mysqlx.ClientMessages;
 
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
 import database.IResultSetToObject;
 import entities.users.User;
 import enums.AccountStatus;
-import enums.ColorEnum;
 import enums.UserRole;
 
 public class UserController
