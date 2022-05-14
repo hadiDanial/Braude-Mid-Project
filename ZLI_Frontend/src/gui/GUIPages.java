@@ -1,0 +1,42 @@
+package gui;
+
+import gui.catalog.*;
+import gui.client.*;
+import gui.complaints.*;
+import gui.orders.*;
+import gui.reports.*;
+import gui.surveys.*;
+import gui.users.*;
+
+public enum GUIPages
+{
+	// TODO: Add all pages
+	Login("users/LoginPage.fxml", "Login"),
+	MainContainer("client/ClientUI.fxml", "Zerli G13"),
+	StartupPage("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
+	Settings("client/SettingsPage.fxml", "Settings"),
+	Orders("orders/OrdersPage.fxml", "Orders"),
+	UpdateOrder("orders/OrderUpdatePage.fxml", "Update Order");
+
+	private final String fxmlFile;
+//	private final Class<? extends GUIController> controllerClass;
+	private final String pageTitle;
+
+	private static final String packageName = "/gui/";
+
+	GUIPages(String fxmlFile, String pageTitle)
+	{
+		this.fxmlFile = fxmlFile;
+		this.pageTitle = pageTitle;
+	}
+
+	public String getFxmlFile()
+	{
+		return packageName + fxmlFile;
+	}
+	
+	public String getPageTitle()
+	{
+		return pageTitle;
+	}	
+}
