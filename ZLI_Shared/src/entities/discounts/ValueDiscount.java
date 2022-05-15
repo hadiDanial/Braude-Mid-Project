@@ -11,13 +11,13 @@ public class ValueDiscount extends Discount
 
 	public ValueDiscount()
 	{
-		super();
+		super(Discount.VALUE_DISCRIMINATOR);
 	}
 
 
 	public ValueDiscount(Instant discountStartDate, Instant discountEndDate, String discountName, float discountValue)
 	{
-		super(discountStartDate, discountEndDate, discountName, discountValue);
+		super(discountStartDate, discountEndDate, discountName, discountValue, Discount.VALUE_DISCRIMINATOR);
 		if (discountValue < 0)
 			throw new InvalidParameterException("Discount Value must be non-negative: (" + discountValue + ").");
 	}

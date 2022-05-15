@@ -13,19 +13,21 @@ public abstract class Discount
 	private HashSet<CatalogItem> products;
 	private String discountName;
 	private float discountValue;
+	private String discountType;
 	
 	public static final String PERCENTAGE_DISCRIMINATOR = "P";
 	public static final String VALUE_DISCRIMINATOR = "V";
 	
 	public static final PercentageDiscount firstPurchaseDiscount = new PercentageDiscount(Instant.MIN, Instant.MAX, "First Purchase Discount", 0.1f);
-	public Discount()
+	public Discount(String discountType)
 	{
 		super();
 		products = new HashSet<CatalogItem>();
+		this.discountType = discountType;
 	}
 	
 	
-	public Discount(Instant discountStartDate, Instant discountEndDate, String discountName, float discountValue)
+	public Discount(Instant discountStartDate, Instant discountEndDate, String discountName, float discountValue, String discountType)
 	{
 		super();
 		this.discountStartDate = discountStartDate;
@@ -33,6 +35,7 @@ public abstract class Discount
 		this.discountName = discountName;
 		this.discountValue = discountValue;
 		products = new HashSet<CatalogItem>();
+		this.discountType = discountType;
 	}
 
 
