@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS `Discounts`;
 DROP TABLE IF EXISTS `Branches`;
 DROP TABLE IF EXISTS `Survey_Answers`;
 DROP TABLE IF EXISTS `Surveys`;
+DROP TABLE IF EXISTS `Complaints`;
 DROP TABLE IF EXISTS `Users`;
 DROP TABLE IF EXISTS `Locations`;
 DROP TABLE IF EXISTS `Items_In_Product`;
@@ -65,12 +66,15 @@ create table `Survey_Answers`(`answerId` int PRIMARY KEY AUTO_INCREMENT, `custom
                               `a4` TINYINT NOT NULL,
                               `a5` TINYINT NOT NULL, 
                               `a6` TINYINT NOT NULL, 
-                              CONSTRAINT val_range CHECK(a1>=-0 AND a1<=10 AND a2>=-0 AND a2<=10 AND a3>=-0 AND a3<=10 AND a4>=-0 AND a4<=10 AND a5>=-0 AND a5<=10 AND a6>=-0 AND a6<=10),
+                              CONSTRAINT val_range CHECK(a1>=1 AND a1<=10 AND a2>=1 AND a2<=10 AND a3>=1 AND a3<=10 AND a4>=1 AND a4<=10 AND a5>=1 AND a5<=10 AND a6>=1 AND a6<=10),
 							  FOREIGN KEY (surveyId) REFERENCES Surveys(surveyId), 
                               FOREIGN KEY (customerId) REFERENCES Users(userId), 
                               FOREIGN KEY (orderId) REFERENCES Orders(orderId));                              
                               
-                                           
+create table `Complaints`(`complaintId` int PRIMARY KEY AUTO_INCREMENT, `customerId` int NOT NULL,`customerServiceEmployeeId` int NOT NULL,
+						  `complaintDetails` varchar(2048), `complaintResult` varchar(2048), `submissionTime` timestamp NOT NULL, `wasHandled` Boolean,
+						FOREIGN KEY (customerId) REFERENCES Users(userId), FOREIGN KEY (customerServiceEmployeeId) REFERENCES Users(userId));
+                                                  
 
               
 insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 50, 'Hello', 'Red', 'Valentines roses', 'Haifa', now(), DATE_ADD(NOW(), INTERVAL 30 MINUTE));
@@ -100,8 +104,9 @@ INSERT INTO Surveys (surveyDate, q1, q2, q3, q4, q5, q6) VALUES (now(), 'q1','q2
 INSERT INTO Surveys (surveyDate, q1, q2, q3, q4, q5, q6) VALUES (now(), 'q7','q8','q9','q10','q11','q12');
 INSERT INTO Surveys (surveyDate, q1, q2, q3, q4, q5, q6) VALUES (now(), 'q13','q14','q15','q16','q17','q18');
 INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,1,1,2,3,4,5,10);
-INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,2,5,4,8,1,0,1);
+INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,2,5,4,8,1,1,1);
 INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,3,6,5,3,4,9,7);
-
+INSERT INTO Complaints (customerId, customerServiceEmployeeId, complaintDetails, complaintResult, submissionTime, wasHandled) VALUES (1,1, 'YOUR SERVICE SUCKS', 'GO HOME', now(), true);
+INSERT INTO Complaints (customerId, customerServiceEmployeeId, complaintDetails, complaintResult, submissionTime, wasHandled) VALUES (1,1, 'help me pls', 'nope', now(), false);
 SELECT * FROM catalog join catalogiteminbranch WHERE catalog.catalogId = catalogiteminbranch.catalogId AND catalogiteminbranch.branchId = 1 AND catalogiteminbranch.quantityInStock > 6;
 -- SELECT * FROM Orders;
