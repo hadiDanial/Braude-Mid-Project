@@ -7,8 +7,6 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 
-import com.mysql.cj.protocol.Message;
-
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
 import database.IResultSetToObject;
@@ -117,9 +115,7 @@ public class UserController
 	}
 
 	public boolean register(User user)
-	{ // "username", "password", "firstName", "lastName", "emailAddress",
-		// "phoneNumber", "role", "accountStatus", "credit",
-		// "isLoggedIn", "lastLoginDate"
+	{ 
 		int res = databaseConnection.insertToDatabase(TABLE_NAME, allColumnNames,
 				new IObjectToPreparedStatementParameters<User>()
 				{

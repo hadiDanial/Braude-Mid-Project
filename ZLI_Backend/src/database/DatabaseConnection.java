@@ -186,8 +186,7 @@ public class DatabaseConnection
 	 * @return Entity object of type <code>T</code> if a record with the condition
 	 *         is found, otherwise <code>NULL</code>.
 	 */
-	public <T> T getBySimpleCondition(String conditionFieldName, String conditionValue, String tableName,
-			IResultSetToObject<T> rsToObject)
+	public <T> T getBySimpleCondition(String conditionFieldName, String conditionValue, String tableName,IResultSetToObject<T> rsToObject)
 	{
 		Statement stmt;
 		T item = null;
