@@ -5,11 +5,14 @@ DROP TABLE IF EXISTS `CatalogItemInBranch`;
 DROP TABLE IF EXISTS `Orders_Discounts`;
 DROP TABLE IF EXISTS `Discounts`;
 DROP TABLE IF EXISTS `Branches`;
+DROP TABLE IF EXISTS `Survey_Answers`;
+DROP TABLE IF EXISTS `Surveys`;
 DROP TABLE IF EXISTS `Users`;
 DROP TABLE IF EXISTS `Locations`;
 DROP TABLE IF EXISTS `Items_In_Product`;
 DROP TABLE IF EXISTS `Catalog`;
 DROP TABLE IF EXISTS `Orders`;
+
 
 create table `Orders`(`orderId` int primary key AUTO_INCREMENT, `price` float, `greetingCard` varchar(256), `color` varchar(32), 
 					  `dOrder` varchar(256), `shop` varchar(32), `date` timestamp, `orderDate` timestamp);
@@ -24,7 +27,7 @@ create table `User_Orders`(`userId` int NOT NULL, `orderId` int NOT NULL, PRIMAR
 		FOREIGN KEY (userId) REFERENCES Users(userId) ON DELETE CASCADE, 
         FOREIGN KEY (orderId) REFERENCES Orders(orderId) ON DELETE CASCADE) ;
         
-create table `Catalog`(`catalogId` int primary key AUTO_INCREMENT, `productName` varchar(256) NOT NULL, `price` float NOT NULL, `image` BLOB NOT NULL,
+create table `Catalog`(`catalogId` int primary key AUTO_INCREMENT, `productName` varchar(256) NOT NULL, `price` float NOT NULL, `image` BLOB,
                        `type` varchar(50) NOT NULL, `primaryColor` varchar(20), `productOrItem` varchar(1) NOT NULL DEFAULT 'P');
                        
 create table `Items_In_Product`(`itemId` int NOT NULL, `productId` int NOT NULL, `itemQuantityInProduct` float NOT NULL, PRIMARY KEY (itemId, productId),
@@ -43,7 +46,7 @@ create table `CatalogItemInBranch`(`catalogId` int NOT NULL, `branchId` int NOT 
 									FOREIGN KEY (catalogId) REFERENCES Catalog(catalogId), FOREIGN KEY (branchId) REFERENCES Branches(branchId));
                        
 create table `Discounts`(`discountId` int PRIMARY KEY AUTO_INCREMENT, `discountStartDate` timestamp NOT NULL, `discountEndDate` timestamp NOT NULL,
-						 `discountName` varchar(128), `discountValue` float);
+						 `discountName` varchar(128), `discountValue` float NOT NULL, `discountType` varchar(1) NOT NULL);
                          
 create table `Discounts_Products`(`catalogId` int NOT NULL, `branchId` int NOT NULL, `discountId` int NOT NULL, PRIMARY KEY(catalogId, branchId, discountId), 
 							  FOREIGN KEY (catalogId, branchId) REFERENCES CatalogItemInBranch(catalogId, branchId), FOREIGN KEY (discountId) REFERENCES Discounts(discountId));
@@ -51,8 +54,23 @@ create table `Discounts_Products`(`catalogId` int NOT NULL, `branchId` int NOT N
 create table `Orders_Discounts`(`orderId` int NOT NULL, `discountId` int NOT NULL, PRIMARY KEY(orderId, discountId), 
 							  FOREIGN KEY (orderId) REFERENCES Orders(orderId), FOREIGN KEY (discountId) REFERENCES Discounts(discountId));                              
                               
+                           
+create table `Surveys`(`surveyId` int PRIMARY KEY AUTO_INCREMENT, `specialistId` int, `surveyDate` timestamp NOT NULL, `analysisResults` BLOB,
+						 `q1` varchar(1024),`q2` varchar(1024),`q3` varchar(1024),`q4` varchar(1024),`q5` varchar(1024),`q6` varchar(1024));
+                                                   
+create table `Survey_Answers`(`answerId` int PRIMARY KEY AUTO_INCREMENT, `customerId` int NOT NULL, `orderId` int NOT NULL, `surveyId` int NOT NULL,
+							  `a1` TINYINT NOT NULL, 
+                              `a2` TINYINT NOT NULL,
+                              `a3` TINYINT NOT NULL,
+                              `a4` TINYINT NOT NULL,
+                              `a5` TINYINT NOT NULL, 
+                              `a6` TINYINT NOT NULL, 
+                              CONSTRAINT val_range CHECK(a1>=-0 AND a1<=10 AND a2>=-0 AND a2<=10 AND a3>=-0 AND a3<=10 AND a4>=-0 AND a4<=10 AND a5>=-0 AND a5<=10 AND a6>=-0 AND a6<=10),
+							  FOREIGN KEY (surveyId) REFERENCES Surveys(surveyId), 
+                              FOREIGN KEY (customerId) REFERENCES Users(userId), 
+                              FOREIGN KEY (orderId) REFERENCES Orders(orderId));                              
                               
-                              
+                                           
 
               
 insert into Orders (orderId, price, greetingCard, color, dOrder, shop, date, orderDate) values (default, 50, 'Hello', 'Red', 'Valentines roses', 'Haifa', now(), DATE_ADD(NOW(), INTERVAL 30 MINUTE));
@@ -78,6 +96,12 @@ INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (4
 INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (1,2,3);
 insert into Orders (price, greetingCard, color, dOrder, shop, date, orderDate) values (94.9, 'refresh', 'Yellow', 'blaaaa', 'nazareth', now(), now());
 insert into User_Orders (userId, orderId) values (1, 5);
+INSERT INTO Surveys (surveyDate, q1, q2, q3, q4, q5, q6) VALUES (now(), 'q1','q2','q3','q4','q5','q6');
+INSERT INTO Surveys (surveyDate, q1, q2, q3, q4, q5, q6) VALUES (now(), 'q7','q8','q9','q10','q11','q12');
+INSERT INTO Surveys (surveyDate, q1, q2, q3, q4, q5, q6) VALUES (now(), 'q13','q14','q15','q16','q17','q18');
+INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,1,1,2,3,4,5,10);
+INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,2,5,4,8,1,0,1);
+INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,3,6,5,3,4,9,7);
 
 SELECT * FROM catalog join catalogiteminbranch WHERE catalog.catalogId = catalogiteminbranch.catalogId AND catalogiteminbranch.branchId = 1 AND catalogiteminbranch.quantityInStock > 6;
 -- SELECT * FROM Orders;

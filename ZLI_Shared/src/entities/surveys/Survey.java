@@ -18,6 +18,12 @@ public class Survey
 	
 	static final int NUM_QUESTIONS = 6;
 		
+	public Survey()
+	{
+		customers = new ArrayList<User>();
+		answers = new ArrayList<SurveyAnswers>();
+		this.surveyDate = Instant.now();
+	}
 	
 	public Survey(ArrayList<User> customers, String[] questions)
 	{
