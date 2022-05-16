@@ -6,12 +6,16 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
 import database.IResultSetToObject;
 import entities.other.Branch;
+import entities.products.CartItem;
 import entities.users.Order;
+import entities.users.OrderDelivery;
+import entities.users.User;
 import enums.ColorEnum;
 import enums.OrderStatus;
 
@@ -20,11 +24,19 @@ public class OrderController
 
 	private static OrderController instance;
 	private final DatabaseConnection databaseConnection;
-	private static final String TABLE_NAME = "Orders";
-	private static final String ID_FIELD_NAME = "orderNumber";
+	private static final String ORDERS_TABLE_NAME = "Orders";
+	private static final String ORDERS_PRODUCTS_TABLE_NAME = "Orders_Products";
+	private static final String ORDERS_DISCOUNTS_TABLE_NAME = "Orders_Discounts";
+	private static final String DELIVERIES_TABLE_NAME = "Deliveries";
+	private static final String ID_FIELD_NAME = "orderId";
 	private IResultSetToObject<Order> rsToOrder;
-	private static final String[] allColumnNames =
-	{ "price", "greetingCard", "color", "dOrder", "shop", "date", "orderDate" };
+	private static final String[] ordersColumnNames =
+	{ "userId", "branchId", "orderStatus", "totalCost", "greetingCard", "color", "details", "orderDate",
+			"deliveryDate" };
+	private static final String[] productsInOrderColumnNames =
+	{ "orderId", "catalogId", "quantity" };
+	private static final String[] deliveriesrColumnNames =
+	{ "orderId", "recipientName", "recipientPhoneNumber", "locationId", "delivered" };
 
 	private OrderController()
 	{
@@ -37,14 +49,20 @@ public class OrderController
 				try
 				{
 					Order order = new Order();
-					order.setOrderId(rs.getInt("orderId"));
-					order.setTotalCost(rs.getFloat("price"));
-					order.setGreetingCard(rs.getString("greetingCard"));
-					order.setColor(ColorEnum.valueOf(rs.getString("color")));
-					order.setOrderDetails(rs.getString("dOrder"));
-					order.setBranch(new Branch(rs.getString("shop")));
-					order.setDeliveryDate(rs.getTimestamp("date").toInstant());
-					order.setOrderDate(rs.getTimestamp("orderDate").toInstant());
+					order.setOrderId(rs.getInt(ID_FIELD_NAME));
+					User customer = new User();
+					customer.setUserId(rs.getInt(ordersColumnNames[0]));
+					order.setCustomer(customer);
+					Branch branch = new Branch();
+					branch.setBranchId(rs.getInt(ordersColumnNames[1]));
+					order.setBranch(branch);
+					order.setOrderStatus(OrderStatus.valueOf(rs.getString(ordersColumnNames[2])));
+					order.setTotalCost(rs.getFloat(ordersColumnNames[3]));
+					order.setGreetingCard(rs.getString(ordersColumnNames[4]));
+					order.setColor(ColorEnum.valueOf(rs.getString(ordersColumnNames[5])));
+					order.setOrderDetails(rs.getString(ordersColumnNames[6]));
+					order.setOrderDate(rs.getTimestamp(ordersColumnNames[7]).toInstant());
+					order.setDeliveryDate(rs.getTimestamp(ordersColumnNames[8]).toInstant());
 					return order;
 				} catch (Exception e)
 				{
@@ -66,33 +84,76 @@ public class OrderController
 
 	public boolean createNewOrder(Order order)
 	{
-		int res = databaseConnection.insertToDatabase(TABLE_NAME, allColumnNames, new IObjectToPreparedStatementParameters<Order>()
+		boolean res;
+		
+		int insertedOrderId = databaseConnection.insertAndReturnGeneratedId(ORDERS_TABLE_NAME, ordersColumnNames, new IObjectToPreparedStatementParameters<Order>()
 		{
 
 			@Override
 			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
 			{
-				// 	{ "price", "greetingCard", "color", "dOrder", "shop", "date", "orderDate" };
-				statementToPrepare.setFloat(1, order.getTotalCost());
-				statementToPrepare.setString(2, order.getGreetingCard());
-				statementToPrepare.setString(3, order.getColor().name());
-				statementToPrepare.setString(4, order.getOrderDetails());
-				statementToPrepare.setString(5, order.getBranchName());
-				statementToPrepare.setTimestamp(6, Timestamp.from(order.getDeliveryDate()));
-				statementToPrepare.setTimestamp(7, Timestamp.from(order.getOrderDate()));
+				// 	{ "userId", "branchId", "orderStatus", "totalCost", "greetingCard", "color", "details", "orderDate", "deliveryDate" };
+				statementToPrepare.setInt(1, order.getCustomer().getUserId());
+				statementToPrepare.setInt(2, order.getBranch().getBranchId());
+				statementToPrepare.setString(3, OrderStatus.Pending.name());
+				statementToPrepare.setFloat(4, order.getTotalCost());
+				statementToPrepare.setString(5, order.getGreetingCard());
+				statementToPrepare.setString(6, order.getColor().name());
+				statementToPrepare.setString(7, order.getOrderDetails());
+				statementToPrepare.setTimestamp(8, Timestamp.from(order.getOrderDate()));
+				statementToPrepare.setTimestamp(9, Timestamp.from(order.getDeliveryDate()));
 			}
 		});
-		return res == 1;
+		Order insertedOrder = databaseConnection.getByID(insertedOrderId, ORDERS_TABLE_NAME, ID_FIELD_NAME, rsToOrder);
+		if(insertedOrder == null)
+		{
+			return false;
+		}
+		// Save the order details - what products were bought and in what quantities
+		ArrayList<CartItem> cart = order.getProducts();
+		res = databaseConnection.insertCollection(ORDERS_PRODUCTS_TABLE_NAME,productsInOrderColumnNames, cart.size(), new IObjectToPreparedStatementParameters<CartItem>()
+		{
+
+			@Override
+			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+			{
+				for (int i = 0; i < cart.size(); i++)
+				{
+					int val = i * productsInOrderColumnNames.length;
+					statementToPrepare.setInt(val + 1, insertedOrder.getOrderId());
+					statementToPrepare.setInt(val + 2, cart.get(i).getCatalogItem().getBaseProduct().getProductId());
+					statementToPrepare.setInt(val + 3, cart.get(i).getQuantity());					
+				}
+			}
+		});
+		if(!res) return false;
+		OrderDelivery delivery = order.getDeliveryDetails(); 
+		if(delivery == null)
+			return true;
+		res = 1 ==  databaseConnection.insertToDatabase(DELIVERIES_TABLE_NAME, deliveriesrColumnNames, new IObjectToPreparedStatementParameters<OrderDelivery>()
+		{
+			@Override
+			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+			{
+				// 	{ "orderId", "recipientName", "recipientPhoneNumber", "locationId", "delivered" };
+				statementToPrepare.setInt(1, insertedOrder.getOrderId());
+				statementToPrepare.setString(2, delivery.getRecipientName());
+				statementToPrepare.setString(3, delivery.getRecipientPhoneNumber());
+				statementToPrepare.setInt(4, delivery.getLocation().getLocationId());
+				statementToPrepare.setBoolean(5, delivery.isDelivered());
+			}
+		});
+		return res;
 	}
 
 	public ArrayList<Order> getAllOrders()
 	{
-		return databaseConnection.getAll(TABLE_NAME, rsToOrder);
+		return databaseConnection.getAll(ORDERS_TABLE_NAME, rsToOrder);
 	}
 
 	public Order getOrder(int orderId)
 	{
-		return databaseConnection.getByID(orderId, TABLE_NAME, ID_FIELD_NAME, rsToOrder);
+		return databaseConnection.getByID(orderId, ORDERS_TABLE_NAME, ID_FIELD_NAME, rsToOrder);
 	}
 
 	public boolean updateOrder(Order orderToUpdate)
@@ -100,7 +161,7 @@ public class OrderController
 		ArrayList<String> keys = new ArrayList<String>();
 		keys.add("date");
 		keys.add("color");
-		return databaseConnection.updateById(orderToUpdate.getOrderId(), ID_FIELD_NAME, TABLE_NAME, keys,
+		return databaseConnection.updateById(orderToUpdate.getOrderId(), ID_FIELD_NAME, ORDERS_TABLE_NAME, keys,
 				new IObjectToPreparedStatementParameters<Order>()
 				{
 
