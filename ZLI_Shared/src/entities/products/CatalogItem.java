@@ -11,10 +11,12 @@ public class CatalogItem implements IDiscountable
 	private BaseProduct baseProduct;
 	private Branch branch;
 	private int quantityInStock;
-
+	private HashSet<Discount> discounts;
+	
 	public CatalogItem()
 	{
 		super();
+		discounts = new HashSet<Discount>();
 	}
 
 	public CatalogItem(BaseProduct baseProduct, Branch branch, int quantityInStock)
@@ -23,10 +25,11 @@ public class CatalogItem implements IDiscountable
 		this.baseProduct = baseProduct;
 		this.branch = branch;
 		this.quantityInStock = quantityInStock;
+		discounts = new HashSet<Discount>();
 	}
 
 	@Override
-	public float getPriceAfterDiscounts(HashSet<Discount> discounts)
+	public float getPriceAfterDiscounts()
 	{
 		float finalPrice = baseProduct.getPrice();
 		for (Discount discount : discounts)
@@ -34,6 +37,12 @@ public class CatalogItem implements IDiscountable
 			finalPrice = discount.applyDiscount(finalPrice);
 		}
 		return finalPrice;
+	}
+	
+	@Override
+	public void setDiscounts(HashSet<Discount> discounts)
+	{
+		this.discounts = discounts;
 	}
 	
 	public BaseProduct getBaseProduct()

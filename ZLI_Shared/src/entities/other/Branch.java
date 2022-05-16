@@ -15,6 +15,15 @@ public class Branch implements Serializable
 	private String branchName;
 	private Location location;
 
+
+	public Branch() 
+	{
+		
+	}	
+	public Branch(String branchName) {
+		this.branchName = branchName;
+	}
+
 	public Branch(User manager, ArrayList<User> workers, String branchName, Location location) {
 		super();
 		this.manager = manager;
@@ -22,11 +31,7 @@ public class Branch implements Serializable
 		this.branchName = branchName;
 		this.location = location;
 	}
-
-	public Branch(String branchName) {
-		this.branchName = branchName;
-	}
-
+	
 	public int getBranchId() {
 		return branchId;
 	}

@@ -9,6 +9,8 @@ import java.util.HashSet;
 import entities.discounts.Discount;
 import entities.discounts.IDiscountable;
 import entities.other.Branch;
+import entities.products.CartItem;
+import entities.products.CatalogItem;
 import entities.products.Item;
 import entities.products.Product;
 import enums.ColorEnum;
@@ -24,8 +26,7 @@ public class Order implements Serializable, IDiscountable
 	private int orderId;
 	private OrderDelivery deliveryDetails;
 	private String greetingCard;
-	private ArrayList<Product> products;
-	private ArrayList<Item> items;
+	private ArrayList<CartItem> products;
 	private Instant orderDate;
 	private Instant deliveryDate;
 	private float totalCost;
@@ -36,50 +37,45 @@ public class Order implements Serializable, IDiscountable
 
 	// Demo only
 	private String orderDetails;
+	private HashSet<Discount> discounts;
 
 	public Order()
 	{
+		products = new ArrayList<CartItem>();
+		discounts = new HashSet<Discount>();
 	}
-
-	public Order(int orderId, String greetingCard, Instant deliveryDate, float totalCost, OrderStatus orderStatus,
-			Branch branch, ColorEnum colorEnum, String orderDetails)
-	{
-		super();
-		this.orderId = orderId;
-		this.greetingCard = greetingCard;
-		this.deliveryDate = deliveryDate;
-		this.orderDate = Instant.now();
-		this.totalCost = totalCost;
-		this.orderStatus = orderStatus;
-		this.branch = branch;
-		this.colorEnum = colorEnum;
-		this.orderDetails = orderDetails;
-	}
-
-	public Order(int orderId, String greetingCard, Instant deliveryDate, float totalCost, OrderStatus orderStatus,
-			Branch branch, ColorEnum colorEnum, String orderDetails, Instant orderDate)
+	
+	public Order(int orderId, String greetingCard, OrderStatus orderStatus,
+			Branch branch, ColorEnum colorEnum, String orderDetails, Instant deliveryDate, Instant orderDate)
 	{
 		super();
 		this.orderId = orderId;
 		this.greetingCard = greetingCard;
 		this.deliveryDate = deliveryDate;
 		this.orderDate = orderDate;
-		this.totalCost = totalCost;
 		this.orderStatus = orderStatus;
 		this.branch = branch;
 		this.colorEnum = colorEnum;
 		this.orderDetails = orderDetails;
+		products = new ArrayList<CartItem>();
+		discounts = new HashSet<Discount>();
 	}
 
 	@Override
-	public float getPriceAfterDiscounts(HashSet<Discount> discounts)
+	public float getPriceAfterDiscounts()
 	{
-		float finalPrice = totalCost;
+		float finalPrice = getTotalCost();
 		for (Discount discount : discounts)
 		{
 			finalPrice = discount.applyDiscount(finalPrice);
 		}
 		return finalPrice;
+	}
+	
+	@Override
+	public void setDiscounts(HashSet<Discount> discounts)
+	{
+		this.discounts = discounts;
 	}
 	
 	public ColorEnum getColor()
@@ -152,8 +148,16 @@ public class Order implements Serializable, IDiscountable
 		this.deliveryDate = deliveryDate;
 	}
 
+	/**
+	 * Calculates the total cost of the order by summing up the prices of all the products in the cart and applying their discounts.
+	 */
 	public float getTotalCost()
 	{
+		totalCost = 0;
+		for (CartItem cartItem : products)
+		{
+			totalCost += cartItem.getCatalogItem().getPriceAfterDiscounts() * cartItem.getQuantity();
+		}
 		return totalCost;
 	}
 
@@ -187,24 +191,15 @@ public class Order implements Serializable, IDiscountable
 		return branch.getBranchName();
 	}
 
-	public ArrayList<Product> getProducts()
+
+	public ArrayList<CartItem> getProducts()
 	{
 		return products;
 	}
 
-	public void setProducts(ArrayList<Product> products)
+	public void setProducts(ArrayList<CartItem> products)
 	{
 		this.products = products;
-	}
-
-	public ArrayList<Item> getItems()
-	{
-		return items;
-	}
-
-	public void setItems(ArrayList<Item> items)
-	{
-		this.items = items;
 	}
 
 	public User getCustomer()
@@ -292,7 +287,7 @@ public class Order implements Serializable, IDiscountable
 	public String toString()
 	{
 		return "Order #" + orderId + ", deliveryDetails=" + deliveryDetails + ", greetingCard=" + greetingCard
-				+ ", products=" + products + ", items=" + items + ", orderDate="
+				+ ", products=" + products + ", orderDate="
 				+ DateFormatter.formatInstant(orderDate, true) + ", deliveryDate="
 				+ DateFormatter.formatInstant(deliveryDate, true) + ", totalCost=" + totalCost + ", orderStatus="
 				+ orderStatus + ", branch=" + branch.getBranchName() + ", customer=" + customer + "]";
