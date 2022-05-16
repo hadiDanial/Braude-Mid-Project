@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entities.products.BaseProduct;
+import entities.products.CartItem;
 import gui.ServerUI;
 import server.ConsoleString;
 
@@ -106,6 +107,111 @@ public class DatabaseConnection
 			IObjectToPreparedStatementParameters<T> objToPS)
 	{
 		PreparedStatement ps;
+		String query = generatePSInsertQuery(tableName, columnNames, 1);
+
+		try
+		{
+			ps = conn.prepareStatement(query);
+			objToPS.convertObjectToPSQuery(ps);
+			return ps.executeUpdate();
+
+		} catch (Exception e)
+		{
+			System.out.println(e);
+			return -1;
+		}
+	}
+
+	/**
+	 * Insert a collection into the database.
+	 * @param <T> Class type for the entity that matches the table.
+	 * @param tableName   Name of the table.
+	 * @param columnNames The names of the columns of the table that will have
+	 *                    values to be inserted.
+	 * @param count The number of records to be inserted.
+	 * @param objToPS     An instance of
+	 *                    <code>IObjectToPreparedStatementParameters</code> that
+	 *                    describes how to insert the object data into a
+	 *                    <code>PreparedStatement</code>. <b>Must insert the data in
+	 *                    the same order as the column names in the
+	 *                    <code>columnNames</code> array.</b>
+	 * @return True if number of records affected equals count.
+	 */
+	public <T> boolean insertCollection(String tableName, String[] columnNames, int count,
+			IObjectToPreparedStatementParameters<T> objToPS)
+	{
+		PreparedStatement ps;
+		String query = generatePSInsertQuery(tableName, columnNames, count);
+
+		try
+		{
+			ps = conn.prepareStatement(query);
+			objToPS.convertObjectToPSQuery(ps);
+			int res = ps.executeUpdate();
+			if(res != count)
+				throw new SQLException("Affected rows: " + res + ", should be " + count + "! (DatabaseConnection.insertCollection)");
+			return true;
+
+		} catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	/**
+	 * Insert an entity to a table and returns its auto-generated id.
+	 * 
+	 * @param <T>         Class type for the entity that matches the table.
+	 * @param tableName   Name of the table.
+	 * @param columnNames The names of the columns of the table that will have
+	 *                    values to be inserted.
+	 * @param objToPS     An instance of
+	 *                    <code>IObjectToPreparedStatementParameters</code> that
+	 *                    describes how to insert the object data into a
+	 *                    <code>PreparedStatement</code>. <b>Must insert the data in
+	 *                    the same order as the column names in the
+	 *                    <code>columnNames</code> array.</b>
+	 * @return ID of new record or -1 on failure.
+	 */
+	public <T> int insertAndReturnGeneratedId(String tableName, String[] columnNames,
+			IObjectToPreparedStatementParameters<T> objToPS)
+	{
+		PreparedStatement ps;
+		String query = generatePSInsertQuery(tableName, columnNames, 1);
+
+		try
+		{
+			ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			objToPS.convertObjectToPSQuery(ps);
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next())
+			{
+				int id = rs.getInt(1);
+				rs.close();
+				return id;
+			} else
+			{
+				return -1;
+			}
+
+		} catch (Exception e)
+		{
+			System.out.println(e);
+			return -1;
+		}
+	}
+
+	/**
+	 * Generate an insertion query:<br>
+	 * <code>INSERT INTO tableName (col1, col2,...) VALUES (val_a1, val_a2,...), (val_b1, val_b2,...), ... ;</code>
+	 * @param tableName Name of the table
+	 * @param columnNames Names of the table columns columns.
+	 * @param count Number of values to insert.
+	 * @return
+	 */
+	private String generatePSInsertQuery(String tableName, String[] columnNames, int count)
+	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO ");
 		sb.append(tableName);
@@ -117,27 +223,25 @@ public class DatabaseConnection
 			else
 				sb.append(columnNames[i] + ",");
 		}
-		sb.append(") VALUES(");
-		for (int i = 0; i < columnNames.length; i++)
+		sb.append(") VALUES ");
+		for (int j = 0; j < count; j++)
 		{
-			if (i == columnNames.length - 1)
-				sb.append("?");
-			else
-				sb.append("?,");
+			sb.append("(");
+			for (int i = 0; i < columnNames.length; i++)
+			{
+				if (i == columnNames.length - 1)
+					sb.append("?");
+				else
+					sb.append("?,");
+			}
+			sb.append(")");
+			if(j < count-1)
+			{				
+				sb.append(", ");
+			}
 		}
-		sb.append(");");
-
-		try
-		{
-			ps = conn.prepareStatement(sb.toString());
-			objToPS.convertObjectToPSQuery(ps);
-			return ps.executeUpdate();
-
-		} catch (Exception e)
-		{
-			System.out.println(e);
-			return -1;
-		}
+		sb.append(";");
+		return sb.toString();
 	}
 
 	/**
@@ -159,7 +263,7 @@ public class DatabaseConnection
 		try
 		{
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT FROM " + tableName + " WHERE " + idFieldName + "=" + id + ";");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " + idFieldName + "=" + id + ";");
 			if (rs.next())
 			{
 				item = rsToObject.convertToObject(rs);
@@ -186,7 +290,8 @@ public class DatabaseConnection
 	 * @return Entity object of type <code>T</code> if a record with the condition
 	 *         is found, otherwise <code>NULL</code>.
 	 */
-	public <T> T getBySimpleCondition(String conditionFieldName, String conditionValue, String tableName,IResultSetToObject<T> rsToObject)
+	public <T> T getBySimpleCondition(String conditionFieldName, String conditionValue, String tableName,
+			IResultSetToObject<T> rsToObject)
 	{
 		Statement stmt;
 		T item = null;
@@ -413,4 +518,6 @@ public class DatabaseConnection
 			System.out.println(e);
 		}
 	}
+
+
 }
