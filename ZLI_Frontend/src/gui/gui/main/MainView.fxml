@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" style="-fx-background-color: #E8E8E8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.main.MainView">
+   <children>
+      <VBox alignment="TOP_CENTER" style="-fx-background-color: #E8E8E8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" style="-fx-background-color: #05595B;" VBox.vgrow="ALWAYS">
+               <children>
+                  <Pane prefHeight="50.0" prefWidth="100.0" />
+                  <Text fill="#e2d784" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Text>
+                  <Pane prefHeight="50.0" prefWidth="588.0" HBox.hgrow="ALWAYS" />
+                  <MenuButton fx:id="userDropDown" disable="true" mnemonicParsing="false" style="-fx-background-color: #062C30;" text="MenuButton" textFill="WHITE" visible="false">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="PERSON" size="18" />
+                     </graphic>
+                  </MenuButton>
+                  <Pane prefHeight="50.0" prefWidth="20.0" />
+                  <Button fx:id="shoppingCartBtn" disable="true" mnemonicParsing="false" onAction="#onShoppingCartBtn" style="-fx-background-color: #062C30;" textFill="WHITE" visible="false">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="SHOPPING_CART" size="18" />
+                     </graphic>
+                  </Button>
+                  <Pane prefHeight="50.0" prefWidth="20.0" />
+                  <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#onSettingsBtn" style="-fx-background-color: #062C30;" textFill="WHITE">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="SETTINGS" size="18" />
+                     </graphic>
+                  </Button>
+                  <Pane prefHeight="50.0" prefWidth="100.0" />
+               </children>
+            </HBox>
+            <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #E8E8E8;">
+               <content>
+                  <HBox alignment="TOP_CENTER" style="-fx-background-color: #E8E8E8;">
+                     <children>
+                        <Pane prefWidth="250.0" style="-fx-background-color: #E8E8E8;" HBox.hgrow="ALWAYS" />
+                        <StackPane fx:id="centerView" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="900.0" style="-fx-background-color: #E8E8E8;">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </StackPane>
+                        <Pane prefWidth="250.0" style="-fx-background-color: #E8E8E8;" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="900.0" prefWidth="900.0" style="-fx-background-radius: 35; -fx-background-color: #E8E8E8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.catalog.CatalogPage">
+   <children>
+      <VBox alignment="TOP_CENTER" maxWidth="900.0" minWidth="600.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #E8E8E8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="180.0" style="-fx-background-color: #078082; -fx-background-radius: 15;">
+               <children>
+                  <Text fill="#e2d784" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog">
+                     <font>
+                        <Font size="60.0" />
+                     </font>
+                  </Text>
+                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="180.0" prefWidth="275.0" spacing="20.0">
+                     <children>
+                        <MenuButton mnemonicParsing="false" style="-fx-background-color: #05595B;" text="Filter" textFill="#e2d784">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                           <graphic>
+                              <MaterialDesignIconView fill="#e2d784" glyphName="FILTER" size="18" />
+                           </graphic>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </MenuButton>
+                        <MenuButton mnemonicParsing="false" style="-fx-background-color: #05595B;" text="Sort" textFill="#e2d784">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                           <graphic>
+                              <MaterialDesignIconView fill="#e2d784" glyphName="SORT_DESCENDING" size="18" />
+                           </graphic>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </MenuButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="50.0" right="50.0" />
+               </padding>
+            </HBox>
+            <VBox fx:id="productsListView" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" style="-fx-background-color: #E8E8E8;" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

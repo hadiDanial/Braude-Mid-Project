@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.info.SenderInfoPage">
+    <children>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox alignment="CENTER" prefWidth="200.0" spacing="50.0">
+                    <children>
+                        <VBox alignment="TOP_CENTER" spacing="10.0">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 60; -fx-background-color: #062C30;">
+                                    <children>
+                                        <Label text="1" textFill="WHITE">
+                                            <font>
+                                                <Font size="32.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" layoutX="430.0" layoutY="10.0">
+                            <children>
+                        <HBox alignment="TOP_CENTER" VBox.vgrow="NEVER">
+                           <children>
+                                      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 60; -fx-background-color: #05595B;">
+                                          <children>
+                                              <Label text="2" textFill="#e2d784">
+                                                  <font>
+                                                      <Font size="32.0" />
+                                                  </font>
+                                              </Label>
+                                          </children>
+                                      </HBox>
+                           </children>
+                        </HBox>
+                                <Label text="Sender Info">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" layoutX="485.0" layoutY="10.0">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 60; -fx-background-color: #062C30;">
+                                    <children>
+                                        <Label text="3" textFill="WHITE">
+                                            <font>
+                                                <Font size="32.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" layoutX="540.0" layoutY="10.0">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 60; -fx-background-color: #062C30;">
+                                    <children>
+                                        <Label text="4" textFill="WHITE">
+                                            <font>
+                                                <Font size="32.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            <HBox alignment="TOP_CENTER" prefWidth="620.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER_LEFT" spacing="30.0">
+                     <children>
+                        <HBox alignment="CENTER" spacing="30.0">
+                           <children>
+                              <Label text="Name" textFill="#05595b">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="nameInput" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="30.0">
+                           <children>
+                              <Label text="Phone" textFill="#05595b">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="phoneInput" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <VBox>
+                           <children>
+                              <HBox spacing="30.0">
+                                 <children>
+                                    <Label text="Greeting Card" textFill="#05595b">
+                                       <font>
+                                          <Font size="28.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextArea fx:id="greetingInput" prefHeight="199.0" prefWidth="417.0" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#onBackBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="#e2d784">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Button>
+                        <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onNextBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Next" textFill="#e2d784">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
