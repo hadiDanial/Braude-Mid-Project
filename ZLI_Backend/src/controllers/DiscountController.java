@@ -102,14 +102,15 @@ public class DiscountController {
 						                      
                     }
 				});
+                float discountedOrder;
                 // do we do a loop here for every order we want to make discount for ??
                 if(rs.getString("discountType").equals(Discount.PERCENTAGE_DISCRIMINATOR))
                 {
-                    pd.applyDiscount(discount.getDiscountValue());
+                    discountedOrder=pd.applyDiscount(discount.getDiscountValue());
                 }
                 if(rs.getString("discountType").equals(Discount.VALUE_DISCRIMINATOR))
                 {
-                    vd.applyDiscount(discount.getDiscountValue());
+                    discountedOrder=vd.applyDiscount(discount.getDiscountValue());
                 }
                 //do we update order table after discount ??
 		return res == 1;
