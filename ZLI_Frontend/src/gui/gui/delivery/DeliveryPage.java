@@ -17,7 +17,7 @@ public class DeliveryPage {
     private TextField phoneInput;
 
     @FXML
-    private TextField adressInput;
+    private TextField addressInput;
 
     @FXML
     private JFXTimePicker timePicker;

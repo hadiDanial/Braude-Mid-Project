@@ -168,7 +168,7 @@
                                                    </font>
                                                 </Label>
                                                 <Pane prefHeight="56.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-                                                <TextField fx:id="adressInput" style="-fx-background-radius: 15;">
+                                                <TextField fx:id="addressInput" style="-fx-background-radius: 15;">
                                                    <font>
                                                       <Font size="26.0" />
                                                    </font>
