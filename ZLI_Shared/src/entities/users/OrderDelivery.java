@@ -11,6 +11,12 @@ public class OrderDelivery
 	private Location location;
 	private boolean delivered;
 
+	
+	public OrderDelivery()
+	{
+		super();
+	}
+
 	public OrderDelivery(Order orderWithDelivery, String recipientName, String recipientPhoneNumber, Location location)
 	{
 		super();

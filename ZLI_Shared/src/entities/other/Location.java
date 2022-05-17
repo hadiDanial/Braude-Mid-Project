@@ -8,6 +8,12 @@ public class Location
 	private String street;
 	private String building;
 	private String notes;
+	
+	public Location()
+	{
+		super();
+	}
+
 	public Location(String city, int zipCode, String street, String building, String notes)
 	{
 		super();
