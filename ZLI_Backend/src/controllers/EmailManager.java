@@ -25,6 +25,19 @@ public class EmailManager
 	
 	public static void sendEmail(String title, String content, User recipient)
 	{
+		Thread thread = new Thread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				send(title, content, recipient);
+			}
+		});
+		thread.run();
+	}
+	
+	private static void send(String title, String content, User recipient)
+	{
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", true);
 		properties.put("mail.smtp.starttls.enable", "true");
@@ -64,6 +77,5 @@ public class EmailManager
 		{
 			e.printStackTrace();
 		}
-		
 	}
 }
