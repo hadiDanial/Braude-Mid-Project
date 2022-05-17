@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,7 +48,17 @@ class OrderControllerTest
 		testLogout();
 		testRegister();
 		testAddOrder();
+		testGetPendingOrders();
 		assert(true);
+	}
+
+	private void testGetPendingOrders()
+	{
+		ArrayList<Order> pending = OrderController.getInstance().getPendingOrders(2); 
+		for (Order order : pending)
+		{
+			System.out.println(order);
+		}
 	}
 
 	private void testGetCatalogByBranch()
@@ -85,6 +96,7 @@ class OrderControllerTest
 		location.setLocationId(1);
 		User user = new User();
 		user.setUserId(1);
+		user.setEmailAddress("hadi.dan@me.com");
 		order.setCustomer(user);
 		order.setDeliveryDetails(new OrderDelivery(order, "Hadi", "0525614352", location));
 		order.setGreetingCard("Hello noob");
