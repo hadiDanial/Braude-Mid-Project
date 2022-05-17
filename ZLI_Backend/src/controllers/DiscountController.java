@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
+import java.util.ArrayList;
 
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
@@ -20,6 +21,7 @@ public class DiscountController {
 	private final DatabaseConnection databaseConnection;
     private static PercentageDiscount pd;
     private static ValueDiscount vd;    
+    float discountedOrder=0;
 	private static final String TABLE_NAME = "Discounts";
 	private static final String DISCOUNTS_TABLE_NAME = "Orders_Discounts";
 	private static final String ID_FIELD_NAME = "discountId";
@@ -84,7 +86,7 @@ public class DiscountController {
 		}
 		return instance;
 	}
-    public boolean createDiscount(ResultSet rs,Discount discount) throws SQLException{
+    public boolean createDiscount(ResultSet rs,Discount discount,int userId) throws SQLException{
         int res = databaseConnection.insertToDatabase(TABLE_NAME, discountsProductsColumnNames,
 				new IObjectToPreparedStatementParameters<Discount>()
 				{
@@ -102,7 +104,6 @@ public class DiscountController {
 						                      
                     }
 				});
-                float discountedOrder;
                 // do we do a loop here for every order we want to make discount for ??
                 if(rs.getString("discountType").equals(Discount.PERCENTAGE_DISCRIMINATOR))
                 {
@@ -112,6 +113,17 @@ public class DiscountController {
                 {
                     discountedOrder=vd.applyDiscount(discount.getDiscountValue());
                 }
+                ArrayList<String> keys = new ArrayList<>();
+		keys.add("totalCost");
+		databaseConnection.updateById(userId, ID_FIELD_NAME, TABLE_NAME, keys,
+				new IObjectToPreparedStatementParameters<Discount>()
+				{
+					@Override
+					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+					{
+						statementToPrepare.setFloat(1,  discountedOrder);
+					}
+				});
                 //do we update order table after discount ??
 		return res == 1;
     }
