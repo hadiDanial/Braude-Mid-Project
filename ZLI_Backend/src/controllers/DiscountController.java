@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
@@ -13,6 +14,8 @@ import database.IResultSetToObject;
 import entities.discounts.Discount;
 import entities.discounts.PercentageDiscount;
 import entities.discounts.ValueDiscount;
+import entities.products.CartItem;
+import entities.products.CatalogItem;
 import entities.users.Order;
 import javafx.scene.chart.PieChart.Data;
 
@@ -116,7 +119,7 @@ public class DiscountController {
                 ArrayList<String> keys = new ArrayList<>();
 		keys.add("totalCost");
 		databaseConnection.updateById(userId, ID_FIELD_NAME, TABLE_NAME, keys,
-				new IObjectToPreparedStatementParameters<Discount>()
+				new IObjectToPreparedStatementParameters<Order>()
 				{
 					@Override
 					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
@@ -125,6 +128,27 @@ public class DiscountController {
 					}
 				});
                 //do we update order table after discount ??
+                
 		return res == 1;
+    }
+
+    public boolean removeDiscount(Discount discount,int userId)
+    {
+        if(discount.getDiscountEndDate().equals(Instant.now()))
+        {
+            ArrayList<String> keys = new ArrayList<>();
+            keys.add("totalCost");
+            databaseConnection.updateById(userId, ID_FIELD_NAME, TABLE_NAME, keys,
+                    new IObjectToPreparedStatementParameters<Order>()
+                    {
+                        @Override
+                        public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+                        {
+                            statementToPrepare.setFloat(1, Order.setTotalCost);
+                            //how to get total cost pre discount ?
+                        }
+                    });
+        }
+        return false;
     }
 }
