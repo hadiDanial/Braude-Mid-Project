@@ -1,30 +1,23 @@
-package gui.delivery;
-
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTimePicker;
+package gui.orders.delivery.info;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class PickUpPage {
+public class SenderInfoPage {
 
     @FXML
     private TextField nameInput;
 
     @FXML
-    private JFXTimePicker timePicker;
+    private TextField phoneInput;
 
     @FXML
-    private JFXDatePicker datePicker;
+    private TextArea greetingInput;
 
     @FXML
     void onBackBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onDeliverySelect(ActionEvent event) {
 
     }
 

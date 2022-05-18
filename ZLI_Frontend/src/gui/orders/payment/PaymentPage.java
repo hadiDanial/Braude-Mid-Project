@@ -1,4 +1,4 @@
-package gui.gui.payment;
+package gui.orders.payment;
 
 import com.jfoenix.controls.JFXDatePicker;
 

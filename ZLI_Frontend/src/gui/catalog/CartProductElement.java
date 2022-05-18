@@ -1,4 +1,4 @@
-package gui.gui.catalog;
+package gui.catalog;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

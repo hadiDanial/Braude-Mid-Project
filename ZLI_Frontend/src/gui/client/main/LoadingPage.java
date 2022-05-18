@@ -1,4 +1,4 @@
-package gui.gui.main;
+package gui.client.main;
 
 public class LoadingPage {
 

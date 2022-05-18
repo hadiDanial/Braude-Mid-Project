@@ -1,4 +1,4 @@
-package gui.gui.cart;
+package gui.orders.cart;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

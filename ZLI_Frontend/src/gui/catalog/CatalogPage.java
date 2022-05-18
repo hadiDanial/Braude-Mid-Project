@@ -1,24 +1,18 @@
 package gui.catalog;
 
-import entities.products.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 
-public class CatalogPage
-{
+public class CatalogPage {
+    @FXML
+    private VBox productsListView;
 
-	public void displayAllProducts()
-	{
-		// TODO - implement CatalogPage.displayAllProducts
-		throw new UnsupportedOperationException();
-	}
+    public static ObservableList<String> productsList = FXCollections.observableArrayList();
 
-	/**
-	 * 
-	 * @param product
-	 */
-	public void addProductToOrder(BaseProduct product)
-	{
-		// TODO - implement CatalogPage.addProductToOrder
-		throw new UnsupportedOperationException();
-	}
+    public CatalogPage() {
+        // super("/gui/catalog/CatalogPage.fxml");
+    }
 
 }

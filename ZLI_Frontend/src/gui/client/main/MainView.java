@@ -1,4 +1,4 @@
-package gui.gui.main;
+package gui.client.main;
 
 import java.net.URL;
 import java.util.ResourceBundle;
