@@ -44,10 +44,16 @@ public class OrderController
 		return instance;
 	}
 
+	/**
+	 * Register a new order and save it to the database - PENDING manager approval
+	 * 
+	 * @param order Order to save
+	 * @return true if order was saved successfully.
+	 */
 	public boolean createNewOrder(Order order)
 	{
 		boolean res;
-
+		// Save Order
 		int insertedOrderId = databaseConnection.insertAndReturnGeneratedId(Tables.ORDERS_TABLE_NAME,
 				Tables.ordersColumnNames, new IObjectToPreparedStatementParameters<Order>()
 				{
@@ -68,7 +74,7 @@ public class OrderController
 						statementToPrepare.setTimestamp(9, Timestamp.from(order.getDeliveryDate()));
 					}
 				});
-//		Order insertedOrder = databaseConnection.getByID(insertedOrderId, ORDERS_TABLE_NAME, ID_FIELD_NAME, rsToOrder);
+
 		if (insertedOrderId == -1)
 		{
 			return false;
@@ -96,24 +102,28 @@ public class OrderController
 				});
 		if (!res)
 			return false;
+
+		// Save order delivery details if they exist
 		OrderDelivery delivery = order.getDeliveryDetails();
-		if (delivery == null)
-			return true;
-		res = 1 == databaseConnection.insertToDatabase(Tables.DELIVERIES_TABLE_NAME, Tables.deliveriesColumnNames,
-				new IObjectToPreparedStatementParameters<OrderDelivery>()
-				{
-					@Override
-					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+		if (delivery != null)
+		{
+			res = 1 == databaseConnection.insertToDatabase(Tables.DELIVERIES_TABLE_NAME, Tables.deliveriesColumnNames,
+					new IObjectToPreparedStatementParameters<OrderDelivery>()
 					{
-						// { "orderId", "recipientName", "recipientPhoneNumber", "locationId",
-						// "delivered" };
-						statementToPrepare.setInt(1, order.getOrderId());
-						statementToPrepare.setString(2, delivery.getRecipientName());
-						statementToPrepare.setString(3, delivery.getRecipientPhoneNumber());
-						statementToPrepare.setInt(4, delivery.getLocation().getLocationId());
-						statementToPrepare.setBoolean(5, delivery.isDelivered());
-					}
-				});
+						@Override
+						public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+						{
+							// { "orderId", "recipientName", "recipientPhoneNumber", "locationId",
+							// "delivered" };
+							statementToPrepare.setInt(1, order.getOrderId());
+							statementToPrepare.setString(2, delivery.getRecipientName());
+							statementToPrepare.setString(3, delivery.getRecipientPhoneNumber());
+							statementToPrepare.setInt(4, delivery.getLocation().getLocationId());
+							statementToPrepare.setBoolean(5, delivery.isDelivered());
+						}
+					});
+		}
+		// Send email to customer.
 		if (res)
 		{
 			EmailManager.sendEmail(
@@ -207,7 +217,7 @@ public class OrderController
 
 					OrderDelivery delivery = convertRSToOrderDelivery(deliveryRS);
 					Branch branch = convertRSToBranch(deliveryRS);
-					if(branch != null)
+					if (branch != null)
 					{
 						order.setBranch(branch);
 					}
@@ -301,20 +311,20 @@ public class OrderController
 		{
 //			if (resultSet.next())
 //			{
-				String[] deliveriesColumnNames = Tables.deliveriesColumnNames;
-				OrderDelivery delivery = new OrderDelivery();
-				delivery.setDelivered(false);
-				delivery.setRecipientName(resultSet.getString(deliveriesColumnNames[1]));
-				delivery.setRecipientPhoneNumber(resultSet.getString(deliveriesColumnNames[2]));
-				Location loc = new Location();
-				loc.setLocationId(resultSet.getInt(deliveriesColumnNames[3]));
-				loc.setBuilding(resultSet.getString("building"));
-				loc.setStreet(resultSet.getString("street"));
-				loc.setZipCode(resultSet.getInt("zipCode"));
-				loc.setCity(resultSet.getString("city"));
-				loc.setNotes(resultSet.getString("notes"));
-				delivery.setLocation(loc);
-				return delivery;
+			String[] deliveriesColumnNames = Tables.deliveriesColumnNames;
+			OrderDelivery delivery = new OrderDelivery();
+			delivery.setDelivered(false);
+			delivery.setRecipientName(resultSet.getString(deliveriesColumnNames[1]));
+			delivery.setRecipientPhoneNumber(resultSet.getString(deliveriesColumnNames[2]));
+			Location loc = new Location();
+			loc.setLocationId(resultSet.getInt(deliveriesColumnNames[3]));
+			loc.setBuilding(resultSet.getString("building"));
+			loc.setStreet(resultSet.getString("street"));
+			loc.setZipCode(resultSet.getInt("zipCode"));
+			loc.setCity(resultSet.getString("city"));
+			loc.setNotes(resultSet.getString("notes"));
+			delivery.setLocation(loc);
+			return delivery;
 //			} else
 //				return null;
 		} catch (SQLException e)
