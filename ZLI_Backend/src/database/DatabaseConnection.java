@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import entities.products.BaseProduct;
 import entities.products.CartItem;
@@ -124,11 +126,12 @@ public class DatabaseConnection
 
 	/**
 	 * Insert a collection into the database.
-	 * @param <T> Class type for the entity that matches the table.
+	 * 
+	 * @param <T>         Class type for the entity that matches the table.
 	 * @param tableName   Name of the table.
 	 * @param columnNames The names of the columns of the table that will have
 	 *                    values to be inserted.
-	 * @param count The number of records to be inserted.
+	 * @param count       The number of records to be inserted.
 	 * @param objToPS     An instance of
 	 *                    <code>IObjectToPreparedStatementParameters</code> that
 	 *                    describes how to insert the object data into a
@@ -148,8 +151,9 @@ public class DatabaseConnection
 			ps = conn.prepareStatement(query);
 			objToPS.convertObjectToPSQuery(ps);
 			int res = ps.executeUpdate();
-			if(res != count)
-				throw new SQLException("Affected rows: " + res + ", should be " + count + "! (DatabaseConnection.insertCollection)");
+			if (res != count)
+				throw new SQLException(
+						"Affected rows: " + res + ", should be " + count + "! (DatabaseConnection.insertCollection)");
 			return true;
 
 		} catch (Exception e)
@@ -158,6 +162,7 @@ public class DatabaseConnection
 			return false;
 		}
 	}
+
 	/**
 	 * Insert an entity to a table and returns its auto-generated id.
 	 * 
@@ -205,9 +210,10 @@ public class DatabaseConnection
 	/**
 	 * Generate an insertion query:<br>
 	 * <code>INSERT INTO tableName (col1, col2,...) VALUES (val_a1, val_a2,...), (val_b1, val_b2,...), ... ;</code>
-	 * @param tableName Name of the table
+	 * 
+	 * @param tableName   Name of the table
 	 * @param columnNames Names of the table columns columns.
-	 * @param count Number of values to insert.
+	 * @param count       Number of values to insert.
 	 * @return
 	 */
 	private String generatePSInsertQuery(String tableName, String[] columnNames, int count)
@@ -235,8 +241,8 @@ public class DatabaseConnection
 					sb.append("?,");
 			}
 			sb.append(")");
-			if(j < count-1)
-			{				
+			if (j < count - 1)
+			{
 				sb.append(", ");
 			}
 		}
@@ -247,70 +253,83 @@ public class DatabaseConnection
 	/**
 	 * Returns a record from the given table with a specific primary key.
 	 * 
-	 * @param <T>         Class type for the entity that matches the table.
 	 * @param id          Primary key for the requested record.
 	 * @param idFieldName Name of the field containing the primary key of the table.
 	 * @param tableName   Name of the table.
-	 * @param rsToObject  An <code>IResultSetToObject</code> that describes how to
-	 *                    convert a record to the entity class.
-	 * @return Entity object of type <code>T</code> if a record with the PK is
-	 *         found, otherwise <code>NULL</code>.
+	 * @return Result set that contains a record with the PK if it is found,
+	 *         otherwise <code>NULL</code>.
 	 */
-	public <T> T getByID(int id, String tableName, String idFieldName, IResultSetToObject<T> rsToObject)
+	public ResultSet getByID(int id, String tableName, String idFieldName)
 	{
 		Statement stmt;
-		T item = null;
 		try
 		{
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " + idFieldName + "=" + id + ";");
-			if (rs.next())
-			{
-				item = rsToObject.convertToObject(rs);
-			}
-			rs.close();
+			return rs;
 		} catch (Exception e)
 		{
 			e.printStackTrace();
-			item = null;
+			return null;
 		}
-		return item;
 	}
 
 	/**
-	 * Returns a record from the given table with a specific simple condition
+	 * Returns records from the given table with a specific simple condition
 	 * (string, one column).
 	 * 
-	 * @param <T>                Class type for the entity that matches the table.
 	 * @param conditionFieldName Name of the field containing the condition.
 	 * @param conditionValue     Value of the condition.
 	 * @param tableName          Name of the table.
-	 * @param rsToObject         An <code>IResultSetToObject</code> that describes
-	 *                           how to convert a record to the entity class.
-	 * @return Entity object of type <code>T</code> if a record with the condition
-	 *         is found, otherwise <code>NULL</code>.
+	 * @return ResultSet for all records matching the condition.
 	 */
-	public <T> T getBySimpleCondition(String conditionFieldName, String conditionValue, String tableName,
-			IResultSetToObject<T> rsToObject)
+	public ResultSet getBySimpleCondition(String conditionFieldName, String conditionValue, String tableName)
 	{
 		Statement stmt;
-		T item = null;
 		try
 		{
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
 					"SELECT * FROM " + tableName + " WHERE " + conditionFieldName + "='" + conditionValue + "';");
-			if (rs.next())
-			{
-				item = rsToObject.convertToObject(rs);
-			}
-			rs.close();
+			return rs;
 		} catch (Exception e)
 		{
 			e.printStackTrace();
-			item = null;
+			return null;
 		}
-		return item;
+	}
+
+	/**
+	 * Returns records from the given table that match all of the conditions.
+	 * @param tableName Name of the table.
+	 * @param conditionsMap HashMap containing the conditions - column names and their values.
+	 * @return ResultSet containing the results of the query.
+	 */
+	public ResultSet getByConditions(String tableName, HashMap<String, String> conditionsMap)
+	{
+		Statement stmt;
+		try
+		{
+			StringBuilder sb = new StringBuilder();
+			String AND = " AND ";
+			for (Entry<String, String> entry : conditionsMap.entrySet())
+			{
+				String key = entry.getKey();
+				String val = entry.getValue();
+				sb.append(key + "='" + val + "'" + AND);
+			}
+			sb.delete(sb.length() - AND.length(), sb.length());
+			System.out.println(sb.toString());
+			stmt = conn.createStatement();
+			String query = "SELECT * FROM " + tableName + " WHERE " + sb.toString() + ";";
+			System.out.println(query);
+			ResultSet rs = stmt.executeQuery(query);
+			return rs;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**
@@ -322,20 +341,14 @@ public class DatabaseConnection
 	 *                   convert a record to the entity class.
 	 * @return An ArrayList containing all the records in the database.
 	 */
-	public <T> ArrayList<T> getAll(String tableName, IResultSetToObject<T> rsToObject)
+	public ResultSet getAll(String tableName)
 	{
 		Statement stmt;
-		ArrayList<T> list = new ArrayList<T>();
 		try
 		{
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName + ";");
-			while (rs.next())
-			{
-				list.add(rsToObject.convertToObject(rs));
-			}
-			rs.close();
-			return list;
+			return rs;
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -346,32 +359,50 @@ public class DatabaseConnection
 	/**
 	 * Returns all records when joining the two tables with the given conditions.
 	 * 
-	 * @param <T>             Class type for the entity that matches the table.
-	 * @param firstTableName  First join table name.
-	 * @param secondTableName Second join table name.
-	 * @param conditions      The conditions of the join operation, for example:<br>
-	 *                        <code>firstTableName.firstTableId=secondTableName.secondTableId AND secondTabkeName.quantity > 10</code>.
-	 *                        Do not include WHERE or ; in the conditions.
-	 * @param rsToObject      An <code>IResultSetToObject</code> that describes how
-	 *                        to convert a record to the entity class.
+	 * @param <T>        Class type for the entity that matches the table.
+	 * @param tableNames List of all the tables in the join.
+	 * @param conditions The conditions of the join operation, for example:<br>
+	 *                   <code>firstTableName.firstTableId=secondTableName.secondTableId AND secondTabkeName.quantity > 10</code>.
+	 *                   Do not include WHERE or ; in the conditions.
+	 * @param rsToObject An <code>IResultSetToObject</code> that describes how to
+	 *                   convert a record to the entity class.
 	 * @return An ArrayList containing all matching records from the join result.
 	 */
-	public <T> ArrayList<T> getJoinResultWithSimpleConditions(String firstTableName, String secondTableName,
-			String conditions, IResultSetToObject<T> rsToObject)
+	public ResultSet getSimpleJoinResult(ArrayList<String> tableNames, String conditions)
+	{
+		return getSimpleJoinResultsWithSelectColumns(tableNames, "*", conditions);
+	}
+
+	/**
+	 * Returns all records when joining the two tables with the given conditions.
+	 * 
+	 * @param tableNames    List of all the tables in the join.
+	 * @param selectColumns Which columns from the join result to return.
+	 * @param conditions    The conditions of the join operation, for example:<br>
+	 *                      <code>firstTableName.firstTableId=secondTableName.secondTableId AND secondTabkeName.quantity > 10</code>.
+	 *                      Do not include WHERE or ; in the conditions.
+	 * @return An ArrayList containing all matching records from the join result.
+	 */
+	public ResultSet getSimpleJoinResultsWithSelectColumns(ArrayList<String> tableNames, String selectColumns,
+			String conditions)
 	{
 		Statement stmt;
-		ArrayList<T> list = new ArrayList<T>();
 		try
 		{
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM " + firstTableName + " JOIN " + secondTableName + " WHERE " + conditions + ";");
-			while (rs.next())
+			String joins = "";
+			for (int i = 0; i < tableNames.size(); i++)
 			{
-				list.add(rsToObject.convertToObject(rs));
+				if (i == tableNames.size() - 1)
+					joins += tableNames.get(i);
+				else
+					joins += tableNames.get(i) + " JOIN ";
 			}
-			rs.close();
-			return list;
+
+			stmt = conn.createStatement();
+			String query = "SELECT " + selectColumns + " FROM " + joins + " WHERE " + conditions + ";";
+			System.out.println(query);
+			ResultSet rs = stmt.executeQuery(query);
+			return rs;
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -437,14 +468,14 @@ public class DatabaseConnection
 	 *                           column.</b>
 	 * @return
 	 */
-	public <T> boolean updateAllMatchingCondition(String conditionFieldName, String tableName, ArrayList<String> keys,
-			IObjectToPreparedStatementParameters<T> objToPS)
+	public <T> boolean updateAllMatchingCondition(String conditionFieldName, String conditionValue, String tableName,
+			ArrayList<String> keys, IObjectToPreparedStatementParameters<T> objToPS)
 	{
 		PreparedStatement ps;
 		try
 		{
 			StringBuilder sb = new StringBuilder();
-			String condition = conditionFieldName + "=?";
+			String condition = conditionFieldName + "=" + conditionValue;
 			sb.append("UPDATE " + tableName + " SET ");
 
 			appendToQueryString(sb, keys, condition);
@@ -499,25 +530,4 @@ public class DatabaseConnection
 			sb.delete(sb.length() - 2, sb.length());
 		}
 	}
-
-	/**
-	 * Resets the Orders table in the database.
-	 */
-	private void resetOrdersTable()
-	{
-		Statement st;
-		try
-		{
-			st = conn.createStatement();
-			boolean rs = st.execute("DROP TABLE IF EXISTS `Orders`;" + "create table `Orders`("
-					+ "`orderNumber` int primary key AUTO_INCREMENT," + "`price` float,"
-					+ "`greetingCard` varchar(256)," + "`color` varchar(32)," + "`dOrder` varchar(256),"
-					+ "`shop` varchar(32)," + "`date` timestamp," + "`orderDate` timestamp);");
-		} catch (Exception e)
-		{
-			System.out.println(e);
-		}
-	}
-
-
 }

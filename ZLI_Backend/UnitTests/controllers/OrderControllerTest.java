@@ -43,11 +43,11 @@ class OrderControllerTest
 	@Test
 	void test()
 	{
-		testGetCatalogByBranch();
-		testLogin();
-		testLogout();
-		testRegister();
-		testAddOrder();
+//		testGetCatalogByBranch();
+//		testLogin();
+//		testLogout();
+//		testRegister();
+//		testAddOrder();
 		testGetPendingOrders();
 		assert(true);
 	}
@@ -58,6 +58,10 @@ class OrderControllerTest
 		for (Order order : pending)
 		{
 			System.out.println(order);
+			for (CartItem cartItem : order.getProducts())
+			{
+				System.out.println("x" + cartItem.getQuantity() + ": " + cartItem.getCatalogItem());
+			}
 		}
 	}
 

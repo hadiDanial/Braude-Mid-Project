@@ -75,4 +75,9 @@ public class CatalogItem implements IDiscountable
 		this.quantityInStock = quantityInStock;
 	}
 
+	@Override
+	public String toString()
+	{
+		return baseProduct.toString();
+	}
 }

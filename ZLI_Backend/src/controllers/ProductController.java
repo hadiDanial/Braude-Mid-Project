@@ -1,10 +1,11 @@
 package controllers;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import database.DatabaseConnection;
-import database.IResultSetToObject;
+import database.Tables;
 import entities.products.BaseProduct;
 import entities.products.Item;
 import entities.products.Product;
@@ -16,47 +17,10 @@ public class ProductController
 {
 	private static ProductController instance;
 	private final DatabaseConnection databaseConnection;
-	private static final String ALL_PRODUCTS_TABLE_NAME = "Catalog";
-	private static final String PRODUCTS_IN_BRANCH_TABLE_NAME = "CatalogItemInBranch";
-	private IResultSetToObject<BaseProduct> rsToProduct;
 
 	private ProductController()
 	{
 		databaseConnection = DatabaseConnection.getInstance();
-		rsToProduct = new IResultSetToObject<BaseProduct>()
-		{
-			@Override
-			public BaseProduct convertToObject(ResultSet rs)
-			{
-				try
-				{
-					if (rs.getString("productOrItem").equals(BaseProduct.ITEM_DISCRIMINATOR))
-					{
-						Item item = new Item();
-						item.setProductId(rs.getInt("catalogId"));
-						item.setProductName(rs.getString("productName"));
-						item.setPrice(rs.getFloat("price"));
-						item.setImage(rs.getBytes("image"));
-						item.setItemType(ItemType.valueOf(rs.getString("type")));
-						item.setPrimaryColor(ColorEnum.valueOf(rs.getString("primaryColor")));
-						return item;
-					} else
-					{
-						Product product = new Product();
-						product.setProductId(rs.getInt("catalogId"));
-						product.setProductName(rs.getString("productName"));
-						product.setPrice(rs.getFloat("price"));
-						product.setImage(rs.getBytes("image"));
-						product.setProductType(ProductType.valueOf(rs.getString("type")));
-						return product;
-					}
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-					return null;
-				}
-			}
-		};
 	}
 
 	public static ProductController getInstance()
@@ -75,7 +39,8 @@ public class ProductController
 	 */
 	public ArrayList<BaseProduct> getAllProducts()
 	{
-		return databaseConnection.getAll(ALL_PRODUCTS_TABLE_NAME, rsToProduct);
+		ResultSet rs = databaseConnection.getAll(Tables.ALL_PRODUCTS_TABLE_NAME); 
+		return convertRSToBaseProductArray(rs);
 	}
 
 	/**
@@ -85,10 +50,65 @@ public class ProductController
 	 */
 	public ArrayList<BaseProduct> getCatalogByBranch(int branchId)
 	{
-		String conditions = "catalog.catalogId = catalogiteminbranch.catalogId AND " + "catalogiteminbranch.branchId = "
+		ArrayList<String> joins = new ArrayList<String>();
+		joins.add(Tables.PRODUCTS_IN_BRANCH_TABLE_NAME);
+		joins.add(Tables.ALL_PRODUCTS_TABLE_NAME);
+		String conditions = "catalog.catalogId = catalogiteminbranch.catalogId AND catalogiteminbranch.branchId = "
 				+ branchId + " AND catalogiteminbranch.quantityInStock > 0";
-		return databaseConnection.getJoinResultWithSimpleConditions(PRODUCTS_IN_BRANCH_TABLE_NAME,
-				ALL_PRODUCTS_TABLE_NAME, conditions, rsToProduct);
+		ResultSet rs = databaseConnection.getSimpleJoinResult(joins, conditions);
+		return convertRSToBaseProductArray(rs);
+	}
+	
+	public ArrayList<BaseProduct> convertRSToBaseProductArray(ResultSet rs)
+	{
+		ArrayList<BaseProduct> products = new ArrayList<BaseProduct>();
+		try
+		{
+			while (rs.next())
+			{
+				products.add(convertRSToBaseProduct(rs, false));
+			}
+			rs.close();
+			return products;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public BaseProduct convertRSToBaseProduct(ResultSet rs, boolean closeRS)
+	{
+		try
+		{
+			if (rs.getString("productOrItem").equals(BaseProduct.ITEM_DISCRIMINATOR))
+			{
+				Item item = new Item();
+				item.setProductId(rs.getInt("catalogId"));
+				item.setProductName(rs.getString("productName"));
+				item.setPrice(rs.getFloat("price"));
+				item.setImage(rs.getBytes("image"));
+				item.setItemType(ItemType.valueOf(rs.getString("type")));
+				item.setPrimaryColor(ColorEnum.valueOf(rs.getString("primaryColor")));
+				if(closeRS)
+					rs.close();
+				return item;
+			} else
+			{
+				Product product = new Product();
+				product.setProductId(rs.getInt("catalogId"));
+				product.setProductName(rs.getString("productName"));
+				product.setPrice(rs.getFloat("price"));
+				product.setImage(rs.getBytes("image"));
+				product.setProductType(ProductType.valueOf(rs.getString("type")));
+				if(closeRS)
+					rs.close();
+				return product;
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

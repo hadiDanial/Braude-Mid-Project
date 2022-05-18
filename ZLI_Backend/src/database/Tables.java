@@ -33,4 +33,5 @@ public class Tables
 	{ "catalogId", "branchId", "discountId" };
 	public static final String[] ordersDiscountsColumnNames =
 	{ "orderId", "discountId" };
+	public static final String BRANCHES_TABLE_NAME = "Branches";
 }
