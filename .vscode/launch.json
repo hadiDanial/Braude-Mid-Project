@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
             "name": "Launch ServerUI",
             "request": "launch",
             "mainClass": "gui.ServerUI",
@@ -15,29 +21,14 @@
             "type": "java",
             "name": "Launch ClientUI",
             "request": "launch",
-            "mainClass": "gui.ClientUI",
+            "mainClass": "gui.client.ClientUI",
             "projectName": "ZLI_Frontend"
         },
         {
             "type": "java",
-            "name": "Launch Current File",
+            "name": "Launch MainView",
             "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "console": "externalTerminal",
-            "name": "Launch BackendTestClass",
-            "request": "launch",
-            "mainClass": "TestClass",
-            "projectName": "ZLI_Backend"
-        },
-        {
-            "type": "java",
-            "console": "externalTerminal",
-            "name": "Launch FrontendTestClass",
-            "request": "launch",
-            "mainClass": "FrontendTestClass",
+            "mainClass": "gui.client.main.MainView",
             "projectName": "ZLI_Frontend"
         }
     ]
