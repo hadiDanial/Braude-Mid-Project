@@ -1,7 +1,9 @@
 package server;
 
 import controllers.OrderController;
+import controllers.UserController;
 import entities.users.Order;
+import entities.users.User;
 import requests.Request;
 import requests.RequestType;
 
@@ -20,12 +22,12 @@ public class MessageParser {
                 return OrderController.getInstance().updateOrder((Order) req.getMessage());
             }
             case Login: {
-
-                break;
+            	User loginRequest = (User)req.getMessage();
+            	return UserController.getInstance().login(loginRequest.getUsername(), loginRequest.getPassword());                
             }
             case Logout: {
-
-                break;
+            	// Message = User Id
+            	return UserController.getInstance().logout((Integer) req.getMessage());
             }
             default:
                 break;
