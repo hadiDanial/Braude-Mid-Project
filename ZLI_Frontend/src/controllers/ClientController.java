@@ -17,7 +17,6 @@ public class ClientController
 {
 
 	private static ClientController instance;
-	private static ClientUI clientUI;
 	private Client client;
 	public static HashSet<IEventListener> connectionListeners;
 	
@@ -34,11 +33,6 @@ public class ClientController
 			instance = new ClientController();
 		}
 		return instance;
-	}
-
-	public static void setClientUI(ClientUI clientUI)
-	{
-		ClientController.clientUI = clientUI;
 	}
 
 	public <T> void sendRequest(Request request, IResponse<T> response)

@@ -36,9 +36,7 @@ public class ClientUI extends Application
 	 */
 	public void start(Stage primaryStage)
 	{
-		ClientController.setClientUI(this);
 		SceneManager.initUI(primaryStage);
-		
 	}
 	
 	public void onSettingsButtonClicked(ActionEvent event)
