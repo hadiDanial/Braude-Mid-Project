@@ -11,8 +11,8 @@ import gui.users.*;
 public enum GUIPages
 {
 	// TODO: Add all pages
-	Login("users/LoginPage.fxml", "Login"),
-	MainContainer("client/ClientUI.fxml", "Zerli G13"),
+	Login("client/login/LogInPage.fxml", "Login"),
+	MainContainer("client/main/MainView.fxml", "Zerli G13"),
 	StartupPage("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
 	Settings("client/SettingsPage.fxml", "Settings"),
 	Orders("orders/OrdersPage.fxml", "Orders"),

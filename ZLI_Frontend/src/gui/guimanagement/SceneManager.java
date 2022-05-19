@@ -7,12 +7,14 @@ import java.util.Stack;
 import client.ClientProperties;
 import controllers.ClientController;
 import gui.client.ClientUI;
+import gui.client.main.MainView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -23,7 +25,7 @@ public class SceneManager
 	private static Stage mainWindow;
 	private static Scene currentScene;
 	private static Pane root;
-	private static AnchorPane containerAnchorPane;
+	private static StackPane container;
 	private static VBox contentVBox;
 	private static Stack<HistoryState> history;
 	private static Stage loadingWindow;
@@ -36,7 +38,8 @@ public class SceneManager
 	public static void initUI(Stage primaryStage)
 	{
 		root = new AnchorPane();
-		containerAnchorPane = new AnchorPane();
+		container = new StackPane();
+		contentVBox = new VBox();
 		mainWindow = primaryStage;
 		history = new Stack<HistoryState>();
 
@@ -50,11 +53,12 @@ public class SceneManager
 		});
 
 		loadMainContainer();
-		loadNewScene(GUIPages.Orders, true);
+		loadNewScene(GUIPages.Login, true);
+		loadAdditiveScene(GUIPages.UpdateOrder, true);
 		mainWindow.setHeight(ClientProperties.getClientHeight());
 		mainWindow.setWidth(ClientProperties.getClientWidth());
 //		mainWindow.setResizable(false);
-//		loadAdditiveScene(GUIPages.Orders, true, 0);
+//		loadAdditiveScene(GUIPages.Orders, true);
 //		loadAdditiveScene(GUIPages.UpdateOrder, true);
 	}
 
@@ -69,10 +73,9 @@ public class SceneManager
 		try
 		{
 			root = loader.load();
-			ClientUI clientUI = loader.getController();
-			containerAnchorPane = clientUI.getContent();
-			contentVBox = new VBox();
-			containerAnchorPane.getChildren().add(contentVBox);
+			MainView mainView = loader.getController();
+			container = mainView.getContent();
+			container.getChildren().add(contentVBox);
 			currentScene = new Scene(root);
 			mainWindow.setTitle(pageToLoad.getPageTitle());
 			mainWindow.setScene(currentScene);
