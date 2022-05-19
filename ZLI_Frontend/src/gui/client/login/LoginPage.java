@@ -17,9 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import utility.IResponse;
-import utility.IObserver;
 
-public class LoginPage extends GUIController implements IObserver
+public class LoginPage extends GUIController
 {
 	@FXML
 	private TextField userNameInput;
@@ -88,8 +87,4 @@ public class LoginPage extends GUIController implements IObserver
 //		loginButton.disableProperty().bind(userNameInput.textProperty().isEmpty().or(passwordInput.textProperty().isEmpty()));
 	}
 
-	@Override
-	public <T> void update(T data)
-	{
-	}
 }
