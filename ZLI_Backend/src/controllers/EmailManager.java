@@ -23,6 +23,18 @@ public class EmailManager
 	private static final String email = "zerli.g13@gmail.com";
 	private static final String password = "thlvanlofmpfrxuh";
 	
+	public static void sendEmail(String title, String content, String recipientEmailAddress)
+	{
+		Thread thread = new Thread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				send(title, content, recipientEmailAddress);
+			}
+		});
+		thread.run();
+	}
 	public static void sendEmail(String title, String content, User recipient)
 	{
 		Thread thread = new Thread(new Runnable()
@@ -30,13 +42,13 @@ public class EmailManager
 			@Override
 			public void run()
 			{
-				send(title, content, recipient);
+				send(title, content, recipient.getEmailAddress());
 			}
 		});
 		thread.run();
 	}
 	
-	private static void send(String title, String content, User recipient)
+	private static void send(String title, String content, String recipientEmailAddress)
 	{
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", true);
@@ -56,7 +68,7 @@ public class EmailManager
 		{
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(email));
-			message.setRecipients(RecipientType.TO, InternetAddress.parse(recipient.getEmailAddress()));
+			message.setRecipients(RecipientType.TO, InternetAddress.parse(recipientEmailAddress));
 			message.setSubject(title);
 			
 			MimeBodyPart mimeBodyPart = new MimeBodyPart();
