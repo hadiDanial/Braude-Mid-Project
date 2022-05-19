@@ -333,13 +333,7 @@ public class OrderController
 			delivery.setDelivered(false);
 			delivery.setRecipientName(resultSet.getString(deliveriesColumnNames[1]));
 			delivery.setRecipientPhoneNumber(resultSet.getString(deliveriesColumnNames[2]));
-			Location loc = new Location();
-			loc.setLocationId(resultSet.getInt(deliveriesColumnNames[3]));
-			loc.setBuilding(resultSet.getString("building"));
-			loc.setStreet(resultSet.getString("street"));
-			loc.setZipCode(resultSet.getInt("zipCode"));
-			loc.setCity(resultSet.getString("city"));
-			loc.setNotes(resultSet.getString("notes"));
+			Location loc = LocationController.convertRSToLocation(resultSet, false, false);
 			delivery.setLocation(loc);
 			return delivery;
 //			} else
@@ -351,6 +345,14 @@ public class OrderController
 
 		return null;
 	}
+
+	/**
+	 * @param resultSet
+	 * @param deliveriesColumnNames
+	 * @return
+	 * @throws SQLException
+	 */
+	
 
 	public ArrayList<CartItem> convertRSToCart(ResultSet cartRS)
 	{

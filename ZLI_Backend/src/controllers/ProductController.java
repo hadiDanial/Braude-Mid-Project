@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import database.DatabaseConnection;
 import database.Tables;
+import entities.other.Branch;
 import entities.products.BaseProduct;
+import entities.products.CatalogItem;
 import entities.products.Item;
 import entities.products.Product;
 import enums.ColorEnum;
@@ -37,10 +39,10 @@ public class ProductController
 	 * 
 	 * @return
 	 */
-	public ArrayList<BaseProduct> getAllProducts()
+	public ArrayList<CatalogItem> getAllProducts()
 	{
-		ResultSet rs = databaseConnection.getAll(Tables.ALL_PRODUCTS_TABLE_NAME); 
-		return convertRSToBaseProductArray(rs);
+		ResultSet rs = databaseConnection.getAll(Tables.ALL_PRODUCTS_TABLE_NAME);
+		return convertRSToCatalogItemArray(rs, null);
 	}
 
 	/**
@@ -48,25 +50,34 @@ public class ProductController
 	 * 
 	 * @return
 	 */
-	public ArrayList<BaseProduct> getCatalogByBranch(int branchId)
+	public ArrayList<CatalogItem> getCatalogByBranch(int branchId)
 	{
 		ArrayList<String> joins = new ArrayList<String>();
 		joins.add(Tables.PRODUCTS_IN_BRANCH_TABLE_NAME);
 		joins.add(Tables.ALL_PRODUCTS_TABLE_NAME);
 		String conditions = "catalog.catalogId = catalogiteminbranch.catalogId AND catalogiteminbranch.branchId = "
 				+ branchId + " AND catalogiteminbranch.quantityInStock > 0";
+		Branch branch = BranchController.getInstance().getBranchById(branchId);
 		ResultSet rs = databaseConnection.getSimpleJoinResult(joins, conditions);
-		return convertRSToBaseProductArray(rs);
+		return convertRSToCatalogItemArray(rs, branch);
 	}
-	
-	public ArrayList<BaseProduct> convertRSToBaseProductArray(ResultSet rs)
+
+	public ArrayList<CatalogItem> convertRSToCatalogItemArray(ResultSet rs, Branch branch)
 	{
-		ArrayList<BaseProduct> products = new ArrayList<BaseProduct>();
+		ArrayList<CatalogItem> products = new ArrayList<CatalogItem>();
 		try
 		{
 			while (rs.next())
 			{
-				products.add(convertRSToBaseProduct(rs, false));
+				BaseProduct p = convertRSToBaseProduct(rs, false);
+				CatalogItem item = new CatalogItem();
+				item.setBaseProduct(p);
+				if (branch != null)
+				{
+					item.setBranch(branch);
+					item.setQuantityInStock(rs.getInt("quantityInStock"));
+				}
+				products.add(item);
 			}
 			rs.close();
 			return products;
@@ -76,6 +87,7 @@ public class ProductController
 			return null;
 		}
 	}
+
 	public BaseProduct convertRSToBaseProduct(ResultSet rs, boolean closeRS)
 	{
 		try
@@ -89,7 +101,7 @@ public class ProductController
 				item.setImage(rs.getBytes("image"));
 				item.setItemType(ItemType.valueOf(rs.getString("type")));
 				item.setPrimaryColor(ColorEnum.valueOf(rs.getString("primaryColor")));
-				if(closeRS)
+				if (closeRS)
 					rs.close();
 				return item;
 			} else
@@ -100,7 +112,7 @@ public class ProductController
 				product.setPrice(rs.getFloat("price"));
 				product.setImage(rs.getBytes("image"));
 				product.setProductType(ProductType.valueOf(rs.getString("type")));
-				if(closeRS)
+				if (closeRS)
 					rs.close();
 				return product;
 			}
