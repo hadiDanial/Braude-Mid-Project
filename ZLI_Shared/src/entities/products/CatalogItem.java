@@ -1,18 +1,21 @@
 package entities.products;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
 import entities.discounts.Discount;
 import entities.discounts.IDiscountable;
 import entities.other.Branch;
 
-public class CatalogItem implements IDiscountable
+public class CatalogItem implements IDiscountable, Serializable
 {
 	private BaseProduct baseProduct;
 	private Branch branch;
 	private int quantityInStock;
 	private HashSet<Discount> discounts;
 	
+	private static final long serialVersionUID = 6014173283082159954L;
+
 	public CatalogItem()
 	{
 		super();

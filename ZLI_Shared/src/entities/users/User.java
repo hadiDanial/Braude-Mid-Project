@@ -1,14 +1,14 @@
 package entities.users;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
 
 import enums.AccountStatus;
 import enums.UserRole;
 
-public class User
+public class User implements Serializable
 {
-	
 	private int userId;
 	private String username;
 	private String password;
@@ -22,6 +22,8 @@ public class User
 	private boolean isLoggedIn = false;
 	private Instant lastLoginDate;
 	private ArrayList<Order> Orders;
+
+	private static final long serialVersionUID = 2507221277433512324L;
 
 	public User()
 	{

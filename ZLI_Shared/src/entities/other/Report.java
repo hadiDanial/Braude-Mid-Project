@@ -1,14 +1,18 @@
 package entities.other;
 
+import java.io.Serializable;
 import java.util.*;
 import enums.ReportType;
 
-public class Report
+public class Report implements Serializable
 {
 	private int reportId;
 	private Branch branch;
 	private Date reportDate;
 	private ReportType reportType;
+	
+	private static final long serialVersionUID = 1262150235358849085L;
+
 	public Report(Branch branch, Date reportDate, ReportType reportType)
 	{
 		super();

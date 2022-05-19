@@ -1,10 +1,12 @@
 package entities.surveys;
 
+import java.io.Serializable;
+
 import entities.users.Order;
 import entities.users.User;
 import exceptions.SurveyException;
 
-public class SurveyAnswers
+public class SurveyAnswers implements Serializable
 {
 	private int answerId;
 	private User customer;
@@ -15,6 +17,8 @@ public class SurveyAnswers
 	static final int MAX_ANSWER_VALUE = 10;
 	static final int MIN_ANSWER_VALUE = 0;
 	
+	private static final long serialVersionUID = -8074074013065418141L;
+
 	public SurveyAnswers(User customer, Order order, Survey survey)
 	{
 		super();

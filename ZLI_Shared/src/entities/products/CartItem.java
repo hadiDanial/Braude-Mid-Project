@@ -1,13 +1,17 @@
 package entities.products;
 
+import java.io.Serializable;
+
 import entities.users.Order;
 
-public class CartItem
+public class CartItem implements Serializable
 {
 	private Order order;
 	private CatalogItem catalogItem;
 	private int quantity;
 	
+	private static final long serialVersionUID = -3949814939126280842L;
+
 	public CartItem()
 	{
 		super();
@@ -38,5 +42,15 @@ public class CartItem
 	public void setQuantity(int quantity)
 	{
 		this.quantity = quantity;
+	}
+
+	public Order getOrder()
+	{
+		return order;
+	}
+
+	public void setOrder(Order order)
+	{
+		this.order = order;
 	}
 }

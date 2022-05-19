@@ -1,16 +1,18 @@
 package entities.users;
 
+import java.io.Serializable;
+
 import entities.other.Location;
 
-public class OrderDelivery
+public class OrderDelivery implements Serializable
 {
-
 	private Order orderWithDelivery;
 	private String recipientName;
 	private String recipientPhoneNumber;
 	private Location location;
 	private boolean delivered;
 
+	private static final long serialVersionUID = -7895325901158480997L;
 	
 	public OrderDelivery()
 	{

@@ -5,6 +5,8 @@ import java.time.Instant;
 
 public class PercentageDiscount extends Discount
 {
+	private static final long serialVersionUID = 5420333059268417370L;
+
 	public PercentageDiscount()
 	{
 		super(Discount.PERCENTAGE_DISCRIMINATOR);

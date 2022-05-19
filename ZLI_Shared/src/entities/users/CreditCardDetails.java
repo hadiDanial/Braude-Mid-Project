@@ -1,14 +1,18 @@
 package entities.users;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class CreditCardDetails
+public class CreditCardDetails implements Serializable
 {
 	private int creditCardId;
 	private User customer;
 	private int creditCardNumber;
 	private Instant expirationDate;
 	private String cardHolderName;
+	
+	private static final long serialVersionUID = -8841530215525127937L;
+
 	public CreditCardDetails(User customer, int creditCardNumber, Instant expirationDate, String cardHolderName)
 	{
 		super();

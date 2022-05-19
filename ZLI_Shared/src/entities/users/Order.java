@@ -19,10 +19,6 @@ import utility.DateFormatter;
 
 public class Order implements Serializable, IDiscountable
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2345501089755051123L;
 	private int orderId;
 	private OrderDelivery deliveryDetails;
 	private String greetingCard;
@@ -38,6 +34,8 @@ public class Order implements Serializable, IDiscountable
 	// Demo only
 	private String orderDetails;
 	private HashSet<Discount> discounts;
+
+	private static final long serialVersionUID = -2345501089755051123L;
 
 	public Order()
 	{

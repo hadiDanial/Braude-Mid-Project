@@ -1,12 +1,13 @@
 package entities.surveys;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
 
 import entities.users.User;
 import exceptions.SurveyException;
 
-public class Survey
+public class Survey implements Serializable
 {
 	private int surveyId;
 	private User customerServiceSpecialist;
@@ -18,6 +19,8 @@ public class Survey
 	
 	static final int NUM_QUESTIONS = 6;
 		
+	private static final long serialVersionUID = 4685144997413378000L;
+
 	public Survey()
 	{
 		customers = new ArrayList<User>();
