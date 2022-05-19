@@ -13,6 +13,7 @@ import entities.users.Order;
 import enums.ColorEnum;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.SceneManager;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -134,21 +135,17 @@ public class UpdateOrder extends GUIController
 			{
 				boolean result = (Boolean) message;
 				orderDetails.setText(result ? "Order updated successfully." : "Failed to update!");
-				waitingForResponse = false;
+				Platform.runLater(new Runnable()
+				{
+					
+					@Override
+					public void run()
+					{
+						closeSceneAndOpenOrdersTable(true);
+					}
+				});
 			}
 		}, order);
-		try
-		{
-			while (waitingForResponse)
-			{
-				Thread.sleep(25);
-			}
-			Thread.sleep(100);
-			closeSceneAndOpenOrdersTable(true);
-		} catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	@FXML
