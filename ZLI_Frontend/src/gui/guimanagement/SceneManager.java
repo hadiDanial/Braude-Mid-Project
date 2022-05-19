@@ -54,7 +54,7 @@ public class SceneManager
 
 		loadMainContainer();
 		loadNewScene(GUIPages.Login, true);
-		loadAdditiveScene(GUIPages.UpdateOrder, true);
+		loadAdditiveScene(GUIPages.Loading, true);
 		mainWindow.setHeight(ClientProperties.getClientHeight());
 		mainWindow.setWidth(ClientProperties.getClientWidth());
 //		mainWindow.setResizable(false);

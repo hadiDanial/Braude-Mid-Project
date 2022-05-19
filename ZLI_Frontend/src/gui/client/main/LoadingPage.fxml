@@ -29,7 +29,7 @@
                   </Label>
                   <AnchorPane layoutX="29.0" layoutY="-75.0">
                      <children>
-                        <Label layoutX="382.0" layoutY="219.0" text="Welocme to" textFill="#078082">
+                        <Label layoutX="382.0" layoutY="219.0" text="Welcome to" textFill="#078082">
                            <font>
                               <Font size="18.0" />
                            </font>
