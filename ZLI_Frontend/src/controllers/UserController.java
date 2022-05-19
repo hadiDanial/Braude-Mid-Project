@@ -2,10 +2,26 @@ package controllers;
 
 import entities.users.User;
 import enums.*;
+import requests.Request;
+import requests.RequestType;
+import utility.IResponse;
 
 public class UserController
 {
-
+	public static UserController instance;
+	private UserController()
+	{
+		
+	}
+	
+	public static UserController getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new UserController();
+		}
+		return instance;
+	}
 	/**
 	 * 
 	 * @param user
@@ -32,10 +48,13 @@ public class UserController
 	 * @param userLogin
 	 * @param password
 	 */
-	public boolean login(String userLogin, String password)
+	public void login(String username, String password, IResponse<User> response)
 	{
-		// TODO - implement UserController.login
-		throw new UnsupportedOperationException();
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		Request req = new Request(RequestType.Login, user);
+		ClientController.getInstance().sendRequest(req, response);
 	}
 
 	/**
