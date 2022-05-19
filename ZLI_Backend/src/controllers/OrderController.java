@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import database.DatabaseConnection;
@@ -130,8 +131,31 @@ public class OrderController
 					"Zerli - New Order", "Your order has been registered and will be reviewed by a manager soon.<br>"
 							+ "Order #" + insertedOrderId + "<br>" + "Thank you for choosing Zerli!",
 					order.getCustomer());
+			notifyManager(order);
 		}
 		return res;
+	}
+
+	private void notifyManager(Order order)
+	{
+		int branchId = order.getBranch().getBranchId();
+		ArrayList<String> tables = (ArrayList<String>) Arrays.asList(new String[]
+		{ Tables.BRANCHES_TABLE_NAME, Tables.USERS_TABLE_NAME });
+		String selects = "branches.managerId, users.emailAddress, users.firstName";
+		String conditions = "branches.managerId=" + branchId + " AND branches.managerId=users.userId";
+		ResultSet rs = databaseConnection.getJoinResultsWithSelectColumns(tables, selects, conditions);
+		try
+		{
+			String content = "Hello, " + rs.getString("firstName") + "!<br>"
+					+ "A new order has been added to your branch, please review it soon!<br>" + "Order #"
+					+ order.getOrderId();
+			EmailManager.sendEmail("New Order", content, rs.getString("emailAddress"));
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 
 	public ArrayList<Order> getAllOrders()
@@ -153,23 +177,18 @@ public class OrderController
 	 */
 	public boolean updateOrderStatus(Order order, OrderStatus orderStatus)
 	{
-		ArrayList<String> keys = new ArrayList<String>();
-		keys.add(Tables.ordersColumnNames[2]);
-		boolean res = databaseConnection.updateById(order.getOrderId(), ID_FIELD_NAME, Tables.ORDERS_TABLE_NAME, keys,
-				new IObjectToPreparedStatementParameters<Order>()
-				{
-					@Override
-					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
-					{
-						statementToPrepare.setString(1, orderStatus.name());
-					}
-				});
+		boolean res = databaseConnection.updateById(order.getOrderId(), ID_FIELD_NAME, Tables.ORDERS_TABLE_NAME,
+				Tables.ordersColumnNames[2], orderStatus.name());
 		if (res)
 		{
 			EmailManager.sendEmail("Zerli - Order #" + order.getOrderId() + " Status Update",
 					"Your order status has been updated to:" + orderStatus.name() + "<br>"
 							+ "Thank you for your patience!",
 					order.getCustomer());
+			if(orderStatus == OrderStatus.Delivered)
+			{
+				databaseConnection.updateById(order.getOrderId(), "orderId", Tables.DELIVERIES_TABLE_NAME, "delivered", "true");
+			}
 		}
 		return res;
 	}
@@ -195,8 +214,7 @@ public class OrderController
 					+ " AND Orders.orderId= orders_products.orderId AND orders.orderStatus='Pending'"
 					+ " AND catalog.catalogId = orders_products.catalogId";
 			// Join Order_Product + CatalogItem
-			ResultSet cartRS = databaseConnection.getSimpleJoinResultsWithSelectColumns(tableNames, selects,
-					conditions);
+			ResultSet cartRS = databaseConnection.getJoinResultsWithSelectColumns(tableNames, selects, conditions);
 			cart = convertRSToCart(cartRS);
 
 			// Get Delivery details
@@ -208,8 +226,7 @@ public class OrderController
 					+ "locations.notes, branches.branchId, branches.managerId, branches.branchName";
 			conditions = "Deliveries.orderId=" + order.getOrderId()
 					+ " AND deliveries.locationId = locations.locationId AND locations.locationId = branches.branchId";
-			ResultSet deliveryRS = databaseConnection.getSimpleJoinResultsWithSelectColumns(tableNames, selects,
-					conditions);
+			ResultSet deliveryRS = databaseConnection.getJoinResultsWithSelectColumns(tableNames, selects, conditions);
 			try
 			{
 				if (deliveryRS.next())
