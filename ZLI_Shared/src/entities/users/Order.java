@@ -199,6 +199,19 @@ public class Order implements Serializable, IDiscountable
 	{
 		this.products = products;
 	}
+	
+	public void addProduct(CartItem product)
+	{
+		if(products.contains(product))
+		{
+			CartItem existingProduct = products.get(products.indexOf(product)); 
+			existingProduct.setQuantity(product.getQuantity() + existingProduct.getQuantity());
+		}
+		else
+		{			
+			this.products.add(product);
+		}
+	}
 
 	public User getCustomer()
 	{
