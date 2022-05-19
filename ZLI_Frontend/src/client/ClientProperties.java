@@ -6,6 +6,8 @@ public class ClientProperties
 	private static int hostPort = 5555;
 	private static int clientWidth = 1240; 
 	private static int clientHeight = 800; 
+	private static double defaultPercentageOfParent = 0.9;
+
 	public static String getHostAddress()
 	{
 		return hostAddress;
@@ -29,6 +31,10 @@ public class ClientProperties
 	public static int getClientHeight()
 	{
 		return clientHeight;
+	}
+	public static double getDefaultPercentageOfParent()
+	{
+		return defaultPercentageOfParent;
 	} 
 	
 	
