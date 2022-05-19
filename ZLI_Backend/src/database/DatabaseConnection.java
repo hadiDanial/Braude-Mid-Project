@@ -298,8 +298,10 @@ public class DatabaseConnection
 
 	/**
 	 * Returns records from the given table that match all of the conditions.
-	 * @param tableName Name of the table.
-	 * @param conditionsMap HashMap containing the conditions - column names and their values.
+	 * 
+	 * @param tableName     Name of the table.
+	 * @param conditionsMap HashMap containing the conditions - column names and
+	 *                      their values.
 	 * @return ResultSet containing the results of the query.
 	 */
 	public ResultSet getByConditions(String tableName, HashMap<String, String> conditionsMap)
@@ -367,7 +369,7 @@ public class DatabaseConnection
 	 */
 	public ResultSet getSimpleJoinResult(ArrayList<String> tableNames, String conditions)
 	{
-		return getSimpleJoinResultsWithSelectColumns(tableNames, "*", conditions);
+		return getJoinResultsWithSelectColumns(tableNames, "*", conditions);
 	}
 
 	/**
@@ -380,7 +382,7 @@ public class DatabaseConnection
 	 *                      Do not include WHERE or ; in the conditions.
 	 * @return An ArrayList containing all matching records from the join result.
 	 */
-	public ResultSet getSimpleJoinResultsWithSelectColumns(ArrayList<String> tableNames, String selectColumns,
+	public ResultSet getJoinResultsWithSelectColumns(ArrayList<String> tableNames, String selectColumns,
 			String conditions)
 	{
 		Statement stmt;
@@ -438,6 +440,35 @@ public class DatabaseConnection
 			objToPS.convertObjectToPSQuery(ps);
 			System.out.println("Update:\n" + sb.toString());
 			return ps.executeUpdate() == 1;
+		} catch (Exception e)
+		{
+			System.out.println(e);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Updates a single record in the database by its PK.
+
+	 * @param id Primary key of the record.
+	 * @param idFieldName Name of the primary key field in the table.
+	 * @param tableName Name of the table in the schema.
+	 * @param updatedColumnName Name of the column that contains the value that needs to be updated.
+	 * @param updatedColumnValue The new value of the column.
+	 * @return True if the record was successfully updated.
+	 */
+	public boolean updateById(int id, String idFieldName, String tableName, String updatedColumnName,
+			String updatedColumnValue)
+	{
+		Statement statement;
+		try
+		{
+			String query = "UPDATE " + tableName + " SET " + updatedColumnName + "=" + updatedColumnValue + " WHERE "
+					+ idFieldName + "=" + id;
+			statement = conn.createStatement();
+			System.out.println("Update:\n" + query);
+			return statement.executeUpdate(query) == 1;
 		} catch (Exception e)
 		{
 			System.out.println(e);
