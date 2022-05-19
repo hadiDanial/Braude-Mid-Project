@@ -12,7 +12,7 @@ public class UserController
 {
 	public static UserController instance;
 	private User loggedInUser = null;
-	
+
 	private UserController()
 	{
 		
@@ -72,24 +72,20 @@ public class UserController
 		}
 	}
 
-	/**
-	 * 
-	 * @param userId
-	 * @param accountStatus
-	 */
-	public boolean setUserStatus(User userId, AccountStatus accountStatus)
+
+	public boolean setUserStatus(User user, AccountStatus accountStatus)
 	{
 		// TODO - implement UserController.setUserStatus
 		throw new UnsupportedOperationException();
 	}
 
-	public void openHomePage(User loggedInUser)
+	public void openHomePage()
 	{
-		this.loggedInUser = loggedInUser;
 		switch (loggedInUser.getRole())
 		{
 		case Customer:
 			SceneManager.loadNewScene(GUIPages.CatalogPage, true);
+			SceneManager.setHeaderButtonVisibility(true, true);
 			break;
 
 		default:
@@ -101,5 +97,16 @@ public class UserController
 	{
 		return loggedInUser != null;
 	}
+	
+	public User getLoggedInUser()
+	{
+		return loggedInUser;
+	}
+
+	public void setLoggedInUser(User loggedInUser)
+	{
+		this.loggedInUser = loggedInUser;
+	}
+
 
 }

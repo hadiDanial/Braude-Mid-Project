@@ -46,6 +46,8 @@ public class LoginPage extends GUIController
 			@Override
 			public void executeAfterResponse(Object message)
 			{
+				User loggedInUser = (User) message;
+				UserController.getInstance().setLoggedInUser(loggedInUser);
 				Platform.runLater(new Runnable()
 				{
 					
@@ -55,8 +57,7 @@ public class LoginPage extends GUIController
 						// TODO: Display error message or move to home page by user role
 						if (message != null)
 						{
-							User loggedInUser = (User) message;
-							UserController.getInstance().openHomePage(loggedInUser);
+							UserController.getInstance().openHomePage();
 						}
 					}
 				});

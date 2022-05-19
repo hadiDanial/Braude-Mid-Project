@@ -2,18 +2,27 @@ package gui.guimanagement;
 
 import java.io.IOException;
 import java.util.EmptyStackException;
+import java.util.Iterator;
 import java.util.Stack;
 
 import client.ClientProperties;
 import controllers.ClientController;
 import gui.client.ClientUI;
 import gui.client.main.MainView;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -24,12 +33,15 @@ public class SceneManager
 {
 	private static Stage mainWindow;
 	private static Scene currentScene;
-	private static Pane root;
+	private static Pane root, mainViewPane;
 	private static StackPane container;
 	private static VBox contentVBox;
+	private static HBox header;
 	private static Stack<HistoryState> history;
 	private static Stage loadingWindow;
-	
+	private static MenuButton userDropDown;
+	private static Button shoppingCartButton;
+
 	/**
 	 * Initialize the UI. This method should only be called <b>once!</b>
 	 * 
@@ -54,9 +66,13 @@ public class SceneManager
 
 		loadMainContainer();
 		loadNewScene(GUIPages.Login, true);
-		loadAdditiveScene(GUIPages.Loading, true);
+//		loadAdditiveScene(GUIPages.Loading, true);
 		mainWindow.setHeight(ClientProperties.getClientHeight());
 		mainWindow.setWidth(ClientProperties.getClientWidth());
+		ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> resizeAllContent();
+		mainWindow.widthProperty().addListener(stageSizeListener);
+
+//		mainWindow.heightProperty().addListener(stageSizeListener);
 //		mainWindow.setResizable(false);
 //		loadAdditiveScene(GUIPages.Orders, true);
 //		loadAdditiveScene(GUIPages.UpdateOrder, true);
@@ -72,11 +88,20 @@ public class SceneManager
 		FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(pageToLoad.getFxmlFile()));
 		try
 		{
-			root = loader.load();
-			MainView mainView = loader.getController();
-			container = mainView.getContent();
+			root = new AnchorPane();
+			mainViewPane = loader.load();
+			root.getChildren().add(mainViewPane);
+			MainView mainViewController = loader.getController();
+			header = mainViewController.getHeader();
+			userDropDown = mainViewController.getUserDropDown();
+			shoppingCartButton = mainViewController.getShoppingCartButton();
+			container = mainViewController.getContent();
 			container.getChildren().add(contentVBox);
 			currentScene = new Scene(root);
+			mainViewPane.setPrefWidth(ClientProperties.getClientWidth());
+			mainViewPane.setPrefHeight(ClientProperties.getClientHeight());
+			container.setPrefWidth(ClientProperties.getClientWidth());
+			container.setPrefHeight(ClientProperties.getClientHeight());
 			mainWindow.setTitle(pageToLoad.getPageTitle());
 			mainWindow.setScene(currentScene);
 			mainWindow.show();
@@ -106,6 +131,8 @@ public class SceneManager
 				contentVBox.getChildren().add(loadedContent);
 				guiController = loader.getController();
 				setupGUIController(guiController, loadedContent);
+				setSceneWidth(loadedContent, false);
+
 				if (saveToHistory)
 				{
 					HistoryState state = new HistoryState(guiController, false, pageToLoad);
@@ -152,6 +179,41 @@ public class SceneManager
 		return guiController;
 	}
 
+	private static void resizeAllContent()
+	{
+		// TODO: Doesn't work properly... fix later
+		ObservableList<Node> content = contentVBox.getChildren();
+		setSceneWidth(mainViewPane, true);		
+		setSceneWidth(container, false);
+		setSceneWidth(contentVBox, false);
+		for (Node node : content)
+		{
+			System.out.println(node);
+			setSceneWidth((Pane)node, false);
+		}
+		mainViewPane.setMinHeight(mainWindow.getHeight());
+		mainViewPane.setPrefHeight(mainWindow.getHeight());
+		contentVBox.setPrefHeight(mainWindow.getHeight());
+		container.setMinHeight(Region.USE_PREF_SIZE);
+		container.setPrefHeight(mainViewPane.getHeight() - header.getHeight());
+	}
+
+	/**
+	 * @param loadedContent
+	 * @param setMaxSize 
+	 */
+	public static void setSceneWidth(Pane loadedContent, boolean setMaxSize)
+	{
+		Pane parent = (Pane)loadedContent.getParent();
+		double parentWidth = parent.getWidth();
+		double width = parentWidth * (setMaxSize ? 1 : ClientProperties.getDefaultPercentageOfParent());
+		loadedContent.setPrefWidth(width);
+		loadedContent.setMinWidth(width * 0.5);
+		double offset = (parentWidth - width) / 2;
+//		System.out.println(left + " " + right);
+		AnchorPane.setLeftAnchor(loadedContent, offset);
+		AnchorPane.setRightAnchor(loadedContent, offset);
+	}
 	private static void setupGUIController(GUIController guiController, Parent root)
 	{
 		guiController.setRoot(root);
@@ -233,12 +295,21 @@ public class SceneManager
 	{
 		loadingWindow = loadModalWindow(GUIPages.Loading);
 	}
+
 	public static void closeLoadingWindow()
 	{
-		if(loadingWindow != null)
+		if (loadingWindow != null)
 		{
 			loadingWindow.close();
 			loadingWindow = null;
 		}
+	}
+	
+	public static void setHeaderButtonVisibility(boolean showUserDropDown, boolean showShoppingCartButton)
+	{
+		userDropDown.setVisible(showUserDropDown);
+		shoppingCartButton.setVisible(showShoppingCartButton);
+		userDropDown.setDisable(!showUserDropDown);
+		shoppingCartButton.setDisable(!showShoppingCartButton);
 	}
 }

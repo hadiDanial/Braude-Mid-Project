@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -33,6 +34,9 @@ public class MainView extends Application implements Initializable {
     @FXML
     private StackPane centerView;
 
+    @FXML
+    private HBox header;
+    
 	private static AnchorPane root;
 
     @FXML
@@ -78,5 +82,20 @@ public class MainView extends Application implements Initializable {
 	public StackPane getContent()
 	{
 		return centerView;
+	}
+
+	public HBox getHeader()
+	{
+		return header;
+	}
+
+	public MenuButton getUserDropDown()
+	{
+		return userDropDown;
+	}
+
+	public Button getShoppingCartButton()
+	{
+		return shoppingCartBtn;
 	}
 }

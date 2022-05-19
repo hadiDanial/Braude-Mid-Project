@@ -18,7 +18,7 @@
    <children>
       <VBox alignment="TOP_CENTER" style="-fx-background-color: #E8E8E8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" style="-fx-background-color: #05595B;" VBox.vgrow="ALWAYS">
+            <HBox fx:id="header" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" style="-fx-background-color: #05595B;" VBox.vgrow="ALWAYS">
                <children>
                   <Pane prefHeight="50.0" prefWidth="100.0" />
                   <Text fill="#e2d784" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
