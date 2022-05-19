@@ -23,8 +23,11 @@ public class Tables
 	public static final String ORDERS_DISCOUNTS_TABLE_NAME = "Orders_Discounts";
 	public static final String ALL_PRODUCTS_TABLE_NAME = "Catalog";
 	public static final String PRODUCTS_IN_BRANCH_TABLE_NAME = "CatalogItemInBranch";
-	public static final String LOCATIONS_TABLE_NAME = "Locations";
 
+	public static final String LOCATIONS_TABLE_NAME = "Locations";
+	public static final String[] locationColumns =
+	{ "locationId", "city", "zipCode", "street", "building", "notes" };
+	
 	public static final String DISCOUNTS_TABLE_NAME = "Discounts";
 	public static final String[] discountColumnNames =
 	{ "discountId", "discountStartDate", "discountEndDate", "discountName", "discountValue", "discountType", "details",
@@ -33,5 +36,9 @@ public class Tables
 	{ "catalogId", "branchId", "discountId" };
 	public static final String[] ordersDiscountsColumnNames =
 	{ "orderId", "discountId" };
+
 	public static final String BRANCHES_TABLE_NAME = "Branches";
+	public static final String[] branchColumnNames =
+	{ "branchId", "managerId", "branchName", "locationId" };
+
 }
