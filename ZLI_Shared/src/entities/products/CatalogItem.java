@@ -2,6 +2,7 @@ package entities.products;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 
 import entities.discounts.Discount;
 import entities.discounts.IDiscountable;
@@ -13,7 +14,7 @@ public class CatalogItem implements IDiscountable, Serializable
 	private Branch branch;
 	private int quantityInStock;
 	private HashSet<Discount> discounts;
-	
+
 	private static final long serialVersionUID = 6014173283082159954L;
 
 	public CatalogItem()
@@ -41,13 +42,13 @@ public class CatalogItem implements IDiscountable, Serializable
 		}
 		return finalPrice;
 	}
-	
+
 	@Override
 	public void setDiscounts(HashSet<Discount> discounts)
 	{
 		this.discounts = discounts;
 	}
-	
+
 	public BaseProduct getBaseProduct()
 	{
 		return baseProduct;
@@ -83,4 +84,25 @@ public class CatalogItem implements IDiscountable, Serializable
 	{
 		return baseProduct.toString();
 	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(baseProduct, branch);
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CatalogItem other = (CatalogItem) obj;
+		return this.baseProduct.getProductId() == other.getBaseProduct().getProductId()
+				&& this.branch.getBranchId() == other.getBranch().getBranchId();
+	}
+
 }

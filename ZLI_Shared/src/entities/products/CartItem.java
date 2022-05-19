@@ -1,6 +1,7 @@
 package entities.products;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import entities.users.Order;
 
@@ -53,4 +54,24 @@ public class CartItem implements Serializable
 	{
 		this.order = order;
 	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(catalogItem);
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (!(obj instanceof CartItem))
+			return false;
+		CartItem other = (CartItem) obj;
+		return Objects.equals(catalogItem, other.catalogItem);
+	}
+
+
+	
 }
