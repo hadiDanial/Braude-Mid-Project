@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #F5F5F5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.login.LoginPage">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #F5F5F5;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.login.LoginPage">
     <children>
       <HBox alignment="CENTER" style="-fx-background-color: #F5F5F5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -39,7 +39,7 @@
                         </Label>
                         <PasswordField fx:id="passwordInput" />
                         <Pane layoutX="10.0" layoutY="270.0" prefHeight="33.0" prefWidth="149.0" />
-                        <Button mnemonicParsing="false" onAction="#onLogInBtn" style="-fx-background-color: #062C30;" text="Log in" textFill="#e2d784">
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginBtn" style="-fx-background-color: #062C30;" text="Log in" textFill="#e2d784">
                            <font>
                               <Font size="18.0" />
                            </font>

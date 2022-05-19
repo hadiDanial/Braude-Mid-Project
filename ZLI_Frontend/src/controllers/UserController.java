@@ -2,6 +2,8 @@ package controllers;
 
 import entities.users.User;
 import enums.*;
+import gui.guimanagement.GUIPages;
+import gui.guimanagement.SceneManager;
 import requests.Request;
 import requests.RequestType;
 import utility.IResponse;
@@ -9,6 +11,8 @@ import utility.IResponse;
 public class UserController
 {
 	public static UserController instance;
+	private User loggedInUser = null;
+	
 	private UserController()
 	{
 		
@@ -58,13 +62,14 @@ public class UserController
 	}
 
 	/**
-	 * 
-	 * @param userId
 	 */
-	public boolean logout(int userId)
+	public void logout()
 	{
-		// TODO - implement UserController.logout
-		throw new UnsupportedOperationException();
+		if(isLoggedIn())			
+		{
+			Request req = new Request(RequestType.Logout, loggedInUser.getUserId());
+			ClientController.getInstance().sendRequest(req, null);
+		}
 	}
 
 	/**
@@ -76,6 +81,25 @@ public class UserController
 	{
 		// TODO - implement UserController.setUserStatus
 		throw new UnsupportedOperationException();
+	}
+
+	public void openHomePage(User loggedInUser)
+	{
+		this.loggedInUser = loggedInUser;
+		switch (loggedInUser.getRole())
+		{
+		case Customer:
+			SceneManager.loadNewScene(GUIPages.CatalogPage, true);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	public boolean isLoggedIn()
+	{
+		return loggedInUser != null;
 	}
 
 }

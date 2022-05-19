@@ -17,7 +17,8 @@ public enum GUIPages
 	Settings("client/SettingsPage.fxml", "Settings"),
 	Orders("orders/OrdersPage.fxml", "Orders"),
 	UpdateOrder("orders/OrderUpdatePage.fxml", "Update Order"), 
-	Loading("client/main/LoadingPage.fxml", "LOADING");
+	Loading("client/main/LoadingPage.fxml", "LOADING"), 
+	CatalogPage("catalog/CatalogPage.fxml", "Catalog");
 
 	private final String fxmlFile;
 //	private final Class<? extends GUIController> controllerClass;
