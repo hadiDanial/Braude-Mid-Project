@@ -61,6 +61,10 @@ public class ClientController
 	{
 		if(client != null)
 		{
+			// Logout
+			final UserController userController = UserController.getInstance();
+			if(userController.isLoggedIn())
+				userController.logout();
 			client.quit();
 		}
 	}
