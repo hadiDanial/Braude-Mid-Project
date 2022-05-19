@@ -3,7 +3,9 @@ package gui.client.main;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controllers.ClientController;
 import gui.catalog.CatalogPage;
+import gui.guimanagement.SceneManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -29,11 +33,7 @@ public class MainView extends Application implements Initializable {
     @FXML
     private StackPane centerView;
 
-    @FXML
-    private void onSettingsBtn(ActionEvent event) {
-
-        System.out.println("Settings");
-    }
+	private static AnchorPane root;
 
     @FXML
     private void onShoppingCartBtn(ActionEvent event) {
@@ -44,15 +44,16 @@ public class MainView extends Application implements Initializable {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/main/MainView.fxml"));
-
-        Scene scene = new Scene(root);
-        // scene.getStylesheets().add(getClass().getResource("/gui/ServerUI.css").toExternalForm());
-        primaryStage.setTitle("Zerli");
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-
-        primaryStage.show();
+//        Parent root = FXMLLoader.load(getClass().getResource("/gui/main/MainView.fxml"));
+		SceneManager.initUI(primaryStage);
+//
+//        Scene scene = new Scene(root);
+//        // scene.getStylesheets().add(getClass().getResource("/gui/ServerUI.css").toExternalForm());
+//        primaryStage.setTitle("Zerli");
+//        primaryStage.setScene(scene);
+//        primaryStage.setResizable(false);
+//
+//        primaryStage.show();
     }
 
     @Override
@@ -63,4 +64,19 @@ public class MainView extends Application implements Initializable {
     public static void main(String[] args) {
         launch(args);
     }
+
+    @FXML
+    private void onSettingsBtn(ActionEvent event) {
+    	SceneManager.openSettingsPage();
+    }
+
+	public Pane getRoot()
+	{
+		return root;
+	}
+
+	public StackPane getContent()
+	{
+		return centerView;
+	}
 }

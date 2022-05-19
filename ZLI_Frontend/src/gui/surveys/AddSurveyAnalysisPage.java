@@ -1,5 +1,15 @@
 package gui.surveys;
 
-public class AddSurveyAnalysisPage
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import gui.guimanagement.GUIController;
+
+public class AddSurveyAnalysisPage extends GUIController
 {
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+	}
 }
