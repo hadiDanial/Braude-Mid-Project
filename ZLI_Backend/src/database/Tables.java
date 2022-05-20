@@ -32,6 +32,7 @@ public class Tables
 	public static final String[] discountColumnNames =
 	{ "discountId", "discountStartDate", "discountEndDate", "discountName", "discountValue", "discountType", "details",
 			"orderDate", "deliveryDate" };
+	public static final String DISCOUNTS_PRODUCTS_TABLE_NAME ="Discounts_Products";
 	public static final String[] discountsProductsColumnNames =
 	{ "catalogId", "branchId", "discountId" };
 	public static final String[] ordersDiscountsColumnNames =

@@ -1,6 +1,5 @@
 package requests;
 
-import entities.users.User;
 import enums.UserRole;
 
 public enum RequestType
