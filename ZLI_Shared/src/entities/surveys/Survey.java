@@ -111,9 +111,9 @@ public class Survey implements Serializable
 		return answers;
 	}
 
-	public void setAnswers(ArrayList<SurveyAnswers> answers)
+	public void setAnswers(SurveyAnswers answers2)
 	{
-		this.answers = answers;
+		this.answers = answers2;
 	}
 
 	public String[] getQuestions()

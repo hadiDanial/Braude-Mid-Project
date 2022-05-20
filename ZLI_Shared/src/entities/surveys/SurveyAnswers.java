@@ -15,7 +15,7 @@ public class SurveyAnswers implements Serializable
 	private int surveyAnswers[];
 	
 	static final int MAX_ANSWER_VALUE = 10;
-	static final int MIN_ANSWER_VALUE = 0;
+	static final int MIN_ANSWER_VALUE = 1;
 	
 	private static final long serialVersionUID = -8074074013065418141L;
 

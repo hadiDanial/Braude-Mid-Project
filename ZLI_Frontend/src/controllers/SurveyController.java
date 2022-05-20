@@ -1,7 +1,15 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.*;
 import entities.surveys.*;
 import entities.users.User;
+import exceptions.SurveyException;
+import requests.Request;
+import requests.RequestType;
+import utility.IResponse;
 
 public class SurveyController
 {
@@ -20,15 +28,16 @@ public class SurveyController
 		}
 		return instance;
 	}
-
 	/**
 	 * 
 	 * @param survey
+	 * @throws SurveyException
 	 */
-	public boolean createSurvey(Survey survey)
+	public void createSurvey(IResponse<ArrayList<Survey>> response, SurveyAnswers answers, String[] questions) throws SurveyException
 	{
-		// TODO - implement SurveyController.createSurvey
-		throw new UnsupportedOperationException();
+		Survey survey = new Survey();
+		survey.setQuestions(questions);
+		survey.setAnswers(answers);
 	}
 
 	/**
@@ -48,10 +57,43 @@ public class SurveyController
 	 * @param user
 	 * @param answers
 	 */
-	public boolean addSurveyAnswers(Survey survey, User user, SurveyAnswers answers)
+	public void addSurveyAnswers(Survey survey, SurveyAnswers answers)
+	{
+		survey.setAnswers(answers);
+	}
+
+	/**
+	 * 
+	 * @param survey
+	 * @param user
+	 * @param answers
+	 */
+	public Survey getSurveyById(int surveyId)
+	{
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param survey
+	 * @param user
+	 * @param answers
+	 */
+	public boolean getSurveyByDate(Instant surveyDate)
 	{
 		// TODO - implement SurveyController.addSurveyAnswers
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * 
+	 * @param survey
+	 * @param user
+	 * @param answers
+	 */
+	public boolean getSurveyByBranch(Survey survey, User user, SurveyAnswers answers)
+	{
+		// TODO - implement SurveyController.addSurveyAnswers
+		throw new UnsupportedOperationException();
+	}
 }
