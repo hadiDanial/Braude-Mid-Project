@@ -1,11 +1,16 @@
-package gui.gui.cart;
+package gui.orders.cart;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import gui.guimanagement.GUIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class CartPage {
+public class CartPage extends GUIController
+{
 
     @FXML
     private Label totalPriceLabel;
@@ -25,5 +30,10 @@ public class CartPage {
     void onCheckOutBtn(ActionEvent event) {
 
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+	}
 
 }

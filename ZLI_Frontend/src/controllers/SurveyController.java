@@ -10,6 +10,21 @@ import utility.IResponse;
 
 public class SurveyController
 {
+	private static SurveyController instance;
+	private ClientController clientController;
+	
+	private SurveyController() {
+		clientController = ClientController.getInstance();
+	}
+	
+	public static SurveyController getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new SurveyController();
+		}
+		return instance;
+	}
 
 	private static SurveyController instance;
 	private ClientController clientController;

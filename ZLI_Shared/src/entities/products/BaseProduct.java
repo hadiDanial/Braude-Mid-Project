@@ -6,19 +6,19 @@ import java.util.Arrays;
 
 public abstract class BaseProduct implements Serializable
 {
-
 	private int productId;
 	private String productName;
 	private float price;
 	private byte[] image;
 
 	private static final String NEW_PRODUCT_NAME = "New Product";
-	private static final long serialVersionUID = 5869287229470090229L;
 	
 	public static final String PRODUCT_DISCRIMINATOR = "P";
 	public static final String ITEM_DISCRIMINATOR = "I";
 	
 	protected final String type;
+
+	private static final long serialVersionUID = 5869287229470090229L;
 	
 	public BaseProduct(String productName, float price, byte[] image, String type)
 	{

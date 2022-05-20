@@ -1,5 +1,15 @@
 package gui.users;
 
-public class LoginPage
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import gui.guimanagement.GUIController;
+
+public class LoginPage extends GUIController
 {
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+	}
 }

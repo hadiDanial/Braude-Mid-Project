@@ -1,15 +1,16 @@
-package gui.gui.catalog;
+package gui.catalog;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import gui.guimanagement.GUIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class ProductElement {
-
-    public ProductElement() {
-        // super("/gui/catalog/ProductElement.fxml");
-    }
+public class ProductElement extends GUIController
+{
 
     @FXML
     private ImageView imageView;
@@ -30,5 +31,10 @@ public class ProductElement {
     void onAddToCart(ActionEvent event) {
 
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+	}
 
 }

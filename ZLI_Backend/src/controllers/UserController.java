@@ -6,10 +6,11 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
-import database.IResultSetToObject;
+import database.Tables;
 import entities.users.User;
 import enums.AccountStatus;
 import enums.UserRole;
@@ -18,45 +19,11 @@ public class UserController
 {
 	private static UserController instance;
 	private final DatabaseConnection databaseConnection;
-	private static final String TABLE_NAME = "Users";
 	private static final String ID_FIELD_NAME = "userId";
-	private IResultSetToObject<User> rsToUser;
-	private static final String[] allColumnNames =
-	{ "username", "password", "firstName", "lastName", "emailAddress", "phoneNumber", "role", "status", "credit",
-			"isLoggedIn", "lastLoginDate" };
 
 	private UserController()
 	{
 		databaseConnection = DatabaseConnection.getInstance();
-		rsToUser = new IResultSetToObject<User>()
-		{
-			@Override
-			public User convertToObject(ResultSet rs)
-			{
-				try
-				{
-					User user = new User();
-					user.setUserId(rs.getInt("userId"));
-					user.setUsername(rs.getString("username"));
-					user.setPassword(rs.getString("password"));
-					user.setFirstName(rs.getString("firstName"));
-					user.setLastName(rs.getString("lastName"));
-					user.setEmailAddress(rs.getString("emailAddress"));
-					user.setPhoneNumber(rs.getString("phoneNumber"));
-					user.setRole(UserRole.valueOf(rs.getString("role")));
-					user.setAccountStatus(AccountStatus.valueOf(rs.getString("status")));
-					user.setLoggedIn(rs.getBoolean("isLoggedIn"));
-					Timestamp lastLogin = rs.getTimestamp("lastLoginDate");
-					user.setLastLoginDate((lastLogin == null) ? null : lastLogin.toInstant());
-					return user;
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-					return null;
-				}
-			}
-		};
-
 	}
 
 	public static UserController getInstance()
@@ -70,7 +37,10 @@ public class UserController
 
 	public User login(String username, String password)
 	{
-		User user = databaseConnection.getBySimpleCondition(allColumnNames[0], username, TABLE_NAME, rsToUser);
+		ResultSet userRS = databaseConnection.getBySimpleCondition(Tables.usersColumnNames[1], username,
+				Tables.USERS_TABLE_NAME);
+
+		User user = convertRSToUser(userRS);
 		if (user == null || user.isLoggedIn())
 			return null;
 		if (password.equals(user.getPassword()))
@@ -80,7 +50,7 @@ public class UserController
 			ArrayList<String> keys = new ArrayList<String>();
 			keys.add("isLoggedIn");
 			keys.add("lastLoginDate");
-			databaseConnection.updateById(user.getUserId(), ID_FIELD_NAME, TABLE_NAME, keys,
+			databaseConnection.updateById(user.getUserId(), ID_FIELD_NAME, Tables.USERS_TABLE_NAME, keys,
 					new IObjectToPreparedStatementParameters<User>()
 					{
 						@Override
@@ -101,7 +71,7 @@ public class UserController
 	{
 		ArrayList<String> keys = new ArrayList<>();
 		keys.add("isLoggedIn");
-		databaseConnection.updateById(userId, ID_FIELD_NAME, TABLE_NAME, keys,
+		databaseConnection.updateById(userId, ID_FIELD_NAME, Tables.USERS_TABLE_NAME, keys,
 				new IObjectToPreparedStatementParameters<User>()
 				{
 
@@ -115,15 +85,15 @@ public class UserController
 	}
 
 	public boolean register(User user)
-	{ 
-		int res = databaseConnection.insertToDatabase(TABLE_NAME, allColumnNames,
+	{
+		int res = databaseConnection.insertToDatabase(Tables.USERS_TABLE_NAME,
+				Arrays.copyOfRange(Tables.usersColumnNames, 1, Tables.usersColumnNames.length),
 				new IObjectToPreparedStatementParameters<User>()
 				{
 
 					@Override
 					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
 					{
-						statementToPrepare.setBoolean(1, true);
 						statementToPrepare.setString(1, user.getUsername());
 						statementToPrepare.setString(2, user.getPassword());
 						statementToPrepare.setString(3, user.getFirstName());
@@ -140,4 +110,36 @@ public class UserController
 		return res == 1;
 	}
 
+	public User convertRSToUser(ResultSet rs)
+	{
+		try
+		{
+			String[] usersColumnNames = Tables.usersColumnNames;
+			if (rs.next())
+			{
+//				{ "userId", "username", "password", "firstName", "lastName", "emailAddress", "phoneNumber", "role", "status",
+//					"credit", "isLoggedIn", "lastLoginDate" };
+				User user = new User();
+				user.setUserId(rs.getInt(usersColumnNames[0]));
+				user.setUsername(rs.getString(usersColumnNames[1]));
+				user.setPassword(rs.getString(usersColumnNames[2]));
+				user.setFirstName(rs.getString(usersColumnNames[3]));
+				user.setLastName(rs.getString(usersColumnNames[4]));
+				user.setEmailAddress(rs.getString(usersColumnNames[5]));
+				user.setPhoneNumber(rs.getString(usersColumnNames[6]));
+				user.setRole(UserRole.valueOf(rs.getString(usersColumnNames[7])));
+				user.setAccountStatus(AccountStatus.valueOf(rs.getString(usersColumnNames[8])));
+				user.setCredit(rs.getFloat(usersColumnNames[9]));
+				user.setLoggedIn(rs.getBoolean(usersColumnNames[10]));
+				Timestamp lastLogin = rs.getTimestamp(usersColumnNames[11]);
+				user.setLastLoginDate((lastLogin == null) ? null : lastLogin.toInstant());
+				return user;
+			} else
+				return null;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

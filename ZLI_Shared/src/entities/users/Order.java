@@ -19,10 +19,6 @@ import utility.DateFormatter;
 
 public class Order implements Serializable, IDiscountable
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2345501089755051123L;
 	private int orderId;
 	private OrderDelivery deliveryDetails;
 	private String greetingCard;
@@ -38,6 +34,8 @@ public class Order implements Serializable, IDiscountable
 	// Demo only
 	private String orderDetails;
 	private HashSet<Discount> discounts;
+
+	private static final long serialVersionUID = -2345501089755051123L;
 
 	public Order()
 	{
@@ -200,6 +198,19 @@ public class Order implements Serializable, IDiscountable
 	public void setProducts(ArrayList<CartItem> products)
 	{
 		this.products = products;
+	}
+	
+	public void addProduct(CartItem product)
+	{
+		if(products.contains(product))
+		{
+			CartItem existingProduct = products.get(products.indexOf(product)); 
+			existingProduct.setQuantity(product.getQuantity() + existingProduct.getQuantity());
+		}
+		else
+		{			
+			this.products.add(product);
+		}
 	}
 
 	public User getCustomer()

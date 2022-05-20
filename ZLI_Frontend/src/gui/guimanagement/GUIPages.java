@@ -11,13 +11,14 @@ import gui.users.*;
 public enum GUIPages
 {
 	// TODO: Add all pages
-	Login("users/LoginPage.fxml", "Login"),
-	MainContainer("client/ClientUI.fxml", "Zerli G13"),
+	Login("client/login/LoginPage.fxml", "Login"),
+	MainContainer("client/main/MainView.fxml", "Zerli G13"),
 	StartupPage("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
 	Settings("client/SettingsPage.fxml", "Settings"),
 	Orders("orders/OrdersPage.fxml", "Orders"),
 	UpdateOrder("orders/OrderUpdatePage.fxml", "Update Order"), 
-	Loading("client/SettingsPage.fxml", "LOADING"); // TODO: Create loading page
+	Loading("client/main/LoadingPage.fxml", "LOADING"), 
+	CatalogPage("catalog/CatalogPage.fxml", "Catalog");
 
 	private final String fxmlFile;
 //	private final Class<? extends GUIController> controllerClass;

@@ -1,8 +1,9 @@
 package entities.users;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class Complaint
+public class Complaint implements Serializable
 {
 	private int complaintId;
 	private User customer;
@@ -12,6 +13,8 @@ public class Complaint
 	private String complaintResult;
 	private boolean wasHandled;
 	
+	private static final long serialVersionUID = 8137391902399453083L;
+
 	public Complaint(User customer, User customerServiceEmployee, String complaintDetails,
 			Instant submissionTime, String complaintResult)
 	{

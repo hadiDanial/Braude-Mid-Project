@@ -1,12 +1,15 @@
 package gui.reports;
 
 import enums.*;
+import gui.guimanagement.GUIController;
 
+import java.net.URL;
 import java.time.Instant;
+import java.util.ResourceBundle;
 
 import entities.other.*;
 
-public class ReportsPage
+public class ReportsPage extends GUIController
 {
 
 	/**
@@ -30,6 +33,11 @@ public class ReportsPage
 	{
 		// TODO - implement ReportsPage.compareReports
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
 	}
 
 }

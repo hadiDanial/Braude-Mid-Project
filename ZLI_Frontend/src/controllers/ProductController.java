@@ -1,9 +1,33 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import entities.products.*;
+import requests.Request;
+import requests.RequestType;
+import utility.IResponse;
 
 public class ProductController
 {
+	ArrayList<CatalogItem> catalog;
+
+	private static ProductController instance;
+	private UserController userController;
+
+	private ProductController()
+	{
+		catalog = new ArrayList<CatalogItem>();
+		userController = UserController.getInstance();
+	}
+
+	public static ProductController getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new ProductController();
+		}
+		return instance;
+	}
 
 	public boolean createProduct()
 	{
@@ -21,22 +45,39 @@ public class ProductController
 		throw new UnsupportedOperationException();
 	}
 
-	public Product[] getAllProducts()
+	public void getAllProducts(IResponse<ArrayList<CatalogItem>> response)
 	{
-		// TODO - implement ProductController.getAllProducts
-		throw new UnsupportedOperationException();
+		Request req = new Request(RequestType.GetAllProducts, null, userController.getLoggedInUser());
+		ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
 	}
 
-	public Item[] getAllItems()
+
+	private IResponse<ArrayList<CatalogItem>> executeResponseAndSaveCatalog(IResponse<ArrayList<CatalogItem>> response)
 	{
-		// TODO - implement ProductController.getAllItems
-		throw new UnsupportedOperationException();
+		return new IResponse<ArrayList<CatalogItem>>()
+		{
+
+			@Override
+			public void executeAfterResponse(Object message)
+			{
+				ProductController.getInstance().setCatalog((ArrayList<CatalogItem>)message);
+				response.executeAfterResponse(message);
+			}
+		};
 	}
 
-	public BaseProduct[] getEntireCatalog()
+	protected void setCatalog(ArrayList<CatalogItem> catalog)
 	{
-		// TODO - implement ProductController.getEntireCatalog
-		throw new UnsupportedOperationException();
+		this.catalog = catalog;
+	}
+
+	/**
+	 * Gets the catalog by branch
+	 */
+	public void getCatalogByBranch(int branchId, IResponse<ArrayList<CatalogItem>> response)
+	{
+		Request req = new Request(RequestType.GetCatalogByBranch, branchId, userController.getLoggedInUser());
+		ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
 	}
 
 	/**

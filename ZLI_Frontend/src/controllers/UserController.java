@@ -2,10 +2,30 @@ package controllers;
 
 import entities.users.User;
 import enums.*;
+import gui.guimanagement.GUIPages;
+import gui.guimanagement.SceneManager;
+import requests.Request;
+import requests.RequestType;
+import utility.IResponse;
 
 public class UserController
 {
+	public static UserController instance;
+	private User loggedInUser = null;
 
+	private UserController()
+	{
+		
+	}
+	
+	public static UserController getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new UserController();
+		}
+		return instance;
+	}
 	/**
 	 * 
 	 * @param user
@@ -32,31 +52,61 @@ public class UserController
 	 * @param userLogin
 	 * @param password
 	 */
-	public boolean login(String userLogin, String password)
+	public void login(String username, String password, IResponse<User> response)
 	{
-		// TODO - implement UserController.login
-		throw new UnsupportedOperationException();
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		Request req = new Request(RequestType.Login, user);
+		ClientController.getInstance().sendRequest(req, response);
 	}
 
 	/**
-	 * 
-	 * @param userId
 	 */
-	public boolean logout(int userId)
+	public void logout()
 	{
-		// TODO - implement UserController.logout
-		throw new UnsupportedOperationException();
+		if(isLoggedIn())			
+		{
+			Request req = new Request(RequestType.Logout, loggedInUser.getUserId());
+			ClientController.getInstance().sendRequest(req, null);
+		}
 	}
 
-	/**
-	 * 
-	 * @param userId
-	 * @param accountStatus
-	 */
-	public boolean setUserStatus(User userId, AccountStatus accountStatus)
+
+	public boolean setUserStatus(User user, AccountStatus accountStatus)
 	{
 		// TODO - implement UserController.setUserStatus
 		throw new UnsupportedOperationException();
 	}
+
+	public void openHomePage()
+	{
+		switch (loggedInUser.getRole())
+		{
+		case Customer:
+			SceneManager.loadNewScene(GUIPages.CatalogPage, true);
+			SceneManager.setHeaderButtonVisibility(true, true);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	public boolean isLoggedIn()
+	{
+		return loggedInUser != null;
+	}
+	
+	public User getLoggedInUser()
+	{
+		return loggedInUser;
+	}
+
+	public void setLoggedInUser(User loggedInUser)
+	{
+		this.loggedInUser = loggedInUser;
+	}
+
 
 }

@@ -1,11 +1,15 @@
-package gui.gui.catalog;
+package gui.catalog;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import gui.guimanagement.GUIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class CartProductElement {
+public class CartProductElement extends GUIController{
 
     @FXML
     private Label countNumLabel;
@@ -29,5 +33,10 @@ public class CartProductElement {
     void onDeleteBtn(ActionEvent event) {
 
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+	}
 
 }

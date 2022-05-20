@@ -1,11 +1,15 @@
 package entities.products;
 
-public class ItemInProduct
+import java.io.Serializable;
+
+public class ItemInProduct implements Serializable
 {
 	private Product product;
 	private BaseProduct item;
 	private int itemQuantityInProduct;
 	
+	private static final long serialVersionUID = 2077203177267906933L;
+
 	public ItemInProduct(Product product, BaseProduct item, int itemQuantityInProduct)
 	{
 		super();

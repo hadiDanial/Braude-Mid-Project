@@ -1,6 +1,8 @@
 package entities.other;
 
-public class Location
+import java.io.Serializable;
+
+public class Location implements Serializable
 {
 	private int locationId;
 	private String city;
@@ -8,6 +10,14 @@ public class Location
 	private String street;
 	private String building;
 	private String notes;
+	
+	private static final long serialVersionUID = -2568448348582449249L;
+
+	public Location()
+	{
+		super();
+	}
+
 	public Location(String city, int zipCode, String street, String building, String notes)
 	{
 		super();

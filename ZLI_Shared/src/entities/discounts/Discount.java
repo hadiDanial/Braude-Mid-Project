@@ -1,12 +1,13 @@
 package entities.discounts;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 
 import entities.products.CatalogItem;
 
-public abstract class Discount
+public abstract class Discount implements Serializable
 {
 	private int discountId;
 	private Instant discountStartDate, discountEndDate;
@@ -18,6 +19,8 @@ public abstract class Discount
 	public static final String PERCENTAGE_DISCRIMINATOR = "P";
 	public static final String VALUE_DISCRIMINATOR = "V";
 	
+	private static final long serialVersionUID = 4565344021091868423L;
+
 	public static final PercentageDiscount firstPurchaseDiscount = new PercentageDiscount(Instant.MIN, Instant.MAX, "First Purchase Discount", 0.1f);
 	public Discount(String discountType)
 	{
@@ -98,7 +101,23 @@ public abstract class Discount
 		return Instant.now().isAfter(getDiscountStartDate()) && Instant.now().isBefore(getDiscountEndDate());
 	}
 
+	public String getDiscountType()
+	{
+		return discountType;
+	}
 
+	public void setDiscountType(String discountType)
+	{
+		this.discountType = discountType;
+	}
+	public void addProduct(CatalogItem catalogItem)
+	{
+		products.add(catalogItem);
+	}
+	public void removeProduct(CatalogItem catalogItem)
+	{
+		products.remove(catalogItem);
+	}
 	@Override
 	public int hashCode()
 	{

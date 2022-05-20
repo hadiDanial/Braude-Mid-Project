@@ -6,12 +6,19 @@ import java.util.Stack;
 
 import client.ClientProperties;
 import controllers.ClientController;
-import gui.client.ClientUI;
+import gui.client.main.MainView;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -22,12 +29,14 @@ public class SceneManager
 {
 	private static Stage mainWindow;
 	private static Scene currentScene;
-	private static Pane root;
-	private static AnchorPane containerAnchorPane;
-	private static VBox contentVBox;
+	private static Pane root, mainViewPane;
+	private static VBox container;
+	private static HBox header;
 	private static Stack<HistoryState> history;
 	private static Stage loadingWindow;
-	
+	private static MenuButton userDropDown;
+	private static Button shoppingCartButton;
+
 	/**
 	 * Initialize the UI. This method should only be called <b>once!</b>
 	 * 
@@ -36,7 +45,7 @@ public class SceneManager
 	public static void initUI(Stage primaryStage)
 	{
 		root = new AnchorPane();
-		containerAnchorPane = new AnchorPane();
+		container = new VBox();
 		mainWindow = primaryStage;
 		history = new Stack<HistoryState>();
 
@@ -50,12 +59,17 @@ public class SceneManager
 		});
 
 		loadMainContainer();
-		loadNewScene(GUIPages.Orders, true);
+		loadNewScene(GUIPages.Login, true);
+//		loadAdditiveScene(GUIPages.Loading, true);
 		mainWindow.setHeight(ClientProperties.getClientHeight());
 		mainWindow.setWidth(ClientProperties.getClientWidth());
-//		mainWindow.setResizable(false);
-//		loadAdditiveScene(GUIPages.Orders, true, 0);
-//		loadAdditiveScene(GUIPages.UpdateOrder, true);
+		mainWindow.setMinWidth(800);
+		mainWindow.setMinHeight(600);
+		
+		// Dynamically resize content
+		ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> resizeAllContent();
+		mainWindow.widthProperty().addListener(stageSizeListener);
+		mainWindow.heightProperty().addListener(stageSizeListener);
 	}
 
 	/**
@@ -68,12 +82,20 @@ public class SceneManager
 		FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(pageToLoad.getFxmlFile()));
 		try
 		{
-			root = loader.load();
-			ClientUI clientUI = loader.getController();
-			containerAnchorPane = clientUI.getContent();
-			contentVBox = new VBox();
-			containerAnchorPane.getChildren().add(contentVBox);
+			root = new AnchorPane();
+			mainViewPane = loader.load();
+			root.getChildren().add(mainViewPane);
+			MainView mainViewController = loader.getController();
+			header = mainViewController.getHeader();
+			userDropDown = mainViewController.getUserDropDown();
+			shoppingCartButton = mainViewController.getShoppingCartButton();
+			container = mainViewController.getContent();
+			container.setAlignment(Pos.BASELINE_LEFT);
 			currentScene = new Scene(root);
+			mainViewPane.setPrefWidth(ClientProperties.getClientWidth());
+			mainViewPane.setPrefHeight(ClientProperties.getClientHeight());
+			container.setPrefWidth(ClientProperties.getClientWidth());
+			container.setPrefHeight(ClientProperties.getClientHeight());
 			mainWindow.setTitle(pageToLoad.getPageTitle());
 			mainWindow.setScene(currentScene);
 			mainWindow.show();
@@ -99,10 +121,13 @@ public class SceneManager
 			if (pageToLoad != GUIPages.MainContainer)
 			{
 				Pane loadedContent = loader.load();
-				contentVBox.getChildren().clear();
-				contentVBox.getChildren().add(loadedContent);
+				container.getChildren().clear();
+				container.getChildren().add(loadedContent);
 				guiController = loader.getController();
 				setupGUIController(guiController, loadedContent);
+				setContentWidth(loadedContent, true, true);
+				setContentHeight(loadedContent, true, true);
+
 				if (saveToHistory)
 				{
 					HistoryState state = new HistoryState(guiController, false, pageToLoad);
@@ -141,7 +166,7 @@ public class SceneManager
 				HistoryState state = new HistoryState(guiController, true, pageToLoad);
 				history.push(state);
 			}
-			contentVBox.getChildren().add(toAdd);
+			container.getChildren().add(toAdd);
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -149,6 +174,70 @@ public class SceneManager
 		return guiController;
 	}
 
+	
+	/**
+	 * Dynamically resize content.
+	 */
+	private static void resizeAllContent()
+	{
+		mainViewPane.setPrefWidth(mainWindow.getWidth());
+		mainViewPane.setPrefHeight(mainWindow.getHeight());
+		mainViewPane.setMaxWidth(mainWindow.getWidth());
+		mainViewPane.setMaxHeight(mainWindow.getHeight());
+		setContentWidth(mainViewPane, true, true);		
+		setContentWidth(container, true, true);
+		setContentHeight(mainViewPane, true, true);		
+		setContentHeight(container, false, false);
+		ObservableList<Node> children = container.getChildren();
+		for(Node child : children)
+		{
+			setContentWidth((Pane)child, false, true);
+			setContentHeight((Pane) child, false, true);					
+		}
+	}
+	
+
+	/**
+	 * Dynamically set the pane's height
+	 * @param loadedContent Pane that needs to be resized
+	 * @param setMaxSize Use the maximum size or leave a margin?
+	 * @param useWindowWidth Use the window height or the view pane height?
+	 */
+	public static void setContentHeight(Pane loadedContent, boolean setMaxSize, boolean useWindowSize) 
+	{
+		double parentHeight = (useWindowSize ? mainWindow.getHeight() : mainViewPane.getHeight());
+		double headerHeight =  header.getHeight();
+		double height = parentHeight * (setMaxSize ? 1 : ClientProperties.getDefaultPercentageOfParent()) - headerHeight;
+		loadedContent.setMaxHeight(height);
+		loadedContent.setPrefHeight(height);
+		loadedContent.setMinHeight(height * 0.5);
+		double offset = (parentHeight - height - headerHeight) / 2;
+		AnchorPane.setTopAnchor(loadedContent, offset);
+		AnchorPane.setBottomAnchor(loadedContent, offset);
+	}
+	
+	/**
+	 * Dynamically set the pane's width
+	 * @param loadedContent Pane that needs to be resized
+	 * @param setMaxSize Use the maximum size or leave a margin?
+	 * @param useWindowSize Use the window width or the view pane width?
+	 */
+	public static void setContentWidth(Pane loadedContent, boolean setMaxSize, boolean useWindowSize)
+	{
+		double parentWidth = (useWindowSize ? mainWindow.getWidth() : mainViewPane.getWidth());
+		double width = parentWidth * (setMaxSize ? 1 : ClientProperties.getDefaultPercentageOfParent());
+		loadedContent.setPrefWidth(width);
+		loadedContent.setMinWidth(width * 0.5);
+		double offset = (parentWidth - width) / 2;
+		AnchorPane.setLeftAnchor(loadedContent, offset);
+		AnchorPane.setRightAnchor(loadedContent, offset);
+	}
+	
+	/**
+	 * Setup the GUIController root, scene, and stage.
+	 * @param guiController
+	 * @param root
+	 */
 	private static void setupGUIController(GUIController guiController, Parent root)
 	{
 		guiController.setRoot(root);
@@ -169,7 +258,7 @@ public class SceneManager
 			HistoryState state = history.peek();
 			if (state.isAdditivelyLoaded())
 			{
-				contentVBox.getChildren().remove(state.getGuiController().getRoot());
+				container.getChildren().remove(state.getGuiController().getRoot());
 			} else
 			{
 				reloadScene(state);
@@ -183,10 +272,13 @@ public class SceneManager
 		}
 	}
 
+	/**
+	 * Reload a history state.
+	 */
 	private static void reloadScene(HistoryState state)
 	{
-		contentVBox.getChildren().clear();
-		contentVBox.getChildren().add(state.getGuiController().getRoot());
+		container.getChildren().clear();
+		container.getChildren().add(state.getGuiController().getRoot());
 	}
 
 	/**
@@ -230,12 +322,24 @@ public class SceneManager
 	{
 		loadingWindow = loadModalWindow(GUIPages.Loading);
 	}
+
 	public static void closeLoadingWindow()
 	{
-		if(loadingWindow != null)
+		if (loadingWindow != null)
 		{
 			loadingWindow.close();
 			loadingWindow = null;
 		}
+	}
+	
+	/**
+	 * Set whether the user drop down and the shopping cart buttons will be visible.
+	 */
+	public static void setHeaderButtonVisibility(boolean showUserDropDown, boolean showShoppingCartButton)
+	{
+		userDropDown.setVisible(showUserDropDown);
+		shoppingCartButton.setVisible(showShoppingCartButton);
+		userDropDown.setDisable(!showUserDropDown);
+		shoppingCartButton.setDisable(!showShoppingCartButton);
 	}
 }

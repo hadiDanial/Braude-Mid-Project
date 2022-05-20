@@ -12,52 +12,45 @@ public class OrderController
 {
 	private static OrderController instance;
 	private ClientController clientController;
-	
-	private OrderController() {
+	private UserController userController;
+	private Order order;
+
+	private OrderController()
+	{
 		clientController = ClientController.getInstance();
+		userController = UserController.getInstance();
 	}
-	
+
 	public static OrderController getInstance()
 	{
-		if(instance == null)
+		if (instance == null)
 		{
 			instance = new OrderController();
 		}
 		return instance;
 	}
-	
 
 	public void getAllOrders(IResponse<ArrayList<Order>> response)
 	{
-		Request request = new Request(RequestType.GetAllOrders, null);
+		Request request = new Request(RequestType.GetAllOrders, null, userController.getLoggedInUser());
 		clientController.sendRequest(request, response);
 	}
-	
+
 	public void updateOrder(IResponse<Boolean> response, Order updatedOrder)
 	{
-		Request request = new Request(RequestType.UpdateOrder, updatedOrder);
+		Request request = new Request(RequestType.UpdateOrder, updatedOrder, userController.getLoggedInUser());
 		clientController.sendRequest(request, response);
 	}
 
-	
-	/**
-	 * 
-	 * @param product
-	 */
-	public boolean addProductToOrder(Product product)
+	public void addCatalogItemToOrder(CatalogItem catalogItem, int quantity)
 	{
-		// TODO - implement OrderController.addProductToOrder
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param item
-	 */
-	public boolean addItemToOrder(Item item)
-	{
-		// TODO - implement OrderController.addItemToOrder
-		throw new UnsupportedOperationException();
+		if (order == null)
+			order = new Order();
+		CartItem cartItem = new CartItem();
+		cartItem.setCatalogItem(catalogItem);
+		cartItem.setQuantity(quantity);
+		order.addProduct(cartItem);
+		order.setBranch(catalogItem.getBranch());
 	}
 
 	public void addOrderDetails()
@@ -66,10 +59,13 @@ public class OrderController
 		throw new UnsupportedOperationException();
 	}
 
-	public void sendOrderToServer()
+	public void sendOrderToServer(IResponse<Boolean> response)
 	{
-		// TODO - implement OrderController.sendOrderToServer
-		throw new UnsupportedOperationException();
+		if (order == null)
+			response.executeAfterResponse(false);
+		order.setCustomer(userController.getLoggedInUser());
+		Request req = new Request(RequestType.CreateOrder, order, order.getCustomer());
+		clientController.sendRequest(req, response);
 	}
 
 	/**
