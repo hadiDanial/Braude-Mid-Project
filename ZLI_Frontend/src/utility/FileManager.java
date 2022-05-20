@@ -77,4 +77,8 @@ public class FileManager
 	{
 		return readFile(chooseFile(FileType.Image));
 	}
+	public static byte[] choosePDFFile()
+	{
+		return readFile(chooseFile(FileType.PDF));
+	}
 }
