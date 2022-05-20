@@ -57,7 +57,41 @@ public class SurveyController
 	 * @param user
 	 * @param answers
 	 */
-	public boolean addSurveyAnswers(Survey survey, User user, SurveyAnswers answers)
+	public void addSurveyAnswers(Survey survey, SurveyAnswers answers)
+	{
+		survey.setAnswers(answers);
+	}
+
+	/**
+	 * 
+	 * @param survey
+	 * @param user
+	 * @param answers
+	 */
+	public Survey getSurveyById(int surveyId)
+	{
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param survey
+	 * @param user
+	 * @param answers
+	 */
+	public boolean getSurveyByDate(Instant surveyDate)
+	{
+		// TODO - implement SurveyController.addSurveyAnswers
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param survey
+	 * @param user
+	 * @param answers
+	 */
+	public boolean getSurveyByBranch(Survey survey, User user, SurveyAnswers answers)
 	{
 		// TODO - implement SurveyController.addSurveyAnswers
 		throw new UnsupportedOperationException();
