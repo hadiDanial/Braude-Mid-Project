@@ -25,7 +25,12 @@ public class Client extends AbstractClient
 	protected void handleMessageFromServer(Object message)
 	{
 		awaitResponse = false;
-		if (response != null)
+		if(message instanceof Exception)
+		{
+			System.out.println(((Exception)message).getMessage());
+			response = null;
+		}
+		else if (response != null)
 		{
 			response.executeAfterResponse(message);
 			response = null;
