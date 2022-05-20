@@ -1,10 +1,15 @@
 package controllers;
 
+import java.sql.Blob;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import database.DatabaseConnection;
+import database.IObjectToPreparedStatementParameters;
 import database.Tables;
 import entities.other.Branch;
 import entities.products.BaseProduct;
@@ -14,6 +19,7 @@ import entities.products.Product;
 import enums.ColorEnum;
 import enums.ItemType;
 import enums.ProductType;
+import requests.UpdateEntityRequest;
 
 public class ProductController
 {
@@ -35,9 +41,43 @@ public class ProductController
 	}
 
 	/**
-	 * Gets the entire catalog
+	 * Add a new product to the database.
 	 * 
+	 * @param newProduct Product to add.
+	 * @return True if product was successfully added to the database.
+	 */
+	public boolean addProduct(BaseProduct newProduct)
+	{
+		String[] columns = Arrays.copyOfRange(Tables.allProductsColumnNames, 1,
+				Tables.allProductsColumnNames.length - 1);
+		int res = databaseConnection.insertAndReturnGeneratedId(Tables.ALL_PRODUCTS_TABLE_NAME, columns,
+				convertBaseProductToPS(newProduct));
+		if (res == -1)
+			return false;
+		return true;
+	}
+
+	/**
+	 * Update base product.
+	 * 
+	 * @param updateRequest UpdateEntityRequest<BaseProduct> containing the id and
+	 *                      updated properties of the base product.
 	 * @return
+	 */
+	public boolean updateBaseProduct(UpdateEntityRequest<BaseProduct> updateRequest)
+	{
+		// String conditionFieldName, String conditionValue, String tableName,
+		// ArrayList<String> keys, IObjectToPreparedStatementParameters<T> objToPS
+		int id = updateRequest.getEntityId();
+		List<String> keys = Arrays
+				.asList(Arrays.copyOfRange(Tables.allProductsColumnNames, 0, Tables.allProductsColumnNames.length - 1));
+		return databaseConnection.updateAllMatchingCondition(Tables.allProductsColumnNames[0], id + "",
+				Tables.ALL_PRODUCTS_TABLE_NAME, (ArrayList<String>) keys,
+				convertBaseProductToPS(updateRequest.getUpdatedEntity()));
+	}
+
+	/**
+	 * Gets the entire catalog.
 	 */
 	public ArrayList<CatalogItem> getAllProducts()
 	{
@@ -46,9 +86,7 @@ public class ProductController
 	}
 
 	/**
-	 * Gets the catalog by branch
-	 * 
-	 * @return
+	 * Gets the catalog by branch.
 	 */
 	public ArrayList<CatalogItem> getCatalogByBranch(int branchId)
 	{
@@ -62,6 +100,13 @@ public class ProductController
 		return convertRSToCatalogItemArray(rs, branch);
 	}
 
+	/**
+	 * Convert ResultSet to CatalogItem array
+	 * 
+	 * @param rs     ResultSet containing CatalogItem records.
+	 * @param branch The branch of the catalog.
+	 * @return List of CatalogItem contained in the ResultSet.
+	 */
 	public ArrayList<CatalogItem> convertRSToCatalogItemArray(ResultSet rs, Branch branch)
 	{
 		ArrayList<CatalogItem> products = new ArrayList<CatalogItem>();
@@ -88,10 +133,20 @@ public class ProductController
 		}
 	}
 
-	public BaseProduct convertRSToBaseProduct(ResultSet rs, boolean closeRS)
+	/**
+	 * Convert a ResultSet to a BaseProduct.
+	 * 
+	 * @param rs             ResultSet containing a base product.
+	 * @param isSingleRecord Should the resultSet be closed after we're done?
+	 * @return BaseProduct generated from the ResultSet
+	 */
+	public BaseProduct convertRSToBaseProduct(ResultSet rs, boolean isSingleRecord)
 	{
 		try
 		{
+			if (isSingleRecord)
+				if (!rs.next())
+					return null;
 			if (rs.getString("productOrItem").equals(BaseProduct.ITEM_DISCRIMINATOR))
 			{
 				Item item = new Item();
@@ -101,7 +156,7 @@ public class ProductController
 				item.setImage(rs.getBytes("image"));
 				item.setItemType(ItemType.valueOf(rs.getString("type")));
 				item.setPrimaryColor(ColorEnum.valueOf(rs.getString("primaryColor")));
-				if (closeRS)
+				if (isSingleRecord)
 					rs.close();
 				return item;
 			} else
@@ -112,7 +167,7 @@ public class ProductController
 				product.setPrice(rs.getFloat("price"));
 				product.setImage(rs.getBytes("image"));
 				product.setProductType(ProductType.valueOf(rs.getString("type")));
-				if (closeRS)
+				if (isSingleRecord)
 					rs.close();
 				return product;
 			}
@@ -123,4 +178,33 @@ public class ProductController
 		}
 	}
 
+	private IObjectToPreparedStatementParameters<BaseProduct> convertBaseProductToPS(BaseProduct newProduct)
+	{
+		return new IObjectToPreparedStatementParameters<BaseProduct>()
+		{
+
+			@Override
+			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+			{
+				// { "catalogId", "productName", "price", "image", "type", "primaryColor",
+				// "productOrItem" };
+				statementToPrepare.setString(1, newProduct.getProductName());
+				statementToPrepare.setFloat(2, newProduct.getPrice());
+				Blob blob = databaseConnection.createBlob();
+				blob.setBytes(1, newProduct.getImage());
+				statementToPrepare.setBlob(3, blob);
+				if (newProduct.isProduct())
+				{
+					statementToPrepare.setString(4, ((Product) newProduct).getProductType().name());
+					statementToPrepare.setString(5, ColorEnum.None.name());
+					statementToPrepare.setString(6, BaseProduct.PRODUCT_DISCRIMINATOR);
+				} else
+				{
+					statementToPrepare.setString(4, ((Item) newProduct).getItemType().name());
+					statementToPrepare.setString(5, ((Item) newProduct).getPrimaryColor().name());
+					statementToPrepare.setString(6, BaseProduct.ITEM_DISCRIMINATOR);
+				}
+			}
+		};
+	}
 }

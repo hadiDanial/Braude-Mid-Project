@@ -21,7 +21,11 @@ public class Tables
 	{ "orderId", "recipientName", "recipientPhoneNumber", "locationId", "delivered" };
 
 	public static final String ORDERS_DISCOUNTS_TABLE_NAME = "Orders_Discounts";
+	
 	public static final String ALL_PRODUCTS_TABLE_NAME = "Catalog";
+	public static final String[] allProductsColumnNames = 
+		{ "catalogId", "productName", "price", "image", "type", "primaryColor", "productOrItem" };
+	
 	public static final String PRODUCTS_IN_BRANCH_TABLE_NAME = "CatalogItemInBranch";
 
 	public static final String LOCATIONS_TABLE_NAME = "Locations";
