@@ -1,7 +1,9 @@
 package server;
 
+import controllers.DiscountController;
 import controllers.OrderController;
 import controllers.UserController;
+import entities.discounts.Discount;
 import entities.users.Order;
 import entities.users.User;
 import requests.Request;
@@ -29,8 +31,18 @@ public class MessageParser {
             	// Message = User Id
             	return UserController.getInstance().logout((Integer) req.getMessage());
             }
+            case CreateDiscount: {
+                return DiscountController.getInstance().createDiscount((Discount)req.getMessage());
+            }
+            case GetAllDiscounts: {
+                return DiscountController.getInstance().getAllDiscounts();
+            }
             default:
                 break;
+            case AddProductsDiscount: {
+                DiscountController.getInstance().addProductsDiscount((Discount)req.getMessage());
+            }
+             
         }
         return new Object();
     }
