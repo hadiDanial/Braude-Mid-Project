@@ -2,12 +2,10 @@ package gui.guimanagement;
 
 import java.io.IOException;
 import java.util.EmptyStackException;
-import java.util.Iterator;
 import java.util.Stack;
 
 import client.ClientProperties;
 import controllers.ClientController;
-import gui.client.ClientUI;
 import gui.client.main.MainView;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
@@ -20,11 +18,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -34,8 +34,7 @@ public class SceneManager
 	private static Stage mainWindow;
 	private static Scene currentScene;
 	private static Pane root, mainViewPane;
-	private static StackPane container;
-	private static VBox contentVBox;
+	private static VBox container;
 	private static HBox header;
 	private static Stack<HistoryState> history;
 	private static Stage loadingWindow;
@@ -50,8 +49,7 @@ public class SceneManager
 	public static void initUI(Stage primaryStage)
 	{
 		root = new AnchorPane();
-		container = new StackPane();
-		contentVBox = new VBox();
+		container = new VBox();
 		mainWindow = primaryStage;
 		history = new Stack<HistoryState>();
 
@@ -69,13 +67,11 @@ public class SceneManager
 //		loadAdditiveScene(GUIPages.Loading, true);
 		mainWindow.setHeight(ClientProperties.getClientHeight());
 		mainWindow.setWidth(ClientProperties.getClientWidth());
+		mainWindow.setMinWidth(800);
+		mainWindow.setMinHeight(600);
 		ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> resizeAllContent();
 		mainWindow.widthProperty().addListener(stageSizeListener);
-
-//		mainWindow.heightProperty().addListener(stageSizeListener);
-//		mainWindow.setResizable(false);
-//		loadAdditiveScene(GUIPages.Orders, true);
-//		loadAdditiveScene(GUIPages.UpdateOrder, true);
+		mainWindow.heightProperty().addListener(stageSizeListener);
 	}
 
 	/**
@@ -96,10 +92,13 @@ public class SceneManager
 			userDropDown = mainViewController.getUserDropDown();
 			shoppingCartButton = mainViewController.getShoppingCartButton();
 			container = mainViewController.getContent();
-			container.getChildren().add(contentVBox);
+			container.setAlignment(Pos.BASELINE_LEFT);
 			currentScene = new Scene(root);
 			mainViewPane.setPrefWidth(ClientProperties.getClientWidth());
 			mainViewPane.setPrefHeight(ClientProperties.getClientHeight());
+			mainViewPane.setBackground(new Background(new BackgroundFill(new Color(1, 0, 0, 1), null, null)));
+			container.setBackground(new Background(new BackgroundFill(new Color(1, 0, 0, 1), null, null)));
+
 			container.setPrefWidth(ClientProperties.getClientWidth());
 			container.setPrefHeight(ClientProperties.getClientHeight());
 			mainWindow.setTitle(pageToLoad.getPageTitle());
@@ -127,11 +126,12 @@ public class SceneManager
 			if (pageToLoad != GUIPages.MainContainer)
 			{
 				Pane loadedContent = loader.load();
-				contentVBox.getChildren().clear();
-				contentVBox.getChildren().add(loadedContent);
+				container.getChildren().clear();
+				container.getChildren().add(loadedContent);
 				guiController = loader.getController();
 				setupGUIController(guiController, loadedContent);
-				setSceneWidth(loadedContent, false);
+				setContentWidth(loadedContent, true, true);
+				setContentHeight(loadedContent, true, true);
 
 				if (saveToHistory)
 				{
@@ -171,7 +171,7 @@ public class SceneManager
 				HistoryState state = new HistoryState(guiController, true, pageToLoad);
 				history.push(state);
 			}
-			contentVBox.getChildren().add(toAdd);
+			container.getChildren().add(toAdd);
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -182,35 +182,45 @@ public class SceneManager
 	private static void resizeAllContent()
 	{
 		// TODO: Doesn't work properly... fix later
-		ObservableList<Node> content = contentVBox.getChildren();
-		setSceneWidth(mainViewPane, true);		
-		setSceneWidth(container, false);
-		setSceneWidth(contentVBox, false);
-		for (Node node : content)
-		{
-			System.out.println(node);
-			setSceneWidth((Pane)node, false);
-		}
-		mainViewPane.setMinHeight(mainWindow.getHeight());
+		ObservableList<Node> content = container.getChildren();
+		mainViewPane.setPrefWidth(mainWindow.getWidth());
 		mainViewPane.setPrefHeight(mainWindow.getHeight());
-		contentVBox.setPrefHeight(mainWindow.getHeight());
-		container.setMinHeight(Region.USE_PREF_SIZE);
-		container.setPrefHeight(mainViewPane.getHeight() - header.getHeight());
+		mainViewPane.setMaxWidth(mainWindow.getWidth());
+		mainViewPane.setMaxHeight(mainWindow.getHeight());
+		setContentWidth(mainViewPane, true, true);		
+		setContentWidth(container, true, true);
+		setContentHeight(mainViewPane, true, true);		
+		setContentHeight(container, false, false);
+//		for (Node node : content)
+//		{
+//			setContentWidth((Pane)node, false, false);
+//			setContentHeight((Pane)node, false, false);
+//		}
 	}
-
+	
+	public static void setContentHeight(Pane loadedContent, boolean setMaxSize, boolean useWindowHeight) 
+	{
+		double parentHeight = (useWindowHeight ? mainWindow.getHeight() : mainViewPane.getHeight());
+		double headerHeight =  header.getHeight();
+		double height = parentHeight * (setMaxSize ? 1 : ClientProperties.getDefaultPercentageOfParent()) - headerHeight;
+		loadedContent.setMaxHeight(height);
+		loadedContent.setPrefHeight(height);
+		loadedContent.setMinHeight(height * 0.5);
+		double offset = (parentHeight - height - headerHeight) / 2;
+		AnchorPane.setTopAnchor(loadedContent, offset);
+		AnchorPane.setBottomAnchor(loadedContent, offset);
+	}
 	/**
 	 * @param loadedContent
 	 * @param setMaxSize 
 	 */
-	public static void setSceneWidth(Pane loadedContent, boolean setMaxSize)
+	public static void setContentWidth(Pane loadedContent, boolean setMaxSize, boolean useWindowWidth)
 	{
-		Pane parent = (Pane)loadedContent.getParent();
-		double parentWidth = parent.getWidth();
+		double parentWidth = (useWindowWidth ? mainWindow.getWidth() : mainViewPane.getWidth());
 		double width = parentWidth * (setMaxSize ? 1 : ClientProperties.getDefaultPercentageOfParent());
 		loadedContent.setPrefWidth(width);
 		loadedContent.setMinWidth(width * 0.5);
 		double offset = (parentWidth - width) / 2;
-//		System.out.println(left + " " + right);
 		AnchorPane.setLeftAnchor(loadedContent, offset);
 		AnchorPane.setRightAnchor(loadedContent, offset);
 	}
@@ -234,7 +244,7 @@ public class SceneManager
 			HistoryState state = history.peek();
 			if (state.isAdditivelyLoaded())
 			{
-				contentVBox.getChildren().remove(state.getGuiController().getRoot());
+				container.getChildren().remove(state.getGuiController().getRoot());
 			} else
 			{
 				reloadScene(state);
@@ -250,8 +260,8 @@ public class SceneManager
 
 	private static void reloadScene(HistoryState state)
 	{
-		contentVBox.getChildren().clear();
-		contentVBox.getChildren().add(state.getGuiController().getRoot());
+		container.getChildren().clear();
+		container.getChildren().add(state.getGuiController().getRoot());
 	}
 
 	/**

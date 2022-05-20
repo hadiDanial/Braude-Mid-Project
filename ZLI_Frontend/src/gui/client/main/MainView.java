@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainView extends Application implements Initializable {
@@ -32,7 +33,7 @@ public class MainView extends Application implements Initializable {
     private Button settingsBtn;
 
     @FXML
-    private StackPane centerView;
+    private VBox centerView;
 
     @FXML
     private HBox header;
@@ -79,7 +80,7 @@ public class MainView extends Application implements Initializable {
 		return root;
 	}
 
-	public StackPane getContent()
+	public VBox getContent()
 	{
 		return centerView;
 	}
