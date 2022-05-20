@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -484,6 +485,7 @@ public class DatabaseConnection
 	 * 
 	 * @param <T>                The class of the entity to update.
 	 * @param conditionFieldName Name of the field where the condition must match.
+	 * @param conditionValue	 Value of the condition.
 	 * @param tableName          Name of the table.
 	 * @param keys               Names of the fields that need updating.
 	 * @param objToPS            An instance of
@@ -491,10 +493,8 @@ public class DatabaseConnection
 	 *                           that describes how to insert the object data into a
 	 *                           <code>PreparedStatement</code>. <b>Must insert the
 	 *                           data in the same order as the objects in the
-	 *                           <code>keys</code> list. Last parameter must be the
-	 *                           condition for the <code>conditionFieldName</code>
-	 *                           column.</b>
-	 * @return
+	 *                           <code>keys</code> list.</b>
+	 * @return True if any records were updated.
 	 */
 	public <T> boolean updateAllMatchingCondition(String conditionFieldName, String conditionValue, String tableName,
 			ArrayList<String> keys, IObjectToPreparedStatementParameters<T> objToPS)
@@ -557,5 +557,15 @@ public class DatabaseConnection
 		{
 			sb.delete(sb.length() - 2, sb.length());
 		}
+	}
+
+	/**
+	 * Create a Blob object that can be used to insert to the database
+	 * @return new Blob object
+	 * @throws SQLException
+	 */
+	public Blob createBlob() throws SQLException
+	{
+		return conn.createBlob();
 	}
 }
