@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
@@ -14,8 +13,6 @@ import database.Tables;
 import entities.discounts.Discount;
 import entities.discounts.PercentageDiscount;
 import entities.discounts.ValueDiscount;
-import entities.products.CartItem;
-import entities.products.CatalogItem;
 import entities.users.Order;
 
 public class DiscountController
@@ -24,6 +21,7 @@ public class DiscountController
 	private final DatabaseConnection databaseConnection;
 	private static PercentageDiscount pd;
 	private static ValueDiscount vd;
+	private Order order;
 	float discountedOrder = 0;
 
 	private static final String ID_FIELD_NAME = "discountId";
@@ -104,8 +102,8 @@ public class DiscountController
 						@Override
 						public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
 						{
-//                            statementToPrepare.setFloat(1, Order.setTotalCost);
-							// how to get total cost pre discount ?
+	                       statementToPrepare.setFloat(1,order.getTotalCost());
+							
 						}
 					});
 		}
@@ -138,7 +136,6 @@ public class DiscountController
 			{
 				Discount discount = Discount(Discount.VALUE_DISCRIMINATOR);
 				discount.setDiscountId(rs.getInt(discountColumnNames[0]));
-				// about timstamps here ? java or sql wrapper
 				java.sql.Timestamp discountStartDate = rs.getTimestamp(discountColumnNames[1]);
 				discount.setDiscountStartDate(
 						(discountStartDate == null) ? null : discountStartDate.toInstant());
