@@ -1,9 +1,12 @@
 package controllers;
 
 import java.util.ArrayList;
-
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.*;
 import entities.surveys.*;
 import entities.users.User;
+import exceptions.SurveyException;
 import requests.Request;
 import requests.RequestType;
 import utility.IResponse;
@@ -25,25 +28,16 @@ public class SurveyController
 		}
 		return instance;
 	}
-	public void createSurvey(IResponse<ArrayList<Survey>> response)
-	{
-		//Request request = new Request(RequestType, null);
-		//clientController.sendRequest(request, response);
-	}
-	
-	public void updateOrder(IResponse<Boolean> response, Survey updatedOrder)
-	{
-		Request request = new Request(RequestType.UpdateOrder, updatedOrder);
-		clientController.sendRequest(request, response);
-	}
 	/**
 	 * 
 	 * @param survey
+	 * @throws SurveyException
 	 */
-	public boolean createSurvey(Survey survey)
+	public void createSurvey(IResponse<ArrayList<Survey>> response, SurveyAnswers answers, String[] questions) throws SurveyException
 	{
-		// TODO - implement SurveyController.createSurvey
-		throw new UnsupportedOperationException();
+		Survey survey = new Survey();
+		survey.setQuestions(questions);
+		survey.setAnswers(answers);
 	}
 
 	/**
