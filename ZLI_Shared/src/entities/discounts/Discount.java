@@ -110,8 +110,14 @@ public abstract class Discount implements Serializable
 	{
 		this.discountType = discountType;
 	}
-
-
+	public void addProduct(CatalogItem catalogItem)
+	{
+		products.add(catalogItem);
+	}
+	public void removeProduct(CatalogItem catalogItem)
+	{
+		products.remove(catalogItem);
+	}
 	@Override
 	public int hashCode()
 	{

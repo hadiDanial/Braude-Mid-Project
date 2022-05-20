@@ -3,6 +3,7 @@ package controllers;
 import java.util.ArrayList;
 
 import entities.discounts.Discount;
+import entities.products.CatalogItem;
 import requests.Request;
 import requests.RequestType;
 import utility.IResponse;
@@ -25,17 +26,37 @@ public class DiscountController {
 		}
 		return instance;
     }
-    public boolean createDiscount()
+    public void createDiscount(Discount discount,IResponse<Boolean> response)
 	{
-		throw new UnsupportedOperationException();
+		Request req=new Request(RequestType.CreateDiscount, discount,userController.getLoggedInUser());
+		ClientController.getInstance().sendRequest(req, response);
 	}
-    public Discount getProduct(int discountId)
+	public void addProductsToDiscount(ArrayList<CatalogItem> products,Discount discount,IResponse<Boolean> response)
 	{
-		throw new UnsupportedOperationException();
+		for(CatalogItem p : products)
+		{
+			discount.addProduct(p);
+		}
+		Request req=new Request(RequestType.AddProductsDiscount,discount,userController.getLoggedInUser());
+		ClientController.getInstance().sendRequest(req, response);
+	}
+	public void removeProductsToDiscount(ArrayList<CatalogItem> products,Discount discount,IResponse<Boolean> response)
+	{
+		for(CatalogItem p : products)
+		{
+			discount.removeProduct(p);
+		}
+		Request req=new Request(RequestType.RemoveProductsDiscount,discount,userController.getLoggedInUser());
+		ClientController.getInstance().sendRequest(req, response);
+	}
+	public void getDiscountsByBranch(int branchId,IResponse<ArrayList<Discount>> response)
+	{
+		Request req=new Request(RequestType.GetDiscountsByBranch, branchId,userController.getLoggedInUser());
+		ClientController.getInstance().sendRequest(req, response);
 	}
     public void getAllDiscounts(IResponse<ArrayList<Discount>> response)
 	{
-		Request req = new Request(RequestType.GetAllOrders, null, userController.getLoggedInUser());
+		Request req = new Request(RequestType.GetAllDiscounts, null, userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, executeResponseAndSaveDiscount(response));
 	}
     private IResponse<ArrayList<Discount>> executeResponseAndSaveDiscount(IResponse<ArrayList<Discount>> response)

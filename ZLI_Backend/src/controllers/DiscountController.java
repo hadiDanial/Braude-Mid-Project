@@ -50,9 +50,6 @@ public class DiscountController
 		int res = databaseConnection.insertToDatabase(Tables.DISCOUNTS_TABLE_NAME, Tables.discountsProductsColumnNames,
 				new IObjectToPreparedStatementParameters<Discount>()
 				{
-					// "discountId", "discountStartDate", "discountEndDate",
-					// "discountName", "discountValue", "discountType", "details", "orderDate",
-					// "deliveryDate" }
 					@Override
 					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
 					{
@@ -90,7 +87,7 @@ public class DiscountController
 		return res == 1;
 	}
 
-	public boolean removeDiscount(Discount discount, int userId)
+	/*public boolean removeDiscount(Discount discount, int userId)
 	{
 		if (discount.getDiscountEndDate().equals(Instant.now()))
 		{
@@ -108,7 +105,7 @@ public class DiscountController
 					});
 		}
 		return false;
-	}
+	}*/
 	
 	public Discount convertRSToDiscount(ResultSet rs)
 	{

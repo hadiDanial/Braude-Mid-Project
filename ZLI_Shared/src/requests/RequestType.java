@@ -1,5 +1,6 @@
 package requests;
 
+import entities.users.User;
 import enums.UserRole;
 
 public enum RequestType
@@ -11,16 +12,19 @@ public enum RequestType
 	
 	// Orders
 	CreateOrder(new UserRole[] {UserRole.BranchManager, UserRole.Customer}),
+	CreateDiscount(new UserRole[] {UserRole.ChainEmployee}),
 	GetOrder(new UserRole[] {UserRole.BranchManager, UserRole.BranchEmployee, UserRole.Customer}),
 	GetAllOrders(new UserRole[] {UserRole.CEO }),
 	GetPendingOrders(new UserRole[] {UserRole.BranchManager, UserRole.BranchEmployee}),
 	UpdateOrderStatus(new UserRole[] {UserRole.BranchManager, UserRole.DeliveryPerson, UserRole.BranchEmployee}),
 	UpdateOrder(new UserRole[] {UserRole.BranchManager }),
-	
+	GetAllDiscounts(new UserRole[]{UserRole.BranchManager, UserRole.Customer,UserRole.ChainEmployee}),
 	// Products/Catalog
+	RemoveProductsDiscount(new UserRole[] {UserRole.ChainEmployee}),
+	AddProductsDiscount(new UserRole[]{UserRole.ChainEmployee}),
 	GetAllProducts(UserRole.values()),
-	GetCatalogByBranch(UserRole.values());
-
+	GetCatalogByBranch(UserRole.values()),
+	GetDiscountsByBranch(UserRole.values());
 	private UserRole[] permittedRoles;
 
 	RequestType(UserRole[] permittedRoles)
