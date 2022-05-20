@@ -25,26 +25,10 @@ public class SurveyController
 		}
 		return instance;
 	}
-
-	private static SurveyController instance;
-	private ClientController clientController;
-		
-	private SurveyController() {
-		clientController = ClientController.getInstance();
-	}
-
-	public static SurveyController getInstance()
-	{
-		if(instance == null)
-		{
-			instance = new SurveyController();
-		}
-		return instance;
-	}
 	public void createSurvey(IResponse<ArrayList<Survey>> response)
 	{
-		Request request = new Request(RequestType.Survey, null);
-		clientController.sendRequest(request, response);
+		//Request request = new Request(RequestType, null);
+		//clientController.sendRequest(request, response);
 	}
 	
 	public void updateOrder(IResponse<Boolean> response, Survey updatedOrder)
