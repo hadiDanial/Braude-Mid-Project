@@ -20,6 +20,7 @@ public enum GUIPages
 	Loading("client/main/LoadingPage.fxml", "LOADING"), 
 	CatalogPage("catalog/CatalogPage.fxml", "Catalog"), 
 	ProductElement("catalog/ProductElement.fxml", ""),
+	Cart("catalog/Cart.fxml", "Cart"),
 	Error("client/error/ErrorPage.fxml", "Error"); 
 
 	private final String fxmlFile;

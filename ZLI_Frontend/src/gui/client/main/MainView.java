@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import controllers.ClientController;
 import gui.catalog.CatalogPage;
+import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -47,7 +48,7 @@ public class MainView extends Application implements Initializable {
     @FXML
     private void onShoppingCartBtn(ActionEvent event) {
         if (shoppingCartBtn.isVisible() && !shoppingCartBtn.isDisabled()) {
-            System.out.println("Shopping cart");
+            SceneManager.loadNewScene(GUIPages.Cart, true);
         }
     }
 

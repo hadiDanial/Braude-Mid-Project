@@ -3,6 +3,7 @@ package controllers;
 import java.util.ArrayList;
 
 import entities.products.*;
+import entities.users.Order;
 import requests.Request;
 import requests.RequestType;
 import utility.IResponse;
@@ -13,11 +14,13 @@ public class ProductController
 
 	private static ProductController instance;
 	private UserController userController;
-
+	private Order order;
+	
 	private ProductController()
 	{
 		catalog = new ArrayList<CatalogItem>();
 		userController = UserController.getInstance();
+		order = new Order();
 	}
 
 	public static ProductController getInstance()
@@ -126,6 +129,11 @@ public class ProductController
 
 	public void addProductToCart(CatalogItem product)
 	{
+		CartItem item = new CartItem();
+		item.setCatalogItem(product);
+		item.setQuantity(1);
+		order.addProduct(item);
+		System.out.println("Added product to order. Cart:\n" + order.getProducts());
 	}
 
 }
