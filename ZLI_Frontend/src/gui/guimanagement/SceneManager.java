@@ -2,6 +2,7 @@ package gui.guimanagement;
 
 import java.io.IOException;
 import java.util.EmptyStackException;
+import java.util.HashSet;
 import java.util.Stack;
 
 import client.ClientProperties;
@@ -18,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -32,11 +34,14 @@ public class SceneManager
 	private static Scene currentScene;
 	private static Pane root, mainViewPane;
 	private static VBox container;
+	private static ScrollPane scrollPane;
 	private static HBox header;
 	private static Stack<HistoryState> history;
 	private static Stage loadingWindow;
 	private static MenuButton userDropDown;
 	private static Button shoppingCartButton;
+	private static HashSet<Pane> panesToResize;
+	private static AnchorPane scrollPaneAnchor;
 
 	/**
 	 * Initialize the UI. This method should only be called <b>once!</b>
@@ -49,7 +54,8 @@ public class SceneManager
 		container = new VBox();
 		mainWindow = primaryStage;
 		history = new Stack<HistoryState>();
-
+		panesToResize = new HashSet<Pane>();
+		scrollPaneAnchor = new AnchorPane();
 		mainWindow.setOnCloseRequest(new EventHandler<WindowEvent>()
 		{
 			@Override
@@ -66,7 +72,7 @@ public class SceneManager
 		mainWindow.setWidth(ClientProperties.getClientWidth());
 		mainWindow.setMinWidth(800);
 		mainWindow.setMinHeight(600);
-		
+
 		// Dynamically resize content
 		ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> resizeAllContent();
 		mainWindow.widthProperty().addListener(stageSizeListener);
@@ -90,6 +96,7 @@ public class SceneManager
 			header = mainViewController.getHeader();
 			userDropDown = mainViewController.getUserDropDown();
 			shoppingCartButton = mainViewController.getShoppingCartButton();
+			scrollPane = mainViewController.getScrollPane();
 			container = mainViewController.getContent();
 			container.setAlignment(Pos.BASELINE_LEFT);
 			currentScene = new Scene(root);
@@ -128,7 +135,10 @@ public class SceneManager
 				setupGUIController(guiController, loadedContent);
 				setContentWidth(loadedContent, true, true);
 				setContentHeight(loadedContent, true, true);
-
+				scrollPane.setContent(null);
+				scrollPane.setStyle("-fx-min-height: 0%;");
+				scrollPane.setVisible(false);
+				panesToResize.clear();
 				if (saveToHistory)
 				{
 					HistoryState state = new HistoryState(guiController, false, pageToLoad);
@@ -168,6 +178,10 @@ public class SceneManager
 				history.push(state);
 			}
 			container.getChildren().add(toAdd);
+			container.setAlignment(Pos.CENTER);
+			scrollPane.setContent(container);
+			scrollPane.setStyle("-fx-min-height: 100%;");
+			scrollPane.setVisible(true);
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -175,75 +189,48 @@ public class SceneManager
 		return guiController;
 	}
 
-	
 	/**
-	 * Dynamically resize content.
+	 * Loads a page without replacing any existing content.
+	 * 
+	 * @param pageToLoad Page to load
+	 * @param parent     The Pane that the newly loaded scenes will be added to.
+	 * @return The GUIController of the loaded scene.
 	 */
-	private static void resizeAllContent()
+	public static GUIController loadAdditiveSceneFromParent(GUIPages pageToLoad, Pane parent)
 	{
-		mainViewPane.setPrefWidth(mainWindow.getWidth());
-		mainViewPane.setPrefHeight(mainWindow.getHeight());
-		mainViewPane.setMaxWidth(mainWindow.getWidth());
-		mainViewPane.setMaxHeight(mainWindow.getHeight());
-		setContentWidth(mainViewPane, true, true);		
-		setContentWidth(container, true, true);
-		setContentHeight(mainViewPane, true, true);		
-		setContentHeight(container, false, false);
-		ObservableList<Node> children = container.getChildren();
-		for(Node child : children)
+		FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(pageToLoad.getFxmlFile()));
+		GUIController guiController = null;
+		Parent toAdd;
+		try
 		{
-			setContentWidth((Pane)child, false, true);
-			setContentHeight((Pane) child, false, true);					
-		}
-	}
-	
+			toAdd = loader.load();
+			panesToResize.add(parent);
+			guiController = loader.getController();
+			setupGUIController(guiController, toAdd);
+			parent.getChildren().add(toAdd);
+			if (parent instanceof VBox)
+			{
+				((VBox) parent).setAlignment(Pos.CENTER);
+				((VBox) parent).setSpacing(20);
+			}
+			double width = mainWindow.getWidth();
+			parent.setPrefWidth(width);
+			panesToResize.remove(scrollPaneAnchor);
+			scrollPaneAnchor.getChildren().clear();
+			scrollPaneAnchor.getChildren().add(parent);
+			AnchorPane.setLeftAnchor(scrollPaneAnchor, 0.0);
+			AnchorPane.setRightAnchor(scrollPaneAnchor, 0.0);
+			panesToResize.add(scrollPaneAnchor);
+			scrollPane.setContent(scrollPaneAnchor);
+			scrollPane.setStyle("-fx-min-height: " + getHeightPercentWithoutHeader() + "%;");
+			parent.setMaxWidth(scrollPane.getPrefViewportWidth());
+			scrollPane.setVisible(true);
 
-	/**
-	 * Dynamically set the pane's height
-	 * @param loadedContent Pane that needs to be resized
-	 * @param setMaxSize Use the maximum size or leave a margin?
-	 * @param useWindowWidth Use the window height or the view pane height?
-	 */
-	public static void setContentHeight(Pane loadedContent, boolean setMaxSize, boolean useWindowSize) 
-	{
-		double parentHeight = (useWindowSize ? mainWindow.getHeight() : mainViewPane.getHeight());
-		double headerHeight =  header.getHeight();
-		double height = parentHeight * (setMaxSize ? 1 : ClientProperties.getDefaultPercentageOfParent()) - headerHeight;
-		loadedContent.setMaxHeight(height);
-		loadedContent.setPrefHeight(height);
-		loadedContent.setMinHeight(height * 0.5);
-		double offset = (parentHeight - height - headerHeight) / 2;
-		AnchorPane.setTopAnchor(loadedContent, offset);
-		AnchorPane.setBottomAnchor(loadedContent, offset);
-	}
-	
-	/**
-	 * Dynamically set the pane's width
-	 * @param loadedContent Pane that needs to be resized
-	 * @param setMaxSize Use the maximum size or leave a margin?
-	 * @param useWindowSize Use the window width or the view pane width?
-	 */
-	public static void setContentWidth(Pane loadedContent, boolean setMaxSize, boolean useWindowSize)
-	{
-		double parentWidth = (useWindowSize ? mainWindow.getWidth() : mainViewPane.getWidth());
-		double width = parentWidth * (setMaxSize ? 1 : ClientProperties.getDefaultPercentageOfParent());
-		loadedContent.setPrefWidth(width);
-		loadedContent.setMinWidth(width * 0.5);
-		double offset = (parentWidth - width) / 2;
-		AnchorPane.setLeftAnchor(loadedContent, offset);
-		AnchorPane.setRightAnchor(loadedContent, offset);
-	}
-	
-	/**
-	 * Setup the GUIController root, scene, and stage.
-	 * @param guiController
-	 * @param root
-	 */
-	private static void setupGUIController(GUIController guiController, Parent root)
-	{
-		guiController.setRoot(root);
-		guiController.setScene(currentScene);
-		guiController.setStage(mainWindow);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return guiController;
 	}
 
 	/**
@@ -301,7 +288,7 @@ public class SceneManager
 			pane = loader.load();
 			guiController = loader.getController();
 			guiController.setStage(modalWindow);
-			if(data != null)
+			if (data != null)
 				guiController.setData(data);
 			Scene scene = new Scene(pane);
 			modalWindow.setScene(scene);
@@ -334,7 +321,7 @@ public class SceneManager
 			loadingWindow = null;
 		}
 	}
-	
+
 	/**
 	 * Set whether the user drop down and the shopping cart buttons will be visible.
 	 */
@@ -350,7 +337,7 @@ public class SceneManager
 	{
 		Platform.runLater(new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
@@ -362,5 +349,140 @@ public class SceneManager
 	public static void clearHistory()
 	{
 		history.clear();
+	}
+	
+	
+	
+	
+	
+	//////////////////////
+	//  RESIZE CONTENT  //
+	//////////////////////
+	
+	
+	/**
+	 * Dynamically resize content.
+	 */
+	private static void resizeAllContent()
+	{
+		double windowHeight = mainWindow.getHeight();
+		double windowWidth = mainWindow.getWidth();
+		mainViewPane.setPrefWidth(windowWidth);
+		mainViewPane.setPrefHeight(windowHeight);
+		mainViewPane.setMaxWidth(windowWidth);
+		mainViewPane.setMaxHeight(windowHeight);
+		setContentWidth(mainViewPane, true, true);
+		setContentWidth(container, true, true);
+		setContentHeight(mainViewPane, true, true);
+		setContentHeight(container, false, false);
+		if (scrollPane.getContent() == null)
+			scrollPane.setStyle("-fx-min-height: 0%;");
+		else
+			scrollPane.setStyle("-fx-min-height: " + getHeightPercentWithoutHeader() + "%;");
+		scrollPane.setMinWidth(windowWidth);
+		scrollPane.setMaxWidth(windowWidth);
+		scrollPane.setPrefWidth(windowWidth);
+		scrollPane.setPrefViewportWidth(windowWidth);
+		scrollPaneAnchor.setMaxWidth(scrollPane.getPrefViewportWidth());
+		scrollPaneAnchor.setMinWidth(scrollPane.getPrefViewportWidth() - 20);
+		scrollPaneAnchor.setPrefWidth(scrollPane.getPrefViewportWidth() - 20);
+		ObservableList<Node> children = container.getChildren();
+		resizeChildren(children, true);
+		for (Pane p : panesToResize)
+		{
+			children = p.getChildren();
+			resizeChildren(children, false);
+		}
+	}
+
+	/**
+	 * Resize a list of nodes.
+	 * 
+	 * @param children     List of nodes to resize.
+	 * @param resizeHeight
+	 */
+	private static void resizeChildren(ObservableList<Node> children, boolean resizeHeight)
+	{
+		for (Node child : children)
+		{
+			setContentWidth((Pane) child, false, true);
+			if (resizeHeight)
+				setContentHeight((Pane) child, false, true);
+		}
+	}
+
+	/**
+	 * @return Height of the window minus the header and container as a percentage
+	 *         of the window height.
+	 */
+	private static double getHeightPercentWithoutHeader()
+	{
+		double height = mainWindow.getHeight();
+		return (height - header.getHeight() - container.getHeight()) / height;
+	}
+
+	/**
+	 * Calculate the height of the window minus the header, with an optional percentage.
+	 * @param setMaxSize
+	 * @param parentHeight
+	 * @param headerHeight
+	 * @return
+	 */
+	private static double calculateHeight(boolean setMaxSize, double parentHeight, double headerHeight)
+	{
+		double height = parentHeight * (setMaxSize ? 1 : ClientProperties.getDefaultPercentageOfParent())
+				- headerHeight;
+		return height;
+	}
+
+	/**
+	 * Dynamically set the pane's height
+	 * 
+	 * @param loadedContent  Pane that needs to be resized
+	 * @param setMaxSize     Use the maximum size or leave a margin?
+	 * @param useWindowWidth Use the window height or the view pane height?
+	 */
+	public static void setContentHeight(Pane loadedContent, boolean setMaxSize, boolean useWindowSize)
+	{
+		double parentHeight = (useWindowSize ? mainWindow.getHeight() : mainViewPane.getHeight());
+		double headerHeight = header.getHeight();
+		double height = calculateHeight(setMaxSize, parentHeight, headerHeight);
+		loadedContent.setMaxHeight(height);
+		loadedContent.setPrefHeight(height);
+		loadedContent.setMinHeight(height * 0.5);
+		double offset = (parentHeight - height - headerHeight) / 2;
+		AnchorPane.setTopAnchor(loadedContent, offset);
+		AnchorPane.setBottomAnchor(loadedContent, offset);
+	}
+
+	/**
+	 * Dynamically set the pane's width
+	 * 
+	 * @param loadedContent Pane that needs to be resized
+	 * @param setMaxSize    Use the maximum size or leave a margin?
+	 * @param useWindowSize Use the window width or the view pane width?
+	 */
+	public static void setContentWidth(Pane loadedContent, boolean setMaxSize, boolean useWindowSize)
+	{
+		double parentWidth = (useWindowSize ? mainWindow.getWidth() : mainViewPane.getWidth());
+		double width = parentWidth * (setMaxSize ? 1 : ClientProperties.getDefaultPercentageOfParent());
+		loadedContent.setPrefWidth(width);
+		loadedContent.setMinWidth(width * 0.5);
+		double offset = (parentWidth - width) / 2;
+		AnchorPane.setLeftAnchor(loadedContent, offset);
+		AnchorPane.setRightAnchor(loadedContent, offset);
+	}
+
+	/**
+	 * Setup the GUIController root, scene, and stage.
+	 * 
+	 * @param guiController
+	 * @param root
+	 */
+	private static void setupGUIController(GUIController guiController, Parent root)
+	{
+		guiController.setRoot(root);
+		guiController.setScene(currentScene);
+		guiController.setStage(mainWindow);
 	}
 }

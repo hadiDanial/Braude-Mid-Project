@@ -27,6 +27,7 @@ public abstract class FormController extends GUIController implements IEventList
 			if(!control.validateAll())
 			{
 				submissionButton.setDisable(true);
+				submissionButton.setFocusTraversable(true);
 				return false;
 			}
 		}

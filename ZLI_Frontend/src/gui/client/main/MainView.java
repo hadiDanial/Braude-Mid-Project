@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -34,9 +35,12 @@ public class MainView extends Application implements Initializable {
 
     @FXML
     private VBox centerView;
-
-    @FXML
+    
+	@FXML
     private HBox header;
+    
+    @FXML
+    private ScrollPane scrollPane;
     
 	private static AnchorPane root;
 
@@ -49,21 +53,11 @@ public class MainView extends Application implements Initializable {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("/gui/main/MainView.fxml"));
 		SceneManager.initUI(primaryStage);
-//
-//        Scene scene = new Scene(root);
-//        // scene.getStylesheets().add(getClass().getResource("/gui/ServerUI.css").toExternalForm());
-//        primaryStage.setTitle("Zerli");
-//        primaryStage.setScene(scene);
-//        primaryStage.setResizable(false);
-//
-//        primaryStage.show();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // centerView.getChildren().add(new CatalogPage().getRoot());
     }
 
     public static void main(String[] args) {
@@ -98,5 +92,10 @@ public class MainView extends Application implements Initializable {
 	public Button getShoppingCartButton()
 	{
 		return shoppingCartBtn;
+	}
+
+	public ScrollPane getScrollPane()
+	{
+		return scrollPane;
 	}
 }
