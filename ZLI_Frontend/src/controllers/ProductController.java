@@ -124,4 +124,8 @@ public class ProductController
 		throw new UnsupportedOperationException();
 	}
 
+	public void addProductToCart(CatalogItem product)
+	{
+	}
+
 }

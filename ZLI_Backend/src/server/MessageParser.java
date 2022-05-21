@@ -70,10 +70,14 @@ public class MessageParser {
             {
             	return ProductController.getInstance().updateBaseProduct((UpdateEntityRequest<BaseProduct>) req.getMessage());
             }
+            case GetAllProducts:
+            {
+            	return ProductController.getInstance().getAllProducts();
+            }
             default:
             	break;
         }
-        return new Object();
+        return null;
     }
 
     /**
