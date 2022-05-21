@@ -113,6 +113,7 @@ public class FileManager
 	 */
 	public static Image bytesToImage(byte[] imageBytes)
 	{
+		if(imageBytes == null) return null;
 		ByteArrayInputStream byteInputStream = new ByteArrayInputStream(imageBytes);
 		Image image = new Image(byteInputStream);
 		return image;
