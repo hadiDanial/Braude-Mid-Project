@@ -25,7 +25,7 @@ CREATE TABLE `Users`(`userId` INT primary key AUTO_INCREMENT, `username` varchar
 Update Users SET isLoggedIn=true, lastLoginDate=now() WHERE username='Hadi';
 
         
-CREATE TABLE `Catalog`(`catalogId` INT primary key AUTO_INCREMENT, `productName` varchar(256) NOT NULL, `price` float NOT NULL, `image` BLOB,
+CREATE TABLE `Catalog`(`catalogId` INT primary key AUTO_INCREMENT, `productName` varchar(256) NOT NULL, `price` float NOT NULL, `image` MEDIUMBLOB,
                        `type` varchar(50) NOT NULL, `primaryColor` varchar(20), `productOrItem` varchar(1) NOT NULL DEFAULT 'P');
                        
 CREATE TABLE `Items_In_Product`(`itemId` INT NOT NULL, `productId` INT NOT NULL, `itemQuantityInProduct` float NOT NULL, PRIMARY KEY (itemId, productId),
@@ -93,7 +93,7 @@ INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, 
 INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, `productOrItem`) VALUES ('Cactus', '199', 'FlowerPot', 'Green', 'P');
 INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, `productOrItem`) VALUES ('Bridal Flowers', '500', 'Bouquet', 'Red', 'P');
 INSERT INTO `zlig13`.`catalog` (`productName`, `price`, `type`, `primaryColor`, `productOrItem`) VALUES ('Lemon Sapling', '120', 'Seedling', 'None', 'I');
-INSERT INTO Users (username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('Hadi','bestpassword123','Hadi','Danial','hadi@gmail.com','05223113','CEO','Frozen');
+INSERT INTO Users (username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('Hadi','123','Hadi','Danial','hadi@gmail.com','05223113','Customer','Frozen');
 INSERT INTO Users (username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('Yosef','bestpassword456','Yosef','Awad','yosef@gmail.com','052231132','BranchManager','Active');
 
 INSERT INTO Locations (city, zipCode, street) VALUES ('Haifa', 1234, '123 Street');
