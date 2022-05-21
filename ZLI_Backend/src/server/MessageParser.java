@@ -85,6 +85,8 @@ public class MessageParser {
      */
 	private static void checkPermissions(RequestType type, User user) throws UnauthenticatedUserException, UnauthorizedRoleException
 	{
+		if(type == RequestType.Login) 
+			return;
 		if(type != RequestType.Login && user == null)
 			throw new UnauthenticatedUserException("Cannot use system without being authenticated.");
 		if(!type.isAuthorized(user.getRole()))

@@ -104,6 +104,7 @@ public class Server extends AbstractServer {
 			Request request;
 			if (msg instanceof Request) {
 				request = (Request) msg;
+				System.out.println("Message received: " + request.getRequestType() + " from " + client);
 				Object response = MessageParser.handleRequest(request);
 				sendToClient(response, client);
 			} else {
@@ -113,8 +114,7 @@ public class Server extends AbstractServer {
 
 		}
 
-		System.out.println("Message received: " + msg + " from " + client);
-		this.sendToAllClients(msg);
+
 	}
 
 	@Override
