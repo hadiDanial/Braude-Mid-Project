@@ -27,7 +27,9 @@ public class Client extends AbstractClient
 		awaitResponse = false;
 		if(message instanceof Exception)
 		{
-			System.out.println(((Exception)message).getMessage());
+			String messageString = ((Exception)message).getMessage();
+			System.out.println(messageString);
+			SceneManager.displayErrorMessage(messageString);
 			response = null;
 		}
 		else if (response != null)

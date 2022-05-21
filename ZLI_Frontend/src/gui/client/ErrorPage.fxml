@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<AnchorPane prefHeight="225.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.ErrorPage">
+   <children>
+      <Button id="OkBttn" fx:id="okBtn" alignment="CENTER" layoutX="142.0" layoutY="151.0" mnemonicParsing="false" onAction="#onBtnClick" prefHeight="31.0" prefWidth="67.0" text="Okay" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="142.0" />
+      <TextFlow layoutX="52.0" layoutY="25.0" prefHeight="100.0" prefWidth="247.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <Text fx:id="errorMessageText" strokeType="OUTSIDE" strokeWidth="0.0" text="Error!" />
+         </children>
+      </TextFlow>
+   </children>
+</AnchorPane>

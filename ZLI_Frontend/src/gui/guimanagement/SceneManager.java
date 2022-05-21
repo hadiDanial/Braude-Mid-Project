@@ -7,6 +7,7 @@ import java.util.Stack;
 import client.ClientProperties;
 import controllers.ClientController;
 import gui.client.main.MainView;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -287,7 +288,7 @@ public class SceneManager
 	 * 
 	 * @param pageToLoad Page to load.
 	 */
-	public static Stage loadModalWindow(GUIPages pageToLoad)
+	public static Stage loadModalWindow(GUIPages pageToLoad, Object data)
 	{
 		Stage modalWindow = new Stage();
 		GUIController guiController = null;
@@ -300,6 +301,8 @@ public class SceneManager
 			pane = loader.load();
 			guiController = loader.getController();
 			guiController.setStage(modalWindow);
+			if(data != null)
+				guiController.setData(data);
 			Scene scene = new Scene(pane);
 			modalWindow.setScene(scene);
 			modalWindow.show();
@@ -315,12 +318,12 @@ public class SceneManager
 	 */
 	public static void openSettingsPage()
 	{
-		loadModalWindow(GUIPages.Settings);
+		loadModalWindow(GUIPages.Settings, null);
 	}
 
 	public static void openLoadingWindow()
 	{
-		loadingWindow = loadModalWindow(GUIPages.Loading);
+		loadingWindow = loadModalWindow(GUIPages.Loading, null);
 	}
 
 	public static void closeLoadingWindow()
@@ -341,5 +344,23 @@ public class SceneManager
 		shoppingCartButton.setVisible(showShoppingCartButton);
 		userDropDown.setDisable(!showUserDropDown);
 		shoppingCartButton.setDisable(!showShoppingCartButton);
+	}
+
+	public static void displayErrorMessage(String messageString)
+	{
+		Platform.runLater(new Runnable()
+		{
+			
+			@Override
+			public void run()
+			{
+				loadModalWindow(GUIPages.Error, messageString);
+			}
+		});
+	}
+
+	public static void clearHistory()
+	{
+		history.clear();
 	}
 }
