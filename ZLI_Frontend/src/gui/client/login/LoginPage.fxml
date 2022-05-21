@@ -8,47 +8,78 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #F5F5F5;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.login.LoginPage">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #F5F5F5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.login.LoginPage">
     <children>
       <HBox alignment="CENTER" style="-fx-background-color: #F5F5F5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER">
                <children>
-                    <VBox alignment="CENTER" style="-fx-background-color: #078082; -fx-background-radius: 15;">
+                  <StackPane>
                      <children>
-                        <Label text="Zerli" textFill="#e2d784">
-                           <font>
-                              <Font size="38.0" />
-                           </font>
-                        </Label>
-                        <Pane prefHeight="81.0" prefWidth="149.0" />
-                        <Label text="User Name" textFill="#e2d784">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="userNameInput" />
-                        <Pane layoutX="10.0" layoutY="394.0" prefHeight="18.0" prefWidth="149.0" />
-                        <Label text="Password" textFill="#e2d784">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <PasswordField fx:id="passwordInput" />
-                        <Pane layoutX="10.0" layoutY="270.0" prefHeight="33.0" prefWidth="149.0" />
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginBtn" style="-fx-background-color: #062C30;" text="Log in" textFill="#e2d784">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
+                          <VBox alignment="CENTER" style="-fx-background-color: #078082; -fx-background-radius: 15;">
+                           <children>
+                              <Label text="Zerli" textFill="#e2d784">
+                                 <font>
+                                    <Font size="38.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="50.0" prefWidth="187.0" />
+                              <Label text="User Name" textFill="#e2d784">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="usernameInput" />
+                              <Pane layoutX="50.0" layoutY="85.0" prefHeight="50.0" prefWidth="187.0" />
+                              <Label text="Password" textFill="#e2d784">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <PasswordField fx:id="passwordInput" />
+                              <Pane layoutX="10.0" layoutY="270.0" prefHeight="80.0" prefWidth="149.0" />
+                              <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginBtn" style="-fx-background-color: #062C30;" text="Log in" textFill="#e2d784">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets bottom="40.0" left="40.0" right="40.0" top="20.0" />
+                           </padding>
+                          </VBox>
+                        <VBox maxWidth="-Infinity" mouseTransparent="true" prefWidth="200.0" spacing="40.0">
+                           <children>
+                              <TextFlow maxHeight="70.0" maxWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="usernameErrorLabel" alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="59.0" prefWidth="200.0" text="Username error" textFill="#ff7205">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </TextFlow>
+                              <TextFlow maxWidth="-Infinity" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="passwordErrorLabel" focusTraversable="false" maxWidth="-Infinity" prefWidth="200.0" text="Password error" textFill="#ff7205">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </TextFlow>
+                           </children>
+                           <StackPane.margin>
+                              <Insets top="190.0" />
+                           </StackPane.margin>
+                        </VBox>
                      </children>
-                     <padding>
-                        <Insets bottom="40.0" left="40.0" right="40.0" top="20.0" />
-                     </padding>
-                    </VBox>
+                  </StackPane>
                </children>
             </VBox>
          </children>
