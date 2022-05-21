@@ -19,7 +19,7 @@ public enum GUIPages
 	UpdateOrder("orders/OrderUpdatePage.fxml", "Update Order"), 
 	Loading("client/main/LoadingPage.fxml", "LOADING"), 
 	CatalogPage("catalog/CatalogPage.fxml", "Catalog"), 
-	Error("client/ErrorPage.fxml", "Error");
+	Error("client/error/ErrorPage.fxml", "Error");
 
 	private final String fxmlFile;
 //	private final Class<? extends GUIController> controllerClass;
