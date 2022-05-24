@@ -32,22 +32,29 @@ public class BranchController
 	public Branch getBranchById(int branchId)
 	{
 		ResultSet rs = databaseConnection.getByID(branchId, Tables.BRANCHES_TABLE_NAME, ID_FIELD_NAME);
-		return convertRSToBranch(rs);
+		Branch branch = convertRSToBranch(rs, true);
+		Location location = LocationController.getInstance().getLocationById(branch.getLocation().getLocationId());
+		branch.setLocation(location);
+		return branch;
 	}
 
-	public static Branch convertRSToBranch(ResultSet rs)
+	public static Branch convertRSToBranch(ResultSet rs, boolean useNext)
 	{
 		String[] columnNames = Tables.branchColumnNames;
 		try
 		{
+			if(useNext)
+				if(!rs.next())
+					return null;
 			Branch branch = new Branch();
 			branch.setBranchId(rs.getInt(columnNames[0]));
 			User user = new User();
 			user.setUserId(rs.getInt(columnNames[1]));
 			branch.setManager(user);
 			branch.setBranchName(rs.getString(columnNames[2]));
-			Location location = LocationController.convertRSToLocation(rs, false, false);
-			branch.setLocation(location);
+			Location loc = new Location();
+			loc.setLocationId(rs.getInt(columnNames[3]));
+			branch.setLocation(loc);
 			return branch;
 			
 		} catch (SQLException e)

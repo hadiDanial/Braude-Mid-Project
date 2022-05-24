@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import database.DatabaseConnection;
+import database.Tables;
 import entities.other.Location;
 
 public class LocationController
@@ -48,5 +49,12 @@ public class LocationController
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public Location getLocationById(int locationId)
+	{
+		ResultSet rs = databaseConnection.getByID(locationId, Tables.LOCATIONS_TABLE_NAME, ID_FIELD_NAME);
+		Location location = LocationController.convertRSToLocation(rs, true, true);
+		return location;
 	}
 }
