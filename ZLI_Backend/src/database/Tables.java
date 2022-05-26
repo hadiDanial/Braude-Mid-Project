@@ -46,4 +46,8 @@ public class Tables
 	public static final String[] branchColumnNames =
 	{ "branchId", "managerId", "branchName", "locationId" };
 
+	public static final String COMPLAINTS_TABLE_NAME="Complaints";
+	public static final String[] complaintsColumnNames= 
+	{ "complaintId", "customerId", "customerServiceEmployeeId", "complaintDetails", "complaintResult", "submissionTime", "wasHandled"};
+
 }
