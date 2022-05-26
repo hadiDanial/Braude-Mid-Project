@@ -133,10 +133,10 @@ public class SceneManager
 				container.getChildren().add(loadedContent);
 				guiController = loader.getController();
 				setupGUIController(guiController, loadedContent);
-				setContentWidth(loadedContent, true, true);
-				setContentHeight(loadedContent, true, true);
+//				setContentWidth(loadedContent, true, true);
+//				setContentHeight(loadedContent, true, true);
+//				scrollPane.setStyle("-fx-min-height: 0%;");
 				scrollPane.setContent(null);
-				scrollPane.setStyle("-fx-min-height: 0%;");
 				scrollPane.setVisible(false);
 				panesToResize.clear();
 				if (saveToHistory)
@@ -144,6 +144,7 @@ public class SceneManager
 					HistoryState state = new HistoryState(guiController, false, pageToLoad);
 					history.push(state);
 				}
+				resizeAllContent();
 				mainWindow.setTitle(pageToLoad.getPageTitle());
 				mainWindow.show();
 			}
@@ -180,7 +181,8 @@ public class SceneManager
 			container.getChildren().add(toAdd);
 			container.setAlignment(Pos.CENTER);
 			scrollPane.setContent(container);
-			scrollPane.setStyle("-fx-min-height: 100%;");
+//			scrollPane.setStyle("-fx-min-height: 100%;");
+			resizeAllContent();
 			scrollPane.setVisible(true);
 		} catch (IOException e)
 		{
@@ -222,9 +224,10 @@ public class SceneManager
 			AnchorPane.setRightAnchor(scrollPaneAnchor, 0.0);
 			panesToResize.add(scrollPaneAnchor);
 			scrollPane.setContent(scrollPaneAnchor);
-			scrollPane.setStyle("-fx-min-height: " + getHeightPercentWithoutHeader() + "%;");
+//			scrollPane.setStyle("-fx-min-height: " + getHeightPercentWithoutHeader() + "%;");
 			parent.setMaxWidth(scrollPane.getPrefViewportWidth());
 			scrollPane.setVisible(true);
+			resizeAllContent();
 
 		} catch (IOException e)
 		{
@@ -378,7 +381,12 @@ public class SceneManager
 		if (scrollPane.getContent() == null)
 			scrollPane.setStyle("-fx-min-height: 0%;");
 		else
-			scrollPane.setStyle("-fx-min-height: " + getHeightPercentWithoutHeader() + "%;");
+		{
+			scrollPane.setStyle("-fx-min-height: 100%;");
+			double h = windowHeight - header.getHeight();
+			scrollPane.setPrefViewportHeight(h);
+			scrollPane.setMinViewportHeight(h);
+		}
 		scrollPane.setMinWidth(windowWidth);
 		scrollPane.setMaxWidth(windowWidth);
 		scrollPane.setPrefWidth(windowWidth);
@@ -418,7 +426,9 @@ public class SceneManager
 	private static double getHeightPercentWithoutHeader()
 	{
 		double height = mainWindow.getHeight();
-		return (height - header.getHeight() - container.getHeight()) / height;
+		height = (height - header.getHeight()) / height;
+		System.out.println(height);
+		return height;
 	}
 
 	/**
