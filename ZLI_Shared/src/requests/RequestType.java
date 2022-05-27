@@ -24,7 +24,10 @@ public enum RequestType
 	AddProductsDiscount(new UserRole[]{UserRole.ChainEmployee}),
 	GetAllProducts(UserRole.values()),
 	GetCatalogByBranch(UserRole.values()),
-	GetDiscountsByBranch(UserRole.values());
+	GetDiscountsByBranch(UserRole.values()),
+	CreateSurvey(new UserRole[]{UserRole.BranchManager}),
+	GetSurveyByBranch(new UserRole[]{UserRole.BranchManager}),
+	GetSurveyById(new UserRole[]{UserRole.BranchManager});
 	private UserRole[] permittedRoles;
 
 	RequestType(UserRole[] permittedRoles)

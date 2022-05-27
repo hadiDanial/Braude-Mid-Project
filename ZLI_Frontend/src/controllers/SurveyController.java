@@ -15,6 +15,7 @@ public class SurveyController
 {
 	private static SurveyController instance;
 	private ClientController clientController;
+	private UserController userController;
 	
 	private SurveyController() {
 		clientController = ClientController.getInstance();
@@ -33,11 +34,13 @@ public class SurveyController
 	 * @param survey
 	 * @throws SurveyException
 	 */
-	public void createSurvey(IResponse<ArrayList<Survey>> response, SurveyAnswers answers, String[] questions) throws SurveyException
+	public void createSurvey(IResponse<ArrayList<Survey>> response, ArrayList<SurveyAnswers> answers, String[] questions) throws SurveyException
 	{
 		Survey survey = new Survey();
 		survey.setQuestions(questions);
 		survey.setAnswers(answers);
+		Request req=new Request(RequestType.CreateSurvey,survey,userController.getLoggedInUser());
+		ClientController.getInstance().sendRequest(req, response);
 	}
 
 	/**
@@ -54,10 +57,9 @@ public class SurveyController
 	/**
 	 * 
 	 * @param survey
-	 * @param user
 	 * @param answers
 	 */
-	public void addSurveyAnswers(Survey survey, SurveyAnswers answers)
+	public void addSurveyAnswers(Survey survey, ArrayList<SurveyAnswers> answers)
 	{
 		survey.setAnswers(answers);
 	}
@@ -68,9 +70,10 @@ public class SurveyController
 	 * @param user
 	 * @param answers
 	 */
-	public Survey getSurveyById(int surveyId)
+	public void getSurveyById(IResponse<ArrayList<Survey>> response, int surveyId)
 	{
-		return null;
+		Request req=new Request(RequestType.GetSurveyById, surveyId,userController.getLoggedInUser());
+		ClientController.getInstance().sendRequest(req, response);
 	}
 
 	/**
@@ -91,9 +94,9 @@ public class SurveyController
 	 * @param user
 	 * @param answers
 	 */
-	public boolean getSurveyByBranch(Survey survey, User user, SurveyAnswers answers)
+	public void getSurveyByBranch(int branchId,IResponse<ArrayList<Survey>> response)
 	{
-		// TODO - implement SurveyController.addSurveyAnswers
-		throw new UnsupportedOperationException();
+		Request req=new Request(RequestType.GetSurveyByBranch, branchId,userController.getLoggedInUser());
+		ClientController.getInstance().sendRequest(req, response);
 	}
 }
