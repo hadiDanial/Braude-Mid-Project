@@ -37,6 +37,7 @@ public class ClientController
 
 	public <T> void sendRequest(Request request, IResponse<T> response)
 	{
+		request.setUser(UserController.getInstance().getLoggedInUser());
 		client.handleMessageFromClientUI(request, response);
 	}
 	public void reconnectToServer()

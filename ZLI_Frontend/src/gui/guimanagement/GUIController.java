@@ -12,7 +12,8 @@ public abstract class GUIController implements Initializable
 	protected Scene scene;
 	protected Stage stage;
 	protected Parent root;
-
+	protected Object data;
+	
 	public void setScene(Scene scene)
 	{
 		this.scene = scene;
@@ -31,5 +32,15 @@ public abstract class GUIController implements Initializable
 	public Parent getRoot()
 	{
 		return root;
+	}
+
+	public Object getData()
+	{
+		return data;
+	}
+
+	public void setData(Object data)
+	{
+		this.data = data;
 	}
 }

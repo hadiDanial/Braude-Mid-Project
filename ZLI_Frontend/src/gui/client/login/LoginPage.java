@@ -1,46 +1,57 @@
 package gui.client.login;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
-
 import controllers.UserController;
 import entities.users.User;
+import gui.guimanagement.FormController;
 import gui.guimanagement.GUIController;
+import gui.guimanagement.SceneManager;
+import gui.guimanagement.forms.EmptyValidator;
+import gui.guimanagement.forms.InputLengthValidator;
+import gui.guimanagement.forms.ValidatedControl;
+import gui.guimanagement.forms.Validator;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import utility.IResponse;
 
-public class LoginPage extends GUIController
+public class LoginPage extends FormController
 {
 	@FXML
-	private TextField userNameInput;
+	private TextField usernameInput;
 
 	@FXML
 	private PasswordField passwordInput;
 
 	@FXML
-	private Button loginButton;
+	private Label usernameErrorLabel;
 
-	ValidationSupport validationSupport;
+	@FXML
+	private Label passwordErrorLabel;
+
+	@FXML
+	private Button loginButton;
 
 	@FXML
 	void onLoginBtn(ActionEvent event)
 	{
-		String username = userNameInput.getText();
+		String username = usernameInput.getText();
 		String password = passwordInput.getText();
 		if (username == null || password == null || username.isEmpty() || password.isEmpty())
 		{
 			return;
 		}
-		UserController.getInstance().login(userNameInput.getText(), passwordInput.getText(), new IResponse<User>()
+		UserController.getInstance().login(usernameInput.getText(), passwordInput.getText(), new IResponse<User>()
 		{
 
 			@Override
@@ -50,7 +61,7 @@ public class LoginPage extends GUIController
 				UserController.getInstance().setLoggedInUser(loggedInUser);
 				Platform.runLater(new Runnable()
 				{
-					
+
 					@Override
 					public void run()
 					{
@@ -58,6 +69,10 @@ public class LoginPage extends GUIController
 						if (message != null)
 						{
 							UserController.getInstance().openHomePage();
+						}
+						else
+						{
+							SceneManager.displayErrorMessage("Failed to login...");
 						}
 					}
 				});
@@ -68,24 +83,14 @@ public class LoginPage extends GUIController
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-//		int minLength = 3, maxLength = 20;
-//		Predicate<TextField> inputLengthPredicate = new Predicate<TextField>()
-//		{
-//			
-//			@Override
-//			public boolean test(TextField t)
-//			{
-//				int length = t.getText().length();
-//				return length <= maxLength && length >= minLength;
-//			}
-//		}; 
-//		String lengthErrorMessage = "must be between " + minLength + " and " + maxLength + " characters.";
-//		validationSupport = new ValidationSupport();
-//		validationSupport.registerValidator(userNameInput, Validator.createEmptyValidator("Please enter a username."));
-////		validationSupport.registerValidator(userNameInput, Validator.createPredicateValidator(inputLengthPredicate, "Username " + lengthErrorMessage));
-//		validationSupport.registerValidator(passwordInput, Validator.createEmptyValidator("Please enter a password."));
-////		validationSupport.registerValidator(passwordInput, Validator.createPredicateValidator(inputLengthPredicate, "Password " + lengthErrorMessage));
-//		loginButton.disableProperty().bind(userNameInput.textProperty().isEmpty().or(passwordInput.textProperty().isEmpty()));
+		int minLength = 3, maxLength = 20;
+		List<Validator> usernameValidators = Arrays.asList(new Validator[]
+		{ new InputLengthValidator(usernameInput, usernameErrorLabel, true, "Username", this, minLength, maxLength) });
+		ValidatedControl usernameChecker = new ValidatedControl(usernameInput, usernameValidators);
+		List<Validator> passwordValidators = Arrays.asList(new Validator[]
+		{ new InputLengthValidator(passwordInput, passwordErrorLabel, true, "Password", this, minLength, maxLength) });
+		ValidatedControl passwordChecker = new ValidatedControl(passwordInput, passwordValidators);
+		setupFormController(Arrays.asList(new ValidatedControl[] {usernameChecker, passwordChecker}), loginButton);
 	}
 
 }

@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" style="-fx-background-radius: 35; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.catalog.ProductElement">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-radius: 35; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.catalog.ProductElement">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="900.0" style="-fx-padding: 15 35 15 15" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
-            <Pane prefHeight="200.0" prefWidth="60.0" />
+            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Pane prefHeight="200.0" prefWidth="82.0" />
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="294.0" spacing="20.0">
                <children>
                   <Label fx:id="nameLabel" text="Name" textFill="#062c30" VBox.vgrow="ALWAYS">
@@ -50,7 +50,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Pane prefHeight="200.0" prefWidth="81.0" HBox.hgrow="ALWAYS" />
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#onAddToCart" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 50; -fx-background-color: #05595B;">
                <graphic>
                   <MaterialDesignIconView fill="#e2d784" glyphName="CART_PLUS" size="28" />

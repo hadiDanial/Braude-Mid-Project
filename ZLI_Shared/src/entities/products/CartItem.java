@@ -72,6 +72,12 @@ public class CartItem implements Serializable
 		return Objects.equals(catalogItem, other.catalogItem);
 	}
 
+	@Override
+	public String toString()
+	{
+		return "CartItem [catalogItem=" + catalogItem + ", quantity=" + quantity + "]";
+	}
 
+	
 	
 }

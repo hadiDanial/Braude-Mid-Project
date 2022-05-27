@@ -3,7 +3,6 @@ package entities.products;
 import java.io.Serializable;
 import java.util.Arrays;
 
-
 public abstract class BaseProduct implements Serializable
 {
 	private int productId;
@@ -12,14 +11,14 @@ public abstract class BaseProduct implements Serializable
 	private byte[] image;
 
 	private static final String NEW_PRODUCT_NAME = "New Product";
-	
+
 	public static final String PRODUCT_DISCRIMINATOR = "P";
 	public static final String ITEM_DISCRIMINATOR = "I";
-	
+
 	protected final String type;
 
 	private static final long serialVersionUID = 5869287229470090229L;
-	
+
 	public BaseProduct(String productName, float price, byte[] image, String type)
 	{
 		super();
@@ -28,7 +27,7 @@ public abstract class BaseProduct implements Serializable
 		this.image = image;
 		this.type = type;
 	}
-	
+
 	public BaseProduct(String type)
 	{
 		super();
@@ -40,27 +39,27 @@ public abstract class BaseProduct implements Serializable
 	{
 		return productId;
 	}
-	
+
 	public void setProductId(int productId)
 	{
 		this.productId = productId;
 	}
-	
+
 	public String getProductName()
 	{
 		return productName;
 	}
-	
+
 	public void setProductName(String productName)
 	{
 		this.productName = productName;
 	}
-	
+
 	public float getPrice()
 	{
 		return price;
 	}
-	
+
 	public void setPrice(float price)
 	{
 		this.price = price;
@@ -70,22 +69,22 @@ public abstract class BaseProduct implements Serializable
 	{
 		return image;
 	}
-	
+
 	public void setImage(byte[] image)
 	{
 		this.image = image;
 	}
-	
+
 	public boolean isProduct()
 	{
 		return type.equals(PRODUCT_DISCRIMINATOR);
 	}
-	
+
 	public boolean isItem()
 	{
 		return type.equals(ITEM_DISCRIMINATOR);
 	}
-	
+
 	@Override
 	public int hashCode()
 	{
@@ -95,6 +94,7 @@ public abstract class BaseProduct implements Serializable
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -123,12 +123,12 @@ public abstract class BaseProduct implements Serializable
 		}
 		return true;
 	}
+
 	@Override
 	public String toString()
 	{
-		return (isProduct() ? "Product" : "Item") + " [productId=" + productId + ", productName=" + productName + ", price="
-				+ price + ", image=" + Arrays.toString(image) + "]";
+		return (isProduct() ? "Product" : "Item") + " [productId=" + productId + ", productName=" + productName
+				+ ", price=" + price + "]";
 	}
 
-	
 }

@@ -69,6 +69,7 @@ public class UserController
 		{
 			Request req = new Request(RequestType.Logout, loggedInUser.getUserId());
 			ClientController.getInstance().sendRequest(req, null);
+			loggedInUser = null;
 		}
 	}
 
