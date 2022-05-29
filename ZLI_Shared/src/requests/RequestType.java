@@ -28,6 +28,7 @@ public enum RequestType
 	CreateSurvey(new UserRole[]{UserRole.BranchManager}),
 	GetSurveyByBranch(new UserRole[]{UserRole.BranchManager}),
 	GetSurveyById(new UserRole[]{UserRole.BranchManager}),
+	GetSurveyByDate(new UserRole[]{UserRole.BranchManager}),
 	
 	// Discounts
 	GetAllDiscounts(new UserRole[]{ UserRole.BranchManager, UserRole.Customer,UserRole.ChainEmployee }),
