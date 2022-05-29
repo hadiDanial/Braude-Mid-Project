@@ -39,7 +39,7 @@ public class SurveyController
 		Survey survey = new Survey();
 		survey.setQuestions(questions);
 		survey.setAnswers(answers);
-		Request req=new Request(RequestType.CreateSurvey,survey,userController.getLoggedInUser());
+		Request req=new Request(RequestType.CreateSurvey,survey);
 		ClientController.getInstance().sendRequest(req, response);
 	}
 
@@ -72,7 +72,7 @@ public class SurveyController
 	 */
 	public void getSurveyById(IResponse<ArrayList<Survey>> response, int surveyId)
 	{
-		Request req=new Request(RequestType.GetSurveyById, surveyId,userController.getLoggedInUser());
+		Request req=new Request(RequestType.GetSurveyById, surveyId);
 		ClientController.getInstance().sendRequest(req, response);
 	}
 
@@ -82,10 +82,10 @@ public class SurveyController
 	 * @param user
 	 * @param answers
 	 */
-	public boolean getSurveyByDate(Instant surveyDate)
+	public void getSurveyByDate(IResponse<ArrayList<Survey>> response,Instant surveyDate)
 	{
-		// TODO - implement SurveyController.addSurveyAnswers
-		throw new UnsupportedOperationException();
+		Request req=new Request(RequestType.GetSurveyByDate, surveyDate);
+		ClientController.getInstance().sendRequest(req, response);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class SurveyController
 	 */
 	public void getSurveyByBranch(int branchId,IResponse<ArrayList<Survey>> response)
 	{
-		Request req=new Request(RequestType.GetSurveyByBranch, branchId,userController.getLoggedInUser());
+		Request req=new Request(RequestType.GetSurveyByBranch, branchId);
 		ClientController.getInstance().sendRequest(req, response);
 	}
 }
