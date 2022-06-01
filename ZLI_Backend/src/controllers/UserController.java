@@ -142,4 +142,10 @@ public class UserController
 			return null;
 		}
 	}
+
+	public void updateUserCredit(User user, float totalCost)
+	{
+		user.setCredit(user.getCredit()+totalCost);
+		databaseConnection.updateById(user.getUserId(), ID_FIELD_NAME, Tables.USERS_TABLE_NAME, "credit",user.getCredit()+"");
+	}
 }
