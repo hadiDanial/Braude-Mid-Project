@@ -1,8 +1,11 @@
 package gui.guimanagement.forms;
 
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import utility.IEventListener;
 
 public abstract class Validator
@@ -29,6 +32,18 @@ public abstract class Validator
 				checkValidation();
 			});
 		}
+		control.setOnKeyPressed(new EventHandler<KeyEvent>()
+		{
+
+			@Override
+			public void handle(KeyEvent event)
+			{
+				KeyCode code = event.getCode();
+				if (code.equals(KeyCode.TAB) || code.equals(KeyCode.ENTER)) {
+					checkValidation();
+		        }
+			}
+		});
 	}
 
 	/**
