@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 
 import controllers.UserController;
 import entities.users.User;
+import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.FormController;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.SceneManager;
@@ -91,6 +92,7 @@ public class LoginPage extends FormController
 		{ new InputLengthValidator(passwordInput, passwordErrorLabel, true, "Password", this, minLength, maxLength) });
 		ValidatedControl passwordChecker = new ValidatedControl(passwordInput, passwordValidators);
 		setupFormController(Arrays.asList(new ValidatedControl[] {usernameChecker, passwordChecker}), loginButton);
+		ButtonAnimator.addButtonAnimations(loginButton);
 	}
 
 }
