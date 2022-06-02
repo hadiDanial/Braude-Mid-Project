@@ -21,7 +21,7 @@ public class OrderController
 		userController = UserController.getInstance();
 	}
 
-	public static OrderController getInstance()
+	public static synchronized OrderController getInstance()
 	{
 		if (instance == null)
 		{
@@ -66,15 +66,5 @@ public class OrderController
 		order.setCustomer(userController.getLoggedInUser());
 		Request req = new Request(RequestType.CreateOrder, order, order.getCustomer());
 		clientController.sendRequest(req, response);
-	}
-
-	/**
-	 * 
-	 * @param baseProduct
-	 */
-	public boolean isProduct(BaseProduct baseProduct)
-	{
-		// TODO - implement OrderController.isProduct
-		throw new UnsupportedOperationException();
 	}
 }
