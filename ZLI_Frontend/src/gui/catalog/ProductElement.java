@@ -3,6 +3,7 @@ package gui.catalog;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controllers.OrderController;
 import controllers.ProductController;
 import entities.products.BaseProduct;
 import entities.products.CatalogItem;
@@ -38,7 +39,7 @@ public class ProductElement extends GUIController
 	@FXML
 	void onAddToCart(ActionEvent event)
 	{
-		ProductController.getInstance().addProductToCart(product);
+		OrderController.getInstance().addProductToCart(product);
 	}
 
 	@Override

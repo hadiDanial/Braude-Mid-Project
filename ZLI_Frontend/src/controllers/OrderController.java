@@ -20,6 +20,7 @@ public class OrderController
 	{
 		clientController = ClientController.getInstance();
 		userController = UserController.getInstance();
+		order = new Order();
 	}
 
 	public static synchronized OrderController getInstance()
@@ -74,5 +75,20 @@ public class OrderController
 		order.setOrderStatus(OrderStatus.Delivered);
 		Request request = new Request(RequestType.UpdateOrderStatus, order);
 		clientController.sendRequest(request, response);
+	}
+	
+	public void addProductToCart(CatalogItem product)
+	{
+		CartItem item = new CartItem();
+		item.setCatalogItem(product);
+		item.setQuantity(1);
+		item.setOrder(order);
+		order.addProduct(item);
+		System.out.println("Added product to order. Cart:\n" + order.getProducts());
+	}
+
+	public Order getOrder()
+	{
+		return order;
 	}
 }

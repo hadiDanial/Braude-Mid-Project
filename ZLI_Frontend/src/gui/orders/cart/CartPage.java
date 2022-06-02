@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import controllers.OrderController;
 import controllers.ProductController;
 import entities.products.CartItem;
 import entities.users.Order;
@@ -29,7 +30,8 @@ import javafx.scene.layout.Pane;
 public class CartPage extends GUIController
 {
 	private ProductController productController;
-
+	private OrderController orderController;
+	
 	@FXML
 	private Label totalPriceLabel;
 
@@ -67,7 +69,8 @@ public class CartPage extends GUIController
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		productController = ProductController.getInstance();
-		order = productController.getOrder();
+		orderController = OrderController.getInstance();
+		order = orderController.getOrder();
 		cartList.setAll((ArrayList<CartItem>) order.getProducts());
 		TableColumn<CartProductElement, CartProductElement> cartColumn = new TableColumn<>("Cart");
 		cartColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
