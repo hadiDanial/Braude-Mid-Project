@@ -12,9 +12,11 @@ import database.IObjectToPreparedStatementParameters;
 import database.Tables;
 import entities.users.Complaint;
 import entities.users.Order;
+import entities.users.User;
 
 public class ComplaintController {
     private final DatabaseConnection databaseConnection;
+	private UserController userController;
     private static ComplaintController instance;
 	private static final String ID_FIELD_NAME = "complaintId";
 
@@ -57,7 +59,7 @@ public class ComplaintController {
                 }
 		return res == 1;
     }
-    private void notifyEmployee(Complaint complaint)
+    public void notifyEmployee(Complaint complaint)
     {
         int customerServiceEmployeeId = complaint.getCustomerServiceEmployee().getUserId();
 		ArrayList<String> tables = (ArrayList<String>) Arrays.asList(new String[]
@@ -68,7 +70,7 @@ public class ComplaintController {
 		try
 		{
 			String content = "Hello, " + rs.getString("firstName") + "!<br>"
-					+ "A new complaint has been filed, please review it soon!<br>" + "Complaint #"
+					+ "A new complaint has been filed, please review it within 24 hours !<br>" + "Complaint #"
 					+ complaint.getComplaintId();
 			EmailManager.sendEmail("New Complaint", content, rs.getString("emailAddress"));
 		} catch (SQLException e)
@@ -76,10 +78,9 @@ public class ComplaintController {
 			e.printStackTrace();
 		}
     }
-    public void handleComplaint(Complaint complaint) 
+    public void handleComplaint(Complaint complaint, Boolean type, User user) 
     {
-        Boolean handle=false;
-        int customerId = complaint.getCustomer().getUserId();
+		int customerId = complaint.getCustomer().getUserId();
 		ArrayList<String> tables = (ArrayList<String>) Arrays.asList(new String[]
 		{ Tables.COMPLAINTS_TABLE_NAME, Tables.USERS_TABLE_NAME });
 		String selects = "complaints.customerId, users.emailAddress, users.firstName";
@@ -87,23 +88,24 @@ public class ComplaintController {
 		ResultSet rs = databaseConnection.getJoinResultsWithSelectColumns(tables, selects, conditions);
         try
         {
+		 if(type==true){
          String content = "Hello, " + rs.getString("firstName") + "!<br>"
          + "your complaint #"+ complaint.getComplaintId() +" has been handled, here's our response to it: <br>"
          + complaint.getComplaintResult()+ "<br>" + "Have a nice day! <br>";
          EmailManager.sendEmail("Complaint Response", content, rs.getString("emailAddress"));
-
-     databaseConnection.insertToDatabase(Tables.COMPLAINTS_TABLE_NAME, Tables.complaintsColumnNames, new IObjectToPreparedStatementParameters<Complaint>()
-      {
-        @Override
-        public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
-        {
-            statementToPrepare.setBoolean(1,complaint.isWasHandled());
-        }               
-      });
-      //need to check if complaint is handled either after sending response or before
-    }catch (Exception e)
+		 }
+		 if(type==false)
 		{
-			e.printStackTrace();
+		 notifyEmployee(complaint);
+		 String content = "Hello, " + rs.getString("firstName") + "!<br>"
+         + "sorry for the inconvenience of not responding to your complaint #"+ complaint.getComplaintId() +", we are willing to compensate you for the trouble.<br>"
+         + user.getCredit()+ "<br>" + "Have a nice day! <br>";
+         EmailManager.sendEmail("Complaint Response", content, rs.getString("emailAddress"));
+		 userController.updateUserCredit(complaint.getCustomer(),user.getCredit());
 		}
-    }
+		}catch(Exception e)
+		{
+		e.printStackTrace();
+		}
+	}
 }
