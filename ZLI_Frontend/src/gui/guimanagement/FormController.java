@@ -17,7 +17,8 @@ public abstract class FormController extends GUIController implements IEventList
 	{
 		this.validatedControls = validatedControls;
 		this.submissionButton = submissionButton;
-		this.submissionButton.setDisable(true);
+		if(validatedControls != null)
+			this.submissionButton.setDisable(true);
 	}
 	
 	public boolean isValidForm()
