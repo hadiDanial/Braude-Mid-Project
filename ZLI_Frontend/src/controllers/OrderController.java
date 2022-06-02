@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entities.products.*;
 import entities.users.Order;
+import enums.OrderStatus;
 import requests.Request;
 import requests.RequestType;
 import utility.IResponse;
@@ -66,5 +67,12 @@ public class OrderController
 		order.setCustomer(userController.getLoggedInUser());
 		Request req = new Request(RequestType.CreateOrder, order, order.getCustomer());
 		clientController.sendRequest(req, response);
+	}
+
+	public void orderIsDelivered(IResponse<Boolean> response,Order order)
+	{
+		order.setOrderStatus(OrderStatus.Delivered);
+		Request request = new Request(RequestType.UpdateOrderStatus, order);
+		clientController.sendRequest(request, response);
 	}
 }

@@ -26,6 +26,7 @@ import enums.OrderStatus;
 public class OrderController
 {
 	private static OrderController instance;
+	private final UserController userController;
 	private final DatabaseConnection databaseConnection;
 	private final ProductController productController;
 	private static final String ID_FIELD_NAME = "orderId";
@@ -34,6 +35,7 @@ public class OrderController
 	{
 		databaseConnection = DatabaseConnection.getInstance();
 		productController = ProductController.getInstance();
+		userController = UserController.getInstance();
 	}
 
 	public static OrderController getInstance()
@@ -188,6 +190,10 @@ public class OrderController
 			if(orderStatus == OrderStatus.Delivered)
 			{
 				databaseConnection.updateById(order.getOrderId(), "orderId", Tables.DELIVERIES_TABLE_NAME, "delivered", "true");
+			}
+			if(orderStatus == OrderStatus.Canceled)
+			{
+				userController.updateUserCredit(order.getCustomer(),order.getTotalCost());
 			}
 		}
 		return res;
