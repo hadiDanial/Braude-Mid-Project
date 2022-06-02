@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import controllers.ClientController;
 import gui.catalog.CatalogPage;
+import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
 import javafx.application.Application;
@@ -24,51 +25,60 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MainView extends Application implements Initializable {
-    @FXML
-    private MenuButton userDropDown;
-
-    @FXML
-    private Button shoppingCartBtn;
-
-    @FXML
-    private Button settingsBtn;
-
-    @FXML
-    private VBox centerView;
-    
+public class MainView extends Application implements Initializable
+{
 	@FXML
-    private HBox header;
-    
-    @FXML
-    private ScrollPane scrollPane;
-    
+	private MenuButton userDropDown;
+
+	@FXML
+	private Button shoppingCartBtn;
+
+	@FXML
+	private Button settingsBtn;
+
+	@FXML
+	private VBox centerView;
+
+	@FXML
+	private HBox header;
+
+	@FXML
+	private ScrollPane scrollPane;
+
 	private static AnchorPane root;
 
-    @FXML
-    private void onShoppingCartBtn(ActionEvent event) {
-        if (shoppingCartBtn.isVisible() && !shoppingCartBtn.isDisabled()) {
-            SceneManager.loadNewScene(GUIPages.Cart, true);
-        }
-    }
+	@FXML
+	private void onShoppingCartBtn(ActionEvent event)
+	{
+		if (shoppingCartBtn.isVisible() && !shoppingCartBtn.isDisabled())
+		{
+			SceneManager.loadNewScene(GUIPages.Cart, true);
+		}
+	}
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+	@Override
+	public void start(Stage primaryStage) throws Exception
+	{
 		SceneManager.initUI(primaryStage);
-    }
+	}
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+//		ButtonAnimator.addButtonAnimations("", "fx-background-color: #062C30;", "fx-background-color: #0c545c;",
+//				"fx-background-color: #062C30;", settingsBtn, shoppingCartBtn);
+	}
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+	public static void main(String[] args)
+	{
+		launch(args);
+	}
 
-    @FXML
-    private void onSettingsBtn(ActionEvent event) {
-    	SceneManager.openSettingsPage();
-    }
+	@FXML
+	private void onSettingsBtn(ActionEvent event)
+	{
+		SceneManager.openSettingsPage();
+	}
 
 	public Pane getRoot()
 	{

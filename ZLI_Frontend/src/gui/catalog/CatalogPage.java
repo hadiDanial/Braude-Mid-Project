@@ -24,7 +24,8 @@ public class CatalogPage extends GUIController
 	public static ObservableList<CatalogItem> productsList = FXCollections.observableArrayList();
 	private ProductController productController;
 
-	VBox scrollPaneContent;
+	private VBox scrollPaneContent;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -52,6 +53,7 @@ public class CatalogPage extends GUIController
 								ProductElement element = (ProductElement)SceneManager.loadAdditiveSceneFromParent(GUIPages.ProductElement, scrollPaneContent);
 								element.setData(item);
 							}
+							
 						}
 					}
 				});

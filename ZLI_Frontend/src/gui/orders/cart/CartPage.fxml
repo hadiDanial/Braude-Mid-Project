@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.cart.CartPage">
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.cart.CartPage">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" prefWidth="200.0" spacing="50.0">
                <children>
@@ -98,25 +102,38 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" style="-fx-background-color: #05595B; -fx-border-color: #05595B;" />
-                  <VBox fx:id="cartItemsList" prefHeight="200.0" prefWidth="100.0" />
+                  <ScrollPane fx:id="scrollPane" vbarPolicy="NEVER" hbarPolicy="NEVER" maxHeight="1000.0" minViewportHeight="150.0" prefHeight="500.0">
+                     <VBox.margin>
+                        <Insets bottom="30.0" top="20.0" />
+                     </VBox.margin>
+                     <content>
+                        <TableView fx:id="cartTable" maxHeight="1000.0" minHeight="-Infinity" />
+                     </content>
+                  </ScrollPane>
                </children>
             </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onBackBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="#e2d784">
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#onBackBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="#e2d784">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onCheckOutBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Check Out" textFill="#e2d784">
+                  <Button fx:id="nextBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onCheckOutBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Check Out" textFill="#e2d784">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
    </children>
+   <padding>
+      <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+   </padding>
 </AnchorPane>

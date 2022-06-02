@@ -122,6 +122,8 @@ public class SceneManager
 	 */
 	public static GUIController loadNewScene(GUIPages pageToLoad, boolean saveToHistory)
 	{
+		if(!history.isEmpty() && pageToLoad.equals(history.peek().getPage()))
+			return null;
 		FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(pageToLoad.getFxmlFile()));
 		GUIController guiController = null;
 		try
@@ -206,26 +208,30 @@ public class SceneManager
 		try
 		{
 			toAdd = loader.load();
-			panesToResize.add(parent);
 			guiController = loader.getController();
 			setupGUIController(guiController, toAdd);
-			parent.getChildren().add(toAdd);
-			if (parent instanceof VBox)
-			{
-				((VBox) parent).setAlignment(Pos.CENTER);
-				((VBox) parent).setSpacing(20);
-			}
 			double width = mainWindow.getWidth();
-			parent.setPrefWidth(width);
+			if(parent != null)
+			{
+				panesToResize.add(parent);
+				parent.getChildren().add(toAdd);
+				parent.setPrefWidth(width);
+				
+				if (parent instanceof VBox)
+				{
+					((VBox) parent).setAlignment(Pos.CENTER);
+					((VBox) parent).setSpacing(20);
+				}
+				parent.setMaxWidth(scrollPane.getPrefViewportWidth());
+				scrollPaneAnchor.getChildren().clear();
+				scrollPaneAnchor.getChildren().add(parent);
+			}
 			panesToResize.remove(scrollPaneAnchor);
-			scrollPaneAnchor.getChildren().clear();
-			scrollPaneAnchor.getChildren().add(parent);
 			AnchorPane.setLeftAnchor(scrollPaneAnchor, 0.0);
 			AnchorPane.setRightAnchor(scrollPaneAnchor, 0.0);
 			panesToResize.add(scrollPaneAnchor);
 			scrollPane.setContent(scrollPaneAnchor);
 //			scrollPane.setStyle("-fx-min-height: " + getHeightPercentWithoutHeader() + "%;");
-			parent.setMaxWidth(scrollPane.getPrefViewportWidth());
 			scrollPane.setVisible(true);
 			resizeAllContent();
 
@@ -254,6 +260,7 @@ public class SceneManager
 			{
 				reloadScene(state);
 			}
+			state.getGuiController().initialize(null, null);
 			return state.getGuiController();
 		} catch (EmptyStackException e)
 		{
@@ -494,5 +501,15 @@ public class SceneManager
 		guiController.setRoot(root);
 		guiController.setScene(currentScene);
 		guiController.setStage(mainWindow);
+	}
+	
+	public static double getStageHeight()
+	{
+		return mainWindow.getHeight();
+	}
+
+	public static void addHeightListener(ChangeListener<? super Number> listener)
+	{
+		mainWindow.heightProperty().addListener(listener);
 	}
 }
