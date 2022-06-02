@@ -22,6 +22,11 @@ public abstract class FormController extends GUIController implements IEventList
 	
 	public boolean isValidForm()
 	{
+		if(validatedControls == null) 
+		{
+			submissionButton.setDisable(false);			
+			return true;
+		}
 		for(ValidatedControl control : validatedControls)
 		{
 			if(!control.validateAll())
