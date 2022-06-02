@@ -200,16 +200,28 @@ public class Order implements Serializable, IDiscountable
 		this.products = products;
 	}
 	
-	public void addProduct(CartItem product)
+	public void addProduct(CartItem cartItem)
 	{
-		if(products.contains(product))
+		if(products.contains(cartItem))
 		{
-			CartItem existingProduct = products.get(products.indexOf(product)); 
-			existingProduct.setQuantity(product.getQuantity() + existingProduct.getQuantity());
+			CartItem existingProduct = products.get(products.indexOf(cartItem)); 
+			existingProduct.setQuantity(cartItem.getQuantity() + existingProduct.getQuantity());
 		}
 		else
 		{			
-			this.products.add(product);
+			this.products.add(cartItem);
+		}
+	}
+
+	public void removeProduct(CartItem cartItem, int i)
+	{
+		if(products.contains(cartItem))
+		{
+			int quantity = cartItem.getQuantity() - i;
+			cartItem.setQuantity(quantity);
+			if(quantity <= 0)
+				products.remove(cartItem);
+
 		}
 	}
 
@@ -303,4 +315,5 @@ public class Order implements Serializable, IDiscountable
 				+ DateFormatter.formatInstant(deliveryDate, true) + ", totalCost=" + totalCost + ", orderStatus="
 				+ orderStatus + ", branch=" + branch.getBranchName() + ", customer=" + customer + "]";
 	}
+
 }

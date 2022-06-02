@@ -50,8 +50,15 @@ public class ProductController
 
 	public void getAllProducts(IResponse<ArrayList<CatalogItem>> response)
 	{
-		Request req = new Request(RequestType.GetAllProducts, null, userController.getLoggedInUser());
-		ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
+		if(catalog == null || catalog.isEmpty())
+		{			
+			Request req = new Request(RequestType.GetAllProducts, null, userController.getLoggedInUser());
+			ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
+		}
+		else 
+		{
+			response.executeAfterResponse(catalog);
+		}
 	}
 
 
@@ -97,28 +104,6 @@ public class ProductController
 	/**
 	 * 
 	 * @param product
-	 * @param quantity
-	 */
-	public boolean setQuantity(Product product, int quantity)
-	{
-		// TODO - implement ProductController.setQuantity
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param product
-	 * @param discountedPrice
-	 */
-	public boolean setProductDiscountPrice(Product product, float discountedPrice)
-	{
-		// TODO - implement ProductController.setProductDiscountPrice
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param product
 	 * @param onSale
 	 */
 	public boolean setProductDiscountStatus(Product product, boolean onSale)
@@ -132,8 +117,14 @@ public class ProductController
 		CartItem item = new CartItem();
 		item.setCatalogItem(product);
 		item.setQuantity(1);
+		item.setOrder(order);
 		order.addProduct(item);
 		System.out.println("Added product to order. Cart:\n" + order.getProducts());
+	}
+
+	public Order getOrder()
+	{
+		return order;
 	}
 
 }
