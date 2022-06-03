@@ -115,6 +115,8 @@ public class UserController
 
 	public void checkIfFirstOrder(IResponse<Boolean> response)
 	{
+		Request req = new Request(RequestType.CHECK_IF_FIRST_ORDER, loggedInUser);
+		clientController.sendRequest(req, response);
 	}
 
 }
