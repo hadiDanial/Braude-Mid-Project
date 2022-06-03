@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -8,10 +10,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.payment.PaymentPage">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.payment.PaymentPage">
     <children>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -114,79 +118,163 @@
                               <Separator style="-fx-background-color: #05595B; -fx-border-color: #05595B;" />
                            </children>
                         </VBox>
-                                <HBox alignment="CENTER" spacing="30.0">
-                                    <children>
-                                        <Label text="Card Holder" textFill="#05595b">
-                                            <font>
-                                                <Font size="28.0" />
-                                            </font>
-                                        </Label>
-                              <Pane HBox.hgrow="ALWAYS" />
-                                        <TextField fx:id="cardHolderInput" style="-fx-background-radius: 15;">
-                                            <font>
-                                                <Font size="26.0" />
-                                            </font>
-                                        </TextField>
-                                    </children>
-                                </HBox>
-                                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="30.0">
-                                    <children>
-                                        <Label text="Card Number" textFill="#05595b">
-                                            <font>
-                                                <Font size="28.0" />
-                                            </font>
-                                        </Label>
-                              <Pane HBox.hgrow="ALWAYS" />
-                                        <TextField fx:id="cardNumberInput" style="-fx-background-radius: 15;">
-                                            <font>
-                                                <Font size="26.0" />
-                                            </font>
-                                        </TextField>
-                                    </children>
-                                </HBox>
+                        <StackPane>
+                           <children>
+                                      <HBox alignment="CENTER" spacing="30.0">
+                                          <children>
+                                              <Label text="Card Holder" textFill="#05595b">
+                                                  <font>
+                                                      <Font size="28.0" />
+                                                  </font>
+                                              </Label>
+                                    <Pane HBox.hgrow="ALWAYS" />
+                                              <TextField fx:id="cardHolderInput" style="-fx-background-radius: 15;">
+                                                  <font>
+                                                      <Font size="26.0" />
+                                                  </font>
+                                              </TextField>
+                                          </children>
+                                      </HBox>
+                              <TextFlow mouseTransparent="true" translateY="65.0">
+                                 <children>
+                                    <Label fx:id="nameError1" alignment="TOP_LEFT" text="Name error" textFill="#ff7205">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="nameError2" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" text="Name error" textFill="#ff7205" translateX="10.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </TextFlow>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                                      <HBox alignment="CENTER" spacing="30.0">
+                                          <children>
+                                              <Label text="Card Number" textFill="#05595b">
+                                                  <font>
+                                                      <Font size="28.0" />
+                                                  </font>
+                                              </Label>
+                                    <Pane HBox.hgrow="ALWAYS" />
+                                              <TextField fx:id="cardNumberInput" style="-fx-background-radius: 15;">
+                                                  <font>
+                                                      <Font size="26.0" />
+                                                  </font>
+                                              </TextField>
+                                          </children>
+                                      </HBox>
+                              <TextFlow mouseTransparent="true" translateY="65.0">
+                                 <children>
+                                    <Label fx:id="cardError1" alignment="TOP_LEFT" mouseTransparent="true" text="Card error" textFill="#ff7205">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="cardError2" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mouseTransparent="true" text="Card error" textFill="#ff7205" translateX="10.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </StackPane>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="259.0">
                            <children>
-                              <Label text="CVV" textFill="#05595b">
-                                 <font>
-                                    <Font size="28.0" />
-                                 </font>
-                              </Label>
-                              <Pane prefHeight="56.0" prefWidth="15.0" />
-                              <TextField fx:id="CVVInput" prefHeight="56.0" prefWidth="114.0" style="-fx-background-radius: 15;">
-                                 <font>
-                                    <Font size="26.0" />
-                                 </font>
-                              </TextField>
+                              <StackPane>
+                                 <children>
+                                    <Group>
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutY="10.0" text="CVV" textFill="#05595b">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </Label>
+                                          <Pane layoutX="53.0" prefHeight="56.0" prefWidth="15.0" />
+                                          <TextField fx:id="CVVInput" layoutX="68.0" prefHeight="56.0" prefWidth="114.0" style="-fx-background-radius: 15;">
+                                             <font>
+                                                <Font size="26.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </Group>
+                                    <TextFlow mouseTransparent="true" translateY="65.0">
+                                       <children>
+                                          <Label fx:id="cvvError1" alignment="TOP_LEFT" focusTraversable="false" mouseTransparent="true" text="CVV Error" textFill="#ff7205">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cvvError2" alignment="TOP_LEFT" focusTraversable="false" layoutX="10.0" layoutY="10.0" mouseTransparent="true" text="CVV Error" textFill="#ff7205" translateX="10.0">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </TextFlow>
+                                 </children>
+                              </StackPane>
                               <Pane layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="43.0" HBox.hgrow="ALWAYS" />
-                              <Label layoutX="178.0" layoutY="18.0" text="Expiration" textFill="#05595b">
-                                 <font>
-                                    <Font size="28.0" />
-                                 </font>
-                              </Label>
-                              <Pane layoutX="231.0" layoutY="10.0" prefHeight="56.0" prefWidth="15.0" />
-                              <JFXDatePicker fx:id="expirationDateInput" />
+                              <StackPane>
+                                 <children>
+                                    <Group>
+                                       <children>
+                                          <Label layoutY="10.0" text="Expiration" textFill="#05595b">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </Label>
+                                          <Pane layoutX="123.0" prefHeight="56.0" prefWidth="15.0" />
+                                          <JFXDatePicker fx:id="expirationDateInput" layoutX="138.0" layoutY="17.0" />
+                                       </children>
+                                    </Group>
+                                    <TextFlow mouseTransparent="true" translateY="65.0">
+                                       <children>
+                                          <Label fx:id="expirationError" alignment="TOP_LEFT" mouseTransparent="true" text="Card error" textFill="#ff7205">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </TextFlow>
+                                 </children>
+                              </StackPane>
                            </children>
                         </HBox>
+                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                <children>
+                                    <Button fx:id="backBtn" mnemonicParsing="false" onAction="#onBackBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="#e2d784">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Button>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="payBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPayBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Pay" textFill="#e2d784">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                           <VBox.margin>
+                              <Insets bottom="30.0" top="30.0" />
+                           </VBox.margin>
+                            </HBox>
                             </children>
                         </VBox>
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button mnemonicParsing="false" onAction="#onBackBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="#e2d784">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Button>
-                        <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPayBtn" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Pay" textFill="#e2d784">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Button>
                     </children>
                 </HBox>
             </children>
         </VBox>
     </children>
+   <padding>
+      <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+   </padding>
 </AnchorPane>
