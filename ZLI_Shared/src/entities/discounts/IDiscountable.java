@@ -14,4 +14,10 @@ public interface IDiscountable
 	 * @param discounts A set of the discounts to apply.
 	 */
 	public void setDiscounts(HashSet<Discount> discounts);
+	
+	/**
+	 * Add a discount to the discounts set.
+	 * @param discount Discount to add.
+	 */
+	public void addDiscount(Discount discount);
 }

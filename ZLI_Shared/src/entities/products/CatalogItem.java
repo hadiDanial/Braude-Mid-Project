@@ -49,6 +49,12 @@ public class CatalogItem implements IDiscountable, Serializable
 		this.discounts = discounts;
 	}
 
+	@Override
+	public void addDiscount(Discount discount)
+	{
+		if(discounts == null) discounts = new HashSet<Discount>();
+		discounts.add(discount);
+	}
 	public BaseProduct getBaseProduct()
 	{
 		return baseProduct;

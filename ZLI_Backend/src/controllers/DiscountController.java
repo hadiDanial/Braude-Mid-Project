@@ -40,6 +40,10 @@ public class DiscountController
 		ResultSet resultSet=databaseConnection.getAll(Tables.DISCOUNTS_TABLE_NAME);
 		return convertRSToDiscountArrayList(resultSet);
 	}
+	
+	// TODO getActiveDiscounts
+	// select * from discounts join discounts_products join catalog where discounts.discountId=discounts_products.discountId AND discounts_products.catalogId=catalog.catalogId AND discounts.discountStartDate <= now() AND discounts.discountEndDate >= now();
+	
 	public void addProductsDiscount(Discount discount)
 	{
 		Discount discount2;

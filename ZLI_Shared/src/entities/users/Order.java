@@ -71,6 +71,13 @@ public class Order implements Serializable, IDiscountable
 	{
 		this.discounts = discounts;
 	}
+
+	@Override
+	public void addDiscount(Discount discount)
+	{
+		if(discounts == null) discounts = new HashSet<Discount>();
+		discounts.add(discount);
+	}
 	
 	public ColorEnum getColor()
 	{
@@ -152,6 +159,8 @@ public class Order implements Serializable, IDiscountable
 		{
 			totalCost += cartItem.getCatalogItem().getPriceAfterDiscounts() * cartItem.getQuantity();
 		}
+		if(deliveryDetails != null)
+			totalCost += Delivery.deliveryPrice;
 		return totalCost;
 	}
 
@@ -311,5 +320,4 @@ public class Order implements Serializable, IDiscountable
 				+ DateFormatter.formatInstant(deliveryDate, true) + ", totalCost=" + totalCost + ", orderStatus="
 				+ orderStatus + ", branch=" + branch.getBranchName() + ", customer=" + customer + "]";
 	}
-
 }
