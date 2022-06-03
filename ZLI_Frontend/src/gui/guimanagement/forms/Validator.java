@@ -27,6 +27,9 @@ public abstract class Validator
 		{			
 			this.invalidLabel.setVisible(false);
 			this.invalidLabel.setWrapText(true);
+			this.invalidLabel.setMouseTransparent(true);
+			this.invalidLabel.setFocusTraversable(false);
+			this.invalidLabel.managedProperty().bind(this.invalidLabel.visibleProperty());
 		}
 		if(autoValidate)
 		{
