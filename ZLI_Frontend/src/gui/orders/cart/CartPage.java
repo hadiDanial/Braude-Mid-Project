@@ -66,7 +66,6 @@ public class CartPage extends GUIController
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		productController = ProductController.getInstance();
 		orderController = OrderController.getInstance();
 		order = orderController.getOrder();
 		cartList.setAll((ArrayList<CartItem>) order.getProducts());
