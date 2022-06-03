@@ -19,23 +19,20 @@ public class UserController
 	{
 		clientController = ClientController.getInstance();
 	}
-	
+
 	public static synchronized UserController getInstance()
 	{
-		if(instance == null)
+		if (instance == null)
 		{
 			instance = new UserController();
 		}
 		return instance;
 	}
-	/**
-	 * 
-	 * @param user
-	 */
-	public boolean createUser(User user)
+
+	public void register(IResponse<Boolean> response, User newUser)
 	{
-		// TODO - implement UserController.createUser
-		throw new UnsupportedOperationException();
+		Request req = new Request(RequestType.REGISTER, newUser);
+		clientController.sendRequest(req, response);
 	}
 
 	/**
@@ -67,14 +64,13 @@ public class UserController
 	 */
 	public void logout()
 	{
-		if(isLoggedIn())			
+		if (isLoggedIn())
 		{
 			Request req = new Request(RequestType.LOGOUT, loggedInUser.getUserId());
 			clientController.sendRequest(req, null);
 			loggedInUser = null;
 		}
 	}
-
 
 	public boolean setUserStatus(User user, AccountStatus accountStatus)
 	{
@@ -87,7 +83,7 @@ public class UserController
 		Request req = new Request(RequestType.GET_USER_CREDIT_CARD, response);
 		clientController.sendRequest(req, response);
 	}
-	
+
 	public void openHomePage()
 	{
 		switch (loggedInUser.getRole())
@@ -106,7 +102,7 @@ public class UserController
 	{
 		return loggedInUser != null;
 	}
-	
+
 	public User getLoggedInUser()
 	{
 		return loggedInUser;
@@ -117,5 +113,8 @@ public class UserController
 		this.loggedInUser = loggedInUser;
 	}
 
+	public void checkIfFirstOrder(IResponse<Boolean> response)
+	{
+	}
 
 }
