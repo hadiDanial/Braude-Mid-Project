@@ -3,6 +3,7 @@ package gui.client.error;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controllers.UserController;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
@@ -26,6 +27,7 @@ public class ErrorPage extends GUIController
 	public void onBtnClick(ActionEvent event)
 	{
 		SceneManager.clearHistory();
+		UserController.getInstance().logout();
 		SceneManager.loadNewScene(GUIPages.LOGIN, true);
 		stage.close();
 	}
