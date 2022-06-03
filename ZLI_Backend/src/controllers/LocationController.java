@@ -36,7 +36,6 @@ public class LocationController
 					return null;
 			Location loc = new Location();
 			loc.setLocationId(resultSet.getInt("locationId"));
-			loc.setBuilding(resultSet.getString("building"));
 			loc.setStreet(resultSet.getString("street"));
 			loc.setZipCode(resultSet.getInt("zipCode"));
 			loc.setCity(resultSet.getString("city"));

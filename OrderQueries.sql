@@ -32,7 +32,7 @@ CREATE TABLE `Items_In_Product`(`itemId` INT NOT NULL, `productId` INT NOT NULL,
 								FOREIGN KEY (itemId) REFERENCES Catalog(catalogId), FOREIGN KEY (productId) REFERENCES Catalog(catalogId));
                                 
 CREATE TABLE `Locations`(`locationId` INT PRIMARY KEY AUTO_INCREMENT, `city` varchar(30) NOT NULL, `zipCode` INT, 
-						 `street` varchar(30), `building` varchar(30), `notes` varchar(256));
+						 `street` varchar(30), `notes` varchar(256));
                          
 CREATE TABLE `Branches`(`branchId` INT PRIMARY KEY AUTO_INCREMENT, `managerId` INT, `branchName` varchar(50), `locationId` INT NOT NULL, 
 						FOREIGN KEY (locationId) REFERENCES Locations(locationId), FOREIGN KEY (managerId) REFERENCES Users(userId));

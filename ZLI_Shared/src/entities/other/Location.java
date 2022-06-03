@@ -8,7 +8,6 @@ public class Location implements Serializable
 	private String city;
 	private int zipCode;
 	private String street;
-	private String building;
 	private String notes;
 	
 	private static final long serialVersionUID = -2568448348582449249L;
@@ -18,13 +17,12 @@ public class Location implements Serializable
 		super();
 	}
 
-	public Location(String city, int zipCode, String street, String building, String notes)
+	public Location(String city, int zipCode, String street, String notes)
 	{
 		super();
 		this.city = city;
 		this.zipCode = zipCode;
 		this.street = street;
-		this.building = building;
 		this.notes = notes;
 	}
 	
@@ -62,14 +60,7 @@ public class Location implements Serializable
 	{
 		this.street = street;
 	}
-	public String getBuilding()
-	{
-		return building;
-	}
-	public void setBuilding(String building)
-	{
-		this.building = building;
-	}
+
 	public String getNotes()
 	{
 		return notes;
