@@ -1,5 +1,6 @@
 package server;
 
+import controllers.BranchController;
 import controllers.DiscountController;
 import controllers.OrderController;
 import controllers.ProductController;
@@ -20,6 +21,7 @@ public class MessageParser
 	private static DiscountController discountController = DiscountController.getInstance();
 	private static ProductController productController = ProductController.getInstance();
 	private static OrderController orderController = OrderController.getInstance();
+	private static BranchController branchController = BranchController.getInstance();
 
 	/**
 	 * Handle the request - activate the correct function based on the request type.
@@ -98,6 +100,10 @@ public class MessageParser
 				return userController.getCreditCard((User) req.getMessage());
 			else
 				return null;
+		}
+		case GET_ALL_BRANCHES:
+		{
+			return branchController.getAllBranches();
 		}
 		default:
 			break;

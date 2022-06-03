@@ -2,6 +2,7 @@ package controllers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import database.DatabaseConnection;
 import database.Tables;
@@ -14,10 +15,12 @@ public class BranchController
 	private final String ID_FIELD_NAME = "branchId";
 	private DatabaseConnection databaseConnection;
 	private static BranchController instance;
+	private LocationController locationController;
 
 	private BranchController()
 	{
 		databaseConnection = DatabaseConnection.getInstance();
+		locationController = LocationController.getInstance();
 	}
 
 	public static synchronized BranchController getInstance()
@@ -33,7 +36,7 @@ public class BranchController
 	{
 		ResultSet rs = databaseConnection.getByID(branchId, Tables.BRANCHES_TABLE_NAME, ID_FIELD_NAME);
 		Branch branch = convertRSToBranch(rs, true);
-		Location location = LocationController.getInstance().getLocationById(branch.getLocation().getLocationId());
+		Location location = locationController.getLocationById(branch.getLocation().getLocationId());
 		branch.setLocation(location);
 		return branch;
 	}
@@ -62,6 +65,34 @@ public class BranchController
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public ArrayList<Branch> getAllBranches()
+	{
+		ArrayList<String> names = new ArrayList<String>();
+		names.add(Tables.BRANCHES_TABLE_NAME);
+		names.add(Tables.LOCATIONS_TABLE_NAME);
+		String selects = "branchId, managerId, branchName, branches.locationId, city, street, notes, zipCode ";
+		String conditions = "branches.locationId=locations.locationId";
+		ResultSet rs = databaseConnection.getJoinResultsWithSelectColumns(names, selects, conditions);
+		ArrayList<Branch> branches = new ArrayList<Branch>();
+		try
+		{
+			while (rs.next())
+			{
+				Branch branch = convertRSToBranch(rs, false);
+				Location loc = LocationController.convertRSToLocation(rs, false, false);				
+				branch.setLocation(loc);
+				branches.add(branch);
+			}
+			rs.close();
+			return branches;			
+		} 
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

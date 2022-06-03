@@ -84,16 +84,16 @@ public class OrderControllerTest
  	{
  		System.out.println("Should be null: " + UserController.getInstance().login("Hadi", "test"));
  		System.out.println("Should be null: " + UserController.getInstance().login("test", "bestpassword123"));
- 		System.out.println("Should be Hadi User: " + UserController.getInstance().login("Hadi", "bestpassword123"));
+ 		System.out.println("Should be Hadi User: " + UserController.getInstance().login("Hadi", "123"));
  		System.out
- 				.println("Should be Yosef User: " + UserController.getInstance().login("Yosef", "bestpassword456"));
+ 				.println("Should be Yosef User: " + UserController.getInstance().login("Yosef", "123"));
  	}
 
  	private void testAddOrder()
  	{
  		Order order = new Order();
  		order.setColor(ColorEnum.Blue);
- 		Location location = new Location("Haifa", 1234, "123 Street", "", "");
+ 		Location location = new Location("Haifa", 1234, "123 Street", "");
  		location.setLocationId(1);
  		User user = new User();
  		user.setUserId(1);

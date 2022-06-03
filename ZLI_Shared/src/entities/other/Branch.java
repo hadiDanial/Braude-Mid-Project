@@ -88,4 +88,10 @@ public class Branch implements Serializable
 		Branch other = (Branch) obj;
 		return branchId == other.branchId;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return branchName + " branch, " + location.getCity();
+	}
 }
