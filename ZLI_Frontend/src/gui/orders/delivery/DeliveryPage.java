@@ -3,6 +3,7 @@ package gui.orders.delivery;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -134,7 +135,7 @@ public class DeliveryPage extends FormController
 			dateTime = LocalDateTime.of(datePicker.getValue(), pickupTimePicker.getValue());
 			order.setBranch(branchSelection.getValue());
 		}
-		order.setDeliveryDate(Instant.from(dateTime));
+		order.setDeliveryDate(dateTime.toInstant(ZoneOffset.UTC));
 		SceneManager.loadNewScene(GUIPages.CHECKOUT_PAYMENT, true);
 	}
 
@@ -159,7 +160,7 @@ public class DeliveryPage extends FormController
 		deliveryView.managedProperty().bind(deliveryView.visibleProperty());
 		branchController = BranchController.getInstance();
 		orderController = OrderController.getInstance();
-
+		order = orderController.getOrder();
 		branchController.getAllBranches(new IResponse<ArrayList<Branch>>()
 		{
 			@Override
