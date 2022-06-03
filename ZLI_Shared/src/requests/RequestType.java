@@ -34,7 +34,10 @@ public enum RequestType
 	GET_DISCOUNTS_BY_BRANCH(UserRole.values()),
 	GET_ALL_DISCOUNTS(new UserRole[]{ UserRole.BranchManager, UserRole.Customer,UserRole.ChainEmployee }),
 	ADD_PRODUCTS_TO_DISCOUNT(new UserRole[] { UserRole.ChainEmployee }),
-	REMOVE_PRODUCTS_FROM_DISCOUNT(new UserRole[] { UserRole.ChainEmployee });
+	REMOVE_PRODUCTS_FROM_DISCOUNT(new UserRole[] { UserRole.ChainEmployee }), 
+	
+	// Branches
+	GET_ALL_BRANCHES(UserRole.values());
 	
 	private UserRole[] permittedRoles;
 
