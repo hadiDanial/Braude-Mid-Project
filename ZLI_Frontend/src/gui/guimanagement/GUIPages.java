@@ -5,6 +5,7 @@ public enum GUIPages
 	// TODO: Add all pages
 	LOGIN("client/login/LoginPage.fxml", "Login"),
 	MAIN_CONTAINER("client/main/MainView.fxml", "Zerli G13"),
+	OPERATION_SUCCESSFUL("client/success/SuccessPage.fxml", "Success"),
 	ERROR("client/error/ErrorPage.fxml", "Error"),
 	STARTUP_PAGE("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
 	SETTINGS("client/SettingsPage.fxml", "Settings"),
@@ -20,7 +21,6 @@ public enum GUIPages
 	CHECKOUT_PAYMENT("orders/payment/PaymentPage.fxml", "Checkout - Payment"); 
 
 	private final String fxmlFile;
-//	private final Class<? extends GUIController> controllerClass;
 	private final String pageTitle;
 
 	private static final String packageName = "/gui/";

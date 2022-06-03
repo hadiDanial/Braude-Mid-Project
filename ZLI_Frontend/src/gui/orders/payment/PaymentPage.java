@@ -13,6 +13,8 @@ import controllers.UserController;
 import entities.users.CreditCard;
 import entities.users.Order;
 import gui.guimanagement.FormController;
+import gui.guimanagement.GUIPages;
+import gui.guimanagement.SceneManager;
 import gui.guimanagement.forms.DateValidator;
 import gui.guimanagement.forms.DigitsOnlyValidator;
 import gui.guimanagement.forms.InputLengthValidator;
@@ -69,13 +71,30 @@ public class PaymentPage extends FormController
 	@FXML
 	void onBackBtn(ActionEvent event)
 	{
-
+		SceneManager.loadPreviousPage();
 	}
 
 	@FXML
 	void onPayBtn(ActionEvent event)
 	{
-
+		orderController.sendOrderToServer(new IResponse<Boolean>()
+		{
+			
+			@Override
+			public void executeAfterResponse(Object message)
+			{
+				Boolean successful = (Boolean) message;
+				if(successful)
+				{
+					SceneManager.clearHistory();
+					SceneManager.loadModalWindow(GUIPages.OPERATION_SUCCESSFUL, null);
+				}
+				else
+				{
+					SceneManager.displayErrorMessage("Failed to order...");
+				}
+			}
+		});
 	}
 
 	@Override
