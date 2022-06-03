@@ -49,7 +49,7 @@ public class ProductController
 	{
 		if(catalog == null || catalog.isEmpty())
 		{			
-			Request req = new Request(RequestType.GetAllProducts, null, userController.getLoggedInUser());
+			Request req = new Request(RequestType.GET_ALL_PRODUCTS, null, userController.getLoggedInUser());
 			ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
 		}
 		else 
@@ -83,7 +83,7 @@ public class ProductController
 	 */
 	public void getCatalogByBranch(int branchId, IResponse<ArrayList<CatalogItem>> response)
 	{
-		Request req = new Request(RequestType.GetCatalogByBranch, branchId, userController.getLoggedInUser());
+		Request req = new Request(RequestType.GET_CATALOG_BY_BRANCH, branchId, userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
 	}
 

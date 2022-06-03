@@ -36,7 +36,7 @@ public class SurveyController
 		Survey survey = new Survey();
 		survey.setQuestions(questions);
 		survey.setAnswers(answers);
-		Request req=new Request(RequestType.CreateSurvey,survey);
+		Request req=new Request(RequestType.CREATE_SURVEY,survey);
 		ClientController.getInstance().sendRequest(req, response);
 	}
 
@@ -69,7 +69,7 @@ public class SurveyController
 	 */
 	public void getSurveyById(IResponse<ArrayList<Survey>> response, int surveyId)
 	{
-		Request req=new Request(RequestType.GetSurveyById, surveyId);
+		Request req=new Request(RequestType.GET_SURVEY_BY_ID, surveyId);
 		ClientController.getInstance().sendRequest(req, response);
 	}
 
@@ -81,7 +81,7 @@ public class SurveyController
 	 */
 	public void getSurveyByDate(IResponse<ArrayList<Survey>> response,Instant surveyDate)
 	{
-		Request req=new Request(RequestType.GetSurveyByDate, surveyDate);
+		Request req=new Request(RequestType.GET_SURVEY_BY_DATE, surveyDate);
 		ClientController.getInstance().sendRequest(req, response);
 	}
 
@@ -93,7 +93,7 @@ public class SurveyController
 	 */
 	public void getSurveyByBranch(int branchId,IResponse<ArrayList<Survey>> response)
 	{
-		Request req=new Request(RequestType.GetSurveyByBranch, branchId);
+		Request req=new Request(RequestType.GET_SURVEY_BY_BRANCH, branchId);
 		ClientController.getInstance().sendRequest(req, response);
 	}
 }

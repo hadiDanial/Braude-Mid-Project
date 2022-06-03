@@ -40,37 +40,37 @@ public class MessageParser {
 		}
         
         switch (type) {
-            case GetAllOrders: {
+            case GET_ALL_ORDERS: {
                 return OrderController.getInstance().getAllOrders();
             }
-            case UpdateOrder: {
+            case UPDATE_ORDER: {
                 return OrderController.getInstance().updateOrder((Order) req.getMessage());
             }
-            case Login: {
+            case LOGIN: {
             	User loginRequest = (User)req.getMessage();
             	return UserController.getInstance().login(loginRequest.getUsername(), loginRequest.getPassword());                
             }
-            case Logout: {
+            case LOGOUT: {
             	// Message = User Id
             	return UserController.getInstance().logout((Integer) req.getMessage());
             }
-            case CreateDiscount: {
+            case CREATE_DISCOUNT: {
                 return DiscountController.getInstance().createDiscount((Discount)req.getMessage());
             }
-            case GetAllDiscounts: {
+            case GET_ALL_DISCOUNTS: {
                 return DiscountController.getInstance().getAllDiscounts();
             }
-            case AddProductsDiscount: {
+            case ADD_PRODUCTS_TO_DISCOUNT: {
                 DiscountController.getInstance().addProductsDiscount((Discount)req.getMessage());
             }
-            case AddProduct: {
+            case ADD_PRODUCT: {
             	return ProductController.getInstance().addProduct((BaseProduct) req.getMessage());
             }
-            case UpdateProduct:
+            case UPDATE_PRODUCT:
             {
             	return ProductController.getInstance().updateBaseProduct((UpdateEntityRequest<BaseProduct>) req.getMessage());
             }
-            case GetAllProducts:
+            case GET_ALL_PRODUCTS:
             {
             	return ProductController.getInstance().getAllProducts();
             }
@@ -89,9 +89,9 @@ public class MessageParser {
      */
 	private static void checkPermissions(RequestType type, User user) throws UnauthenticatedUserException, UnauthorizedRoleException
 	{
-		if(type == RequestType.Login) 
+		if(type == RequestType.LOGIN) 
 			return;
-		if(type != RequestType.Login && user == null)
+		if(type != RequestType.LOGIN && user == null)
 			throw new UnauthenticatedUserException("Cannot use system without being authenticated.");
 		if(!type.isAuthorized(user.getRole()))
 			throw new UnauthorizedRoleException("User role " + user.getRole() + " cannot perform " + type.name() + " action!");

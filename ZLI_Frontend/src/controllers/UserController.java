@@ -57,7 +57,7 @@ public class UserController
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
-		Request req = new Request(RequestType.Login, user);
+		Request req = new Request(RequestType.LOGIN, user);
 		ClientController.getInstance().sendRequest(req, response);
 	}
 
@@ -67,7 +67,7 @@ public class UserController
 	{
 		if(isLoggedIn())			
 		{
-			Request req = new Request(RequestType.Logout, loggedInUser.getUserId());
+			Request req = new Request(RequestType.LOGOUT, loggedInUser.getUserId());
 			ClientController.getInstance().sendRequest(req, null);
 			loggedInUser = null;
 		}

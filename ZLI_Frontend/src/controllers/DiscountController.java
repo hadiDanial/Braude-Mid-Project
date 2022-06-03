@@ -28,7 +28,7 @@ public class DiscountController {
     }
     public void createDiscount(Discount discount,IResponse<Boolean> response)
 	{
-		Request req=new Request(RequestType.CreateDiscount, discount,userController.getLoggedInUser());
+		Request req=new Request(RequestType.CREATE_DISCOUNT, discount,userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, response);
 	}
 	public void addProductsToDiscount(ArrayList<CatalogItem> products,Discount discount,IResponse<Boolean> response)
@@ -37,7 +37,7 @@ public class DiscountController {
 		{
 			discount.addProduct(p);
 		}
-		Request req=new Request(RequestType.AddProductsDiscount,discount,userController.getLoggedInUser());
+		Request req=new Request(RequestType.ADD_PRODUCTS_TO_DISCOUNT,discount,userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, response);
 	}
 	public void removeProductsToDiscount(ArrayList<CatalogItem> products,Discount discount,IResponse<Boolean> response)
@@ -46,17 +46,17 @@ public class DiscountController {
 		{
 			discount.removeProduct(p);
 		}
-		Request req=new Request(RequestType.RemoveProductsDiscount,discount,userController.getLoggedInUser());
+		Request req=new Request(RequestType.REMOVE_PRODUCTS_FROM_DISCOUNT,discount,userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, response);
 	}
 	public void getDiscountsByBranch(int branchId,IResponse<ArrayList<Discount>> response)
 	{
-		Request req=new Request(RequestType.GetDiscountsByBranch, branchId,userController.getLoggedInUser());
+		Request req=new Request(RequestType.GET_DISCOUNTS_BY_BRANCH, branchId,userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, response);
 	}
     public void getAllDiscounts(IResponse<ArrayList<Discount>> response)
 	{
-		Request req = new Request(RequestType.GetAllDiscounts, null, userController.getLoggedInUser());
+		Request req = new Request(RequestType.GET_ALL_DISCOUNTS, null, userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, executeResponseAndSaveDiscount(response));
 	}
     private IResponse<ArrayList<Discount>> executeResponseAndSaveDiscount(IResponse<ArrayList<Discount>> response)

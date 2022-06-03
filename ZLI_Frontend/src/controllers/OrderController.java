@@ -34,13 +34,13 @@ public class OrderController
 
 	public void getAllOrders(IResponse<ArrayList<Order>> response)
 	{
-		Request request = new Request(RequestType.GetAllOrders, null, userController.getLoggedInUser());
+		Request request = new Request(RequestType.GET_ALL_ORDERS, null, userController.getLoggedInUser());
 		clientController.sendRequest(request, response);
 	}
 
 	public void updateOrder(IResponse<Boolean> response, Order updatedOrder)
 	{
-		Request request = new Request(RequestType.UpdateOrder, updatedOrder, userController.getLoggedInUser());
+		Request request = new Request(RequestType.UPDATE_ORDER, updatedOrder, userController.getLoggedInUser());
 		clientController.sendRequest(request, response);
 	}
 
@@ -66,14 +66,14 @@ public class OrderController
 		if (order == null)
 			response.executeAfterResponse(false);
 		order.setCustomer(userController.getLoggedInUser());
-		Request req = new Request(RequestType.CreateOrder, order, order.getCustomer());
+		Request req = new Request(RequestType.CREATE_ORDER, order, order.getCustomer());
 		clientController.sendRequest(req, response);
 	}
 
 	public void orderIsDelivered(IResponse<Boolean> response,Order order)
 	{
 		order.setOrderStatus(OrderStatus.Delivered);
-		Request request = new Request(RequestType.UpdateOrderStatus, order);
+		Request request = new Request(RequestType.UPDATE_ORDER_STATUS, order);
 		clientController.sendRequest(request, response);
 	}
 	
