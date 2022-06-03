@@ -191,7 +191,7 @@
                                        </font>
                                     </Label>
                                     <Pane prefWidth="45.0" HBox.hgrow="ALWAYS" />
-                                    <TextField fx:id="nameInput1" style="-fx-background-radius: 15;">
+                                    <TextField fx:id="nameInput" style="-fx-background-radius: 15;">
                                        <font>
                                           <Font size="26.0" />
                                        </font>

@@ -37,7 +37,8 @@ public enum RequestType
 	REMOVE_PRODUCTS_FROM_DISCOUNT(new UserRole[] { UserRole.ChainEmployee }), 
 	
 	// Branches
-	GET_ALL_BRANCHES(UserRole.values());
+	GET_ALL_BRANCHES(UserRole.values()), 
+	GET_USER_CREDIT_CARD(new UserRole[] {UserRole.Customer });
 	
 	private UserRole[] permittedRoles;
 
