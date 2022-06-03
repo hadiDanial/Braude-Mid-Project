@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0" style="-fx-background-radius: 15; -fx-border-color: #078082;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.catalogManagment.NewProduct">
+   <children>
+      <VBox layoutX="1.0" layoutY="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="79.0" prefWidth="898.0" style="-fx-background-radius: 15; -fx-background-color: #078082; -fx-border-width: 5;">
+               <children>
+                  <Pane layoutX="76.0" layoutY="10.0" prefHeight="63.0" prefWidth="39.0" />
+                  <Label text="Catalog Products" textFill="#e2d784">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="200.0" prefWidth="647.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Pane layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="111.0" />
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <Pane prefHeight="35.0" prefWidth="200.0" />
+                        <ImageView fx:id="productImage" fitHeight="200.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true" />
+                        <Pane layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="200.0" />
+                        <Label text="Image URL:">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="imageURLField" style="-fx-background-radius: 15;">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </TextField>
+                        <Pane layoutX="10.0" layoutY="245.0" prefHeight="35.0" prefWidth="200.0" />
+                        <Button mnemonicParsing="false" onAction="#onImageSaveBtn" style="-fx-background-color: #05595B;" text="Save" textFill="#e2d784" />
+                     </children>
+                  </VBox>
+                  <Pane layoutX="775.0" layoutY="10.0" prefHeight="519.0" prefWidth="93.0" />
+                  <VBox spacing="15.0">
+                     <children>
+                        <Pane prefHeight="35.0" prefWidth="497.0" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label text="Name: ">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="nameField" prefWidth="324.0" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="45.0">
+                           <children>
+                              <Label text="Price: ">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="priceField" prefWidth="324.0" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="101.0">
+                           <children>
+                              <Label text="Color: ">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <MenuButton fx:id="colorDropDown" mnemonicParsing="false" prefHeight="56.0" prefWidth="324.0" style="-fx-background-radius: 15;" text="MenuButton">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                                  <MenuItem mnemonicParsing="false" text="Action 2" />
+                                </items>
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </MenuButton>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="154.0">
+                           <children>
+                              <Label text="Details: ">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <MenuButton fx:id="detailDropDown" mnemonicParsing="false" prefHeight="56.0" prefWidth="270.0" style="-fx-background-radius: 15;" text="MenuButton">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Action 1" />
+                                    <MenuItem mnemonicParsing="false" text="Action 2" />
+                                 </items>
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </MenuButton>
+                              <Pane layoutX="101.0" layoutY="10.0" prefHeight="56.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                              <Button mnemonicParsing="false" onAction="#onAddDetailBtn" style="-fx-background-color: #05595B;" text="Add" textFill="#e2d784" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="178.0">
+                           <children>
+                              <Label text="Details List: ">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <TreeTableView fx:id="detailsTable" prefHeight="200.0" HBox.hgrow="ALWAYS">
+                                <columns>
+                                  <TreeTableColumn fx:id="detailsColumn" prefWidth="75.0" text="Details List" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TreeTableView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="519.0" prefWidth="119.0" />
+               </children>
+            </HBox>
+            <Pane prefHeight="44.0" prefWidth="898.0" VBox.vgrow="ALWAYS" />
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onBackBtn" prefWidth="100.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="WHITE">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Pane prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onAddBtn" prefWidth="100.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Add" textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
