@@ -17,7 +17,7 @@ import controllers.OrderController;
 import entities.other.Branch;
 import entities.other.Location;
 import entities.users.Order;
-import entities.users.OrderDelivery;
+import entities.users.Delivery;
 import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.FormController;
 import gui.guimanagement.GUIController;
@@ -99,7 +99,7 @@ public class DeliveryPage extends FormController
 	private ArrayList<Branch> branchesArray;
 	private HashSet<String> citiesSet;
 	private boolean isDelivery;
-	private OrderDelivery delivery = null;
+	private Delivery delivery = null;
 	private Order order;
 	private List<ValidatorList> pickupChecker;
 	private List<ValidatorList> deliveryChecker;
@@ -125,7 +125,7 @@ public class DeliveryPage extends FormController
 					order.setBranch(branch);
 				}
 			}
-			delivery = new OrderDelivery(order, nameInput.getText(), phoneInput.getText(), loc);
+			delivery = new Delivery(order, nameInput.getText(), phoneInput.getText(), loc);
 			order.setDeliveryDetails(delivery);
 			dateTime = LocalDateTime.of(deliveryDatePicker.getValue(), deliveryTimePicker.getValue());
 		}

@@ -18,7 +18,7 @@ import entities.products.BaseProduct;
 import entities.products.CartItem;
 import entities.products.CatalogItem;
 import entities.users.Order;
-import entities.users.OrderDelivery;
+import entities.users.Delivery;
 import entities.users.User;
 import enums.ColorEnum;
 import enums.OrderStatus;
@@ -107,11 +107,11 @@ public class OrderController
 			return false;
 
 		// Save order delivery details if they exist
-		OrderDelivery delivery = order.getDeliveryDetails();
+		Delivery delivery = order.getDeliveryDetails();
 		if (delivery != null)
 		{
 			res = 1 == databaseConnection.insertToDatabase(Tables.DELIVERIES_TABLE_NAME, Tables.deliveriesColumnNames,
-					new IObjectToPreparedStatementParameters<OrderDelivery>()
+					new IObjectToPreparedStatementParameters<Delivery>()
 					{
 						@Override
 						public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
@@ -238,7 +238,7 @@ public class OrderController
 				if (deliveryRS.next())
 				{
 
-					OrderDelivery delivery = convertRSToOrderDelivery(deliveryRS);
+					Delivery delivery = convertRSToOrderDelivery(deliveryRS);
 					Branch branch = convertRSToBranch(deliveryRS);
 					if (branch != null)
 					{
@@ -328,14 +328,14 @@ public class OrderController
 		}
 	}
 
-	public OrderDelivery convertRSToOrderDelivery(ResultSet resultSet)
+	public Delivery convertRSToOrderDelivery(ResultSet resultSet)
 	{
 		try
 		{
 //			if (resultSet.next())
 //			{
 			String[] deliveriesColumnNames = Tables.deliveriesColumnNames;
-			OrderDelivery delivery = new OrderDelivery();
+			Delivery delivery = new Delivery();
 			delivery.setDelivered(false);
 			delivery.setRecipientName(resultSet.getString(deliveriesColumnNames[1]));
 			delivery.setRecipientPhoneNumber(resultSet.getString(deliveriesColumnNames[2]));

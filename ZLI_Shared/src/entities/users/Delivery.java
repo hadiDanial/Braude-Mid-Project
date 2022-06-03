@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 import entities.other.Location;
 
-public class OrderDelivery implements Serializable
+public class Delivery implements Serializable
 {
+	public static final float deliveryPrice = 35;
+
 	private Order orderWithDelivery;
 	private String recipientName;
 	private String recipientPhoneNumber;
@@ -14,12 +16,12 @@ public class OrderDelivery implements Serializable
 
 	private static final long serialVersionUID = -7895325901158480997L;
 	
-	public OrderDelivery()
+	public Delivery()
 	{
 		super();
 	}
 
-	public OrderDelivery(Order orderWithDelivery, String recipientName, String recipientPhoneNumber, Location location)
+	public Delivery(Order orderWithDelivery, String recipientName, String recipientPhoneNumber, Location location)
 	{
 		super();
 		this.orderWithDelivery = orderWithDelivery;
@@ -90,11 +92,11 @@ public class OrderDelivery implements Serializable
 		{
 			return true;
 		}
-		if (!(obj instanceof OrderDelivery))
+		if (!(obj instanceof Delivery))
 		{
 			return false;
 		}
-		OrderDelivery other = (OrderDelivery) obj;
+		Delivery other = (Delivery) obj;
 		if (orderWithDelivery == null)
 		{
 			if (other.orderWithDelivery != null)

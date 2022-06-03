@@ -16,7 +16,7 @@ import utility.DateFormatter;
 public class Order implements Serializable, IDiscountable
 {
 	private int orderId;
-	private OrderDelivery deliveryDetails;
+	private Delivery deliveryDetails;
 	private String greetingCard;
 	private ArrayList<CartItem> products;
 	private Instant orderDate;
@@ -92,12 +92,12 @@ public class Order implements Serializable, IDiscountable
 		this.orderId = orderId;
 	}
 
-	public OrderDelivery getDeliveryDetails()
+	public Delivery getDeliveryDetails()
 	{
 		return deliveryDetails;
 	}
 
-	public void setDeliveryDetails(OrderDelivery deliveryDetails)
+	public void setDeliveryDetails(Delivery deliveryDetails)
 	{
 		this.deliveryDetails = deliveryDetails;
 	}

@@ -15,7 +15,7 @@ import entities.products.CatalogItem;
 import entities.products.Item;
 import entities.products.Product;
 import entities.users.Order;
-import entities.users.OrderDelivery;
+import entities.users.Delivery;
 import entities.users.User;
 import enums.AccountStatus;
 import enums.ColorEnum;
@@ -99,7 +99,7 @@ public class OrderControllerTest
  		user.setUserId(1);
  		user.setEmailAddress("hadi.dan@me.com");
  		order.setCustomer(user);
- 		order.setDeliveryDetails(new OrderDelivery(order, "Hadi", "0525614352", location));
+ 		order.setDeliveryDetails(new Delivery(order, "Hadi", "0525614352", location));
  		order.setGreetingCard("Hello noob");
  		order.setOrderDate(Instant.now());
  		order.setDeliveryDate(Instant.now().plusSeconds(6000000));
