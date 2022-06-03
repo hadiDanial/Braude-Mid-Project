@@ -45,7 +45,7 @@ public class SurveyController
 	 * @param survey
 	 * @param results
 	 */
-	public boolean addSurveyAnalysis(Survey survey, String results)
+	public boolean addSurveyAnalysis(Survey survey, byte[] resultsPDF)
 	{
 		// TODO - implement SurveyController.addSurveyAnalysis
 		throw new UnsupportedOperationException();
