@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS `Surveys`;
 DROP TABLE IF EXISTS `Orders`;
 DROP TABLE IF EXISTS `Discounts`;
 DROP TABLE IF EXISTS `Branches`;
-
+DROP TABLE IF EXISTS `Credit_Cards`;
 DROP TABLE IF EXISTS `Complaints`;
 DROP TABLE IF EXISTS `Users`;
 DROP TABLE IF EXISTS `Locations`;
@@ -56,6 +56,11 @@ CREATE TABLE `User_Orders`(`userId` INT NOT NULL, `orderId` INT NOT NULL, PRIMAR
 		FOREIGN KEY (userId) REFERENCES Users(userId) ON DELETE CASCADE, 
         FOREIGN KEY (orderId) REFERENCES Orders(orderId) ON DELETE CASCADE) ;
         
+CREATE TABLE `Credit_Cards`(`creditCardId` INT PRIMARY KEY AUTO_INCREMENT, `customerId` INT NOT NULL, 
+							`creditCardNumber` INT NOT NULL, `cvv` INT NOT NULL, `expirationDate` timestamp, 
+							`cardHolderName` varchar(50) NOT NULL,
+		FOREIGN KEY (customerId) REFERENCES Users(userId) ON DELETE CASCASE);
+
 CREATE TABLE `Discounts`(`discountId` INT PRIMARY KEY AUTO_INCREMENT, `discountStartDate` timestamp NOT NULL, `discountEndDate` timestamp NOT NULL,
 						 `discountName` varchar(128), `discountValue` float NOT NULL, `discountType` varchar(1) NOT NULL);
                          
@@ -65,7 +70,7 @@ CREATE TABLE `Discounts_Products`(`catalogId` INT NOT NULL, `branchId` INT NOT N
 CREATE TABLE `Orders_Discounts`(`orderId` INT NOT NULL, `discountId` INT NOT NULL, PRIMARY KEY(orderId, discountId), 
 							  FOREIGN KEY (orderId) REFERENCES Orders(orderId), FOREIGN KEY (discountId) REFERENCES Discounts(discountId));                              
                               
- CREATE TABLE `Deliveries`(`orderId` INT NOT NULL, `recipientName` varchar(50), `recipientPhoneNumber` varchar(20), `locationId` INT NOT NULL, `delivered` BOOLEAN,
+CREATE TABLE `Deliveries`(`orderId` INT NOT NULL, `recipientName` varchar(50), `recipientPhoneNumber` varchar(20), `locationId` INT NOT NULL, `delivered` BOOLEAN,
 							PRIMARY KEY(orderId), FOREIGN KEY (orderId) REFERENCES Orders(orderId), FOREIGN KEY (locationId) REFERENCES Locations(locationId));  
                             
 CREATE TABLE `Surveys`(`surveyId` INT PRIMARY KEY AUTO_INCREMENT, `specialistId` INT, `surveyDate` timestamp NOT NULL, `analysisResults` BLOB,

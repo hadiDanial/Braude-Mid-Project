@@ -3,21 +3,23 @@ package entities.users;
 import java.io.Serializable;
 import java.time.Instant;
 
-public class CreditCardDetails implements Serializable
+public class CreditCard implements Serializable
 {
 	private int creditCardId;
 	private User customer;
 	private int creditCardNumber;
+	private int cvv;
 	private Instant expirationDate;
 	private String cardHolderName;
 	
 	private static final long serialVersionUID = -8841530215525127937L;
 
-	public CreditCardDetails(User customer, int creditCardNumber, Instant expirationDate, String cardHolderName)
+	public CreditCard(User customer, int creditCardNumber, int cvv, Instant expirationDate, String cardHolderName)
 	{
 		super();
 		this.customer = customer;
 		this.creditCardNumber = creditCardNumber;
+		this.cvv = cvv;
 		this.expirationDate = expirationDate;
 		this.cardHolderName = cardHolderName;
 	}
@@ -44,6 +46,14 @@ public class CreditCardDetails implements Serializable
 	public void setCreditCardNumber(int creditCardNumber)
 	{
 		this.creditCardNumber = creditCardNumber;
+	}
+	public int getCvv()
+	{
+		return cvv;
+	}
+	public void setCvv(int cvv)
+	{
+		this.cvv = cvv;
 	}
 	public Instant getExpirationDate()
 	{

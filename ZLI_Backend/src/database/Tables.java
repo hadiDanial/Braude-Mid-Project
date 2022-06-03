@@ -46,8 +46,12 @@ public class Tables
 	public static final String[] branchColumnNames =
 	{ "branchId", "managerId", "branchName", "locationId" };
 
-	public static final String COMPLAINTS_TABLE_NAME="Complaints";
-	public static final String[] complaintsColumnNames= 
+	public static final String COMPLAINTS_TABLE_NAME = "Complaints";
+	public static final String[] complaintsColumnNames = 
 	{ "complaintId", "customerId", "customerServiceEmployeeId", "complaintDetails", "complaintResult", "submissionTime", "wasHandled"};
 
+	public static final String CREDIT_CARD_TABLE_NAME = "Credit_Cards";
+	public static final String[] creditCardColumnNames = 
+	{ "creditCardId", "customerId", "creditCardNumber", "cvv", "expirationDate", "cardHolderName" };
+				
 }
