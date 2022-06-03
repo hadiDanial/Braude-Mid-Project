@@ -85,6 +85,11 @@ public class MessageParser
 			{
 				return orderController.updateOrder((Order) req.getMessage());
 			}
+			case CHECK_IF_FIRST_ORDER:
+			{
+				// TODO: Implement
+				return true;
+			}
 			
 			// Discounts
 			case CREATE_DISCOUNT:
