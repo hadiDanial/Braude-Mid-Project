@@ -10,7 +10,7 @@ import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.FormController;
 import gui.guimanagement.SceneManager;
 import gui.guimanagement.forms.InputLengthValidator;
-import gui.guimanagement.forms.ValidatedControl;
+import gui.guimanagement.forms.ValidatorList;
 import gui.guimanagement.forms.Validator;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -82,11 +82,11 @@ public class LoginPage extends FormController
 		int minLength = 3, maxLength = 20;
 		List<Validator> usernameValidators = Arrays.asList(new Validator[]
 		{ new InputLengthValidator(usernameInput, usernameErrorLabel, true, "Username", this, minLength, maxLength) });
-		ValidatedControl usernameChecker = new ValidatedControl(usernameInput, usernameValidators);
+		ValidatorList usernameChecker = new ValidatorList(usernameValidators);
 		List<Validator> passwordValidators = Arrays.asList(new Validator[]
 		{ new InputLengthValidator(passwordInput, passwordErrorLabel, true, "Password", this, minLength, maxLength) });
-		ValidatedControl passwordChecker = new ValidatedControl(passwordInput, passwordValidators);
-		setupFormController(Arrays.asList(new ValidatedControl[] {usernameChecker, passwordChecker}), loginButton);
+		ValidatorList passwordChecker = new ValidatorList(passwordValidators);
+		setupFormController(Arrays.asList(new ValidatorList[] {usernameChecker, passwordChecker}), loginButton);
 		ButtonAnimator.addButtonAnimations(loginButton);
 	}
 

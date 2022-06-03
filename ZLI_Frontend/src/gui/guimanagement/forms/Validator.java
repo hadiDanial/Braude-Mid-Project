@@ -23,8 +23,11 @@ public abstract class Validator
 		this.autoValidate = autoValidate;
 		this.message = message;
 		this.eventListener = eventListener;
-		this.invalidLabel.setVisible(false);
-		this.invalidLabel.setWrapText(true);
+		if(this.invalidLabel != null)
+		{			
+			this.invalidLabel.setVisible(false);
+			this.invalidLabel.setWrapText(true);
+		}
 		if(autoValidate)
 		{
 			control.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> 
@@ -52,9 +55,13 @@ public abstract class Validator
 	public boolean checkValidation()
 	{
 		boolean isValid = validate();
-		invalidLabel.setVisible(!isValid);
-		if(!isValid)
-			invalidLabel.setText(message);
+		if(invalidLabel != null)
+		{			
+			invalidLabel.setVisible(!isValid);
+			if(!isValid)
+				invalidLabel.setText(message);
+		}
+		else System.out.println(message);
 		// Check the rest of the form so we can disable the submission button...
 		eventListener.invoke(); 
 		return isValid;

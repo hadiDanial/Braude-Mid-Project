@@ -2,31 +2,31 @@ package gui.guimanagement;
 
 import java.util.List;
 
-import gui.guimanagement.forms.ValidatedControl;
+import gui.guimanagement.forms.ValidatorList;
 import javafx.scene.control.Button;
 import utility.IEventListener;
 
 public abstract class FormController extends GUIController implements IEventListener
 {
-	protected List<ValidatedControl> validatedControls;
+	protected List<ValidatorList> validatorLists;
 	protected Button submissionButton;
 	
-	public void setupFormController(List<ValidatedControl> validatedControls, Button submissionButton)
+	public void setupFormController(List<ValidatorList> validatorLists, Button submissionButton)
 	{
-		this.validatedControls = validatedControls;
+		this.validatorLists = validatorLists;
 		this.submissionButton = submissionButton;
-		if(validatedControls != null)
+		if(validatorLists != null)
 			this.submissionButton.setDisable(true);
 	}
 	
 	public boolean isValidForm()
 	{
-		if(validatedControls == null) 
+		if(validatorLists == null) 
 		{
 			submissionButton.setDisable(false);			
 			return true;
 		}
-		for(ValidatedControl control : validatedControls)
+		for(ValidatorList control : validatorLists)
 		{
 			if(!control.validateAll())
 			{

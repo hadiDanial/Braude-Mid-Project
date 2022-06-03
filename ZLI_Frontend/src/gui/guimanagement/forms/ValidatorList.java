@@ -4,23 +4,13 @@ import java.util.List;
 
 import javafx.scene.control.Control;
 
-public class ValidatedControl
+public class ValidatorList
 {
-	private Control control;
 	private List<Validator> validators;
-	public ValidatedControl(Control control, List<Validator> validators)
+	public ValidatorList(List<Validator> validators)
 	{
 		super();
-		this.control = control;
 		this.validators = validators;
-	}
-	public Control getControl()
-	{
-		return control;
-	}
-	public void setControl(Control control)
-	{
-		this.control = control;
 	}
 	public List<Validator> getValidators()
 	{
