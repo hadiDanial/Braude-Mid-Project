@@ -191,7 +191,7 @@ public class DeliveryPage extends FormController
 				new InputLengthValidator(nameInput, null, true, "Name", this, 1, 20),
 				new InputLengthValidator(addressInput, null, true, "Address", this, 3, 50),
 				new DigitsOnlyValidator(phoneInput, null, true, this),
-				new InputLengthValidator(nameInput, null, true, "Phone", this, 9, 10) });
+				new InputLengthValidator(phoneInput, null, true, "Phone", this, 9, 10) });
 
 		pickupChecker = Arrays.asList(new ValidatorList[]
 		{ new ValidatorList(pickupValidators) });
