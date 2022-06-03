@@ -157,7 +157,6 @@ public class DeliveryPage extends FormController
 	{
 		pickupView.managedProperty().bind(pickupView.visibleProperty());
 		deliveryView.managedProperty().bind(deliveryView.visibleProperty());
-		enablePickupView();
 		branchController = BranchController.getInstance();
 		orderController = OrderController.getInstance();
 
@@ -172,6 +171,7 @@ public class DeliveryPage extends FormController
 		});
 
 		setupValidators();
+		enablePickupView();
 		ButtonAnimator.addButtonAnimations(backBtn, nextBtn);
 	}
 
