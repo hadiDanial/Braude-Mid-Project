@@ -11,20 +11,20 @@ import gui.users.*;
 public enum GUIPages
 {
 	// TODO: Add all pages
-	Login("client/login/LoginPage.fxml", "Login"),
-	MainContainer("client/main/MainView.fxml", "Zerli G13"),
-	Error("client/error/ErrorPage.fxml", "Error"),
-	StartupPage("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
-	Settings("client/SettingsPage.fxml", "Settings"),
-	Orders("orders/OrdersPage.fxml", "Orders"),
-	UpdateOrder("orders/OrderUpdatePage.fxml", "Update Order"), 
-	Loading("client/main/LoadingPage.fxml", "LOADING"),
-	CatalogPage("catalog/CatalogPage.fxml", "Catalog"),
-	ProductElement("catalog/ProductElement.fxml", ""),
-	Cart("orders/cart/CartPage.fxml", "Cart"),
-	CartElement("orders/cart/CartProductElement.fxml", ""),
-	CheckoutPage_Info("orders/delivery/info/SenderInfoPage.fxml", "Checkout"),
-	CheckoutPage_Delivery("orders/delivery/DeliveryPage.fxml", "Checkout"); 
+	LOGIN("client/login/LoginPage.fxml", "Login"),
+	MAIN_CONTAINER("client/main/MainView.fxml", "Zerli G13"),
+	ERROR("client/error/ErrorPage.fxml", "Error"),
+	STARTUP_PAGE("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
+	SETTINGS("client/SettingsPage.fxml", "Settings"),
+	ORDERS("orders/OrdersPage.fxml", "Orders"),
+	UPDATE_ORDER("orders/OrderUpdatePage.fxml", "Update Order"), 
+	LOADING("client/main/LoadingPage.fxml", "LOADING"),
+	CATALOG_PAGE("catalog/CatalogPage.fxml", "Catalog"),
+	PRODUCT_ELEMENT("catalog/ProductElement.fxml", ""),
+	CART("orders/cart/CartPage.fxml", "Cart"),
+	CART_ELEMENT("orders/cart/CartProductElement.fxml", ""),
+	CHECKOUT_GREETING("orders/delivery/info/SenderInfoPage.fxml", "Checkout"),
+	CHECKOUT_DELIVERY("orders/delivery/PickupPage.fxml", "Checkout"); 
 
 	private final String fxmlFile;
 //	private final Class<? extends GUIController> controllerClass;

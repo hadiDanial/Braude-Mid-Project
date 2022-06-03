@@ -194,7 +194,7 @@ public class OrdersPage extends GUIController
 				editButton.setPrefWidth(width * 0.09);
 				setGraphic(editButton);
 				editButton.setOnAction(event -> {
-					updatePage = (UpdateOrder) SceneManager.loadNewScene(GUIPages.UpdateOrder, true);
+					updatePage = (UpdateOrder) SceneManager.loadNewScene(GUIPages.UPDATE_ORDER, true);
 					updatePage.setOrderToUpdate(order);
 					updatePagePane = (AnchorPane) updatePage.getRoot();
 					AnchorPane.setLeftAnchor(updatePagePane, left);

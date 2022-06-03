@@ -62,7 +62,7 @@ public class CartPage extends GUIController
 	@FXML
 	void onCheckOutBtn(ActionEvent event)
 	{
-		SceneManager.loadNewScene(GUIPages.CheckoutPage_Info, true);
+		SceneManager.loadNewScene(GUIPages.CHECKOUT_GREETING, true);
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class CartPage extends GUIController
 		for (CartItem item : cartList)
 		{
 			CartProductElement element = (CartProductElement) SceneManager
-					.loadAdditiveSceneFromParent(GUIPages.CartElement, null);
+					.loadAdditiveSceneFromParent(GUIPages.CART_ELEMENT, null);
 			element.setData(item);
 			element.setCartPage(this);
 			Pane p = ((Pane) element.getRoot());

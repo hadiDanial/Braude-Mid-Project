@@ -85,7 +85,7 @@ public class UserController
 		switch (loggedInUser.getRole())
 		{
 		case Customer:
-			SceneManager.loadNewScene(GUIPages.CatalogPage, true);
+			SceneManager.loadNewScene(GUIPages.CATALOG_PAGE, true);
 			SceneManager.setHeaderButtonVisibility(true, true);
 			break;
 

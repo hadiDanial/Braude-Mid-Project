@@ -66,7 +66,7 @@ public class SceneManager
 		});
 
 		loadMainContainer();
-		loadNewScene(GUIPages.Login, true);
+		loadNewScene(GUIPages.LOGIN, true);
 //		loadAdditiveScene(GUIPages.Loading, true);
 		mainWindow.setHeight(ClientProperties.getClientHeight());
 		mainWindow.setWidth(ClientProperties.getClientWidth());
@@ -85,7 +85,7 @@ public class SceneManager
 	 */
 	private static void loadMainContainer()
 	{
-		GUIPages pageToLoad = GUIPages.MainContainer;
+		GUIPages pageToLoad = GUIPages.MAIN_CONTAINER;
 		FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(pageToLoad.getFxmlFile()));
 		try
 		{
@@ -128,7 +128,7 @@ public class SceneManager
 		GUIController guiController = null;
 		try
 		{
-			if (pageToLoad != GUIPages.MainContainer)
+			if (pageToLoad != GUIPages.MAIN_CONTAINER)
 			{
 				Pane loadedContent = loader.load();
 				container.getChildren().clear();
@@ -251,6 +251,7 @@ public class SceneManager
 	{
 		try
 		{
+			if(history.isEmpty()) return null;
 			history.pop();
 			HistoryState state = history.peek();
 			if (state.isAdditivelyLoaded())
@@ -315,12 +316,12 @@ public class SceneManager
 	 */
 	public static void openSettingsPage()
 	{
-		loadModalWindow(GUIPages.Settings, null);
+		loadModalWindow(GUIPages.SETTINGS, null);
 	}
 
 	public static void openLoadingWindow()
 	{
-		loadingWindow = loadModalWindow(GUIPages.Loading, null);
+		loadingWindow = loadModalWindow(GUIPages.LOADING, null);
 	}
 
 	public static void closeLoadingWindow()
@@ -351,7 +352,7 @@ public class SceneManager
 			@Override
 			public void run()
 			{
-				loadModalWindow(GUIPages.Error, messageString);
+				loadModalWindow(GUIPages.ERROR, messageString);
 			}
 		});
 	}

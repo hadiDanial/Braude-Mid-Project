@@ -50,7 +50,7 @@ public class CatalogPage extends GUIController
 							productsList.setAll((ArrayList<CatalogItem>) message);
 							for(CatalogItem item : productsList)
 							{
-								ProductElement element = (ProductElement)SceneManager.loadAdditiveSceneFromParent(GUIPages.ProductElement, scrollPaneContent);
+								ProductElement element = (ProductElement)SceneManager.loadAdditiveSceneFromParent(GUIPages.PRODUCT_ELEMENT, scrollPaneContent);
 								element.setData(item);
 							}
 							

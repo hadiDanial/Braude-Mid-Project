@@ -26,7 +26,7 @@ public class ErrorPage extends GUIController
 	public void onBtnClick(ActionEvent event)
 	{
 		SceneManager.clearHistory();
-		SceneManager.loadNewScene(GUIPages.Login, true);
+		SceneManager.loadNewScene(GUIPages.LOGIN, true);
 		stage.close();
 	}
 

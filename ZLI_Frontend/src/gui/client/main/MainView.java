@@ -52,7 +52,7 @@ public class MainView extends Application implements Initializable
 	{
 		if (shoppingCartBtn.isVisible() && !shoppingCartBtn.isDisabled())
 		{
-			SceneManager.loadNewScene(GUIPages.Cart, true);
+			SceneManager.loadNewScene(GUIPages.CART, true);
 		}
 	}
 

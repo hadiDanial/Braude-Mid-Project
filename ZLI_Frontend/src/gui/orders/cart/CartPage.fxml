@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.cart.CartPage">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -102,7 +101,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" style="-fx-background-color: #05595B; -fx-border-color: #05595B;" />
-                  <ScrollPane fx:id="scrollPane" vbarPolicy="NEVER" hbarPolicy="NEVER" maxHeight="1000.0" minViewportHeight="150.0" prefHeight="500.0">
+                  <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="1000.0" minViewportHeight="150.0" prefHeight="500.0" vbarPolicy="NEVER">
                      <VBox.margin>
                         <Insets bottom="30.0" top="20.0" />
                      </VBox.margin>
