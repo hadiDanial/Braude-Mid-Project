@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS `Items_In_Product`;
 DROP TABLE IF EXISTS `Catalog`;
 
 
-CREATE TABLE `Users`(`userId` INT primary key AUTO_INCREMENT, `username` varchar(20) NOT NULL UNIQUE, `password` varchar(64) NOT NULL, 
+CREATE TABLE `Users`(`userId` INT primary key, `username` varchar(20) NOT NULL UNIQUE, `password` varchar(64) NOT NULL, 
 					  `firstName` varchar(20) NOT NULL,`lastName` varchar(20) NOT NULL, `emailAddress` varchar(32) NOT NULL, `phoneNumber` varchar(20) NOT NULL,
                       `role` varchar(30) NOT NULL, `status` varchar(20) NOT NULL, `credit` float default 0, `isLoggedIn` Boolean, `lastLoginDate` timestamp);
                       

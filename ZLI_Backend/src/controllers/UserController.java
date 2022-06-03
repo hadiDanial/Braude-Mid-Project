@@ -87,25 +87,25 @@ public class UserController
 
 	public boolean register(User user)
 	{
-		int res = databaseConnection.insertToDatabase(Tables.USERS_TABLE_NAME,
-				Arrays.copyOfRange(Tables.usersColumnNames, 1, Tables.usersColumnNames.length),
+		int res = databaseConnection.insertToDatabase(Tables.USERS_TABLE_NAME, Tables.usersColumnNames,
 				new IObjectToPreparedStatementParameters<User>()
 				{
 
 					@Override
 					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
 					{
-						statementToPrepare.setString(1, user.getUsername());
-						statementToPrepare.setString(2, user.getPassword());
-						statementToPrepare.setString(3, user.getFirstName());
-						statementToPrepare.setString(4, user.getLastName());
-						statementToPrepare.setString(5, user.getEmailAddress());
-						statementToPrepare.setString(6, user.getPhoneNumber());
-						statementToPrepare.setString(7, user.getRole().name());
-						statementToPrepare.setString(8, user.getAccountStatus().name());
-						statementToPrepare.setFloat(9, user.getCredit());
-						statementToPrepare.setBoolean(10, false);
-						statementToPrepare.setTimestamp(11, null);
+						statementToPrepare.setInt(1, user.getUserId());
+						statementToPrepare.setString(2, user.getUsername());
+						statementToPrepare.setString(3, user.getPassword());
+						statementToPrepare.setString(4, user.getFirstName());
+						statementToPrepare.setString(5, user.getLastName());
+						statementToPrepare.setString(6, user.getEmailAddress());
+						statementToPrepare.setString(7, user.getPhoneNumber());
+						statementToPrepare.setString(8, user.getRole().name());
+						statementToPrepare.setString(9, user.getAccountStatus().name());
+						statementToPrepare.setFloat(10, user.getCredit());
+						statementToPrepare.setBoolean(11, false);
+						statementToPrepare.setTimestamp(12, null);
 					}
 				});
 		return res == 1;
