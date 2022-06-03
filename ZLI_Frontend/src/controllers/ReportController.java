@@ -9,7 +9,14 @@ import entities.other.*;
 public class ReportController
 {
 	private static ReportController instance;
-	private ReportController() {}
+	
+	private ClientController clientController;
+	
+	private ReportController() 
+	{
+		clientController = ClientController.getInstance();
+	}
+	
 	public static synchronized ReportController getInstance()
 	{
 		if(instance == null)

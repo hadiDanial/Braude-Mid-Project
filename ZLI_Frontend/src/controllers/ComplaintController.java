@@ -6,7 +6,14 @@ import entities.other.*;
 public class ComplaintController
 {
 	private static ComplaintController instance;
-	private ComplaintController() {}
+	
+	private ClientController clientController;
+	
+	private ComplaintController()
+	{
+		clientController = ClientController.getInstance();
+	}
+	
 	public static synchronized ComplaintController getInstance()
 	{
 		if(instance == null)
