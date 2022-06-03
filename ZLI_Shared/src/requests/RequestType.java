@@ -17,7 +17,8 @@ public enum RequestType
 	GET_PENDING_ORDERS(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
 	UPDATE_ORDER_STATUS(new UserRole[] { UserRole.BranchManager, UserRole.DeliveryPerson, UserRole.BranchEmployee }),
 	UPDATE_ORDER(new UserRole[] { UserRole.BranchManager }),
-
+	CHECK_IF_FIRST_ORDER(new UserRole[] {UserRole.Customer }), 
+	
 	// Products/Catalog
 	ADD_PRODUCT(new UserRole[] { UserRole.ChainEmployee }),
 	UPDATE_PRODUCT(new UserRole[] { UserRole.ChainEmployee }),

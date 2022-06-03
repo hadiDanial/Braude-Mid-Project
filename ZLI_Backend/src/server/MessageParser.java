@@ -52,60 +52,74 @@ public class MessageParser
 
 		switch (type)
 		{
-		case GET_ALL_ORDERS:
-		{
-			return orderController.getAllOrders();
-		}
-		case UPDATE_ORDER:
-		{
-			return orderController.updateOrder((Order) req.getMessage());
-		}
-		case LOGIN:
-		{
-			User loginRequest = (User) req.getMessage();
-			return userController.login(loginRequest.getUsername(), loginRequest.getPassword());
-		}
-		case LOGOUT:
-		{
-			// Message = User Id
-			return userController.logout((Integer) req.getMessage());
-		}
-		case CREATE_DISCOUNT:
-		{
-			return discountController.createDiscount((Discount) req.getMessage());
-		}
-		case GET_ALL_DISCOUNTS:
-		{
-			return discountController.getAllDiscounts();
-		}
-		case ADD_PRODUCTS_TO_DISCOUNT:
-		{
-			discountController.addProductsDiscount((Discount) req.getMessage());
-		}
-		case ADD_PRODUCT:
-		{
-			return productController.addProduct((BaseProduct) req.getMessage());
-		}
-		case UPDATE_PRODUCT:
-		{
-			return productController.updateBaseProduct((UpdateEntityRequest<BaseProduct>) req.getMessage());
-		}
-		case GET_ALL_PRODUCTS:
-		{
-			return productController.getAllProducts();
-		}
-		case GET_USER_CREDIT_CARD:
-		{
-			if (req.getUser().equals(req.getMessage()))
-				return userController.getCreditCard((User) req.getMessage());
-			else
-				return null;
-		}
-		case GET_ALL_BRANCHES:
-		{
-			return branchController.getAllBranches();
-		}
-		default:
+			// Users
+			case REGISTER:
+			{
+				return userController.register((User) req.getMessage());
+			}
+			case LOGIN:
+			{
+				User loginRequest = (User) req.getMessage();
+				return userController.login(loginRequest.getUsername(), loginRequest.getPassword());
+			}
+			case LOGOUT:
+			{
+				// Message = User Id
+				if((Integer) req.getMessage() != req.getUser().getUserId()) return false;
+				return userController.logout((Integer) req.getMessage());
+			}
+			case GET_USER_CREDIT_CARD:
+			{
+				if (req.getUser().equals(req.getMessage()))
+					return userController.getCreditCard((User) req.getMessage());
+				else
+					return null;
+			}
+			
+			// Orders
+			case GET_ALL_ORDERS:
+			{
+				return orderController.getAllOrders();
+			}
+			case UPDATE_ORDER:
+			{
+				return orderController.updateOrder((Order) req.getMessage());
+			}
+			
+			// Discounts
+			case CREATE_DISCOUNT:
+			{
+				return discountController.createDiscount((Discount) req.getMessage());
+			}
+			case GET_ALL_DISCOUNTS:
+			{
+				return discountController.getAllDiscounts();
+			}
+			case ADD_PRODUCTS_TO_DISCOUNT:
+			{
+				discountController.addProductsDiscount((Discount) req.getMessage());
+			}
+			
+			// Products
+			case ADD_PRODUCT:
+			{
+				return productController.addProduct((BaseProduct) req.getMessage());
+			}
+			case UPDATE_PRODUCT:
+			{
+				return productController.updateBaseProduct((UpdateEntityRequest<BaseProduct>) req.getMessage());
+			}
+			case GET_ALL_PRODUCTS:
+			{
+				return productController.getAllProducts();
+			}
+			
+			// Branches
+			case GET_ALL_BRANCHES:
+			{
+				return branchController.getAllBranches();
+			}
+			default:
 			break;
 		}
 		return null;

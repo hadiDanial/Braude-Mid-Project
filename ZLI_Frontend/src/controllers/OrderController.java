@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 
+import entities.discounts.Discount;
 import entities.products.*;
 import entities.users.Order;
 import enums.OrderStatus;
@@ -21,6 +22,16 @@ public class OrderController
 		clientController = ClientController.getInstance();
 		userController = UserController.getInstance();
 		order = new Order();
+		UserController.getInstance().checkIfFirstOrder(new IResponse<Boolean>()
+		{
+			
+			@Override
+			public void executeAfterResponse(Object message)
+			{
+				if((Boolean) message)
+					order.addDiscount(Discount.firstPurchaseDiscount);
+			}
+		});
 	}
 
 	public static synchronized OrderController getInstance()
