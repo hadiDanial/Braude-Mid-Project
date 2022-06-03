@@ -19,7 +19,7 @@ public class DiscountController {
         discounts=new ArrayList<Discount>();
         userController=UserController.getInstance();
     }
-    public static DiscountController getInstance(){
+    public static synchronized DiscountController getInstance(){
         if (instance == null)
 		{
 			instance = new DiscountController();

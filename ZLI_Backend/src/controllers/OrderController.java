@@ -38,7 +38,7 @@ public class OrderController
 		userController = UserController.getInstance();
 	}
 
-	public static OrderController getInstance()
+	public static synchronized OrderController getInstance()
 	{
 		if (instance == null)
 		{

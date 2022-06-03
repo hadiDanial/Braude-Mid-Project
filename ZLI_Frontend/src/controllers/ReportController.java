@@ -8,7 +8,16 @@ import entities.other.*;
 
 public class ReportController
 {
-
+	private static ReportController instance;
+	private ReportController() {}
+	public static synchronized ReportController getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new ReportController();
+		}
+		return instance;
+	}
 	/**
 	 * 
 	 * @param reportType

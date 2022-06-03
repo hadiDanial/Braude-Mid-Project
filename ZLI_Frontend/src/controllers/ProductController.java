@@ -20,7 +20,7 @@ public class ProductController
 		userController = UserController.getInstance();
 	}
 
-	public static ProductController getInstance()
+	public static synchronized ProductController getInstance()
 	{
 		if (instance == null)
 		{

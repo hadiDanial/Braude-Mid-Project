@@ -26,7 +26,7 @@ public class Server extends AbstractServer {
 		}
 	}
 
-	public static Server getInstance() {
+	public static synchronized Server getInstance() {
 		if (instance == null) {
 			instance = new Server(ServerProperties.DEFAULT_PORT);
 		}

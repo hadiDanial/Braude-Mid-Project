@@ -31,7 +31,7 @@ public class ProductController
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
-	public static ProductController getInstance()
+	public static synchronized ProductController getInstance()
 	{
 		if (instance == null)
 		{

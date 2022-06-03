@@ -22,7 +22,7 @@ public class ClientController
 		connectionListeners = new HashSet<IEventListener>();
 	}
 	
-	public static ClientController getInstance() 
+	public static synchronized ClientController getInstance() 
 	{
 		if(instance == null)
 		{

@@ -20,7 +20,7 @@ public class BranchController
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
-	public static BranchController getInstance()
+	public static synchronized BranchController getInstance()
 	{
 		if (instance == null)
 		{

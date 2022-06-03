@@ -27,12 +27,7 @@ public class DiscountController
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
-	protected Discount Discount(String percentageDiscriminator)
-	{
-		return null;
-	}
-
-	public static DiscountController getInstance()
+	public static synchronized DiscountController getInstance()
 	{
 		if (instance == null)
 		{

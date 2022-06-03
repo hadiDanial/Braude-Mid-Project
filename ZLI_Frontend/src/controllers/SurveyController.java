@@ -18,7 +18,7 @@ public class SurveyController
 		clientController = ClientController.getInstance();
 	}
 	
-	public static SurveyController getInstance()
+	public static synchronized SurveyController getInstance()
 	{
 		if(instance == null)
 		{

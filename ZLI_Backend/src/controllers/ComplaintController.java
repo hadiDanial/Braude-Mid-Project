@@ -23,7 +23,7 @@ public class ComplaintController {
 	{
 		databaseConnection = DatabaseConnection.getInstance();
 	}
-    public static ComplaintController getInstance()
+    public static synchronized ComplaintController getInstance()
 	{
 		if (instance == null)
 		{

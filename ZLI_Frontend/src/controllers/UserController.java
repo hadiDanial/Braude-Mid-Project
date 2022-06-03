@@ -18,7 +18,7 @@ public class UserController
 		
 	}
 	
-	public static UserController getInstance()
+	public static synchronized UserController getInstance()
 	{
 		if(instance == null)
 		{

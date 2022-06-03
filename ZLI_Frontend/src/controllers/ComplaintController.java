@@ -5,7 +5,16 @@ import entities.other.*;
 
 public class ComplaintController
 {
-
+	private static ComplaintController instance;
+	private ComplaintController() {}
+	public static synchronized ComplaintController getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new ComplaintController();
+		}
+		return instance;
+	}
 	/**
 	 * 
 	 * @param complaint

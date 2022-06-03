@@ -26,7 +26,7 @@ public class UserController
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
-	public static UserController getInstance()
+	public static synchronized UserController getInstance()
 	{
 		if (instance == null)
 		{

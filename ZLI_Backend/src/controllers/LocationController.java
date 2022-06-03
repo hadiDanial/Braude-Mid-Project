@@ -18,7 +18,7 @@ public class LocationController
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
-	public static LocationController getInstance()
+	public static synchronized LocationController getInstance()
 	{
 		if (instance == null)
 		{
