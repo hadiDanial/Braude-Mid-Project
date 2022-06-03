@@ -2,9 +2,6 @@ package entities.discounts;
 
 import java.security.InvalidParameterException;
 import java.time.Instant;
-import java.util.HashSet;
-
-import entities.products.CatalogItem;
 
 public class ValueDiscount extends Discount
 {

@@ -24,12 +24,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class CartPage extends GUIController
 {
-	private ProductController productController;
 	private OrderController orderController;
 	
 	@FXML

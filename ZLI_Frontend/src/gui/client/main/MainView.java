@@ -3,25 +3,18 @@ package gui.client.main;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import controllers.ClientController;
-import gui.catalog.CatalogPage;
-import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 

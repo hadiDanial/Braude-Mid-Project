@@ -1,11 +1,8 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.io.Serializable;
 import java.time.Instant;
-import java.util.*;
 import entities.surveys.*;
-import entities.users.User;
 import exceptions.SurveyException;
 import requests.Request;
 import requests.RequestType;

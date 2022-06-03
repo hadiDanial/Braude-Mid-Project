@@ -1,7 +1,6 @@
 package entities.products;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 public abstract class BaseProduct implements Serializable
 {

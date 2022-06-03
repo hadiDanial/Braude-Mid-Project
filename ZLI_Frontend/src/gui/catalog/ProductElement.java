@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controllers.OrderController;
-import controllers.ProductController;
 import entities.products.BaseProduct;
 import entities.products.CatalogItem;
 import entities.products.Item;

@@ -1,7 +1,5 @@
 package gui.guimanagement;
 
-import java.util.UUID;
-
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

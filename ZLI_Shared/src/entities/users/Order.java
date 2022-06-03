@@ -1,7 +1,6 @@
 package entities.users;
 
 import java.io.Serializable;
-import java.security.InvalidParameterException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,9 +9,6 @@ import entities.discounts.Discount;
 import entities.discounts.IDiscountable;
 import entities.other.Branch;
 import entities.products.CartItem;
-import entities.products.CatalogItem;
-import entities.products.Item;
-import entities.products.Product;
 import enums.ColorEnum;
 import enums.OrderStatus;
 import utility.DateFormatter;

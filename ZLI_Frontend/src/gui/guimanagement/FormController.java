@@ -3,8 +3,6 @@ package gui.guimanagement;
 import java.util.List;
 
 import gui.guimanagement.forms.ValidatedControl;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import utility.IEventListener;
 

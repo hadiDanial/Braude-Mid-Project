@@ -1,7 +1,6 @@
 package gui.client;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import client.ClientProperties;
@@ -11,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class SettingsPage extends GUIController
 {

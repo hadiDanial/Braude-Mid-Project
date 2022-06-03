@@ -4,11 +4,7 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import client.Client;
-import gui.client.ClientUI;
 import gui.guimanagement.SceneManager;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import requests.Request;
 import utility.IEventListener;
 import utility.IResponse;

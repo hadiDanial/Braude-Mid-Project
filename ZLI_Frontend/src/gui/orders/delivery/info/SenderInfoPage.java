@@ -9,7 +9,6 @@ import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.FormController;
 import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
-import gui.guimanagement.forms.ValidatedControl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

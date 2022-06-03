@@ -1,13 +1,5 @@
 package gui.guimanagement;
 
-import gui.catalog.*;
-import gui.client.*;
-import gui.complaints.*;
-import gui.orders.*;
-import gui.reports.*;
-import gui.surveys.*;
-import gui.users.*;
-
 public enum GUIPages
 {
 	// TODO: Add all pages

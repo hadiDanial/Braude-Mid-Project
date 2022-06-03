@@ -1,19 +1,14 @@
 package gui.client.login;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
-
 import controllers.UserController;
 import entities.users.User;
 import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.FormController;
-import gui.guimanagement.GUIController;
 import gui.guimanagement.SceneManager;
-import gui.guimanagement.forms.EmptyValidator;
 import gui.guimanagement.forms.InputLengthValidator;
 import gui.guimanagement.forms.ValidatedControl;
 import gui.guimanagement.forms.Validator;

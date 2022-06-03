@@ -3,7 +3,6 @@ package gui.orders.cart;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import controllers.OrderController;
 import entities.products.BaseProduct;
 import entities.products.CartItem;
 import gui.guimanagement.GUIController;
@@ -11,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import utility.FileManager;
 
 public class CartProductElement extends GUIController{

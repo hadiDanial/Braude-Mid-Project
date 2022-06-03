@@ -11,7 +11,6 @@ import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
 import database.Tables;
 import entities.users.Complaint;
-import entities.users.Order;
 import entities.users.User;
 
 public class ComplaintController {
