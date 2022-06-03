@@ -1,5 +1,6 @@
 package controllers;
 
+import entities.users.CreditCard;
 import entities.users.User;
 import enums.*;
 import gui.guimanagement.GUIPages;
@@ -11,11 +12,12 @@ import utility.IResponse;
 public class UserController
 {
 	public static UserController instance;
+	private ClientController clientController;
 	private User loggedInUser = null;
 
 	private UserController()
 	{
-		
+		clientController = ClientController.getInstance();
 	}
 	
 	public static synchronized UserController getInstance()
@@ -58,7 +60,7 @@ public class UserController
 		user.setUsername(username);
 		user.setPassword(password);
 		Request req = new Request(RequestType.LOGIN, user);
-		ClientController.getInstance().sendRequest(req, response);
+		clientController.sendRequest(req, response);
 	}
 
 	/**
@@ -68,7 +70,7 @@ public class UserController
 		if(isLoggedIn())			
 		{
 			Request req = new Request(RequestType.LOGOUT, loggedInUser.getUserId());
-			ClientController.getInstance().sendRequest(req, null);
+			clientController.sendRequest(req, null);
 			loggedInUser = null;
 		}
 	}
@@ -80,6 +82,12 @@ public class UserController
 		throw new UnsupportedOperationException();
 	}
 
+	public void getUserCreditCard(IResponse<CreditCard> response)
+	{
+		Request req = new Request(RequestType.GET_USER_CREDIT_CARD, response);
+		clientController.sendRequest(req, response);
+	}
+	
 	public void openHomePage()
 	{
 		switch (loggedInUser.getRole())

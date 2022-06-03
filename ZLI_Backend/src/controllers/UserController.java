@@ -11,6 +11,7 @@ import java.util.Arrays;
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
 import database.Tables;
+import entities.users.CreditCard;
 import entities.users.User;
 import enums.AccountStatus;
 import enums.UserRole;
@@ -145,7 +146,25 @@ public class UserController
 
 	public void updateUserCredit(User user, float totalCost)
 	{
-		user.setCredit(user.getCredit()+totalCost);
-		databaseConnection.updateById(user.getUserId(), ID_FIELD_NAME, Tables.USERS_TABLE_NAME, "credit",user.getCredit()+"");
+		user.setCredit(user.getCredit() + totalCost);
+		databaseConnection.updateById(user.getUserId(), ID_FIELD_NAME, Tables.USERS_TABLE_NAME, "credit",
+				user.getCredit() + "");
+	}
+
+	public CreditCard getCreditCard(User user)
+	{
+		ResultSet rs = databaseConnection.getBySimpleCondition(Tables.creditCardColumnNames[1], String.valueOf(user.getUserId()),
+				Tables.CREDIT_CARD_TABLE_NAME);
+		try
+		{
+			CreditCard cc = new CreditCard(user, rs.getInt(2), rs.getInt(3), rs.getTimestamp(4).toInstant(), rs.getString(5));
+			cc.setCreditCardId(rs.getInt(1));
+			rs.close();
+			return cc;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
