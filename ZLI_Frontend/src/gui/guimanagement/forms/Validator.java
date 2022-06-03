@@ -61,7 +61,7 @@ public abstract class Validator
 			if(!isValid)
 				invalidLabel.setText(message);
 		}
-		else System.out.println(message);
+		else if(!isValid) System.out.println(message);
 		// Check the rest of the form so we can disable the submission button...
 		eventListener.invoke(); 
 		return isValid;
