@@ -87,7 +87,10 @@ public class PaymentPage extends FormController
 				if(successful)
 				{
 					SceneManager.clearHistory();
-					SceneManager.loadModalWindow(GUIPages.OPERATION_SUCCESSFUL, null);
+					// TODO: GUIPages.OPERATION_SUCCESSFUL, return to home page
+//					SceneManager.loadModalWindow(GUIPages.OPERATION_SUCCESSFUL, null);
+					SceneManager.openLoadingWindow();
+					SceneManager.displayErrorMessage("Success");
 				}
 				else
 				{
