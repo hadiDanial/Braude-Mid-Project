@@ -1,4 +1,4 @@
-package gui.deliveryOperator;
+package gui.newPages.deliveryOperator;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

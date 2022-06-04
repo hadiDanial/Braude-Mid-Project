@@ -1,4 +1,4 @@
-package gui.branchEmployee;
+package gui.newPages.branchEmployee;
 
 public class BranchEmployeePortal {
     

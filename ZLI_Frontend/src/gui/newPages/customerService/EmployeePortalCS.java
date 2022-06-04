@@ -1,4 +1,4 @@
-package gui.customerService;
+package gui.newPages.customerService;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

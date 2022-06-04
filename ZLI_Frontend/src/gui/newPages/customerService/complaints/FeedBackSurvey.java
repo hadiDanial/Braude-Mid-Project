@@ -1,4 +1,4 @@
-package gui.customerService.complaints;
+package gui.newPages.customerService.complaints;
 
 import com.jfoenix.controls.JFXDatePicker;
 
