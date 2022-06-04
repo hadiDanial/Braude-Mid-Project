@@ -1,10 +1,10 @@
-package gui.employee;
+package gui.deliveryOperator;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class ChainEmployeePortal {
+public class DeliveryOperatorPortal {
 
     @FXML
     private Label nameLabel;
@@ -16,12 +16,7 @@ public class ChainEmployeePortal {
     private Label branchLabel;
 
     @FXML
-    void onManageCatalogBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onManageDiscountsBtn(ActionEvent event) {
+    void onInsertSurveyAnalysisBtn(ActionEvent event) {
 
     }
 

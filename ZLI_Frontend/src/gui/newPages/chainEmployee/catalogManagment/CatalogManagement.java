@@ -1,4 +1,4 @@
-package gui.catalogManagment;
+package gui.newPages.chainEmployee.catalogManagment;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

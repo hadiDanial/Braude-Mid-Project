@@ -1,4 +1,4 @@
-package gui.discountManagement;
+package gui.newPages.chainEmployee.discountManagement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

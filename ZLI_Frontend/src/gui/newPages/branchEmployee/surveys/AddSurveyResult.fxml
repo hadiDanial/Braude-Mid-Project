@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="900.0" style="-fx-background-radius: 15; -fx-border-color: #078082;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.branchEmployee.surveys.AddSurveyResult">
+   <children>
+      <VBox layoutX="1.0" layoutY="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="64.0" prefWidth="898.0" style="-fx-background-radius: 15; -fx-background-color: #078082; -fx-border-width: 5;">
+               <children>
+                  <Pane layoutX="76.0" layoutY="10.0" prefHeight="63.0" prefWidth="39.0" />
+                  <Label prefHeight="40.0" prefWidth="293.0" text="New Survey Result" textFill="#e2d784">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="200.0" prefWidth="647.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER">
+               <children>
+                  <VBox minWidth="500.0" spacing="15.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label text="Survey Name: ">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="surveyNameLabel" layoutX="10.0" layoutY="10.0">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="47.0">
+                           <children>
+                              <Label text="Survey ID: ">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="surveyIDLabel" layoutX="10.0" layoutY="10.0">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" spacing="5.0">
+                           <children>
+                              <Label text="1:">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="q1Label" layoutX="10.0" layoutY="19.0" text="Question">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="q1AnswerField" prefHeight="56.0" prefWidth="43.0" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="116.0" spacing="5.0">
+                           <children>
+                              <Label text="2:">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="q1Label1" layoutX="10.0" layoutY="19.0" text="Question">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="q2AnswerField" prefHeight="56.0" prefWidth="43.0" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="116.0" spacing="5.0">
+                           <children>
+                              <Label text="3:">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="q1Label2" layoutX="10.0" layoutY="19.0" text="Question">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="q3AnswerField" prefHeight="56.0" prefWidth="43.0" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="187.0" spacing="5.0">
+                           <children>
+                              <Label text="4:">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="q1Label11" layoutX="10.0" layoutY="19.0" text="Question">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="q4AnswerField" prefHeight="56.0" prefWidth="43.0" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="258.0" spacing="5.0">
+                           <children>
+                              <Label text="5:">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="q1Label21" layoutX="10.0" layoutY="19.0" text="Question">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="q5AnswerField" prefHeight="56.0" prefWidth="43.0" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="329.0" spacing="5.0">
+                           <children>
+                              <Label text="6:">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="q1Label111" layoutX="10.0" layoutY="19.0" text="Question">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="q6AnswerField" prefHeight="56.0" prefWidth="43.0" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Pane prefHeight="57.0" prefWidth="898.0" VBox.vgrow="ALWAYS" />
+            <HBox spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onBackBtn" prefWidth="100.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="WHITE">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Pane prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onAddAnotherBtn" prefHeight="56.0" prefWidth="210.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Add Another" textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="808.0" layoutY="10.0" mnemonicParsing="false" onAction="#onFinishBtn" prefHeight="56.0" prefWidth="147.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="finish" textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,4 +1,4 @@
-package gui.discountManagement;
+package gui.newPages.chainEmployee.discountManagement;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
