@@ -1,4 +1,4 @@
-package gui.newPages.serviceSpecialist;
+package gui.surveys;
 
 import com.jfoenix.controls.JFXDatePicker;
 

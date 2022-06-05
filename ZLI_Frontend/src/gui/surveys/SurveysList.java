@@ -1,4 +1,4 @@
-package gui.newPages.branchEmployee.surveys;
+package gui.surveys;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
