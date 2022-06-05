@@ -26,7 +26,7 @@ public class CatalogManagement extends GUIController {
 	private ProductController productController;
     
     @FXML
-    private TableView<?> productsTable;
+    private TableView<CatalogItem> productsTable;
 
     @FXML
     private TableColumn<?, ?> imageColumn;
