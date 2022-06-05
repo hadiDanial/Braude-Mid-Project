@@ -4,28 +4,30 @@ import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 
 public class DiscountManagement {
 
     @FXML
-    private TreeTableView<?> discountsTable;
+    private TableView<?> discountsTable;
 
     @FXML
-    private TreeTableColumn<?, ?> startDateColumn;
+    private TableColumn<?, ?> startDateColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> endDateColumn;
+    private TableColumn<?, ?> endDateColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> numProductsColumn;
+    private TableColumn<?, ?> numProductsColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> discountAmountColumn;
+    private TableColumn<?, ?> discountAmountColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> numSoldColumn;
+    private TableColumn<?, ?> numSoldColumn;
 
     @FXML
     void onAddBtn(ActionEvent event) {

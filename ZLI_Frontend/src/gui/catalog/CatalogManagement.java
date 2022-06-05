@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import java.util.ArrayList;
@@ -24,22 +26,22 @@ public class CatalogManagement extends GUIController {
 	private ProductController productController;
     
     @FXML
-    private TreeTableView<?> productsTable;
+    private TableView<?> productsTable;
 
     @FXML
-    private TreeTableColumn<?, ?> imageColumn;
+    private TableColumn<?, ?> imageColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> nameColumn;
+    private TableColumn<?, ?> nameColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> detailsColumn;
+    private TableColumn<?, ?> detailsColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> priceColumn;
+    private TableColumn<?, ?> priceColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> editColumn;
+    private TableColumn<?, ?> editColumn;
 
     @FXML
     void onAddBtn(ActionEvent event) {
