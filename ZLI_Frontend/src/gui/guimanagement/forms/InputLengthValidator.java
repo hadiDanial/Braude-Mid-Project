@@ -15,6 +15,8 @@ public class InputLengthValidator extends Validator
 		super(control, invalidLabel, autoValidate, fieldName + " must be between " + minLength + " and " + maxLength + " characters.", eventListener);
 		this.minLength = minLength;
 		this.maxLength = maxLength;
+		if(minLength == maxLength)
+			this.message = fieldName + " must be exactly " + minLength + " characters long.";
 	}
 
 	@Override
