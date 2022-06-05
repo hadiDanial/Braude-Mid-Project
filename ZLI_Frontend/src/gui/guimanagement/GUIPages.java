@@ -27,7 +27,10 @@ public enum GUIPages
 	ADD_SURVEY_RESULT("surveys/branchEmployee/AddSurveyResult.fxml", "Add Survey Result"),
 	VIEW_SURVEYS_BRANCH_EMPLOYEE("surveys/branchEmployee/SurveysList.fxml", "Surveys"),
 	
-	
+	BRANCH_EMPLOYEE_PORTAL("gui.users.loginPortals.BranchEmployeePortal.fxml", "Home - Branch Employee"),
+	CHAIN_EMPLOYEE_PORTAL("gui.users.loginPortals.ChainEmployeePortal.fxml", "Home - Chain Employee"),
+	CS_EMPLOYEE_PORTAL("gui.users.loginPortals.EmployeePortalCS.fxml", "Home - Customer Service Employee"),
+	SPECIALIST_EMPLOYEE_PORTAL("gui.users.loginPortals.ServiceSpecialistPortal.fxml", "Home - Service Specialist Employee"),
 	
 	
 	;

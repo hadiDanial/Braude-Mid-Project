@@ -1,10 +1,10 @@
-package gui.newPages.serviceSpecialist;
+package gui.users.loginPortals;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class EmployeePortalCS {
+public class ServiceSpecialistPortal {
 
     @FXML
     private Label nameLabel;
@@ -16,12 +16,7 @@ public class EmployeePortalCS {
     private Label branchLabel;
 
     @FXML
-    void onFeedBackSurveyBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onReviewComplaintsBtn(ActionEvent event) {
+    void onInsertSurveyAnalysisBtn(ActionEvent event) {
 
     }
 
