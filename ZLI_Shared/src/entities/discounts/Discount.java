@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 
 import entities.products.CatalogItem;
+import utility.DateFormatter;
 
 public abstract class Discount implements Serializable
 {
@@ -15,6 +16,7 @@ public abstract class Discount implements Serializable
 	private String discountName;
 	private float discountValue;
 	private String discountType;
+	
 	
 	public static final String PERCENTAGE_DISCRIMINATOR = "P";
 	public static final String VALUE_DISCRIMINATOR = "V";
@@ -47,6 +49,10 @@ public abstract class Discount implements Serializable
 	public int getDiscountId()
 	{
 		return discountId;
+	}
+	public int getProductsSize()
+	{
+		return products.size();
 	}
 	public void setDiscountId(int discountId)
 	{
@@ -143,6 +149,17 @@ public abstract class Discount implements Serializable
 	{
 		return "Discount [discountId=" + discountId + ", discountStartDate=" + discountStartDate + ", discountEndDate="
 				+ discountEndDate + ", products=" + products + ", discountName=" + discountName + "]";
+	}
+
+	public String getFormattedDiscountStartDate()
+	{
+		return DateFormatter.formatInstant(discountStartDate, true);
+	}
+
+	
+	public String getFormattedDiscountEndDate()
+	{
+		return DateFormatter.formatInstant(discountEndDate, true);
 	}
 	
 }
