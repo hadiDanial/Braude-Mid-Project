@@ -19,7 +19,7 @@ import entities.products.Product;
 import enums.ColorEnum;
 import enums.ItemType;
 import enums.ProductType;
-import requests.UpdateEntityRequest;
+import requests.EntityRequestWithId;
 
 public class ProductController
 {
@@ -64,7 +64,7 @@ public class ProductController
 	 *                      updated properties of the base product.
 	 * @return
 	 */
-	public boolean updateBaseProduct(UpdateEntityRequest<BaseProduct> updateRequest)
+	public boolean updateBaseProduct(EntityRequestWithId<BaseProduct> updateRequest)
 	{
 		// String conditionFieldName, String conditionValue, String tableName,
 		// ArrayList<String> keys, IObjectToPreparedStatementParameters<T> objToPS
@@ -73,17 +73,24 @@ public class ProductController
 				.asList(Arrays.copyOfRange(Tables.allProductsColumnNames, 0, Tables.allProductsColumnNames.length - 1));
 		return databaseConnection.updateAllMatchingCondition(Tables.allProductsColumnNames[0], id + "",
 				Tables.ALL_PRODUCTS_TABLE_NAME, (ArrayList<String>) keys,
-				convertBaseProductToPS(updateRequest.getUpdatedEntity()));
+				convertBaseProductToPS(updateRequest.getEntity()));
 	}
 
 	/**
 	 * Gets the entire catalog.
 	 */
-	public ArrayList<CatalogItem> getAllProducts()
+	public ArrayList<CatalogItem> getAllCatalogItems()
 	{
 		ResultSet rs = databaseConnection.getAll(Tables.ALL_PRODUCTS_TABLE_NAME);
 		return convertRSToCatalogItemArray(rs, null);
 	}
+
+	public ArrayList<Item> getAllItems()
+	{
+		ResultSet rs = databaseConnection.getBySimpleCondition("productOrItem", BaseProduct.ITEM_DISCRIMINATOR, Tables.ALL_PRODUCTS_TABLE_NAME);
+		return convertRSToItemArray(rs);		
+	}
+	
 
 	/**
 	 * Gets the catalog by branch.
@@ -126,6 +133,24 @@ public class ProductController
 			}
 			rs.close();
 			return products;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	private ArrayList<Item> convertRSToItemArray(ResultSet rs)
+	{
+		ArrayList<Item> items = new ArrayList<Item>();
+		try
+		{
+			while (rs.next())
+			{
+				items.add((Item) convertRSToBaseProduct(rs, false));
+			}
+			rs.close();
+			return items;
 		} catch (SQLException e)
 		{
 			e.printStackTrace();

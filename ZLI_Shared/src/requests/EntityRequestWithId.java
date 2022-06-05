@@ -2,10 +2,10 @@ package requests;
 
 import java.io.Serializable;
 
-public class UpdateEntityRequest<T extends Serializable> implements Serializable
+public class EntityRequestWithId<T extends Serializable> implements Serializable
 {
 	private int entityId;
-	private T updatedEntity;
+	private T entity;
 	
 	private static final long serialVersionUID = -5169005239090688111L;
 
@@ -19,13 +19,13 @@ public class UpdateEntityRequest<T extends Serializable> implements Serializable
 		this.entityId = entityId;
 	}
 
-	public T getUpdatedEntity()
+	public T getEntity()
 	{
-		return updatedEntity;
+		return entity;
 	}
 
-	public void setUpdatedEntity(T updatedEntity)
+	public void setEntity(T updatedEntity)
 	{
-		this.updatedEntity = updatedEntity;
+		this.entity = updatedEntity;
 	}
 }

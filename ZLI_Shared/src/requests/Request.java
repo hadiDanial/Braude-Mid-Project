@@ -11,6 +11,11 @@ public class Request implements Serializable
 	private RequestType requestType;
 	private Object message;
 	private User user;
+	public Request(RequestType requestType)
+	{
+		super();
+		this.requestType = requestType;
+	}
 	public Request(RequestType requestType, Object message)
 	{
 		super();

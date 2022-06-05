@@ -22,8 +22,9 @@ public enum RequestType
 	// Products/Catalog
 	ADD_PRODUCT(new UserRole[] { UserRole.ChainEmployee }),
 	UPDATE_PRODUCT(new UserRole[] { UserRole.ChainEmployee }),
-	GET_ALL_PRODUCTS(UserRole.values()),
+	GET_CATALOG(UserRole.values()),
 	GET_CATALOG_BY_BRANCH(UserRole.values()),
+	GET_ALL_ITEMS(UserRole.values()),
 	
 	//Survey
 	CREATE_SURVEY(new UserRole[]{UserRole.BranchManager}),
@@ -39,7 +40,7 @@ public enum RequestType
 	
 	// Branches
 	GET_ALL_BRANCHES(UserRole.values()), 
-	GET_USER_CREDIT_CARD(new UserRole[] {UserRole.Customer }),;
+	GET_USER_CREDIT_CARD(new UserRole[] {UserRole.Customer });
 	
 	private UserRole[] permittedRoles;
 
