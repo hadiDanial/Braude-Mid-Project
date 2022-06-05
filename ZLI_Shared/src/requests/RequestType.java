@@ -39,7 +39,7 @@ public enum RequestType
 	
 	// Branches
 	GET_ALL_BRANCHES(UserRole.values()), 
-	GET_USER_CREDIT_CARD(new UserRole[] {UserRole.Customer });
+	GET_USER_CREDIT_CARD(new UserRole[] {UserRole.Customer }),;
 	
 	private UserRole[] permittedRoles;
 
