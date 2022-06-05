@@ -1,5 +1,7 @@
 package gui.guimanagement;
 
+import gui.discountManagement.DiscountManagement;
+
 public enum GUIPages
 {
 	// TODO: Add all pages
@@ -21,6 +23,7 @@ public enum GUIPages
 	CHECKOUT_PAYMENT("orders/payment/PaymentPage.fxml", "Checkout - Payment"),
 	CHECKOUT_END("orders/checkoutEnd/CheckOutEnd.fxml", "Sending order..."),
 	NewDiscount("discountManagement/NewDiscount.fxml", "Add new discount"),
+	DISCOUNT_MANAGEMENT("discountManagement/DiscountManagement.fxml", "Discount Management"),
 	NEW_PRODUCT("catalog/NewProduct.fxml", "Add new product"),
 	
 	COMPLAINT_PAGE("complaints/NewComplaint.fxml", "Complaints"),

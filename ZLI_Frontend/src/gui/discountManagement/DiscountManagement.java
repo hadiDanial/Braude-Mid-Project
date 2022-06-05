@@ -31,22 +31,22 @@ public class DiscountManagement extends GUIController {
 
 
     @FXML
-    private TableView<?> discountsTable;
+    private TableView<Discount> discountsTable;
 
     @FXML
-    private TableColumn<?, ?> startDateColumn;
+    private TableColumn<Discount, String> startDateColumn;
 
     @FXML
-    private TableColumn<?, ?> endDateColumn;
+    private TableColumn<Discount, String> endDateColumn;
 
     @FXML
-    private TableColumn<?, ?> numProductsColumn;
+    private TableColumn<Discount, Integer> numProductsColumn;
 
     @FXML
-    private TableColumn<?, ?> discountAmountColumn;
+    private TableColumn<Discount, Float> discountAmountColumn;
 
     @FXML
-    private TableColumn<?, ?> numSoldColumn;
+    private TableColumn<Discount, Integer> numSoldColumn;
 
     @FXML
     void onAddBtn(ActionEvent event) {
@@ -81,7 +81,7 @@ public class DiscountManagement extends GUIController {
 						else
 						{
 							discountsList.setAll((ArrayList<Discount>) message);
-                            discountsTable.setRoot();						
+                            discountsTable.setItems(discountsList);						
 						}
 					}
 				});
@@ -93,9 +93,9 @@ public class DiscountManagement extends GUIController {
     {
 	 	startDateColumn.setCellValueFactory(new PropertyValueFactory<Discount,String >("FormattedDiscountStartDate"));
         endDateColumn.setCellValueFactory(new PropertyValueFactory<Discount,String >("FormattedDiscountEndDate"));
-        numProductsColumn.setCellValueFactory(new PropertyValueFactory<Discount,Float >("ProductsSize"));
+        numProductsColumn.setCellValueFactory(new PropertyValueFactory<Discount,Integer >("ProductsSize"));
         discountAmountColumn.setCellValueFactory(new PropertyValueFactory<Discount,Float >("DiscountValue"));
-        numSoldColumn.setCellValueFactory(new PropertyValueFactory<Discount,Float >("DiscountValue"));  
+        numSoldColumn.setCellValueFactory(new PropertyValueFactory<Discount,Integer >("DiscountValue"));  
     }
 
 }
