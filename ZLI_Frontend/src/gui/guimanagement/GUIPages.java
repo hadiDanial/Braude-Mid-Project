@@ -19,7 +19,8 @@ public enum GUIPages
 	CHECKOUT_GREETING("orders/delivery/info/SenderInfoPage.fxml", "Checkout"),
 	CHECKOUT_DELIVERY("orders/delivery/DeliveryPage.fxml", "Checkout"),
 	CHECKOUT_PAYMENT("orders/payment/PaymentPage.fxml", "Checkout - Payment"),
-	NewProduct("catalog/NewProduct.fxml", "Add new product");
+	NewProduct("catalog/NewProduct.fxml", "Add new product"), 
+	NewDiscount("discountManagement/NewDiscount.fxml", "Add new discount");
 
 	private final String fxmlFile;
 	private final String pageTitle;
