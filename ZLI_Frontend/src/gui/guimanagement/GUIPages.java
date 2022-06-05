@@ -18,7 +18,8 @@ public enum GUIPages
 	CART_ELEMENT("orders/cart/CartProductElement.fxml", ""),
 	CHECKOUT_GREETING("orders/delivery/info/SenderInfoPage.fxml", "Checkout"),
 	CHECKOUT_DELIVERY("orders/delivery/DeliveryPage.fxml", "Checkout"),
-	CHECKOUT_PAYMENT("orders/payment/PaymentPage.fxml", "Checkout - Payment"); 
+	CHECKOUT_PAYMENT("orders/payment/PaymentPage.fxml", "Checkout - Payment"),
+	CHECKOUT_END("orders/checkoutEnd/CheckOutEnd.fxml", "Sending order..."); 
 
 	private final String fxmlFile;
 	private final String pageTitle;
