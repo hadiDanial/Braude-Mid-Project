@@ -51,7 +51,7 @@ public class OrderControllerTest
 
  	private void testGetPendingOrders()
  	{
- 		ArrayList<Order> pending = OrderController.getInstance().getPendingOrders(2); 
+ 		ArrayList<Order> pending = OrderController.getInstance().getOrdersByStatusAndBranch(2, OrderStatus.Pending); 
  		for (Order order : pending)
  		{
  			System.out.println(order);
