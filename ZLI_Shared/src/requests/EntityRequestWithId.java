@@ -2,7 +2,7 @@ package requests;
 
 import java.io.Serializable;
 
-public class EntityRequestWithId<T extends Serializable> implements Serializable
+public class EntityRequestWithId<T> implements Serializable
 {
 	private int entityId;
 	private T entity;
