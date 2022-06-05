@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0" style="-fx-background-radius: 15; -fx-border-color: #078082;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.branchEmployee.surveys.SurveysList">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0" style="-fx-background-radius: 15; -fx-border-color: #078082;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.surveys.specialist.SurveyAnalyses">
    <children>
       <VBox layoutX="1.0" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,11 +27,15 @@
             </HBox>
             <TreeTableView fx:id="discountsTable" prefHeight="454.0" prefWidth="898.0">
                <columns>
-                  <TreeTableColumn fx:id="surveyIDColumn" prefWidth="75.0" text="Survey ID" />
-                  <TreeTableColumn fx:id="startDateColumn" prefWidth="75.0" text="Start Date" />
-                  <TreeTableColumn fx:id="endDateColumn" prefWidth="75.0" text="End Date" />
-                  <TreeTableColumn fx:id="numOfSurveyedCustomersColumn" prefWidth="140.0" text="# Surveyed" />
-                  <TreeTableColumn fx:id="resultColumn" prefWidth="75.0" text="Add Result" />
+                  <TreeTableColumn fx:id="complaintIDColumn" prefWidth="75.0" text="Survey ID" />
+                  <TreeTableColumn fx:id="complaintIDColumn1" prefWidth="140.0" text="# Surveyed" />
+                  <TreeTableColumn fx:id="customerIDColumn" prefWidth="59.0" text="Question 1" />
+                  <TreeTableColumn fx:id="customerNameColumn" prefWidth="75.0" text="Question 2" />
+                  <TreeTableColumn fx:id="dateOpenedColumn" prefWidth="75.0" text="Question 3" />
+                  <TreeTableColumn fx:id="timeSinceOpeningColumn" prefWidth="75.0" text="Question 4" />
+                  <TreeTableColumn fx:id="timeSinceOpeningColumn1" prefWidth="75.0" text="Question 5" />
+                  <TreeTableColumn fx:id="timeSinceOpeningColumn2" prefWidth="75.0" text="Question 6" />
+                  <TreeTableColumn fx:id="reviewColumn1" prefWidth="75.0" text="Add Analasys" />
                </columns>
                <columnResizePolicy>
                   <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

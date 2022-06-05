@@ -92,6 +92,9 @@ public class UserController
 			SceneManager.loadNewScene(GUIPages.CATALOG_PAGE, true);
 			SceneManager.setHeaderButtonVisibility(true, true);
 			break;
+		case CustomerServiceEmployee:
+			SceneManager.loadNewScene(GUIPages.COMPLAINT_PAGE, true);
+			SceneManager.setHeaderButtonVisibility(true, false);
 
 		default:
 			break;

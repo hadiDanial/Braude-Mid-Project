@@ -77,27 +77,7 @@ public class PaymentPage extends FormController
 	@FXML
 	void onPayBtn(ActionEvent event)
 	{
-		orderController.sendOrderToServer(new IResponse<Boolean>()
-		{
-			
-			@Override
-			public void executeAfterResponse(Object message)
-			{
-				Boolean successful = (Boolean) message;
-				if(successful)
-				{
-					SceneManager.clearHistory();
-					// TODO: GUIPages.OPERATION_SUCCESSFUL, return to home page
-//					SceneManager.loadModalWindow(GUIPages.OPERATION_SUCCESSFUL, null);
-					SceneManager.openLoadingWindow();
-					SceneManager.displayErrorMessage("Success");
-				}
-				else
-				{
-					SceneManager.displayErrorMessage("Failed to order...");
-				}
-			}
-		});
+		SceneManager.loadNewScene(GUIPages.CHECKOUT_END, false);		
 	}
 
 	@Override
