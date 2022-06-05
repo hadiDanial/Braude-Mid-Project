@@ -1,9 +1,12 @@
 package gui.orders.delivery.deliveryOperator;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import controllers.BranchController;
 import controllers.OrderController;
+import entities.other.Branch;
 import entities.other.Location;
 import entities.users.Delivery;
 import gui.guimanagement.GUIController;
@@ -12,17 +15,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import utility.IResponse;
 
 public class DeliveryList extends GUIController{
 
 	public static ObservableList<Delivery> deliveryList = FXCollections.observableArrayList();
+    public static ObservableList<Branch> branchList = FXCollections.observableArrayList();
     OrderController orderController;
+    BranchController branchController;
 
     @FXML
     private TableView<Delivery> deliveryTable;
+
+    @FXML
+    private MenuButton branchDropDown;
 
     @FXML
     private TableColumn<Delivery,Integer > orderIDColumn;
@@ -53,7 +63,16 @@ public class DeliveryList extends GUIController{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeTableColumn();
-        orderController = orderController.getInstance();
+        orderController = OrderController.getInstance();
+        branchController = BranchController.getInstance();
+        branchController.getAllBranches(new IResponse<ArrayList<Branch>>() {
+
+            @Override
+            public void executeAfterResponse(Object message) {
+            }
+        });
+        branchDropDown.getItems().addAll(branchList);
+
 		orderController.(new IResponse<ArrayList<delivery>>()
 		{
 			

@@ -49,7 +49,7 @@ public class ProductController
 	{
 		if(catalog == null || catalog.isEmpty())
 		{			
-			Request req = new Request(RequestType.GET_ALL_PRODUCTS, null, userController.getLoggedInUser());
+			Request req = new Request(RequestType.GET_CATALOG, null, userController.getLoggedInUser());
 			ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
 		}
 		else 
