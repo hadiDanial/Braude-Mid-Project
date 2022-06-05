@@ -89,7 +89,7 @@ public class UserController
 		switch (loggedInUser.getRole())
 		{
 		case Customer:
-			SceneManager.loadNewScene(GUIPages.DISCOUNT_MANAGEMENT, true);
+			SceneManager.loadNewScene(GUIPages.DELIVERY_LIST, true);
 			SceneManager.setHeaderButtonVisibility(true, true);
 			break;
 		case CustomerServiceEmployee:

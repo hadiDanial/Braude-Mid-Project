@@ -32,11 +32,13 @@ public enum GUIPages
 	VIEW_SURVEY_SPECIALIST("surveys/specialist/SurveyAnalysis.fxml", "Surveys - Specialist"),
 	ADD_SURVEY_RESULT("surveys/branchEmployee/AddSurveyResult.fxml", "Add Survey Result"),
 	VIEW_SURVEYS_BRANCH_EMPLOYEE("surveys/branchEmployee/SurveysList.fxml", "Surveys"),
-	
+	DELIVERY_LIST("orders/delivery/deliveryOperator/DeliveryList.fxml", "Delivery List"),
+	DELIVERY_OPERATOR_PORTAL("orders/delivery/deliveryOperator/DeliveryOperatorPortal.fxml", "Delivery Operator Portal"),
+
 	BRANCH_EMPLOYEE_PORTAL("gui.users.loginPortals.BranchEmployeePortal.fxml", "Home - Branch Employee"),
 	CHAIN_EMPLOYEE_PORTAL("gui.users.loginPortals.ChainEmployeePortal.fxml", "Home - Chain Employee"),
 	CS_EMPLOYEE_PORTAL("gui.users.loginPortals.EmployeePortalCS.fxml", "Home - Customer Service Employee"),
-	SPECIALIST_EMPLOYEE_PORTAL("gui.users.loginPortals.ServiceSpecialistPortal.fxml", "Home - Service Specialist Employee"),
+	SPECIALIST_EMPLOYEE_PORTAL("gui.users.loginPortals.ServiceSpecialistPortal.fxml", "Home - Service Specialist Employee");
 	
 	
 	

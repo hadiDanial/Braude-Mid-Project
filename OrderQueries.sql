@@ -108,6 +108,7 @@ INSERT INTO Locations (city, zipCode, street) VALUES ('Tel-Aviv', 9012, 'Dizengo
 INSERT INTO Branches (managerId, branchName, locationId) VALUES (123456789, 'Haifa', 1);
 INSERT INTO Branches (managerId, branchName, locationId) VALUES (987654321, 'Karmiel', 2);
 
+insert into deliveries (orderId,recipientName,recipientPhoneNumber,locationId,delivered) value (1,"hadi",0505555555,1,0)
              
 INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, color, details, orderDate, deliveryDate) values (default, 123456789, 1, 'Pending', 15, 'Hello', 'Red', 'Valentines roses', now(), DATE_ADD(NOW(), INTERVAL 30 MINUTE));
 INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, color, details, orderDate, deliveryDate) values (default, 123456789, 1, 'Pending', 15, 'Greetings', 'Yellow', 'Yellow', now(), DATE_ADD(NOW(), INTERVAL 7 DAY));
