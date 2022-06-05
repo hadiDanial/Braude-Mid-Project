@@ -1,8 +1,9 @@
-package gui.newPages.chainEmployee.discountManagement;
+package gui.discountManagement;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 
+import gui.guimanagement.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -59,7 +60,7 @@ public class NewDiscount {
 
     @FXML
     void onBackBtn(ActionEvent event) {
-
+        SceneManager.loadPreviousPage();
     }
 
 }

@@ -20,7 +20,7 @@ public enum GUIPages
 	CHECKOUT_DELIVERY("orders/delivery/DeliveryPage.fxml", "Checkout"),
 	CHECKOUT_PAYMENT("orders/payment/PaymentPage.fxml", "Checkout - Payment"),
 	CHECKOUT_END("orders/checkoutEnd/CheckOutEnd.fxml", "Sending order..."),
-	
+	NewDiscount("discountManagement/NewDiscount.fxml", "Add new discount"),
 	NEW_PRODUCT("catalog/NewProduct.fxml", "Add new product"),
 	
 	COMPLAINT_PAGE("complaints/NewComplaint.fxml", "Complaints"),

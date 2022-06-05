@@ -1,5 +1,7 @@
-package gui.newPages.chainEmployee.discountManagement;
+package gui.discountManagement;
 
+import gui.guimanagement.GUIPages;
+import gui.guimanagement.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeTableColumn;
@@ -27,12 +29,12 @@ public class DiscountManagement {
 
     @FXML
     void onAddBtn(ActionEvent event) {
-
+        SceneManager.loadNewScene(GUIPages.NewDiscount, true);
     }
 
     @FXML
     void onBackBtn(ActionEvent event) {
-
+        SceneManager.loadPreviousPage();
     }
 
 }
