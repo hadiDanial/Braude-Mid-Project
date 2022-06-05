@@ -43,7 +43,7 @@ public class CatalogManagement extends GUIController {
 
     @FXML
     void onAddBtn(ActionEvent event) {
-        SceneManager.loadNewScene(GUIPages.NewProduct, true);
+        SceneManager.loadNewScene(GUIPages.NEW_PRODUCT, true);
     }
 
     @FXML
