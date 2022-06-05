@@ -199,11 +199,11 @@ public class OrderController
 		return res;
 	}
 
-	public ArrayList<Order> getPendingOrders(int branchId)
+	public ArrayList<Order> getOrdersByStatusAndBranch(int branchId, OrderStatus orderStatus)
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("branchId", branchId + "");
-		map.put("orderStatus", OrderStatus.Pending.name());
+		map.put("orderStatus", orderStatus.name());
 		ResultSet ordersRS = databaseConnection.getByConditions(Tables.ORDERS_TABLE_NAME, map);
 		ArrayList<Order> pendingOrders = convertRSToOrderArray(ordersRS);
 		for (Order order : pendingOrders)
