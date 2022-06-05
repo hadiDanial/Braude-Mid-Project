@@ -16,7 +16,7 @@ public class InputLengthValidator extends Validator
 		this.minLength = minLength;
 		this.maxLength = maxLength;
 		if(minLength == maxLength)
-			this.message = fieldName + " must be exactly " + minLength + " characters long.";
+			this.message = fieldName + " must be exactly " + minLength + " characters long.  ";
 	}
 
 	@Override

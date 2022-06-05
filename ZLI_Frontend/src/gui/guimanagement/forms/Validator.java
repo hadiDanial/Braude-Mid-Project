@@ -21,7 +21,7 @@ public abstract class Validator
 		this.control = control;
 		this.invalidLabel = invalidLabel;
 		this.autoValidate = autoValidate;
-		this.message = message;
+		this.message = message + "  ";
 		this.eventListener = eventListener;
 		if(this.invalidLabel != null)
 		{			
