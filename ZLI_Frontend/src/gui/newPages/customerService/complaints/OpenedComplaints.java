@@ -1,4 +1,4 @@
-package gui.newPages.serviceSpecialist;
+package gui.newPages.customerService.complaints;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
