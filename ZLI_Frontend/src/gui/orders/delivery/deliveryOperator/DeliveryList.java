@@ -1,39 +1,94 @@
 package gui.orders.delivery.deliveryOperator;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import controllers.OrderController;
+import entities.other.Location;
+import entities.users.Delivery;
+import gui.guimanagement.GUIController;
+import gui.guimanagement.SceneManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class DeliveryList {
+public class DeliveryList extends GUIController{
 
-    @FXML
-    private TreeTableView<?> discountsTable;
-
-    @FXML
-    private TreeTableColumn<?, ?> orderIDColumn;
+	public static ObservableList<Delivery> deliveryList = FXCollections.observableArrayList();
+    OrderController orderController;
 
     @FXML
-    private TreeTableColumn<?, ?> recipientColumn;
+    private TableView<Delivery> deliveryTable;
 
     @FXML
-    private TreeTableColumn<?, ?> addressColumn;
+    private TableColumn<Delivery,Integer > orderIDColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> deliveryDateColumn;
+    private TableColumn<Delivery, String> recipientColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> numOfItemsColumn;
+    private TableColumn<Delivery, Location> addressColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> preiceColumn;
+    private TableColumn<Delivery, String> deliveryDateColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> confirmColumn;
+    private TableColumn<Delivery, Integer> numOfItemsColumn;
+
+    @FXML
+    private TableColumn<Delivery, Float> preiceColumn;
+
+    @FXML
+    private TableColumn<Delivery,Boolean > confirmColumn;
 
     @FXML
     void onBackBtn(ActionEvent event) {
+        SceneManager.loadPreviousPage();
+    }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initializeTableColumn();
+        orderController = orderController.getInstance();
+		orderController.(new IResponse<ArrayList<delivery>>()
+		{
+			
+			@Override
+			public void executeAfterResponse(Object message)
+			{
+				Platform.runLater(new Runnable()
+				{
+					
+					@Override
+					public void run()
+					{
+						VBox scrollPaneContent = new VBox();
+						if(message == null)
+							SceneManager.displayErrorMessage("Failed to load Deliveries!");
+						else
+						{
+							deliveryList.setAll((ArrayList<Delivery>) message);
+                            deliveryTable.setItems(deliveryList);						
+						}
+					}
+				});
+			}
+		});
+	}
+
+    private void initializeTableColumn()
+    {
+        orderIDColumn.setCellValueFactory(new PropertyValueFactory<Delivery,Integer >("Id"));
+        recipientColumn.setCellValueFactory(new PropertyValueFactory<Delivery,String >("RecipientName"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<Delivery,Location >("Location"));
+        deliveryDateColumn.setCellValueFactory(new PropertyValueFactory<Delivery,String >("FormattedDeliveryDate"));
+        numOfItemsColumn.setCellValueFactory(new PropertyValueFactory<Delivery,Integer >("ItemsCount")); 
+        preiceColumn.setCellValueFactory(new PropertyValueFactory<Delivery,Float >("Price"));
+        confirmColumn.setCellValueFactory(new PropertyValueFactory<Delivery,Boolean >("DiscountValue"));  
     }
 
 }
