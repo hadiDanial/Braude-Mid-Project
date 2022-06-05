@@ -20,7 +20,17 @@ public enum GUIPages
 	CHECKOUT_DELIVERY("orders/delivery/DeliveryPage.fxml", "Checkout"),
 	CHECKOUT_PAYMENT("orders/payment/PaymentPage.fxml", "Checkout - Payment"),
 	CHECKOUT_END("orders/checkoutEnd/CheckOutEnd.fxml", "Sending order..."),
-	COMPLAINT_PAGE("complaints/NewComplaint.fxml","Complaints");
+	COMPLAINT_PAGE("complaints/NewComplaint.fxml", "Complaints"),
+	ADD_SURVEY("surveys/csEmployee/AddSurvey.fxml", "Add new Survey"),
+	ADD_SURVEY_ANALYSIS("surveys/specialist/AddAnalysis.fxml", "Add survey analysis"),
+	VIEW_SURVEY_SPECIALIST("surveys/specialist/SurveyAnalysis.fxml", "Surveys - Specialist"),
+	ADD_SURVEY_RESULT("surveys/branchEmployee/AddSurveyResult.fxml", "Add Survey Result"),
+	VIEW_SURVEYS_BRANCH_EMPLOYEE("surveys/branchEmployee/SurveysList.fxml", "Surveys"),
+	
+	
+	
+	
+	;
 
 	private final String fxmlFile;
 	private final String pageTitle;

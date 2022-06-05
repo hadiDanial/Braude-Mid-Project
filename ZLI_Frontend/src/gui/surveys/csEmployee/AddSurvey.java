@@ -1,4 +1,4 @@
-package gui.surveys;
+package gui.surveys.csEmployee;
 
 import com.jfoenix.controls.JFXDatePicker;
 
@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class FeedBackSurvey {
+public class AddSurvey {
 
     @FXML
     private TextField nameField;

@@ -1,4 +1,4 @@
-package gui.surveys;
+package gui.surveys.specialist;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
