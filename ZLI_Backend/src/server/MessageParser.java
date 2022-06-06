@@ -6,9 +6,11 @@ import controllers.OrderController;
 import controllers.ProductController;
 import controllers.UserController;
 import entities.discounts.Discount;
+import entities.other.Branch;
 import entities.products.BaseProduct;
 import entities.users.Order;
 import entities.users.User;
+import enums.OrderStatus;
 import exceptions.UnauthenticatedUserException;
 import exceptions.UnauthorizedRoleException;
 import requests.Request;
@@ -89,6 +91,11 @@ public class MessageParser
 			{
 				// TODO: Implement
 				return true;
+			}
+			case GET_ALL_DELIVERY_BRANCH:
+			{
+				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId) req.getMessage();
+				return orderController.getOrdersByStatusAndBranch(entityRequestWithId.getEntityId(),entityRequestWithId.getEntity());
 			}
 			
 			// Discounts

@@ -6,6 +6,7 @@ import entities.discounts.Discount;
 import entities.products.*;
 import entities.users.Order;
 import enums.OrderStatus;
+import requests.EntityRequestWithId;
 import requests.Request;
 import requests.RequestType;
 import utility.IResponse;
@@ -97,6 +98,16 @@ public class OrderController
 		order.addProduct(item);
 		System.out.println("Added product to order. Cart:\n" + order.getProducts());
 	}
+
+	public void getDeliveryByBranch(IResponse<Order> response,int BranchId)
+    {
+        EntityRequestWithId request = new EntityRequestWithId();
+        request.setEntityId(BranchId);
+        request.setEntity(OrderStatus.ToBeDelivered);
+		Request requests = new Request(RequestType.GET_ALL_DELIVERY_BRANCH, request);
+        clientController.sendRequest(requests, response);
+
+    }
 
 	public Order getOrder()
 	{
