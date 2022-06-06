@@ -2,31 +2,27 @@ package gui.newPages.customerService.complaints;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.TableColumn;
 
 public class OpenedComplaints {
 
     @FXML
-    private TreeTableView<?> discountsTable;
+    private TableColumn<?, ?> complaintIDColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> complaintIDColumn;
+    private TableColumn<?, ?> customerIDColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> customerIDColumn;
+    private TableColumn<?, ?> customerNameColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> customerNameColumn;
+    private TableColumn<?, ?> dateOpenedColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> dateOpenedColumn;
+    private TableColumn<?, ?> timeSinceOpeningColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> timeSinceOpeningColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> reviewColumn;
+    private TableColumn<?, ?> reviewColumn;
 
     @FXML
     void onAddBtn(ActionEvent event) {
