@@ -12,6 +12,7 @@ import controllers.OrderController;
 import controllers.UserController;
 import entities.users.CreditCard;
 import entities.users.Order;
+import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.FormController;
 import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
@@ -115,5 +116,9 @@ public class PaymentPage extends FormController
 		List<ValidatorList> paymentChecker = Arrays.asList(new ValidatorList[]
 		{ new ValidatorList(paymentValidators) });
 		setupFormController(paymentChecker, payBtn);
+		
+		
+		ButtonAnimator.addButtonAnimations(payBtn, backBtn);
 	}
+	
 }
