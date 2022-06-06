@@ -27,6 +27,20 @@ public class CEOPortal extends GUIController
     void onViewReportsBtn(ActionEvent event) {
         SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_COMPLAINTS_CEO, true);
     }
+
+    @FXML
+    void onViewSalesReportsBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void onViewOrdersReportsBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void onViewComplaintsReportsBtn(ActionEvent event) {
+
+    }
+    
     @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
