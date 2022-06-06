@@ -103,12 +103,11 @@ public class OrderController
 
 	public void getDeliveryByBranch(IResponse<Order> response,int BranchId)
     {
-        EntityRequestWithId request = new EntityRequestWithId();
+        EntityRequestWithId<OrderStatus> request = new EntityRequestWithId<OrderStatus>();
         request.setEntityId(BranchId);
         request.setEntity(OrderStatus.ToBeDelivered);
 		Request requests = new Request(RequestType.GET_ALL_DELIVERY_BRANCH, request);
         clientController.sendRequest(requests, response);
-
     }
 	
 	public void getAllOrdersByStatus(IResponse<ArrayList<Order>> iResponse,OrderStatus orderStatus)
@@ -116,6 +115,15 @@ public class OrderController
         Request request = new Request(RequestType.GET_ALL_ORDER_STATUS,orderStatus);
         clientController.sendRequest(request, iResponse);
     }
+
+	public void updateOrderStatus(IResponse<Boolean> response,int orderId,OrderStatus orderStatus)
+	{
+        EntityRequestWithId<OrderStatus> request = new EntityRequestWithId<OrderStatus>();
+        request.setEntityId(orderId);
+        request.setEntity(orderStatus);
+		Request requests = new Request(RequestType.UPDATES_ORDER_STATUS, request);
+        clientController.sendRequest(requests, response);
+	}
 
 	public Order getOrder()
 	{

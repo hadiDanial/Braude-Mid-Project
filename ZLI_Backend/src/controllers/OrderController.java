@@ -183,21 +183,22 @@ public class OrderController
 	 * @param orderStatus New order status.
 	 * @return True if update was successful.
 	 */
-	public boolean updateOrderStatus(Order order, OrderStatus orderStatus)
+	public boolean updateOrderStatus(Integer id, OrderStatus orderStatus)
 	{
-		boolean res = databaseConnection.updateById(order.getOrderId(), ID_FIELD_NAME, Tables.ORDERS_TABLE_NAME,
+		Order order = getOrder(id);
+		boolean res = databaseConnection.updateById(id, ID_FIELD_NAME, Tables.ORDERS_TABLE_NAME,
 				Tables.ordersColumnNames[2], orderStatus.name());
 		if (res)
 		{
-			EmailManager.sendEmail("Zerli - Order #" + order.getOrderId() + " Status Update",
+			EmailManager.sendEmail("Zerli - Order #" + id + " Status Update",
 					"Your order status has been updated to:" + orderStatus.name() + "<br>"
 							+ "Thank you for your patience!",
 					order.getCustomer());
 			if(orderStatus == OrderStatus.Delivered)
 			{
-				databaseConnection.updateById(order.getOrderId(), "orderId", Tables.DELIVERIES_TABLE_NAME, "delivered", "true");
+				databaseConnection.updateById(id, "orderId", Tables.DELIVERIES_TABLE_NAME, "delivered", "true");
 			}
-			if(orderStatus == OrderStatus.Canceled)
+		 	if(orderStatus == OrderStatus.Canceled)
 			{
 				userController.updateUserCredit(order.getCustomer(),order.getTotalCost());
 			}

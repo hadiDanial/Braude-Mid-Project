@@ -101,6 +101,11 @@ public class MessageParser
 			{
 				return orderController.getOrdersByStatus((OrderStatus) req.getMessage());
 			}
+			case UPDATES_ORDER_STATUS:
+			{
+				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId) req.getMessage();
+				return orderController.updateOrderStatus(entityRequestWithId.getEntityId(),entityRequestWithId.getEntity());
+			}
 			
 			
 			case GET_ALL_DELIVERY_BRANCH:
