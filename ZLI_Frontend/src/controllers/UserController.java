@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import entities.users.CreditCard;
 import entities.users.User;
 import enums.*;
@@ -105,5 +107,9 @@ public class UserController
 		Request req = new Request(RequestType.CHECK_IF_FIRST_ORDER, loggedInUser);
 		clientController.sendRequest(req, response);
 	}
+    public void getAllUsers(IResponse<ArrayList<User>> response) {
+		Request req = new Request(RequestType.GET_ALL_USERS, loggedInUser);
+		clientController.sendRequest(req, response);
+    }
 
 }

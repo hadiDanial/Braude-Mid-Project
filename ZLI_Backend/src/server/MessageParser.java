@@ -70,6 +70,7 @@ public class MessageParser
 				if((Integer) req.getMessage() != req.getUser().getUserId()) return false;
 				return userController.logout((Integer) req.getMessage());
 			}
+			
 			case GET_USER_CREDIT_CARD:
 			{
 				if (req.getUser().equals(req.getMessage()))

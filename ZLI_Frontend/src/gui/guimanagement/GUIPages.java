@@ -11,6 +11,7 @@ public enum GUIPages
 	OPERATION_SUCCESSFUL("client/success/SuccessPage.fxml", "Success"),
 	LOGIN("client/login/LoginPage.fxml", "Login"),
 	STARTUP_PAGE("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
+	NEW_USER("users/customers/NewUser.fxml","Add new user"),
 
 	
 	ORDERS("orders/OrdersPage.fxml", "Orders"),

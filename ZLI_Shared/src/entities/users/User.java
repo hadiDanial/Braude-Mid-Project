@@ -6,6 +6,7 @@ import java.util.*;
 
 import enums.AccountStatus;
 import enums.UserRole;
+import utility.DateFormatter;
 
 public class User implements Serializable
 {
@@ -162,6 +163,11 @@ public class User implements Serializable
 		Orders = orders;
 	}
 	
+	public String getFormattedLastLoginDate()
+	{
+		return DateFormatter.formatInstant(lastLoginDate, true);
+	}
+
 	public Instant getLastLoginDate()
 	{
 		return lastLoginDate;

@@ -167,4 +167,66 @@ public class UserController
 			return null;
 		}
 	}
+	public ArrayList<User> getAllUsers()
+	{
+		return convertRSToUsersArray(databaseConnection.getAll(Tables.USERS_TABLE_NAME));
+	}
+	public ArrayList<User> convertRSToUsersArray(ResultSet resultSet)
+	{
+		ArrayList<User> user = new ArrayList<User>();
+		try
+		{
+			while (resultSet.next())
+			{
+				user.add(convertRSToUser(resultSet));
+			}
+			resultSet.close();
+			return user;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+/* 	public User convertRSToUser(ResultSet resultSet, boolean isOnlyRecordExpected)
+	{
+		String[] ordersColumnNames = Tables.ordersColumnNames;
+		try
+		{
+			if (isOnlyRecordExpected)
+			{
+				if (!resultSet.next())
+					return null;
+			}
+			User user = new User();
+			user.setUserId(resultSet.getInt(ID_FIELD_NAME));
+			user.setUsername(resultSet.getString(ordersColumnNames[1]));
+			user.setPassword(resultSet.getString(ordersColumnNames[2]));
+			user.setFirstName(resultSet.getString(ordersColumnNames[3]));
+			user.setLastName(resultSet.getString(ordersColumnNames[4]));
+			user.setEmailAddress(resultSet.getString(ordersColumnNames[5]));
+			user.setPhoneNumber(resultSet.getString(ordersColumnNames[6]));
+			user.setRole(UserRole.valueOf(resultSet.getString(ordersColumnNames[7])));
+			User customer = new User();
+			order.setCustomer(customer);
+			Branch branch = new Branch();
+			branch.setBranchId(resultSet.getInt(ordersColumnNames[1]));
+			user.setBranch(branch);
+			user.setOrderStatus(OrderStatus.valueOf(resultSet.getString(ordersColumnNames[2])));
+			user.setTotalCost(resultSet.getFloat(ordersColumnNames[3]));
+			user.setGreetingCard(resultSet.getString(ordersColumnNames[4]));
+			user.setColor(ColorEnum.valueOf(resultSet.getString(ordersColumnNames[5])));
+			user.setOrderDetails(resultSet.getString(ordersColumnNames[6]));
+			user.setOrderDate(resultSet.getTimestamp(ordersColumnNames[7]).toInstant());
+			user.setDeliveryDate(resultSet.getTimestamp(ordersColumnNames[8]).toInstant());
+			if (isOnlyRecordExpected)
+				resultSet.close();
+			return user;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}*/
 }

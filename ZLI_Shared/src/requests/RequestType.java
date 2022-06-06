@@ -9,6 +9,7 @@ public enum RequestType
 	LOGIN(UserRole.values()),
 	LOGOUT(UserRole.values()),
 	REGISTER(new UserRole[] { UserRole.BranchManager }),
+	GET_ALL_USERS(UserRole.values()),
 	
 	// Orders
 	CREATE_ORDER(new UserRole[] { UserRole.BranchManager, UserRole.Customer }),
