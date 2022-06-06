@@ -32,11 +32,7 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </HBox>
-<<<<<<< HEAD
-            <TableView fx:id="pendingOrdersTable" prefHeight="454.0" prefWidth="898.0">
-=======
             <TableView fx:id="ordersTable" prefHeight="454.0" prefWidth="898.0">
->>>>>>> e44010510e34dd0f52bcd618d24666065585e51a
                <columns>
                   <TableColumn fx:id="orderIdColumn" prefWidth="75.0" text="Order Id" />
                   <TableColumn fx:id="orderDetailsColumn" prefWidth="75.0" text="Details" />
