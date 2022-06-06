@@ -147,8 +147,6 @@ public class OpenOrdersList extends GUIController
 	
 	private void updateStatus(Order order, OrderStatus status)
 	{
-		// TODO: USE UPDATE FUNCTION
-//		orderController.updateOrderStatus(null, order);
 		IResponse<Boolean> response = new IResponse<Boolean>() {
 
 			@Override
