@@ -45,6 +45,9 @@ public class Tables
 	public static final String BRANCHES_TABLE_NAME = "Branches";
 	public static final String[] branchColumnNames =
 	{ "branchId", "managerId", "branchName", "locationId" };
+	public static final String BRANCHES_WORKERS_TABLE_NAME = "Branch_Workers";
+	public static final String[] branchWorkersColumnNames =
+		{ "branchId", "workerId" };
 
 	public static final String COMPLAINTS_TABLE_NAME = "Complaints";
 	public static final String[] complaintsColumnNames = 
