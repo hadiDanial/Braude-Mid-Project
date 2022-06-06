@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -25,19 +25,19 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <TreeTableView fx:id="discountsTable" prefHeight="454.0" prefWidth="898.0">
+            <TableView fx:id="discountsTable" prefHeight="454.0" prefWidth="898.0">
                <columns>
-                  <TreeTableColumn fx:id="complaintIDColumn" prefWidth="75.0" text="Complaint ID" />
-                  <TreeTableColumn fx:id="customerIDColumn" prefWidth="75.0" text="Customer ID" />
-                  <TreeTableColumn fx:id="customerNameColumn" prefWidth="75.0" text="Customer Name" />
-                  <TreeTableColumn fx:id="dateOpenedColumn" prefWidth="75.0" text="Date Opened" />
-                  <TreeTableColumn fx:id="timeSinceOpeningColumn" prefWidth="75.0" text="Time Since Opening" />
-                  <TreeTableColumn fx:id="reviewColumn" prefWidth="75.0" text="Review" />
+                  <TableColumn fx:id="complaintIDColumn" prefWidth="75.0" text="Complaint ID" />
+                  <TableColumn fx:id="customerIDColumn" prefWidth="75.0" text="Customer ID" />
+                  <TableColumn fx:id="customerNameColumn" prefWidth="75.0" text="Customer Name" />
+                  <TableColumn fx:id="dateOpenedColumn" prefWidth="75.0" text="Date Opened" />
+                  <TableColumn fx:id="timeSinceOpeningColumn" prefWidth="75.0" text="Time Since Opening" />
+                  <TableColumn fx:id="reviewColumn" prefWidth="75.0" text="Review" />
                </columns>
                <columnResizePolicy>
-                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
-            </TreeTableView>
+            </TableView>
             <Pane prefHeight="44.0" prefWidth="898.0" VBox.vgrow="ALWAYS" />
             <HBox>
                <children>
