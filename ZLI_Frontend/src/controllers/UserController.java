@@ -84,23 +84,6 @@ public class UserController
 		clientController.sendRequest(req, response);
 	}
 
-	public void openHomePage()
-	{
-		switch (loggedInUser.getRole())
-		{
-		case Customer:
-			SceneManager.loadNewScene(GUIPages.CATALOG_PAGE, true);
-			SceneManager.setHeaderButtonVisibility(true, true);
-			break;
-		case CustomerServiceEmployee:
-			SceneManager.loadNewScene(GUIPages.COMPLAINT_PAGE, true);
-			SceneManager.setHeaderButtonVisibility(true, false);
-
-		default:
-			break;
-		}
-	}
-
 	public boolean isLoggedIn()
 	{
 		return loggedInUser != null;

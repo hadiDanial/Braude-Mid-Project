@@ -7,6 +7,8 @@ import java.util.Stack;
 
 import client.ClientProperties;
 import controllers.ClientController;
+import controllers.UserController;
+import enums.UserRole;
 import gui.client.main.MainView;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -252,15 +254,18 @@ public class SceneManager
 		try
 		{
 			if(history.isEmpty()) return null;
-			history.pop();
+			HistoryState prev = history.pop();
 			HistoryState state = history.peek();
-			if (state.isAdditivelyLoaded())
+			if (prev.isAdditivelyLoaded())
 			{
-				container.getChildren().remove(state.getGuiController().getRoot());
-			} else
-			{
-				reloadScene(state);
+				container.getChildren().remove(prev.getGuiController().getRoot());
 			}
+			else
+			{
+				container.getChildren().clear();
+			}
+
+			container.getChildren().add(state.getGuiController().getRoot());
 			state.getGuiController().initialize(null, null);
 			return state.getGuiController();
 		} catch (EmptyStackException e)
@@ -269,15 +274,6 @@ public class SceneManager
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-	/**
-	 * Reload a history state.
-	 */
-	private static void reloadScene(HistoryState state)
-	{
-		container.getChildren().clear();
-		container.getChildren().add(state.getGuiController().getRoot());
 	}
 
 	/**
@@ -512,5 +508,32 @@ public class SceneManager
 	public static void addHeightListener(ChangeListener<? super Number> listener)
 	{
 		mainWindow.heightProperty().addListener(listener);
+	}
+
+	public static void openHomePage()
+	{
+		history.clear();
+		container.getChildren().clear();
+		try
+		{
+			UserRole userRole = UserController.getInstance().getLoggedInUser().getRole();
+			switch(userRole)
+			{
+			case Customer:
+				SceneManager.loadNewScene(GUIPages.CATALOG_PAGE, true);
+				SceneManager.setHeaderButtonVisibility(true, true);
+				break;
+			case CustomerServiceEmployee:
+				SceneManager.loadNewScene(GUIPages.COMPLAINT_PAGE, true);
+				SceneManager.setHeaderButtonVisibility(true, false);
+
+			default:
+				break;
+			}
+		} catch (NullPointerException e)
+		{
+			System.out.println("No user");
+		}
+		
 	}
 }

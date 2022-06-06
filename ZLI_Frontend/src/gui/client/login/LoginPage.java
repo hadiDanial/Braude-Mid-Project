@@ -64,7 +64,7 @@ public class LoginPage extends FormController
 						// TODO: Display error message or move to home page by user role
 						if (message != null)
 						{
-							UserController.getInstance().openHomePage();
+							SceneManager.openHomePage();
 						}
 						else
 						{
