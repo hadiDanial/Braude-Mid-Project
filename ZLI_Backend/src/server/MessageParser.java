@@ -14,6 +14,7 @@ import entities.products.BaseProduct;
 import entities.users.Order;
 import entities.users.User;
 import enums.OrderStatus;
+import enums.UserRole;
 import exceptions.UnauthenticatedUserException;
 import exceptions.UnauthorizedRoleException;
 import requests.Request;
@@ -86,7 +87,16 @@ public class MessageParser
 			{
 				return userController.getAllUsers();
 			}
-
+			case GET_ALL_USERS_BY_ROLE:
+			{
+				return userController.getUsersByRole((UserRole) req.getMessage());
+			}
+			case CREATE_NEW_USER:
+			{
+				return userController.register((User) req.getMessage());
+			}
+			
+			
 			// Orders
 			case GET_ALL_ORDERS:
 			{

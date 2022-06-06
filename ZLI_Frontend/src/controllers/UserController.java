@@ -112,4 +112,16 @@ public class UserController
 		clientController.sendRequest(req, response);
     }
 
+	public void getAllUsersByRole(UserRole customer, IResponse<ArrayList<User>> response)
+	{
+		Request req = new Request(RequestType.GET_ALL_USERS_BY_ROLE, customer);
+		clientController.sendRequest(req, response);
+	}
+
+	public void createNewUser(User user, IResponse<Boolean> response)
+	{
+		Request req = new Request(RequestType.CREATE_NEW_USER, user);
+		clientController.sendRequest(req, response);		
+	}
+
 }
