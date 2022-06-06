@@ -102,7 +102,7 @@ public class SceneManager
 			homeButton = mainViewController.getHomeBtn();
 			scrollPane = mainViewController.getScrollPane();
 			container = mainViewController.getContent();
-			container.setAlignment(Pos.BASELINE_LEFT);
+			container.setAlignment(Pos.TOP_CENTER);
 			currentScene = new Scene(root);
 			mainViewPane.setPrefWidth(ClientProperties.getClientWidth());
 			mainViewPane.setPrefHeight(ClientProperties.getClientHeight());
