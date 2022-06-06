@@ -58,15 +58,15 @@ public enum GUIPages
 	VIEW_REPORTS_COMPLAINTS("reports/complaints/ComplaintsReportPage.fxml", "View Complaints"),
 	VIEW_REPORTS_COMPLAINTS_CEO("reports/complaints/ComplaintsReportPageCEO.fxml", "View Complaints"),
 
-	VIEW_REPORTS_ORDERS_COMPARE("reports/complaints/OrdersReportComparePage.fxml", "Compare Orders"),
-	VIEW_REPORTS_ORDERS_COMPARE_CEO("reports/complaints/OrdersReportComparePageCEO.fxml", "Compare Orders"),
-	VIEW_REPORTS_ORDERS("reports/complaints/OrdersReportPage.fxml", "View Orders"),
-	VIEW_REPORTS_ORDERS_CEO("reports/complaints/OrdersReportPageCEO.fxml", "View Orders"),
+	VIEW_REPORTS_ORDERS_COMPARE("reports/orders/OrdersReportComparePage.fxml", "Compare Orders"),
+	VIEW_REPORTS_ORDERS_COMPARE_CEO("reports/orders/OrdersReportComparePageCEO.fxml", "Compare Orders"),
+	VIEW_REPORTS_ORDERS("reports/orders/OrdersReportPage.fxml", "View Orders"),
+	VIEW_REPORTS_ORDERS_CEO("reports/orders/OrdersReportPageCEO.fxml", "View Orders"),
 	
-	VIEW_REPORTS_SALES_COMPARE("reports/complaints/SalesReportComparePage.fxml", "Compare Sales"),
-	VIEW_REPORTS_SALES_COMPARE_CEO("reports/complaints/SalesReportComparePageCEO.fxml", "Compare Sales"),
-	VIEW_REPORTS_SALES("reports/complaints/SalesReportPage.fxml", "View Sales"),
-	VIEW_REPORTS_SALES_CEO("reports/complaints/SalesReportPageCEO.fxml", "View Sales")
+	VIEW_REPORTS_SALES_COMPARE("reports/sales/SalesReportComparePage.fxml", "Compare Sales"),
+	VIEW_REPORTS_SALES_COMPARE_CEO("reports/sales/SalesReportComparePageCEO.fxml", "Compare Sales"),
+	VIEW_REPORTS_SALES("reports/sales/SalesReportPage.fxml", "View Sales"),
+	VIEW_REPORTS_SALES_CEO("reports/sales/SalesReportPageCEO.fxml", "View Sales")
 	
 	
 	
