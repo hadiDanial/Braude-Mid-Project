@@ -5,23 +5,14 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import controllers.OrderController;
-import entities.other.Location;
 import entities.users.Order;
 import enums.OrderStatus;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.SceneManager;
 import javafx.collections.ObservableList;
-import java.util.ResourceBundle;
 
-import entities.users.Order;
-import gui.guimanagement.GUIController;
-
-import entities.users.Order;
-import enums.OrderStatus;
-import gui.guimanagement.GUIController;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
