@@ -122,7 +122,48 @@ public class ProductEditor extends FormController
 	@FXML
 	void onAddBtn(ActionEvent event)
 	{
+		activeProduct = (isProduct) ? product : item;
+		if(isNewProduct)
+		{
+			productController.createProduct(activeProduct, new IResponse<Boolean>()
+			{
 
+				@Override
+				public void executeAfterResponse(Object message)
+				{
+					if((boolean) message)
+					{
+						catalogItem.setBaseProduct(activeProduct);
+						stage.close();
+					}
+					else
+					{
+						SceneManager.displayErrorMessage("Failed to add new product/item!");
+					}
+				}
+				
+			});
+		}
+		else
+		{
+			productController.updateProduct(catalogItem.getBaseProduct().getProductId(), activeProduct, new IResponse<Boolean>()
+					{
+
+						@Override
+						public void executeAfterResponse(Object message)
+						{
+							if((boolean) message)
+							{
+								catalogItem.setBaseProduct(activeProduct);
+								stage.close();
+							}
+							else
+							{
+								SceneManager.displayErrorMessage("Failed to update product/item!");
+							}
+						}}
+			);
+		}
 	}
 
 	@FXML

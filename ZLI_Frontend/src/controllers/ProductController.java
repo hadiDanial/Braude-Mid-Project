@@ -3,6 +3,7 @@ package controllers;
 import java.util.ArrayList;
 
 import entities.products.*;
+import requests.EntityRequestWithId;
 import requests.Request;
 import requests.RequestType;
 import utility.IResponse;
@@ -14,11 +15,13 @@ public class ProductController
 
 	private static ProductController instance;
 	private UserController userController;
+	private ClientController clientController;
 	
 	private ProductController()
 	{
 		catalog = new ArrayList<CatalogItem>();
 		userController = UserController.getInstance();
+		clientController = ClientController.getInstance();
 	}
 
 	public static synchronized ProductController getInstance()
@@ -101,6 +104,21 @@ public class ProductController
 	protected void setItems(ArrayList<Item> message)
 	{
 		this.items = message;
+	}
+
+	public void createProduct(BaseProduct newProduct, IResponse<Boolean> response)
+	{
+		Request req = new Request(RequestType.ADD_PRODUCT, newProduct);
+		clientController.sendRequest(req, response);
+	}
+
+	public void updateProduct(int productId, BaseProduct activeProduct, IResponse<Boolean> response)
+	{
+		EntityRequestWithId<BaseProduct> e = new EntityRequestWithId<BaseProduct>();
+		e.setEntity(activeProduct);
+		e.setEntityId(productId);
+		Request req = new Request(RequestType.UPDATE_PRODUCT, e);
+		clientController.sendRequest(req, response);
 	}
 
 }

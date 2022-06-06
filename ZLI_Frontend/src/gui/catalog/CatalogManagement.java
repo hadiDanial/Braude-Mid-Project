@@ -133,6 +133,7 @@ public class CatalogManagement extends GUIController
 				editButton.setOnAction(event -> {
 					ProductEditor editor = (ProductEditor) SceneManager.loadModalWindow(GUIPages.EDIT_PRODUCT, item);
 					editor.setIsEditing(item);
+					// TODO: Refresh table?
 				});
 			}
 		});
