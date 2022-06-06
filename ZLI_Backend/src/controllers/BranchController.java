@@ -95,4 +95,20 @@ public class BranchController
 		}
 	}
 
+	public Branch getWorkerBranch(int userId)
+	{
+		ArrayList<String> names = new ArrayList<String>();
+		names.add(Tables.BRANCHES_WORKERS_TABLE_NAME);
+		names.add(Tables.BRANCHES_TABLE_NAME);
+		names.add(Tables.LOCATIONS_TABLE_NAME);
+		String selects = " branches.branchId, branches.managerId, branches.locationId, branches.branchName, "
+				+ "locations.city, locations.notes, locations.street, locations.zipCode";
+		String conditions = "branch_workers.workerId=" + userId + " AND branch_workers.branchId=branches.branchId AND locations.locationId = branches.locationId";
+		//select branches.branchId, branches.managerId, branches.locationId, branches.branchName,
+		//locations.city, locations.notes, locations.street, locations.zipCode
+		//from branch_workers join branches join locations where 
+		ResultSet rs = databaseConnection.getJoinResultsWithSelectColumns(names, selects, conditions);
+		return convertRSToBranch(rs, true);
+	}
+
 }

@@ -13,6 +13,7 @@ public class BranchController
 	private static BranchController instance;
 	private ClientController clientController;
 	private ArrayList<Branch> branches = null;
+	private Branch workerBranch;
 	
 	private BranchController()
 	{
@@ -58,5 +59,21 @@ public class BranchController
 			set.add(branch.getLocation().getCity());
 		}
 		return set;
+	}
+	
+	public void getWorkerBranch(int workerId, IResponse<Branch> response)
+	{
+		Request req = new Request(RequestType.GET_WORKER_BRANCH, workerId);
+		
+		clientController.sendRequest(req, new IResponse<Branch>()
+		{
+
+			@Override
+			public void executeAfterResponse(Object message)
+			{
+				workerBranch = (Branch) message;
+				response.executeAfterResponse(message);
+			}
+		});
 	}
 }
