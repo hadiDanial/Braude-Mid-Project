@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import gui.guimanagement.GUIController;
 
-public class BranchEmployeePortal extends GUIController
+public class CEOPortal extends GUIController
 {
 
 	@Override

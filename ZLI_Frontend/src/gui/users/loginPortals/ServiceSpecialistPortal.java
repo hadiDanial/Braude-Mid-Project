@@ -1,10 +1,15 @@
 package gui.users.loginPortals;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import gui.guimanagement.GUIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class ServiceSpecialistPortal {
+public class ServiceSpecialistPortal extends GUIController
+{
 
     @FXML
     private Label nameLabel;
@@ -19,5 +24,10 @@ public class ServiceSpecialistPortal {
     void onInsertSurveyAnalysisBtn(ActionEvent event) {
 
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+	}
 
 }
