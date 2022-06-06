@@ -18,7 +18,7 @@ public enum GUIPages
 	LOADING("client/main/LoadingPage.fxml", "LOADING"),
 	CATALOG_PAGE("catalog/CatalogPage.fxml", "Catalog"),
 	PRODUCT_ELEMENT("catalog/ProductElement.fxml", ""),
-	
+	OPEN_ORDERS_LIST("orders/openOrders/OpenOrdersList.fxml", "Pending Orders"),
 	ADD_PRODUCT("catalog/ProductEditor.fxml", "Add Product"),
 	EDIT_PRODUCT("catalog/ProductEditor.fxml", "Edit Product"),
 	
@@ -47,7 +47,27 @@ public enum GUIPages
 	CEO_PORTAL("users/loginPortals/CEOPortal.fxml", "Home - CEO"),
 	CHAIN_EMPLOYEE_PORTAL("users/loginPortals/ChainEmployeePortal.fxml", "Home - Chain Employee"),
 	CS_EMPLOYEE_PORTAL("users/loginPortals/EmployeePortalCS.fxml", "Home - Customer Service Employee"),
-	SPECIALIST_EMPLOYEE_PORTAL("users/loginPortals/ServiceSpecialistPortal.fxml", "Home - Service Specialist Employee");
+	SPECIALIST_EMPLOYEE_PORTAL("users/loginPortals/ServiceSpecialistPortal.fxml", "Home - Service Specialist Employee"),
+	
+	
+	VIEW_REPORTS_COMPLAINTS_COMPARE("reports/complaints/ComplaintsReportComparePage.fxml", "Compare Complaints"),
+	VIEW_REPORTS_COMPLAINTS_COMPARE_CEO("reports/complaints/ComplaintsReportComparePageCEO.fxml", "Compare Complaints"),
+	VIEW_REPORTS_COMPLAINTS("reports/complaints/ComplaintsReportPage.fxml", "View Complaints"),
+	VIEW_REPORTS_COMPLAINTS_CEO("reports/complaints/ComplaintsReportPageCEO.fxml", "View Complaints"),
+
+	VIEW_REPORTS_ORDERS_COMPARE("reports/complaints/OrdersReportComparePage.fxml", "Compare Orders"),
+	VIEW_REPORTS_ORDERS_COMPARE_CEO("reports/complaints/OrdersReportComparePageCEO.fxml", "Compare Orders"),
+	VIEW_REPORTS_ORDERS("reports/complaints/OrdersReportPage.fxml", "View Orders"),
+	VIEW_REPORTS_ORDERS_CEO("reports/complaints/OrdersReportPageCEO.fxml", "View Orders"),
+	
+	VIEW_REPORTS_SALES_COMPARE("reports/complaints/SalesReportComparePage.fxml", "Compare Sales"),
+	VIEW_REPORTS_SALES_COMPARE_CEO("reports/complaints/SalesReportComparePageCEO.fxml", "Compare Sales"),
+	VIEW_REPORTS_SALES("reports/complaints/SalesReportPage.fxml", "View Sales"),
+	VIEW_REPORTS_SALES_CEO("reports/complaints/SalesReportPageCEO.fxml", "View Sales"),
+	
+	
+	
+	;
 	
 	
 	
