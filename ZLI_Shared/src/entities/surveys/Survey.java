@@ -6,6 +6,7 @@ import java.util.*;
 
 import entities.users.User;
 import exceptions.SurveyException;
+import utility.DateFormatter;
 
 public class Survey implements Serializable
 {
@@ -53,7 +54,9 @@ public class Survey implements Serializable
 		if(questions.length != NUM_QUESTIONS)
 			throw new SurveyException("Survey must have " + NUM_QUESTIONS + " questions.");
 	}
-	
+	public int getNumberOfSurveyed(){
+		return customers.size();
+	}
 	public int getSurveyId()
 	{
 		return surveyId;
@@ -112,6 +115,15 @@ public class Survey implements Serializable
 	public void setEndDate(Instant endDate)
 	{
 		this.endDate = endDate;
+	}
+	public String getFormattedStartDate()
+	{
+		return DateFormatter.formatInstant(startDate, true);
+	}
+
+	public String getFormattedEndDate()
+	{
+		return DateFormatter.formatInstant(endDate, true);
 	}
 
 	public ArrayList<SurveyAnswers> getAnswers()

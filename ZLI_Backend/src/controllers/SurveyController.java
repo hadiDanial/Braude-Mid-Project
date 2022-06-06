@@ -1,12 +1,30 @@
 package controllers;
 
-import java.security.Timestamp;
+import java.time.Instant;
 import java.sql.ResultSet;
 
 import database.DatabaseConnection;
 import database.Tables;
 import entities.surveys.Survey;
+import entities.users.User;
 
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import database.IObjectToPreparedStatementParameters;
+import entities.other.Branch;
+import entities.products.BaseProduct;
+import entities.products.CatalogItem;
+import entities.products.Item;
+import entities.products.Product;
+import enums.ColorEnum;
+import enums.ItemType;
+import enums.ProductType;
+import requests.EntityRequestWithId;
 public class SurveyController {
 	private static SurveyController instance;
 	private final DatabaseConnection databaseConnection;
@@ -24,7 +42,7 @@ public class SurveyController {
 		}
 		return instance;
 	}
-	public Survey convertRSToUser(ResultSet rs)
+	public Survey convertRSToSurvey(ResultSet rs)
 	{
 		try
 		{
@@ -35,16 +53,19 @@ public class SurveyController {
 //				{ "surveyid, specialistId, surveyDate, analysisResults, q1, q2, q3, q4, q5, q6 };
 				Survey survey = new Survey();
 				survey.setSurveyId(rs.getInt(usersColumnNames[0]));
-				survey.setCustomerServiceSpecialist(rs.(usersColumnNames[1]));
-				Timestamp lastLogin = rs.getTimestamp(usersColumnNames[2]);
-				survey.setLastLoginDate((lastLogin == null) ? null : lastLogin.toInstant());
+                User customer = new User();
+                customer.setUserId(rs.getInt(usersColumnNames[1]));
+                survey.setCustomerServiceSpecialist(customer);
+				Timestamp startDate = rs.getTimestamp(usersColumnNames[2]);
+				survey.setStartDate((startDate == null) ? null : startDate.toInstant());
 				survey.setAnalysisResults(rs.getBytes(usersColumnNames[3]));
-				survey.setQuestions(rs.getString(usersColumnNames[5]));
-				survey.setPhoneNumber(rs.getString(usersColumnNames[6]));
-				survey.setRole(UserRole.valueOf(rs.getString(usersColumnNames[7])));
-				survey.setAccountStatus(AccountStatus.valueOf(rs.getString(usersColumnNames[8])));
-				survey.setCredit(rs.getFloat(usersColumnNames[9]));
-				survey.setLoggedIn(rs.getBoolean(usersColumnNames[10]));
+                questions[0] = (rs.getString(usersColumnNames[4]));
+                questions[1] = (rs.getString(usersColumnNames[5]));
+                questions[2] = (rs.getString(usersColumnNames[6]));
+                questions[3] = (rs.getString(usersColumnNames[7]));
+                questions[4] = (rs.getString(usersColumnNames[8]));
+                questions[5] = (rs.getString(usersColumnNames[9]));
+				survey.setQuestions(questions);
 				return survey;
 			} else
 				return null;
@@ -55,14 +76,14 @@ public class SurveyController {
 		}
 	}
 
-	public ArrayList<survey> convertRSToUsersArray(ResultSet resultSet)
+	public ArrayList<Survey> convertRSToSurveyArray(ResultSet resultSet)
 	{
-		ArrayList<survey> survey = new ArrayList<survey>();
+		ArrayList<Survey> survey = new ArrayList<Survey>();
 		try
 		{
 			while (resultSet.next())
 			{
-				survey.add(convertRSToUser(resultSet));
+				survey.add(convertRSToSurvey(resultSet));
 			}
 			resultSet.close();
 			return survey;
@@ -73,4 +94,8 @@ public class SurveyController {
 		}
 	}
 
+    public ArrayList<Survey> getAllSurvey()
+	{
+        return convertRSToSurveyArray(databaseConnection.getAll(Tables.SURVEYS_TABLE_NAME));
+    }
 }
