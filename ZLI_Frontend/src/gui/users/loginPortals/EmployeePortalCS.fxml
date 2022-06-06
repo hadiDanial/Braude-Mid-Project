@@ -56,12 +56,12 @@
          </font>
       </Label>
       <Separator layoutX="2.0" layoutY="254.0" prefWidth="898.0" style="-fx-background-color: #078082; -fx-border-color: #078082;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" />
-      <Button layoutX="321.0" layoutY="376.0" mnemonicParsing="false" onAction="#onReviewComplaintsBtn" prefHeight="56.0" prefWidth="257.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Review Complaints" textFill="#e2d784">
+      <Button fx:id="reviewComplaintsbButton" layoutX="321.0" layoutY="376.0" mnemonicParsing="false" onAction="#onReviewComplaintsBtn" prefHeight="56.0" prefWidth="257.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Review Complaints" textFill="#e2d784">
          <font>
             <Font size="26.0" />
          </font>
       </Button>
-      <Button layoutX="321.0" layoutY="465.0" mnemonicParsing="false" onAction="#onFeedBackSurveyBtn" prefHeight="56.0" prefWidth="257.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Add Survey" textFill="#e2d784">
+      <Button fx:id="addSurveyButton" layoutX="321.0" layoutY="465.0" mnemonicParsing="false" onAction="#onFeedBackSurveyBtn" prefHeight="56.0" prefWidth="257.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Add Survey" textFill="#e2d784">
          <font>
             <Font size="26.0" />
          </font>
