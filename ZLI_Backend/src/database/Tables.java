@@ -57,4 +57,8 @@ public class Tables
 	public static final String[] creditCardColumnNames = 
 	{ "creditCardId", "customerId", "creditCardNumber", "cvv", "expirationDate", "cardHolderName" };
 				
+	public static final String SURVEYS_TABLE_NAME = "Surveys";
+	public static final String[] surveysColumnNames = 
+	{ "surveyId", "specialistId", "startDate", "endDate", "analysisResults", "q1", "q2", "q3", "q4", "q5", "q6"};
+		
 }
