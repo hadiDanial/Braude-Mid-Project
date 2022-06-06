@@ -10,6 +10,7 @@ public enum RequestType
 	LOGOUT(UserRole.values()),
 	REGISTER(new UserRole[] { UserRole.BranchManager }),
 	GET_ALL_USERS(UserRole.values()),
+	GET_ALL_CUSTOMERS(new UserRole[] {UserRole.BranchManager}),
 	
 	// Orders
 	CREATE_ORDER(new UserRole[] { UserRole.BranchManager, UserRole.Customer }),

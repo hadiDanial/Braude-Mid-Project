@@ -1,5 +1,7 @@
 package server;
 
+import java.util.ArrayList;
+
 import controllers.BranchController;
 import controllers.ComplaintController;
 import controllers.DiscountController;
@@ -80,6 +82,11 @@ public class MessageParser
 					return null;
 			}
 			
+			case GET_ALL_CUSTOMERS:
+			{
+				return userController.getAllUsers();
+			}
+
 			// Orders
 			case GET_ALL_ORDERS:
 			{
