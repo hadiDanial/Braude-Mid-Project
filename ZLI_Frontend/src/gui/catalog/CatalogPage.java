@@ -30,7 +30,7 @@ public class CatalogPage extends GUIController
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		productController = ProductController.getInstance();
-		productController.getAllProducts(new IResponse<ArrayList<CatalogItem>>()
+		productController.getAllCatalogItems(new IResponse<ArrayList<CatalogItem>>()
 		{
 			
 			@Override

@@ -199,11 +199,11 @@ public class OrderController
 		return res;
 	}
 
-	public ArrayList<Order> getPendingOrders(int branchId)
+	public ArrayList<Order> getOrdersByStatusAndBranch(int branchId, OrderStatus orderStatus)
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("branchId", branchId + "");
-		map.put("orderStatus", OrderStatus.Pending.name());
+		map.put("orderStatus", orderStatus.name());
 		ResultSet ordersRS = databaseConnection.getByConditions(Tables.ORDERS_TABLE_NAME, map);
 		ArrayList<Order> pendingOrders = convertRSToOrderArray(ordersRS);
 		for (Order order : pendingOrders)
@@ -217,7 +217,7 @@ public class OrderController
 			tableNames.add(Tables.ALL_PRODUCTS_TABLE_NAME);
 			String selects = "Orders.orderId, orders_products.quantity, catalog.* ";
 			String conditions = " Orders.branchId = " + branchId + " AND Orders.orderId=" + order.getOrderId()
-					+ " AND Orders.orderId= orders_products.orderId AND orders.orderStatus='Pending'"
+					+ " AND Orders.orderId= orders_products.orderId AND orders.orderStatus='" + orderStatus.name() + '"'
 					+ " AND catalog.catalogId = orders_products.catalogId";
 			// Join Order_Product + CatalogItem
 			ResultSet cartRS = databaseConnection.getJoinResultsWithSelectColumns(tableNames, selects, conditions);

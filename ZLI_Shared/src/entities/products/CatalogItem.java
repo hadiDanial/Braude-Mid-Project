@@ -85,6 +85,28 @@ public class CatalogItem implements IDiscountable, Serializable
 		this.quantityInStock = quantityInStock;
 	}
 
+	public String getProductName()
+	{
+		return baseProduct.getProductName();
+	}
+	public Float getBasePrice()
+	{
+		return baseProduct.getPrice();
+	}
+	public String getDetails()
+	{
+		if(baseProduct.isProduct())
+		{
+			Product p = (Product) baseProduct;
+			return p.getProductType() + ", " + p.getItemList();
+		}
+		else
+		{
+			Item i = (Item) baseProduct;
+			return i.getItemType() + ", " + i.getPrimaryColor();
+		}
+	}
+	
 	@Override
 	public String toString()
 	{

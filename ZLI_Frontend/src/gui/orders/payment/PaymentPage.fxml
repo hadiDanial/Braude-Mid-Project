@@ -137,12 +137,12 @@
                                       </HBox>
                               <TextFlow mouseTransparent="true" translateY="65.0">
                                  <children>
-                                    <Label fx:id="nameError1" alignment="TOP_LEFT" text="Name error" textFill="#ff7205">
+                                    <Label fx:id="nameError1" alignment="TOP_LEFT" text="Name error" textFill="#ff0505">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="nameError2" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" text="Name error" textFill="#ff7205" translateX="10.0">
+                                    <Label fx:id="nameError2" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" text="Name error" textFill="#ff0505">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -173,12 +173,12 @@
                                       </HBox>
                               <TextFlow mouseTransparent="true" translateY="65.0">
                                  <children>
-                                    <Label fx:id="cardError1" alignment="TOP_LEFT" mouseTransparent="true" text="Card error" textFill="#ff7205">
+                                    <Label fx:id="cardError1" alignment="TOP_LEFT" mouseTransparent="true" text="Card error" textFill="#ff0505">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="cardError2" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mouseTransparent="true" text="Card error" textFill="#ff7205" translateX="10.0">
+                                    <Label fx:id="cardError2" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mouseTransparent="true" text="Card error" textFill="#ff0505">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -208,12 +208,12 @@
                                     </Group>
                                     <TextFlow mouseTransparent="true" translateY="65.0">
                                        <children>
-                                          <Label fx:id="cvvError1" alignment="TOP_LEFT" focusTraversable="false" mouseTransparent="true" text="CVV Error" textFill="#ff7205">
+                                          <Label fx:id="cvvError1" alignment="TOP_LEFT" focusTraversable="false" mouseTransparent="true" text="CVV Error" textFill="#ff0505">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="cvvError2" alignment="TOP_LEFT" focusTraversable="false" layoutX="10.0" layoutY="10.0" mouseTransparent="true" text="CVV Error" textFill="#ff7205" translateX="10.0">
+                                          <Label fx:id="cvvError2" alignment="TOP_LEFT" focusTraversable="false" layoutX="10.0" layoutY="10.0" mouseTransparent="true" text="CVV Error" textFill="#ff0505">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -238,7 +238,7 @@
                                     </Group>
                                     <TextFlow mouseTransparent="true" translateY="65.0">
                                        <children>
-                                          <Label fx:id="expirationError" alignment="TOP_LEFT" mouseTransparent="true" text="Card error" textFill="#ff7205">
+                                          <Label fx:id="expirationError" alignment="TOP_LEFT" mouseTransparent="true" text="Card error" textFill="#ff0505">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>

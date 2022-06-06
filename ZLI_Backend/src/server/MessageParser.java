@@ -13,7 +13,7 @@ import exceptions.UnauthenticatedUserException;
 import exceptions.UnauthorizedRoleException;
 import requests.Request;
 import requests.RequestType;
-import requests.UpdateEntityRequest;
+import requests.EntityRequestWithId;
 
 public class MessageParser
 {
@@ -112,13 +112,16 @@ public class MessageParser
 			}
 			case UPDATE_PRODUCT:
 			{
-				return productController.updateBaseProduct((UpdateEntityRequest<BaseProduct>) req.getMessage());
+				return productController.updateBaseProduct((EntityRequestWithId<BaseProduct>) req.getMessage());
 			}
-			case GET_ALL_PRODUCTS:
+			case GET_CATALOG:
 			{
-				return productController.getAllProducts();
+				return productController.getAllCatalogItems();
 			}
-			
+			case GET_ALL_ITEMS:
+			{
+				return productController.getAllItems();
+			}
 			// Branches
 			case GET_ALL_BRANCHES:
 			{

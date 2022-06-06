@@ -3,6 +3,8 @@ package gui.client.main;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controllers.UserController;
+import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
 import javafx.application.Application;
@@ -25,6 +27,9 @@ public class MainView extends Application implements Initializable
 
 	@FXML
 	private Button shoppingCartBtn;
+
+	@FXML
+	private Button homeBtn;
 
 	@FXML
 	private Button settingsBtn;
@@ -101,5 +106,19 @@ public class MainView extends Application implements Initializable
 	public ScrollPane getScrollPane()
 	{
 		return scrollPane;
+	}
+
+	public Button getHomeBtn()
+	{
+		return homeBtn;
+	}
+
+	@FXML
+	private void onLogOutBtn(ActionEvent event){
+		UserController.getInstance().logout();
+	}
+	@FXML
+	private void onHomeBtn(ActionEvent event){
+		SceneManager.openHomePage();
 	}
 }

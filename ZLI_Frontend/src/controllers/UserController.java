@@ -69,6 +69,7 @@ public class UserController
 			Request req = new Request(RequestType.LOGOUT, loggedInUser.getUserId());
 			clientController.sendRequest(req, null);
 			loggedInUser = null;
+			SceneManager.loadNewScene(GUIPages.LOGIN, false);
 		}
 	}
 
@@ -82,23 +83,6 @@ public class UserController
 	{
 		Request req = new Request(RequestType.GET_USER_CREDIT_CARD, response);
 		clientController.sendRequest(req, response);
-	}
-
-	public void openHomePage()
-	{
-		switch (loggedInUser.getRole())
-		{
-		case Customer:
-			SceneManager.loadNewScene(GUIPages.DISCOUNT_MANAGEMENT, true);
-			SceneManager.setHeaderButtonVisibility(true, true);
-			break;
-		case CustomerServiceEmployee:
-			SceneManager.loadNewScene(GUIPages.COMPLAINT_OPENED_PAGE, true);
-			SceneManager.setHeaderButtonVisibility(true, false);
-
-		default:
-			break;
-		}
 	}
 
 	public boolean isLoggedIn()

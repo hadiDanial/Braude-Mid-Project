@@ -28,8 +28,7 @@
                   <Pane prefHeight="50.0" prefWidth="588.0" HBox.hgrow="ALWAYS" />
                   <MenuButton fx:id="userDropDown" disable="true" minWidth="150.0" mnemonicParsing="false" style="-fx-background-color: #062C30;" text="MenuButton" textFill="WHITE" visible="false">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                      <MenuItem mnemonicParsing="false" onAction="#onLogOutBtn" text="Log Out" />
                     </items>
                      <graphic>
                         <MaterialIconView fill="WHITE" glyphName="PERSON" size="18" />
@@ -39,6 +38,12 @@
                   <Button fx:id="shoppingCartBtn" disable="true" mnemonicParsing="false" onAction="#onShoppingCartBtn" style="-fx-background-color: #062C30;" textFill="WHITE" visible="false">
                      <graphic>
                         <MaterialIconView fill="WHITE" glyphName="SHOPPING_CART" size="18" />
+                     </graphic>
+                  </Button>
+                  <Pane layoutX="1256.0" layoutY="10.0" minWidth="20.0" prefHeight="50.0" prefWidth="20.0" />
+                  <Button fx:id="homeBtn" layoutX="1222.0" layoutY="22.0" mnemonicParsing="false" onAction="#onHomeBtn" style="-fx-background-color: #062C30;" textFill="WHITE">
+                     <graphic>
+                        <MaterialIconView fill="WHITE" glyphName="HOME" size="18" />
                      </graphic>
                   </Button>
                   <Pane minWidth="20.0" prefHeight="50.0" prefWidth="20.0" />

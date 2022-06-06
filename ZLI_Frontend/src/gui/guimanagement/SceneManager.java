@@ -7,6 +7,8 @@ import java.util.Stack;
 
 import client.ClientProperties;
 import controllers.ClientController;
+import controllers.UserController;
+import enums.UserRole;
 import gui.client.main.MainView;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -42,6 +44,7 @@ public class SceneManager
 	private static Button shoppingCartButton;
 	private static HashSet<Pane> panesToResize;
 	private static AnchorPane scrollPaneAnchor;
+	private static Button homeButton;
 
 	/**
 	 * Initialize the UI. This method should only be called <b>once!</b>
@@ -66,7 +69,7 @@ public class SceneManager
 		});
 
 		loadMainContainer();
-		loadNewScene(GUIPages.LOGIN, true);
+		loadNewScene(GUIPages.LOGIN, false);
 //		loadAdditiveScene(GUIPages.Loading, true);
 		mainWindow.setHeight(ClientProperties.getClientHeight());
 		mainWindow.setWidth(ClientProperties.getClientWidth());
@@ -96,6 +99,7 @@ public class SceneManager
 			header = mainViewController.getHeader();
 			userDropDown = mainViewController.getUserDropDown();
 			shoppingCartButton = mainViewController.getShoppingCartButton();
+			homeButton = mainViewController.getHomeBtn();
 			scrollPane = mainViewController.getScrollPane();
 			container = mainViewController.getContent();
 			container.setAlignment(Pos.BASELINE_LEFT);
@@ -252,15 +256,18 @@ public class SceneManager
 		try
 		{
 			if(history.isEmpty()) return null;
-			history.pop();
+			HistoryState prev = history.pop();
 			HistoryState state = history.peek();
-			if (state.isAdditivelyLoaded())
+			if (prev.isAdditivelyLoaded())
 			{
-				container.getChildren().remove(state.getGuiController().getRoot());
-			} else
-			{
-				reloadScene(state);
+				container.getChildren().remove(prev.getGuiController().getRoot());
 			}
+			else
+			{
+				container.getChildren().clear();
+			}
+
+			container.getChildren().add(state.getGuiController().getRoot());
 			state.getGuiController().initialize(null, null);
 			return state.getGuiController();
 		} catch (EmptyStackException e)
@@ -272,21 +279,12 @@ public class SceneManager
 	}
 
 	/**
-	 * Reload a history state.
-	 */
-	private static void reloadScene(HistoryState state)
-	{
-		container.getChildren().clear();
-		container.getChildren().add(state.getGuiController().getRoot());
-	}
-
-	/**
 	 * Loads the given page as a Modal Window, blocking other open windows until it
 	 * is closed.
 	 * 
 	 * @param pageToLoad Page to load.
 	 */
-	public static Stage loadModalWindow(GUIPages pageToLoad, Object data)
+	public static GUIController loadModalWindow(GUIPages pageToLoad, Object data)
 	{
 		Stage modalWindow = new Stage();
 		GUIController guiController = null;
@@ -308,7 +306,7 @@ public class SceneManager
 		{
 			e.printStackTrace();
 		}
-		return modalWindow;
+		return guiController;
 	}
 
 	/**
@@ -321,17 +319,17 @@ public class SceneManager
 
 	public static void openLoadingWindow()
 	{
-		loadingWindow = loadModalWindow(GUIPages.LOADING, null);
+		loadModalWindow(GUIPages.LOADING, null);
 	}
 
-	public static void closeLoadingWindow()
-	{
-		if (loadingWindow != null)
-		{
-			loadingWindow.close();
-			loadingWindow = null;
-		}
-	}
+//	public static void closeLoadingWindow()
+//	{
+//		if (loadingWindow != null)
+//		{
+//			loadingWindow.close();
+//			loadingWindow = null;
+//		}
+//	}
 
 	/**
 	 * Set whether the user drop down and the shopping cart buttons will be visible.
@@ -512,5 +510,73 @@ public class SceneManager
 	public static void addHeightListener(ChangeListener<? super Number> listener)
 	{
 		mainWindow.heightProperty().addListener(listener);
+	}
+
+	/**
+	 * Load the home page for each user based on their role
+	 */
+	public static void openHomePage()
+	{
+		try
+		{
+			UserRole userRole = UserController.getInstance().getLoggedInUser().getRole();
+			history.clear();
+			container.getChildren().clear();
+			homeButton.setVisible(true);
+			userDropDown.setText(UserController.getInstance().getLoggedInUser().getFullName());
+			switch(userRole)
+			{
+			case Customer:
+			{
+				loadNewScene(GUIPages.CATALOG_PAGE, true);
+				setHeaderButtonVisibility(true, true);
+				break;
+			}
+			case BranchEmployee:
+			{
+				loadNewScene(GUIPages.BRANCH_EMPLOYEE_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			case BranchManager:
+			{
+				loadNewScene(GUIPages.BRANCH_MANAGER_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			case CEO:
+			{
+				loadNewScene(GUIPages.CEO_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			case ChainEmployee:
+			{
+				loadNewScene(GUIPages.CHAIN_EMPLOYEE_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			case CustomerServiceEmployee:
+			{
+				loadNewScene(GUIPages.CS_EMPLOYEE_PORTAL, true);
+				setHeaderButtonVisibility(true, false);
+				break;
+			}
+			case CustomerServiceSpecialist:
+			{
+				loadNewScene(GUIPages.SPECIALIST_EMPLOYEE_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			case DeliveryPerson:
+			{
+				loadNewScene(GUIPages.DELIVERY_OPERATOR_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			default:
+				displayErrorMessage("Invalid user role!");
+				break;
+			}
+		} catch (NullPointerException e)
+		{
+			System.out.println("No user");
+			displayErrorMessage("User Error!");
+		}
+		
 	}
 }

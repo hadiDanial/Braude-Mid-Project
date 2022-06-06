@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.branchManager.orders.OpenOrdersList">
+   <children>
+      <VBox layoutX="1.0" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="900.0" style="-fx-background-radius: 15; -fx-background-color: #078082; -fx-border-width: 5;">
+               <children>
+                  <Pane layoutX="76.0" layoutY="10.0" prefHeight="63.0" prefWidth="39.0" />
+                  <Label text="Pending Orders" textFill="#e2d784">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <TreeTableView fx:id="discountsTable" prefHeight="454.0" prefWidth="898.0">
+               <columns>
+                  <TreeTableColumn fx:id="addressColumn" prefWidth="75.0" text="Address" />
+                  <TreeTableColumn fx:id="orderDateColumn" prefWidth="75.0" text="Order Date" />
+                  <TreeTableColumn fx:id="numOfItemsColumn" prefWidth="75.0" text="# Items" />
+                  <TreeTableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                  <TreeTableColumn fx:id="acceptColumn" prefWidth="75.0" text="Accept" />
+                  <TreeTableColumn fx:id="cancelColumn" prefWidth="75.0" text="Cancle" />
+               </columns>
+               <columnResizePolicy>
+                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TreeTableView>
+            <Pane prefHeight="44.0" prefWidth="898.0" VBox.vgrow="ALWAYS" />
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onBackBtn" prefWidth="100.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="WHITE">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Pane prefWidth="200.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

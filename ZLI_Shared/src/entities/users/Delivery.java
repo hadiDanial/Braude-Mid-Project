@@ -1,8 +1,10 @@
 package entities.users;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import entities.other.Location;
+import utility.DateFormatter;
 
 public class Delivery implements Serializable
 {
@@ -74,6 +76,23 @@ public class Delivery implements Serializable
 	{
 		this.delivered = delivered;
 	}
+	public int getId()
+	{
+		return orderWithDelivery.getOrderId();
+	}
+	public int getItemsCount()
+	{
+		return orderWithDelivery.getProducts().size();
+	}
+	public float getPrice()
+	{
+		return orderWithDelivery.getPriceAfterDiscounts();
+	}
+	public String getFormattedDeliveryDate()
+	{
+		return DateFormatter.formatInstant(orderWithDelivery.getDeliveryDate(), true);
+	}
+
 	
 	@Override
 	public int hashCode()
