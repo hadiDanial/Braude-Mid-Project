@@ -7,6 +7,7 @@ import controllers.ComplaintController;
 import controllers.DiscountController;
 import controllers.OrderController;
 import controllers.ProductController;
+import controllers.SurveyController;
 import controllers.UserController;
 import entities.discounts.Discount;
 import entities.other.Branch;
