@@ -66,7 +66,7 @@ public enum GUIPages
 	VIEW_REPORTS_SALES_COMPARE("reports/complaints/SalesReportComparePage.fxml", "Compare Sales"),
 	VIEW_REPORTS_SALES_COMPARE_CEO("reports/complaints/SalesReportComparePageCEO.fxml", "Compare Sales"),
 	VIEW_REPORTS_SALES("reports/complaints/SalesReportPage.fxml", "View Sales"),
-	VIEW_REPORTS_SALES_CEO("reports/complaints/SalesReportPageCEO.fxml", "View Sales"),
+	VIEW_REPORTS_SALES_CEO("reports/complaints/SalesReportPageCEO.fxml", "View Sales")
 	
 	
 	

@@ -15,9 +15,6 @@ import javafx.scene.control.Label;
 
 public class CEOPortal extends GUIController
 {
-    private User worker;
-	private UserController userController;
-	
     @FXML
     private Label nameLabel;
 
@@ -28,11 +25,10 @@ public class CEOPortal extends GUIController
     private Button reviewReportsBtn;
     @FXML
     void onViewReportsBtn(ActionEvent event) {
-//        SceneManager.loadNewScene(GUIPages.VIEW_REPORTS, saveToHistory);
+        SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_COMPLAINTS_CEO, true);
     }
     @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-
 	}
 }
