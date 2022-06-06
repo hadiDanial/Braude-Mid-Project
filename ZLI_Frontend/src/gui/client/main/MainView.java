@@ -27,6 +27,9 @@ public class MainView extends Application implements Initializable
 	private Button shoppingCartBtn;
 
 	@FXML
+	private Button homeBtn;
+
+	@FXML
 	private Button settingsBtn;
 
 	@FXML
@@ -101,5 +104,14 @@ public class MainView extends Application implements Initializable
 	public ScrollPane getScrollPane()
 	{
 		return scrollPane;
+	}
+
+	@FXML
+	private void onLogOutBtn(ActionEvent event){
+
+	}
+	@FXML
+	private void onHomeBtn(ActionEvent event){
+
 	}
 }
