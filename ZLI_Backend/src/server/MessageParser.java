@@ -91,9 +91,14 @@ public class MessageParser
 			}
 			case CHECK_IF_FIRST_ORDER:
 			{
-				// TODO: Implement
-				return true;
+				return orderController.getNumberOfUserOrders((Integer) req.getMessage()) == 0;
 			}
+			case CREATE_ORDER:
+			{
+				return orderController.createNewOrder((Order) req.getMessage());
+			}
+			
+			
 			case GET_ALL_DELIVERY_BRANCH:
 			{
 				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId) req.getMessage();
