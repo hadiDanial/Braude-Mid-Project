@@ -38,6 +38,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -90,6 +91,29 @@ public class DeliveryPage extends FormController
 
 	@FXML
 	private Button backBtn;
+
+	@FXML
+    private Label branchErrorLabel;
+
+	@FXML
+    private Label pickUpTimeErrorLabel;
+
+	@FXML
+    private Label pickUpDateErrorLabel;
+	@FXML
+    private Label deliveryNameErrorLabel;
+	@FXML
+    private Label deliveryNameErrorLabel2;
+	@FXML
+    private Label deliveryPhoneErrorLabel;
+	@FXML
+    private Label deliveryPhoneErrorLabel2;
+	@FXML
+    private Label deliveryAddressErrorLabel;
+	@FXML
+    private Label deliveryTimeErrorLabel;
+	@FXML
+    private Label deliveryDateErrorLabel;
 
 	@FXML
 	private Button nextBtn;
@@ -179,20 +203,20 @@ public class DeliveryPage extends FormController
 	private void setupValidators()
 	{
 		List<Validator> pickupValidators = Arrays.asList(new Validator[]
-		{ new ChoiceBoxValidator<Branch>(branchSelection, null, true, this, "branch"),
-				new DateValidator(datePicker, false, null, true, "You must choose a date and it can't be in the past",
+		{ new ChoiceBoxValidator<Branch>(branchSelection, branchErrorLabel, true, this, "branch"),
+				new DateValidator(datePicker, false, pickUpTimeErrorLabel, true, "You must choose a date and it can't be in the past",
 						this),
-				new TimeValidator(pickupTimePicker, false, null, true, "You must choose a time", this) });
+				new TimeValidator(pickupTimePicker, false, pickUpDateErrorLabel, true, "You must choose a time", this) });
 
 		List<Validator> deliveryValidators = Arrays.asList(new Validator[]
-		{ new TimeValidator(deliveryTimePicker, false, null, true, "You must choose a time", this),
-				new DateValidator(deliveryDatePicker, false, null, true,
+		{ new TimeValidator(deliveryTimePicker, false, deliveryTimeErrorLabel, true, "You must choose a time", this),
+				new DateValidator(deliveryDatePicker, false, deliveryDateErrorLabel, true,
 						"You must choose a date and it can't be in the past", this),
-				new LettersOnlyValidator(nameInput, null, true, this),
-				new InputLengthValidator(nameInput, null, true, "Name", this, 1, 20),
-				new InputLengthValidator(addressInput, null, true, "Address", this, 3, 50),
-				new DigitsOnlyValidator(phoneInput, null, true, this),
-				new InputLengthValidator(phoneInput, null, true, "Phone", this, 9, 10) });
+				new LettersOnlyValidator(nameInput, deliveryNameErrorLabel, true, this),
+				new InputLengthValidator(nameInput, deliveryNameErrorLabel2, true, "Name", this, 1, 20),
+				new InputLengthValidator(addressInput, deliveryAddressErrorLabel, true, "Address", this, 3, 50),
+				new DigitsOnlyValidator(phoneInput, deliveryPhoneErrorLabel, true, this),
+				new InputLengthValidator(phoneInput, deliveryPhoneErrorLabel2, true, "Phone", this, 9, 10) });
 
 		pickupChecker = Arrays.asList(new ValidatorList[]
 		{ new ValidatorList(pickupValidators) });
