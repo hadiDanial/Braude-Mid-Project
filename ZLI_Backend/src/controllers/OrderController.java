@@ -69,12 +69,11 @@ public class OrderController
 						statementToPrepare.setInt(1, order.getCustomer().getUserId());
 						statementToPrepare.setInt(2, order.getBranch().getBranchId());
 						statementToPrepare.setString(3, OrderStatus.Pending.name());
-						statementToPrepare.setFloat(4, order.getTotalCost());
+						statementToPrepare.setFloat(4, order.getPriceAfterDiscounts());
 						statementToPrepare.setString(5, order.getGreetingCard());
-						statementToPrepare.setString(6, order.getColor().name());
-						statementToPrepare.setString(7, order.getOrderDetails());
-						statementToPrepare.setTimestamp(8, Timestamp.from(order.getOrderDate()));
-						statementToPrepare.setTimestamp(9, Timestamp.from(order.getDeliveryDate()));
+						statementToPrepare.setString(6, order.getOrderDetails());
+						statementToPrepare.setTimestamp(7, Timestamp.from(order.getOrderDate()));
+						statementToPrepare.setTimestamp(8, Timestamp.from(order.getDeliveryDate()));
 					}
 				});
 
@@ -314,7 +313,6 @@ public class OrderController
 			order.setOrderStatus(OrderStatus.valueOf(resultSet.getString(ordersColumnNames[2])));
 			order.setTotalCost(resultSet.getFloat(ordersColumnNames[3]));
 			order.setGreetingCard(resultSet.getString(ordersColumnNames[4]));
-			order.setColor(ColorEnum.valueOf(resultSet.getString(ordersColumnNames[5])));
 			order.setOrderDetails(resultSet.getString(ordersColumnNames[6]));
 			order.setOrderDate(resultSet.getTimestamp(ordersColumnNames[7]).toInstant());
 			order.setDeliveryDate(resultSet.getTimestamp(ordersColumnNames[8]).toInstant());
@@ -388,7 +386,6 @@ public class OrderController
 	{
 		ArrayList<String> keys = new ArrayList<String>();
 		keys.add("date");
-		keys.add("color");
 		return databaseConnection.updateById(orderToUpdate.getOrderId(), ID_FIELD_NAME, Tables.ORDERS_TABLE_NAME, keys,
 				new IObjectToPreparedStatementParameters<Order>()
 				{
@@ -397,7 +394,6 @@ public class OrderController
 					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
 					{
 						statementToPrepare.setTimestamp(1, Timestamp.from(orderToUpdate.getDeliveryDate()));
-						statementToPrepare.setString(2, orderToUpdate.getColor().name());
 					}
 				});
 	}
@@ -411,7 +407,6 @@ public class OrderController
 		o.setBranch(new Branch("TEST"));
 		o.setTotalCost(100);
 		o.setGreetingCard("Hello create tests");
-		o.setColor(ColorEnum.Purple);
 		o.setOrderDetails("This is a newly created order to test if adding works...");
 		o.setDeliveryDate(Instant.now());
 		o.setOrderDate(Instant.now());

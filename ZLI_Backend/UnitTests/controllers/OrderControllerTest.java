@@ -92,7 +92,6 @@ public class OrderControllerTest
  	private void testAddOrder()
  	{
  		Order order = new Order();
- 		order.setColor(ColorEnum.Blue);
  		Location location = new Location("Haifa", 1234, "123 Street", "");
  		location.setLocationId(1);
  		User user = new User();

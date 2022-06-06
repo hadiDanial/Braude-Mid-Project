@@ -45,12 +45,11 @@ CREATE TABLE `CatalogItemInBranch`(`catalogId` INT NOT NULL, `branchId` INT NOT 
                 
 CREATE TABLE `Orders`(`orderId` INT primary key AUTO_INCREMENT, `userId` INT NOT NULL, `branchId` INT NOT NULL,
 					  FOREIGN KEY (userId) REFERENCES Users(userId), FOREIGN KEY (branchId) REFERENCES Branches(branchId),
-                      `orderStatus` varchar(32),
-					  `totalCost` float, `greetingCard` varchar(256), `color` varchar(32), 
+                      `orderStatus` varchar(32), `totalCost` float, `greetingCard` varchar(256),
 					  `details` varchar(256), `orderDate` timestamp, `deliveryDate` timestamp);
 
 CREATE TABLE `Orders_Products` (`orderId` INT NOT NULL, `catalogId` INT NOT NULL, PRIMARY KEY (orderId, catalogId), `quantity` INT NOT NULL,
-								FOREIGN KEY (orderId) REFERENCES Orders(orderId), FOREIGN KEY (catalogId) REFERENCES catalogiteminbranch(catalogId));
+								FOREIGN KEY (orderId) REFERENCES Orders(orderId), FOREIGN KEY (catalogId) REFERENCES catalog(catalogId));
 
 CREATE TABLE `User_Orders`(`userId` INT NOT NULL, `orderId` INT NOT NULL, PRIMARY KEY(userId, orderId),
 		FOREIGN KEY (userId) REFERENCES Users(userId) ON DELETE CASCADE, 
@@ -112,22 +111,23 @@ INSERT INTO Locations (city, zipCode, street) VALUES ('Tel-Aviv', 9012, 'Dizengo
 INSERT INTO Branches (managerId, branchName, locationId) VALUES (123456789, 'Haifa', 1);
 INSERT INTO Branches (managerId, branchName, locationId) VALUES (987654321, 'Karmiel', 2);
 
-insert into deliveries (orderId,recipientName,recipientPhoneNumber,locationId,delivered) value (1,"hadi",0505555555,1,0)
-             
-INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, color, details, orderDate, deliveryDate) values (default, 123456789, 1, 'Pending', 15, 'Hello', 'Red', 'Valentines roses', now(), DATE_ADD(NOW(), INTERVAL 30 MINUTE));
-INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, color, details, orderDate, deliveryDate) values (default, 123456789, 1, 'Pending', 15, 'Greetings', 'Yellow', 'Yellow', now(), DATE_ADD(NOW(), INTERVAL 7 DAY));
-INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, color, details, orderDate, deliveryDate) values (default, 123456789, 1, 'Pending', 15, 'DEAL', 'Purple', 'Royal', now(), DATE_ADD(NOW(), INTERVAL 3 DAY));
-INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, color, details, orderDate, deliveryDate) values (default, 987654321, 1, 'Pending', 15, 'Happy birthday!', 'Mixed', 'Birthday flowers', now(), DATE_ADD(NOW(), INTERVAL 5 DAY));
-INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, color, details, orderDate, deliveryDate) values (default, 987654321, 1, 'Pending', 15, 'WEDDING!!!', 'Bridal', 'Bridal Bouquet', now(), DATE_ADD(NOW(), INTERVAL 30 DAY));
+
+INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, details, orderDate, deliveryDate) values (default, 123456789, 1, 'Pending', 15, 'Hello', 'Valentines roses', now(), DATE_ADD(NOW(), INTERVAL 30 MINUTE));
+INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, details, orderDate, deliveryDate) values (default, 123456789, 1, 'Pending', 15, 'Greetings', 'bla bla', now(), DATE_ADD(NOW(), INTERVAL 7 DAY));
+INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, details, orderDate, deliveryDate) values (default, 123456789, 1, 'Pending', 15, 'DEAL', 'Royal', now(), DATE_ADD(NOW(), INTERVAL 3 DAY));
+INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, details, orderDate, deliveryDate) values (default, 987654321, 1, 'Pending', 15, 'Happy birthday!', 'Birthday flowers', now(), DATE_ADD(NOW(), INTERVAL 5 DAY));
+INSERT INTO Orders (orderId, userId, branchId, orderStatus, totalCost, greetingCard, details, orderDate, deliveryDate) values (default, 987654321, 1, 'Pending', 15, 'WEDDING!!!', 'Bridal Bouquet', now(), DATE_ADD(NOW(), INTERVAL 30 DAY));
+
+insert into deliveries (orderId,recipientName,recipientPhoneNumber,locationId,delivered) value (1,"hadi",0505555555,1,0);
 
 INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (1,1,5);
 INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (3,1,9);
 INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (4,1,17);
 INSERT INTO catalogiteminbranch (catalogId, branchId, quantityInStock) VALUES (1,2,3);
 INSERT INTO User_Orders (userId, orderId) values (123456789, 5);
-INSERT INTO Surveys (surveyDate, q1, q2, q3, q4, q5, q6) VALUES (now(), 'q1','q2','q3','q4','q5','q6');
-INSERT INTO Surveys (surveyDate, q1, q2, q3, q4, q5, q6) VALUES (now(), 'q7','q8','q9','q10','q11','q12');
-INSERT INTO Surveys (surveyDate, q1, q2, q3, q4, q5, q6) VALUES (now(), 'q13','q14','q15','q16','q17','q18');
+INSERT INTO Surveys (startDate, endDate, q1, q2, q3, q4, q5, q6) VALUES (now(), now(), 'q1','q2','q3','q4','q5','q6');
+INSERT INTO Surveys (startDate, endDate, q1, q2, q3, q4, q5, q6) VALUES (now(), now(), 'q7','q8','q9','q10','q11','q12');
+INSERT INTO Surveys (startDate, endDate, q1, q2, q3, q4, q5, q6) VALUES (now(), now(),'q13','q14','q15','q16','q17','q18');
 INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,1,1,2,3,4,5,10);
 INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,2,5,4,8,1,1,1);
 INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,3,6,5,3,4,9,7);

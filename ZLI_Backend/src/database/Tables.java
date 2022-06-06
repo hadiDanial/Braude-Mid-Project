@@ -9,8 +9,7 @@ public class Tables
 
 	public static final String ORDERS_TABLE_NAME = "Orders";
 	public static final String[] ordersColumnNames =
-	{ "userId", "branchId", "orderStatus", "totalCost", "greetingCard", "color", "details", "orderDate",
-			"deliveryDate" };
+	{ "userId", "branchId", "orderStatus", "totalCost", "greetingCard", "details", "orderDate",	"deliveryDate" };
 
 	public static final String ORDERS_PRODUCTS_TABLE_NAME = "Orders_Products";
 	public static final String[] productsInOrderColumnNames =
