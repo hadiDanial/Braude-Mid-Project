@@ -33,7 +33,6 @@ public class Complaint implements Serializable
 		this.submissionTime = submissionTime;
 		this.complaintResult = complaintResult;
 		this.openedDate=openedDate;
-		duration=Duration.between(submissionTime,openedDate);
 		this.wasHandled = false;
 	}
 	public void setDuration(Duration duration)
@@ -42,15 +41,11 @@ public class Complaint implements Serializable
 	}
 	public long getDuration()
 	{
+		duration=Duration.between(submissionTime,openedDate);
 		return duration.toHours();
 	}
 	
 	public String getFormattedopenedDate()
-	{
-		return DateFormatter.formatInstant(openedDate, true);
-	}
-
-	public String getFormattedDeliveryDate()
 	{
 		return DateFormatter.formatInstant(openedDate, true);
 	}
