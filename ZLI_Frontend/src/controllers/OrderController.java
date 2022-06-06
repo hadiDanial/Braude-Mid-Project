@@ -1,5 +1,6 @@
 package controllers;
 
+import java.time.Instant;
 import java.util.ArrayList;
 
 import entities.discounts.Discount;
@@ -78,6 +79,7 @@ public class OrderController
 		if (order == null)
 			response.executeAfterResponse(false);
 		order.setCustomer(userController.getLoggedInUser());
+		order.setOrderDate(Instant.now());
 		Request req = new Request(RequestType.CREATE_ORDER, order, order.getCustomer());
 		clientController.sendRequest(req, response);
 	}
