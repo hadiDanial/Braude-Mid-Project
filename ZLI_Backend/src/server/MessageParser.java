@@ -29,6 +29,7 @@ public class MessageParser
 	private static OrderController orderController = OrderController.getInstance();
 	private static BranchController branchController = BranchController.getInstance();
 	private static ComplaintController complaintController = ComplaintController.getInstance();
+	private static SurveyController surveyController = SurveyController.getInstance();
 	/**
 	 * Handle the request - activate the correct function based on the request type.
 	 * 
@@ -176,6 +177,11 @@ public class MessageParser
 			case GET_ALL_COMPLAINTS:
 			{
 				return complaintController.getAllComplaints();
+			}
+
+			case GET_ALL_SURVEY:
+			{
+				return surveyController.getAllSurvey(req.getMessage());
 			}
 			
 			default:

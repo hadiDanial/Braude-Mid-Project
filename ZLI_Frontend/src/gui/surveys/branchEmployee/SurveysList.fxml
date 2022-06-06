@@ -25,7 +25,7 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <TableView fx:id="discountsTable" prefHeight="454.0" prefWidth="898.0">
+            <TableView fx:id="surveysTable" prefHeight="454.0" prefWidth="898.0">
                <columns>
                   <TableColumn fx:id="surveyIDColumn" prefWidth="75.0" text="Survey ID" />
                   <TableColumn fx:id="startDateColumn" prefWidth="75.0" text="Start Date" />
