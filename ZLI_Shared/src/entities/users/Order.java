@@ -228,7 +228,15 @@ public class Order implements Serializable, IDiscountable
 
 		}
 	}
-
+	public int getNumProducts()
+	{
+		int count = 0;
+		for (CartItem cartItem : products)
+		{
+			count += cartItem.getQuantity();
+		}
+		return count;
+	}
 	public User getCustomer()
 	{
 		return customer;
@@ -241,6 +249,11 @@ public class Order implements Serializable, IDiscountable
 
 	public String getOrderDetails()
 	{
+		orderDetails = "";
+		for (CartItem item : products)
+		{
+			orderDetails += item.toString() + " | ";
+		}
 		return orderDetails;
 	}
 
@@ -248,7 +261,13 @@ public class Order implements Serializable, IDiscountable
 	{
 		this.orderDetails = orderDetails;
 	}
-
+	public String getAddress()
+	{
+		if(deliveryDetails == null)
+			return "Pickup, " + branch.getBranchName() + " branch (" + branch.getLocation().getCity() + ")";
+		else
+			return deliveryDetails.getLocation().toString();
+	}
 	@Override
 	public int hashCode()
 	{

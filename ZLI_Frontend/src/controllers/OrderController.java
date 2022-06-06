@@ -101,7 +101,7 @@ public class OrderController
 		System.out.println("Added product to order. Cart:\n" + order.getProducts());
 	}
 
-	public void getDeliveryByBranch(IResponse<Order> response,int BranchId)
+	public void getDeliveryByBranch(IResponse<Order> response, int BranchId)
     {
         EntityRequestWithId<OrderStatus> request = new EntityRequestWithId<OrderStatus>();
         request.setEntityId(BranchId);
@@ -110,13 +110,13 @@ public class OrderController
         clientController.sendRequest(requests, response);
     }
 	
-	public void getAllOrdersByStatus(IResponse<ArrayList<Order>> iResponse,OrderStatus orderStatus)
+	public void getAllOrdersByStatus(IResponse<ArrayList<Order>> iResponse, OrderStatus orderStatus)
     {
         Request request = new Request(RequestType.GET_ALL_ORDER_STATUS,orderStatus);
         clientController.sendRequest(request, iResponse);
     }
 
-	public void updateOrderStatus(IResponse<Boolean> response,int orderId,OrderStatus orderStatus)
+	public void updateOrderStatus(IResponse<Boolean> response, int orderId, OrderStatus orderStatus)
 	{
         EntityRequestWithId<OrderStatus> request = new EntityRequestWithId<OrderStatus>();
         request.setEntityId(orderId);
