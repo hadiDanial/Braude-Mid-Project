@@ -1,6 +1,7 @@
 package server;
 
 import controllers.BranchController;
+import controllers.ComplaintController;
 import controllers.DiscountController;
 import controllers.OrderController;
 import controllers.ProductController;
@@ -24,7 +25,7 @@ public class MessageParser
 	private static ProductController productController = ProductController.getInstance();
 	private static OrderController orderController = OrderController.getInstance();
 	private static BranchController branchController = BranchController.getInstance();
-
+	private static ComplaintController complaintController = ComplaintController.getInstance();
 	/**
 	 * Handle the request - activate the correct function based on the request type.
 	 * 
@@ -139,6 +140,13 @@ public class MessageParser
 			{
 				return branchController.getWorkerBranch((Integer) req.getMessage());
 			}
+			
+			// Complaints
+			case GET_ALL_COMPLAINTS:
+			{
+				return complaintController.getAllComplaints();
+			}
+			
 			default:
 			break;
 		}

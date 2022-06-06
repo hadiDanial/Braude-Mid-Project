@@ -200,10 +200,7 @@ public class User implements Serializable
 	@Override
 	public String toString()
 	{
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", emailAddress=" + emailAddress + ", phoneNumber="
-				+ phoneNumber + ", role=" + role + ", accountStatus=" + accountStatus + ", credit=" + credit
-				+ ", isLoggedIn=" + isLoggedIn + ", lastLoginDate=" + lastLoginDate + "]";
+		return getFullName() + " (" + username + ")";
 	}
 
 	public String getFullName()

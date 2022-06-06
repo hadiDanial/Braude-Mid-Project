@@ -107,4 +107,38 @@ public class ComplaintController {
 		e.printStackTrace();
 		}
 	}
+	public ArrayList<Complaint> getAllComplaints()
+	{
+		ResultSet rs = databaseConnection.getAll(Tables.COMPLAINTS_TABLE_NAME);
+		return rsToComplaintArrayList(rs);
+	}
+	private ArrayList<Complaint> rsToComplaintArrayList(ResultSet rs)
+	{
+		ArrayList<Complaint> complaints = new ArrayList<Complaint>();
+		try
+		{
+			while(rs.next())
+			{
+				Complaint complaint = new Complaint();
+				int customerId = rs.getInt("customerId");
+				int csEmployeeId = rs.getInt("customerServiceEmployeeId");
+				User customer = UserController.getInstance().getUserById(customerId);
+				User employee = UserController.getInstance().getUserById(csEmployeeId);
+				complaint.setComplaintId(rs.getInt("complaintId"));
+				complaint.setComplaintDetails(rs.getString("complaintDetails"));
+				complaint.setComplaintResult(rs.getString("complaintResult"));
+				complaint.setSubmissionTime(rs.getTimestamp("submissionTime").toInstant());
+				complaint.setWasHandled(rs.getBoolean("wasHandled"));
+				complaint.setCustomer(customer);
+				complaint.setCustomerServiceEmployee(employee);
+				complaints.add(complaint);
+			}
+			rs.close();
+			return complaints;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

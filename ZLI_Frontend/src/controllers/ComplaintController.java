@@ -52,7 +52,7 @@ public class ComplaintController
 
 	public void getAllComplaints(IResponse <ArrayList<Complaint>> response)
 	{
-		Request req=new Request(RequestType.GET_ALL_COMPLAINTS,userController.getLoggedInUser());
+		Request req=new Request(RequestType.GET_ALL_COMPLAINTS);
 		clientController.sendRequest(req, response);
 	}
 

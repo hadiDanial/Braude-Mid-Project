@@ -57,7 +57,7 @@ public class NewComplaint extends FormController{
 
     @FXML
     void onAddBtn(ActionEvent event) {
-        SceneManager.loadNewScene(GUIPages.COMPLAINT_OPENED_PAGE, true);
+        SceneManager.loadNewScene(GUIPages.OPENED_COMPLAINTS_PAGE, true);
     }
 
     @FXML

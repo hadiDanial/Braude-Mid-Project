@@ -189,6 +189,12 @@ public class UserController
 		}
 	}
 
+	public User getUserById(int userId)
+	{
+		ResultSet rs = databaseConnection.getByID(userId, Tables.USERS_TABLE_NAME, ID_FIELD_NAME);		
+		return convertRSToUser(rs);
+	}
+
 /* 	public User convertRSToUser(ResultSet resultSet, boolean isOnlyRecordExpected)
 	{
 		String[] ordersColumnNames = Tables.ordersColumnNames;
