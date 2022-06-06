@@ -1,7 +1,13 @@
 package entities.users;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+
+import utility.DateFormatter;
 
 public class Complaint implements Serializable
 {
@@ -10,13 +16,15 @@ public class Complaint implements Serializable
 	private User customerServiceEmployee;
 	private String complaintDetails;
 	private Instant submissionTime;
+	private Instant openedDate;
+	private Duration duration;
 	private String complaintResult;
 	private boolean wasHandled;
 
 	private static final long serialVersionUID = 8137391902399453083L;
 
 	public Complaint(User customer, User customerServiceEmployee, String complaintDetails,
-			Instant submissionTime, String complaintResult)
+			Instant submissionTime, String complaintResult, Instant openedDate)
 	{
 		super();
 		this.customer = customer;
@@ -24,7 +32,22 @@ public class Complaint implements Serializable
 		this.complaintDetails = complaintDetails;
 		this.submissionTime = submissionTime;
 		this.complaintResult = complaintResult;
+		this.openedDate=openedDate;
 		this.wasHandled = false;
+	}
+	public void setDuration(Duration duration)
+	{
+		this.duration=duration;
+	}
+	public long getDuration()
+	{
+		duration=Duration.between(submissionTime,openedDate);
+		return duration.toHours();
+	}
+	
+	public String getFormattedopenedDate()
+	{
+		return DateFormatter.formatInstant(openedDate, true);
 	}
 	public int getComplaintId()
 	{

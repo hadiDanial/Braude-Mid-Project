@@ -2,13 +2,18 @@ package gui.orders.delivery.deliveryOperator;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import org.junit.runner.Request;
+
 import controllers.BranchController;
+import controllers.ClientController;
 import controllers.OrderController;
 import entities.other.Branch;
 import entities.other.Location;
 import entities.users.Delivery;
+import entities.users.Order;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.SceneManager;
 import javafx.collections.FXCollections;
@@ -20,14 +25,17 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import requests.EntityRequestWithId;
+import requests.RequestType;
 import utility.IResponse;
 
 public class DeliveryList extends GUIController{
 
 	public static ObservableList<Delivery> deliveryList = FXCollections.observableArrayList();
     public static ObservableList<Branch> branchList = FXCollections.observableArrayList();
-    OrderController orderController;
-    BranchController branchController;
+    private OrderController orderController;
+    private BranchController branchController;
+    private ClientController clientController;
 
     @FXML
     private TableView<Delivery> deliveryTable;
@@ -66,40 +74,23 @@ public class DeliveryList extends GUIController{
         initializeTableColumn();
         orderController = OrderController.getInstance();
         branchController = BranchController.getInstance();
+        clientController = ClientController.getInstance();
         branchController.getAllBranches(new IResponse<ArrayList<Branch>>() {
-
             @Override
             public void executeAfterResponse(Object message) {
+                branchList = (ObservableList<Branch>) message;
             }
         });
-        branchDropDown.getItems().addAll(branchList);
-
-		orderController.(new IResponse<ArrayList<delivery>>()
+        branchDropDown.setItems(branchList);
+        orderController.getDeliveryByBranch(new IResponse<Order>()
 		{
-			
 			@Override
 			public void executeAfterResponse(Object message)
 			{
-				Platform.runLater(new Runnable()
-				{
-					
-					@Override
-					public void run()
-					{
-						VBox scrollPaneContent = new VBox();
-						if(message == null)
-							SceneManager.displayErrorMessage("Failed to load Deliveries!");
-						else
-						{
-							deliveryList.setAll((ArrayList<Delivery>) message);
-                            deliveryTable.setItems(deliveryList);						
-						}
-					}
-				});
+				deliveryList = (ObservableList<Delivery>) message;
 			}
-		});
+		},((Branch) branchDropDown.getValue()).getBranchId());
 	}
-
     private void initializeTableColumn()
     {
         orderIDColumn.setCellValueFactory(new PropertyValueFactory<Delivery,Integer >("Id"));

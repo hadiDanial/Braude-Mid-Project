@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import client.Client;
+import entities.users.Order;
 import gui.guimanagement.SceneManager;
+import requests.EntityRequestWithId;
 import requests.Request;
 import utility.IEventListener;
 import utility.IResponse;
