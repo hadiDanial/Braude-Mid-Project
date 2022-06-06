@@ -46,17 +46,7 @@
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <Label layoutX="82.0" layoutY="186.0" text="Branch: " textFill="#062c30">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="branchLabel" layoutX="174.0" layoutY="186.0" text="ALL" textFill="#078082">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="304.0" layoutY="327.0" mnemonicParsing="false" onAction="#onViewReportsBtn" prefHeight="56.0" prefWidth="293.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Reports" textFill="#e2d784">
+                  <Button fx:id="viewReportsBtn" layoutX="304.0" layoutY="327.0" mnemonicParsing="false" onAction="#onViewReportsBtn" prefHeight="56.0" prefWidth="293.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Reports" textFill="#e2d784">
                      <font>
                         <Font size="26.0" />
                      </font>

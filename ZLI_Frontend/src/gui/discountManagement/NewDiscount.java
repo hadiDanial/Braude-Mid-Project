@@ -7,8 +7,8 @@ import gui.guimanagement.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class NewDiscount {
 
@@ -34,19 +34,19 @@ public class NewDiscount {
     private TextField productToAdd;
 
     @FXML
-    private TreeTableView<?> productsTable;
+    private TableView<?> productsTable;
 
     @FXML
-    private TreeTableColumn<?, ?> idColumn;
+    private TableColumn<?, ?> idColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> nameColumn;
+    private TableColumn<?, ?> nameColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> priceColumn;
+    private TableColumn<?, ?> priceColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> removeBtnColumn;
+    private TableColumn<?, ?> removeBtnColumn;
 
     @FXML
     void onAddBtn(ActionEvent event) {

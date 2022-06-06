@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -25,19 +25,19 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <TreeTableView fx:id="discountsTable" prefHeight="454.0" prefWidth="898.0">
+            <TableView fx:id="discountsTable" prefHeight="454.0" prefWidth="898.0">
                <columns>
-                  <TreeTableColumn fx:id="addressColumn" prefWidth="75.0" text="Address" />
-                  <TreeTableColumn fx:id="orderDateColumn" prefWidth="75.0" text="Order Date" />
-                  <TreeTableColumn fx:id="numOfItemsColumn" prefWidth="75.0" text="# Items" />
-                  <TreeTableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
-                  <TreeTableColumn fx:id="acceptColumn" prefWidth="75.0" text="Accept" />
-                  <TreeTableColumn fx:id="cancelColumn" prefWidth="75.0" text="Cancle" />
+                  <TableColumn fx:id="addressColumn" prefWidth="75.0" text="Address" />
+                  <TableColumn fx:id="orderDateColumn" prefWidth="75.0" text="Order Date" />
+                  <TableColumn fx:id="numOfItemsColumn" prefWidth="75.0" text="# Items" />
+                  <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                  <TableColumn fx:id="acceptColumn" prefWidth="75.0" text="Accept" />
+                  <TableColumn fx:id="cancelColumn" prefWidth="75.0" text="Cancle" />
                </columns>
                <columnResizePolicy>
-                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
-            </TreeTableView>
+            </TableView>
             <Pane prefHeight="44.0" prefWidth="898.0" VBox.vgrow="ALWAYS" />
             <HBox>
                <children>

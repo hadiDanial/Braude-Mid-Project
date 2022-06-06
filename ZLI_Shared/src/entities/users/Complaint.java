@@ -23,6 +23,10 @@ public class Complaint implements Serializable
 
 	private static final long serialVersionUID = 8137391902399453083L;
 
+	public Complaint()
+	{
+		
+	}
 	public Complaint(User customer, User customerServiceEmployee, String complaintDetails,
 			Instant submissionTime, String complaintResult, Instant openedDate)
 	{
@@ -32,7 +36,7 @@ public class Complaint implements Serializable
 		this.complaintDetails = complaintDetails;
 		this.submissionTime = submissionTime;
 		this.complaintResult = complaintResult;
-		this.openedDate=openedDate;
+		this.openedDate = openedDate;
 		this.wasHandled = false;
 	}
 	public void setDuration(Duration duration)
@@ -41,12 +45,14 @@ public class Complaint implements Serializable
 	}
 	public long getDuration()
 	{
+		if(openedDate == null) return 0;
 		duration=Duration.between(submissionTime,openedDate);
 		return duration.toHours();
 	}
 	
 	public String getFormattedopenedDate()
 	{
+		if(openedDate == null) return "";
 		return DateFormatter.formatInstant(openedDate, true);
 	}
 	public int getComplaintId()

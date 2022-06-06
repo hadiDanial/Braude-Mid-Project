@@ -5,8 +5,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -119,17 +119,17 @@
                   </VBox>
                </children>
             </HBox>
-            <TreeTableView fx:id="productsTable" prefHeight="200.0">
+            <TableView fx:id="productsTable" prefHeight="200.0">
               <columns>
-                <TreeTableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
-                  <TreeTableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-                  <TreeTableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
-                  <TreeTableColumn fx:id="removeBtnColumn" prefWidth="75.0" text="Remove" />
+                <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                  <TableColumn fx:id="removeBtnColumn" prefWidth="75.0" text="Remove" />
               </columns>
                <columnResizePolicy>
-                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
-            </TreeTableView>
+            </TableView>
             <Pane prefHeight="57.0" prefWidth="898.0" VBox.vgrow="ALWAYS" />
             <HBox>
                <children>

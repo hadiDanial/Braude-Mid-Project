@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -25,18 +25,18 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <TreeTableView fx:id="discountsTable" prefHeight="454.0" prefWidth="898.0">
+            <TableView fx:id="discountsTable" prefHeight="454.0" prefWidth="898.0">
                <columns>
-                  <TreeTableColumn fx:id="surveyIDColumn" prefWidth="75.0" text="Survey ID" />
-                  <TreeTableColumn fx:id="startDateColumn" prefWidth="75.0" text="Start Date" />
-                  <TreeTableColumn fx:id="endDateColumn" prefWidth="75.0" text="End Date" />
-                  <TreeTableColumn fx:id="numOfSurveyedCustomersColumn" prefWidth="140.0" text="# Surveyed" />
-                  <TreeTableColumn fx:id="resultColumn" prefWidth="75.0" text="Add Result" />
+                  <TableColumn fx:id="surveyIDColumn" prefWidth="75.0" text="Survey ID" />
+                  <TableColumn fx:id="startDateColumn" prefWidth="75.0" text="Start Date" />
+                  <TableColumn fx:id="endDateColumn" prefWidth="75.0" text="End Date" />
+                  <TableColumn fx:id="numOfSurveyedCustomersColumn" prefWidth="140.0" text="# Surveyed" />
+                  <TableColumn fx:id="resultColumn" prefWidth="75.0" text="Add Result" />
                </columns>
                <columnResizePolicy>
-                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
-            </TreeTableView>
+            </TableView>
             <Pane prefHeight="44.0" prefWidth="898.0" VBox.vgrow="ALWAYS" />
             <HBox>
                <children>

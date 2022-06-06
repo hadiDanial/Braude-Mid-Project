@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import utility.IResponse;
 
@@ -24,6 +25,8 @@ public class OpenedComplaints extends FormController{
     private ComplaintController complaintController;
     public static ObservableList<Complaint> complaintsList = FXCollections.observableArrayList();
 
+    @FXML
+    private TableView<Complaint> complaintsTable;
 
     @FXML
     private TableColumn<Complaint,Integer> complaintIDColumn;
@@ -64,6 +67,7 @@ public class OpenedComplaints extends FormController{
         ButtonAnimator.addButtonAnimations(addBtn,backBtn);
         complaintController = ComplaintController.getInstance();
         initializeTableColumns();
+        complaintsTable.setItems(complaintsList);
         complaintController.getAllComplaints(new IResponse<ArrayList<Complaint>>() {
 
             @Override

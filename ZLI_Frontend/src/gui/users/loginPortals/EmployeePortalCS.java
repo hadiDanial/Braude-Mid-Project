@@ -46,7 +46,7 @@ public class EmployeePortalCS extends GUIController
 
     @FXML
     void onReviewComplaintsBtn(ActionEvent event) {
-        SceneManager.loadNewScene(GUIPages.COMPLAINT_OPENED_PAGE,true);
+        SceneManager.loadNewScene(GUIPages.OPENED_COMPLAINTS_PAGE,true);
     }
 
 	@Override

@@ -2,28 +2,28 @@ package gui.surveys.branchEmployee;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class SurveysList {
 
     @FXML
-    private TreeTableView<?> discountsTable;
+    private TableView<?> discountsTable;
 
     @FXML
-    private TreeTableColumn<?, ?> surveyIDColumn;
+    private TableColumn<?, ?> surveyIDColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> startDateColumn;
+    private TableColumn<?, ?> startDateColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> endDateColumn;
+    private TableColumn<?, ?> endDateColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> numOfSurveyedCustomersColumn;
+    private TableColumn<?, ?> numOfSurveyedCustomersColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> resultColumn;
+    private TableColumn<?, ?> resultColumn;
 
     @FXML
     void onBackBtn(ActionEvent event) {

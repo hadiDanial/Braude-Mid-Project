@@ -2,31 +2,31 @@ package gui.orders.openOrders;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class OpenOrdersList {
 
     @FXML
-    private TreeTableView<?> discountsTable;
+    private TableView<?> discountsTable;
 
     @FXML
-    private TreeTableColumn<?, ?> addressColumn;
+    private TableColumn<?, ?> addressColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> orderDateColumn;
+    private TableColumn<?, ?> orderDateColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> numOfItemsColumn;
+    private TableColumn<?, ?> numOfItemsColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> priceColumn;
+    private TableColumn<?, ?> priceColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> acceptColumn;
+    private TableColumn<?, ?> acceptColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> cancelColumn;
+    private TableColumn<?, ?> cancelColumn;
 
     @FXML
     void onBackBtn(ActionEvent event) {

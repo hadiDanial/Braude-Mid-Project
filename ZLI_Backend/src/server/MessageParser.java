@@ -1,6 +1,7 @@
 package server;
 
 import controllers.BranchController;
+import controllers.ComplaintController;
 import controllers.DiscountController;
 import controllers.OrderController;
 import controllers.ProductController;
@@ -24,7 +25,7 @@ public class MessageParser
 	private static ProductController productController = ProductController.getInstance();
 	private static OrderController orderController = OrderController.getInstance();
 	private static BranchController branchController = BranchController.getInstance();
-
+	private static ComplaintController complaintController = ComplaintController.getInstance();
 	/**
 	 * Handle the request - activate the correct function based on the request type.
 	 * 
@@ -90,9 +91,14 @@ public class MessageParser
 			}
 			case CHECK_IF_FIRST_ORDER:
 			{
-				// TODO: Implement
-				return true;
+				return orderController.getNumberOfUserOrders((Integer) req.getMessage()) == 0;
 			}
+			case CREATE_ORDER:
+			{
+				return orderController.createNewOrder((Order) req.getMessage());
+			}
+			
+			
 			case GET_ALL_DELIVERY_BRANCH:
 			{
 				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId) req.getMessage();
@@ -139,6 +145,13 @@ public class MessageParser
 			{
 				return branchController.getWorkerBranch((Integer) req.getMessage());
 			}
+			
+			// Complaints
+			case GET_ALL_COMPLAINTS:
+			{
+				return complaintController.getAllComplaints();
+			}
+			
 			default:
 			break;
 		}
