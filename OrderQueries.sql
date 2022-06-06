@@ -73,7 +73,7 @@ CREATE TABLE `Orders_Discounts`(`orderId` INT NOT NULL, `discountId` INT NOT NUL
 CREATE TABLE `Deliveries`(`orderId` INT NOT NULL, `recipientName` varchar(50), `recipientPhoneNumber` varchar(20), `locationId` INT NOT NULL, `delivered` BOOLEAN,
 							PRIMARY KEY(orderId), FOREIGN KEY (orderId) REFERENCES Orders(orderId), FOREIGN KEY (locationId) REFERENCES Locations(locationId));  
                             
-CREATE TABLE `Surveys`(`surveyId` INT PRIMARY KEY AUTO_INCREMENT, `specialistId` INT, `surveyDate` timestamp NOT NULL, `analysisResults` BLOB,
+CREATE TABLE `Surveys`(`surveyId` INT PRIMARY KEY AUTO_INCREMENT, `specialistId` INT, `startDate` timestamp NOT NULL,`endDate` timestamp NOT NULL, `analysisResults` MEDIUMBLOB,
 						 `q1` varchar(1024),`q2` varchar(1024),`q3` varchar(1024),`q4` varchar(1024),`q5` varchar(1024),`q6` varchar(1024));
                                                    
 CREATE TABLE `Survey_Answers`(`answerId` INT PRIMARY KEY AUTO_INCREMENT, `customerId` INT NOT NULL, `orderId` INT NOT NULL, `surveyId` INT NOT NULL,

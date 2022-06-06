@@ -14,8 +14,8 @@ public class Survey implements Serializable
 	private ArrayList<User> customers;
 	private ArrayList<SurveyAnswers> answers;
 	private String questions[];
-	private String analysisResults; // Should be saved as a PDF
-	private Instant surveyDate;
+	private byte[] analysisResults; // Should be saved as a PDF
+	private Instant startDate, endDate;
 	
 	static final int NUM_QUESTIONS = 6;
 		
@@ -25,7 +25,6 @@ public class Survey implements Serializable
 	{
 		customers = new ArrayList<User>();
 		answers = new ArrayList<SurveyAnswers>();
-		this.surveyDate = Instant.now();
 	}
 	
 	public Survey(ArrayList<User> customers, String[] questions)
@@ -33,12 +32,11 @@ public class Survey implements Serializable
 		super();
 		this.customers = customers;
 		this.questions = questions;
-		this.surveyDate = Instant.now();
 		this.questions = new String[NUM_QUESTIONS];
 	}
 	
 	public Survey(User customerServiceSpecialist, ArrayList<User> customers, ArrayList<SurveyAnswers> answers,
-			String[] questions, String analysisResults, Instant surveyDate) throws SurveyException
+			String[] questions, byte[] analysisResults, Instant surveyDate) throws SurveyException
 	{
 		super();
 		this.customerServiceSpecialist = customerServiceSpecialist;
@@ -47,7 +45,7 @@ public class Survey implements Serializable
 		checkQuestionsLength(questions);
 		this.questions = questions;
 		this.analysisResults = analysisResults;
-		this.surveyDate = surveyDate;
+		this.startDate = surveyDate;
 	}
 
 	private void checkQuestionsLength(String[] questions) throws SurveyException
@@ -86,26 +84,36 @@ public class Survey implements Serializable
 		this.customers = customers;
 	}
 	
-	public String getAnalysisResults()
+	public byte[] getAnalysisResults()
 	{
 		return analysisResults;
 	}
 	
-	public void setAnalysisResults(String analysisResults)
+	public void setAnalysisResults(byte[] analysisResults)
 	{
 		this.analysisResults = analysisResults;
 	}
 	
-	public Instant getSurveyDate()
+	public Instant getStartDate()
 	{
-		return surveyDate;
+		return startDate;
 	}
 	
-	public void setSurveyDate(Instant surveyDate)
+	public void setStartDate(Instant surveyDate)
 	{
-		this.surveyDate = surveyDate;
+		this.startDate = surveyDate;
 	}
 	
+	public Instant getEndDate()
+	{
+		return endDate;
+	}
+
+	public void setEndDate(Instant endDate)
+	{
+		this.endDate = endDate;
+	}
+
 	public ArrayList<SurveyAnswers> getAnswers()
 	{
 		return answers;
@@ -132,7 +140,7 @@ public class Survey implements Serializable
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((surveyDate == null) ? 0 : surveyDate.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + surveyId;
 		return result;
 	}
@@ -148,13 +156,13 @@ public class Survey implements Serializable
 			return false;
 		}
 		Survey other = (Survey) obj;
-		if (surveyDate == null)
+		if (startDate == null)
 		{
-			if (other.surveyDate != null)
+			if (other.startDate != null)
 			{
 				return false;
 			}
-		} else if (!surveyDate.equals(other.surveyDate))
+		} else if (!startDate.equals(other.startDate))
 		{
 			return false;
 		}

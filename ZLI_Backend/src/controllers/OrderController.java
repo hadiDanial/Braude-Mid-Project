@@ -418,4 +418,21 @@ public class OrderController
 		createNewOrder(o);
 	}
 
+	public int getNumberOfUserOrders(int userId)
+	{
+		int count = 0;
+		ResultSet rs = databaseConnection.getBySimpleCondition("userId", String.valueOf(userId), Tables.ORDERS_TABLE_NAME);
+		try
+		{
+			while(rs.next())
+			{
+				count++;
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 }
