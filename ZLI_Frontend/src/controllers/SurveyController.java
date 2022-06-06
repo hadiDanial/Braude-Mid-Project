@@ -96,4 +96,10 @@ public class SurveyController
 		Request req=new Request(RequestType.GET_SURVEY_BY_BRANCH, branchId);
 		ClientController.getInstance().sendRequest(req, response);
 	}
+
+	public void getAllSurvey(IResponse<ArrayList<Survey>> response)
+	{
+		Request req=new Request(RequestType.GET_ALL_SURVEY);
+		ClientController.getInstance().sendRequest(req, response);
+	}
 }
