@@ -85,7 +85,10 @@ public class PaymentPage extends FormController
 	{
 		orderController = OrderController.getInstance();
 		order = orderController.getOrder();
-		totalPriceLabel.setText(String.valueOf(order.getTotalCost()));
+		if(order.getTotalCost() == order.getPriceAfterDiscounts())
+			totalPriceLabel.setText("Final Price: " + String.valueOf(order.getPriceAfterDiscounts()));
+		else
+			totalPriceLabel.setText("Original Price: " + String.valueOf(order.getTotalCost()) + " - Final Price: " + String.valueOf(order.getPriceAfterDiscounts()));
 		UserController.getInstance().getUserCreditCard(new IResponse<CreditCard>()
 		{
 

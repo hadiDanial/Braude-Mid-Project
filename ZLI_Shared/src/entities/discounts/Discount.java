@@ -23,7 +23,7 @@ public abstract class Discount implements Serializable
 	
 	private static final long serialVersionUID = 4565344021091868423L;
 
-	public static final PercentageDiscount firstPurchaseDiscount = new PercentageDiscount(Instant.MIN, Instant.MAX, "First Purchase Discount", 0.1f);
+	public static final PercentageDiscount firstPurchaseDiscount = new PercentageDiscount(Instant.MIN, Instant.MAX, "First Purchase Discount", 0.2f);
 	public Discount(String discountType)
 	{
 		super();

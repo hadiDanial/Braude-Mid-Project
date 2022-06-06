@@ -157,15 +157,19 @@ public class UserController
 				Tables.CREDIT_CARD_TABLE_NAME);
 		try
 		{
-			CreditCard cc = new CreditCard(user, rs.getString(2), rs.getInt(3), rs.getTimestamp(4).toInstant(), rs.getString(5));
+			if(rs.next())
+			{
+				
+			CreditCard cc = new CreditCard(user, rs.getString("creditCardNumber"), rs.getInt("cvv"), rs.getTimestamp("expirationDate").toInstant(), rs.getString("cardHolderName"));
 			cc.setCreditCardId(rs.getInt(1));
 			rs.close();
 			return cc;
+			}
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
-			return null;
 		}
+		return null;
 	}
 	public ArrayList<User> getAllUsers()
 	{

@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
@@ -140,17 +141,23 @@ public class OrderController
 	private void notifyManager(Order order)
 	{
 		int branchId = order.getBranch().getBranchId();
-		ArrayList<String> tables = (ArrayList<String>) Arrays.asList(new String[]
-		{ Tables.BRANCHES_TABLE_NAME, Tables.USERS_TABLE_NAME });
+		ArrayList<String> tables = new ArrayList<String>();
+		tables.add(Tables.BRANCHES_TABLE_NAME);
+		tables.add(Tables.USERS_TABLE_NAME);
+		
 		String selects = "branches.managerId, users.emailAddress, users.firstName";
-		String conditions = "branches.managerId=" + branchId + " AND branches.managerId=users.userId";
+		String conditions = "branches.branchId=" + branchId + " AND branches.managerId=users.userId";
 		ResultSet rs = databaseConnection.getJoinResultsWithSelectColumns(tables, selects, conditions);
 		try
 		{
+			if(rs.next())
+			{
+				
 			String content = "Hello, " + rs.getString("firstName") + "!<br>"
 					+ "A new order has been added to your branch, please review it soon!<br>" + "Order #"
 					+ order.getOrderId();
 			EmailManager.sendEmail("New Order", content, rs.getString("emailAddress"));
+			}
 
 		} catch (SQLException e)
 		{

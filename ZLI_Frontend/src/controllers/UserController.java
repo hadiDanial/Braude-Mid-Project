@@ -83,7 +83,7 @@ public class UserController
 
 	public void getUserCreditCard(IResponse<CreditCard> response)
 	{
-		Request req = new Request(RequestType.GET_USER_CREDIT_CARD, response);
+		Request req = new Request(RequestType.GET_USER_CREDIT_CARD, loggedInUser);
 		clientController.sendRequest(req, response);
 	}
 
