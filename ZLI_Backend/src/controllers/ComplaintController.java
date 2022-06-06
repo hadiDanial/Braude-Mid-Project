@@ -54,11 +54,11 @@ public class ComplaintController {
 					"Zerli - Filed Complaint", "Your complaint has been registered and will be responded by a our Customer Service employee soon.<br>"
 							+ "Complaint #" + complaint.getComplaintId() + "<br>" + "Thank you for choosing Zerli!",
 					complaint.getCustomer());
-			notifyEmployee(complaint);
+			notifyEmployee(complaint,"New Complaint Received");
                 }
 		return res == 1;
     }
-    public void notifyEmployee(Complaint complaint)
+    public void notifyEmployee(Complaint complaint,String title)
     {
         int customerServiceEmployeeId = complaint.getCustomerServiceEmployee().getUserId();
 		ArrayList<String> tables = (ArrayList<String>) Arrays.asList(new String[]
@@ -71,13 +71,13 @@ public class ComplaintController {
 			String content = "Hello, " + rs.getString("firstName") + "!<br>"
 					+ "A new complaint has been filed, please review it within 24 hours !<br>" + "Complaint #"
 					+ complaint.getComplaintId();
-			EmailManager.sendEmail("New Complaint", content, rs.getString("emailAddress"));
+			EmailManager.sendEmail(title, content, rs.getString("emailAddress"));
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
     }
-    public void handleComplaint(Complaint complaint, Boolean type, User user) 
+    public void handleComplaint(Complaint complaint, Boolean handled, User user) 
     {
 		int customerId = complaint.getCustomer().getUserId();
 		ArrayList<String> tables = (ArrayList<String>) Arrays.asList(new String[]
@@ -87,15 +87,15 @@ public class ComplaintController {
 		ResultSet rs = databaseConnection.getJoinResultsWithSelectColumns(tables, selects, conditions);
         try
         {
-		 if(type==true){
+		 if(handled==true){
          String content = "Hello, " + rs.getString("firstName") + "!<br>"
          + "your complaint #"+ complaint.getComplaintId() +" has been handled, here's our response to it: <br>"
          + complaint.getComplaintResult()+ "<br>" + "Have a nice day! <br>";
          EmailManager.sendEmail("Complaint Response", content, rs.getString("emailAddress"));
 		 }
-		 if(type==false)
+		 if(handled==false)
 		{
-		 notifyEmployee(complaint);
+		 notifyEmployee(complaint,"Warning: Reply to new complaint !");
 		 String content = "Hello, " + rs.getString("firstName") + "!<br>"
          + "sorry for the inconvenience of not responding to your complaint #"+ complaint.getComplaintId() +", we are willing to compensate you for the trouble.<br>"
          + user.getCredit()+ "<br>" + "Have a nice day! <br>";

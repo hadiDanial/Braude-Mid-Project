@@ -10,6 +10,7 @@ public class LoadingPage extends GUIController{
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		
 	}
 
 }
