@@ -7,7 +7,7 @@ public enum GUIPages
 	// TODO: Add all pages
 	MAIN_CONTAINER("client/main/MainView.fxml", "Zerli G13"),
 	ERROR("client/error/ErrorPage.fxml", "Error"),
-	SETTINGS("client/SettingsPage.fxml", "Settings"),
+	SETTINGS("client/settings/Settings.fxml", "Settings"),
 	OPERATION_SUCCESSFUL("client/success/SuccessPage.fxml", "Success"),
 	LOGIN("client/login/LoginPage.fxml", "Login"),
 	STARTUP_PAGE("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
