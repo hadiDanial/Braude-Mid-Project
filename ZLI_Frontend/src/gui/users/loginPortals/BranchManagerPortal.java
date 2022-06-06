@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.GUIController;
+import gui.guimanagement.GUIPages;
+import gui.guimanagement.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,16 +34,19 @@ public class BranchManagerPortal extends GUIController
 
     @FXML
     void onViewCustomersBtn(ActionEvent event) {
+		SceneManager.loadNewScene(GUIPages.VIEW_SURVEYS_BRANCH_EMPLOYEE, true);
 
     }
 
     @FXML
     void onViewOpenOrdersBtn(ActionEvent event) {
+		SceneManager.loadNewScene(GUIPages.VIEW_SURVEYS_BRANCH_EMPLOYEE, true);
 
     }
 
     @FXML
     void onViewReportsBtn(ActionEvent event) {
+		SceneManager.loadNewScene(GUIPages.VIEW_SURVEYS_BRANCH_EMPLOYEE, true);
 
     }
 
