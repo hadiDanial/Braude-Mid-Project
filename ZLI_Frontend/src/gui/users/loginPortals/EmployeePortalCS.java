@@ -53,6 +53,7 @@ public class EmployeePortalCS extends GUIController
 	public void initialize(URL location, ResourceBundle resources)
 	{
         userController = UserController.getInstance();
+        ButtonAnimator.addButtonAnimations(addSurveyButton,reviewComplaintsbButton);
 		branchController = BranchController.getInstance();
 		worker = userController.getLoggedInUser();
 		nameLabel.setText(worker.getFullName());
@@ -65,8 +66,6 @@ public class EmployeePortalCS extends GUIController
 				branchLabel.setText(workerBranch.getBranchName());
 			}
 		});
-
-		ButtonAnimator.addButtonAnimations(addSurveyButton,reviewComplaintsbButton);
 	}
 
 }
