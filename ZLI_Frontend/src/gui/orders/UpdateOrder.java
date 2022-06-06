@@ -83,7 +83,7 @@ public class UpdateOrder extends GUIController
 		LocalDate localDate = LocalDateTime.ofInstant(order.getDeliveryDate(), ZoneOffset.UTC).toLocalDate();
 		LocalDateTime ldt = LocalDateTime.ofInstant(date, ZoneId.systemDefault());
 		datePicker.setValue(localDate);
-		colorList.setValue(order.getColor());
+//		colorList.setValue(order.getColor());
 		hourSpinner.getValueFactory().setValue(ldt.getHour());
 		minuteSpinner.getValueFactory().setValue(ldt.getMinute());
 	}
@@ -95,7 +95,7 @@ public class UpdateOrder extends GUIController
 		orderDetails.appendText("Ordered on " + order.getFormattedOrderDate() + "\n");
 		orderDetails.appendText("From Branch: " + order.getBranchName() + ".\n");
 		orderDetails.appendText("For delivery on " + order.getFormattedDeliveryDate() + ".\n");
-		orderDetails.appendText("Order color is " + order.getColor().name() + ", details:\n");
+//		orderDetails.appendText("Order color is " + order.getColor().name() + ", details:\n");
 		orderDetails.appendText(order.getOrderDetails() + "\n");
 	}
 
@@ -120,7 +120,7 @@ public class UpdateOrder extends GUIController
 	@FXML
 	void onUpdateBtnClicked(ActionEvent event)
 	{
-		order.setColor(colorList.getValue());
+//		order.setColor(colorList.getValue());
 		LocalDate date = datePicker.getValue();
 
 		int hour = hourSpinner.getValue();

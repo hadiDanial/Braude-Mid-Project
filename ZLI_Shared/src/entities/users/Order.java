@@ -25,7 +25,6 @@ public class Order implements Serializable, IDiscountable
 	private OrderStatus orderStatus;
 	private Branch branch;
 	private User customer;
-	private ColorEnum colorEnum;
 
 	// Demo only
 	private String orderDetails;
@@ -40,7 +39,7 @@ public class Order implements Serializable, IDiscountable
 	}
 	
 	public Order(int orderId, String greetingCard, OrderStatus orderStatus,
-			Branch branch, ColorEnum colorEnum, String orderDetails, Instant deliveryDate, Instant orderDate)
+			Branch branch, String orderDetails, Instant deliveryDate, Instant orderDate)
 	{
 		super();
 		this.orderId = orderId;
@@ -49,7 +48,6 @@ public class Order implements Serializable, IDiscountable
 		this.orderDate = orderDate;
 		this.orderStatus = orderStatus;
 		this.branch = branch;
-		this.colorEnum = colorEnum;
 		this.orderDetails = orderDetails;
 		products = new ArrayList<CartItem>();
 		discounts = new HashSet<Discount>();
@@ -77,16 +75,6 @@ public class Order implements Serializable, IDiscountable
 	{
 		if(discounts == null) discounts = new HashSet<Discount>();
 		discounts.add(discount);
-	}
-	
-	public ColorEnum getColor()
-	{
-		return colorEnum;
-	}
-
-	public void setColor(ColorEnum colorEnum)
-	{
-		this.colorEnum = colorEnum;
 	}
 
 	public int getOrderId()

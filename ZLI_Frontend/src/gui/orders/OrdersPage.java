@@ -150,9 +150,9 @@ public class OrdersPage extends GUIController
 				}
 
 				rect.setStroke(Color.BLACK);
-				rect.setFill(order.getColor().HexToColor());
-				rect.setStrokeWidth(1);
-				setText(order.getColor().name());
+//				rect.setFill(order.getColor().HexToColor());
+//				rect.setStrokeWidth(1);
+//				setText(order.getColor().name());
 				setGraphic(rect);
 
 			}
