@@ -49,6 +49,18 @@ public class BranchManagerPortal extends GUIController
 //		SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_PAGE, true);
 
     }
+    @FXML
+    void onViewSalesReportsBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void onViewOrdersReportsBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void onViewComplaintsReportsBtn(ActionEvent event) {
+
+    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
