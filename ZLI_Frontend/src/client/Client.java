@@ -68,10 +68,9 @@ public class Client extends AbstractClient
 			}
 		} catch (IOException e)
 		{
-//			e.printStackTrace();
+			e.printStackTrace();
 			this.response = null;
 			this.awaitResponse = false;
-			ClientController.getInstance().openSettingsPage();
 //			clientUI.display("Could not send message to server: Terminating client." + e);
 //			quit();
 		}

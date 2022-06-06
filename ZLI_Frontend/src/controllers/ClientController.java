@@ -51,11 +51,6 @@ public class ClientController
 		}
 	}
 
-	public void openSettingsPage()
-	{
-		SceneManager.openSettingsPage();
-	}
-
 	public void closeConnection()
 	{
 		if(client != null)
