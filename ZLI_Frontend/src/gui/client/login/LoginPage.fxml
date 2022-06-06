@@ -34,14 +34,40 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="usernameInput" />
+                              <StackPane>
+                                 <children>
+                                    <TextField fx:id="usernameInput" />
+                                    <TextFlow mouseTransparent="true" translateY="45.0">
+                                       <children>
+                                          <Label fx:id="usernameErrorLabel" alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="59.0" prefWidth="200.0" text="Username error" textFill="#ffd805">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </TextFlow>
+                                 </children>
+                              </StackPane>
                               <Pane layoutX="50.0" layoutY="85.0" prefHeight="50.0" prefWidth="187.0" />
                               <Label text="Password" textFill="#e2d784">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <PasswordField fx:id="passwordInput" />
+                              <StackPane>
+                                 <children>
+                                    <PasswordField fx:id="passwordInput" />
+                                    <TextFlow mouseTransparent="true" translateY="30.0">
+                                       <children>
+                                          <Label fx:id="passwordErrorLabel" focusTraversable="false" maxWidth="-Infinity" prefWidth="200.0" text="Password error" textFill="#ffd805">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </TextFlow>
+                                 </children>
+                              </StackPane>
                               <Pane layoutX="10.0" layoutY="270.0" prefHeight="80.0" prefWidth="149.0" />
                               <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginBtn" style="-fx-background-color: #062C30;" text="Log in" textFill="#e2d784">
                                  <font>
@@ -55,24 +81,7 @@
                           </VBox>
                         <VBox maxWidth="-Infinity" mouseTransparent="true" prefWidth="200.0" spacing="40.0">
                            <children>
-                              <TextFlow maxHeight="70.0" maxWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
-                                 <children>
-                                    <Label fx:id="usernameErrorLabel" alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="59.0" prefWidth="200.0" text="Username error" textFill="#ff7205">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </TextFlow>
-                              <TextFlow maxWidth="-Infinity" prefWidth="200.0">
-                                 <children>
-                                    <Label fx:id="passwordErrorLabel" focusTraversable="false" maxWidth="-Infinity" prefWidth="200.0" text="Password error" textFill="#ff7205">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </TextFlow>
+                              <TextFlow maxWidth="-Infinity" prefWidth="200.0" />
                            </children>
                            <StackPane.margin>
                               <Insets top="190.0" />

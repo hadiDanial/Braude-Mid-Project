@@ -4,8 +4,8 @@ public class ClientProperties
 {
 	private static String hostAddress = "localhost";
 	private static int hostPort = 5555;
-	private static int clientWidth = 1240; 
-	private static int clientHeight = 900; 
+	private static int clientWidth = 1300; 
+	private static int clientHeight = 1000; 
 	private static double defaultPercentageOfParent = 0.9;
 
 	public static String getHostAddress()
