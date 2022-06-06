@@ -40,6 +40,7 @@ public enum GUIPages
 	VIEW_SURVEY_SPECIALIST("surveys/specialist/SurveyAnalysis.fxml", "Surveys - Specialist"),
 	ADD_SURVEY_RESULT("surveys/branchEmployee/AddSurveyResult.fxml", "Add Survey Result"),
 	VIEW_SURVEYS_BRANCH_EMPLOYEE("surveys/branchEmployee/SurveysList.fxml", "Surveys"),
+	
 	DELIVERY_LIST("orders/delivery/deliveryOperator/DeliveryList.fxml", "Delivery List"),
 	DELIVERY_OPERATOR_PORTAL("orders/delivery/deliveryOperator/DeliveryOperatorPortal.fxml", "Delivery Operator Portal"),
 

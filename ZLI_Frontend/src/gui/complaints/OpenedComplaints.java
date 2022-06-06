@@ -1,4 +1,4 @@
-package gui.newPages.customerService.complaints;
+package gui.complaints;
 
 import java.net.URL;
 import java.time.Instant;
