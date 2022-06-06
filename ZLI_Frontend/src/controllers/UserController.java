@@ -69,6 +69,7 @@ public class UserController
 			Request req = new Request(RequestType.LOGOUT, loggedInUser.getUserId());
 			clientController.sendRequest(req, null);
 			loggedInUser = null;
+			SceneManager.loadNewScene(GUIPages.LOGIN, false);
 		}
 	}
 

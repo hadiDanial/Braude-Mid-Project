@@ -200,4 +200,9 @@ public class User implements Serializable
 				+ ", isLoggedIn=" + isLoggedIn + ", lastLoginDate=" + lastLoginDate + "]";
 	}
 
+	public String getFullName()
+	{
+		return firstName + " " + lastName; 
+	}
+
 }

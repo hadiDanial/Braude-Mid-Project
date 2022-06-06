@@ -42,6 +42,8 @@ public enum GUIPages
 	DELIVERY_OPERATOR_PORTAL("orders/delivery/deliveryOperator/DeliveryOperatorPortal.fxml", "Delivery Operator Portal"),
 
 	BRANCH_EMPLOYEE_PORTAL("gui.users.loginPortals.BranchEmployeePortal.fxml", "Home - Branch Employee"),
+	BRANCH_MANAGER_PORTAL("gui.users.loginPortals.BranchManagerPortal.fxml", "Home - Branch Manager"),
+	CEO_PORTAL("gui.users.loginPortals.CEOPortal.fxml", "Home - CEO"),
 	CHAIN_EMPLOYEE_PORTAL("gui.users.loginPortals.ChainEmployeePortal.fxml", "Home - Chain Employee"),
 	CS_EMPLOYEE_PORTAL("gui.users.loginPortals.EmployeePortalCS.fxml", "Home - Customer Service Employee"),
 	SPECIALIST_EMPLOYEE_PORTAL("gui.users.loginPortals.ServiceSpecialistPortal.fxml", "Home - Service Specialist Employee");

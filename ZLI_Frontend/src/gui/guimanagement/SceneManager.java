@@ -44,6 +44,7 @@ public class SceneManager
 	private static Button shoppingCartButton;
 	private static HashSet<Pane> panesToResize;
 	private static AnchorPane scrollPaneAnchor;
+	private static Button homeButton;
 
 	/**
 	 * Initialize the UI. This method should only be called <b>once!</b>
@@ -68,7 +69,7 @@ public class SceneManager
 		});
 
 		loadMainContainer();
-		loadNewScene(GUIPages.LOGIN, true);
+		loadNewScene(GUIPages.LOGIN, false);
 //		loadAdditiveScene(GUIPages.Loading, true);
 		mainWindow.setHeight(ClientProperties.getClientHeight());
 		mainWindow.setWidth(ClientProperties.getClientWidth());
@@ -98,6 +99,7 @@ public class SceneManager
 			header = mainViewController.getHeader();
 			userDropDown = mainViewController.getUserDropDown();
 			shoppingCartButton = mainViewController.getShoppingCartButton();
+			homeButton = mainViewController.getHomeBtn();
 			scrollPane = mainViewController.getScrollPane();
 			container = mainViewController.getContent();
 			container.setAlignment(Pos.BASELINE_LEFT);
@@ -510,29 +512,70 @@ public class SceneManager
 		mainWindow.heightProperty().addListener(listener);
 	}
 
+	/**
+	 * Load the home page for each user based on their role
+	 */
 	public static void openHomePage()
 	{
-		history.clear();
-		container.getChildren().clear();
 		try
 		{
 			UserRole userRole = UserController.getInstance().getLoggedInUser().getRole();
+			history.clear();
+			container.getChildren().clear();
+			homeButton.setVisible(true);
+			userDropDown.setText(UserController.getInstance().getLoggedInUser().getFullName());
 			switch(userRole)
 			{
 			case Customer:
-				SceneManager.loadNewScene(GUIPages.CATALOG_PAGE, true);
-				SceneManager.setHeaderButtonVisibility(true, true);
+			{
+				loadNewScene(GUIPages.CATALOG_PAGE, true);
+				setHeaderButtonVisibility(true, true);
 				break;
+			}
+			case BranchEmployee:
+			{
+				loadNewScene(GUIPages.BRANCH_EMPLOYEE_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			case BranchManager:
+			{
+				loadNewScene(GUIPages.BRANCH_MANAGER_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			case CEO:
+			{
+				loadNewScene(GUIPages.CEO_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			case ChainEmployee:
+			{
+				loadNewScene(GUIPages.CHAIN_EMPLOYEE_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
 			case CustomerServiceEmployee:
-				SceneManager.loadNewScene(GUIPages.COMPLAINT_PAGE, true);
-				SceneManager.setHeaderButtonVisibility(true, false);
-
+			{
+				loadNewScene(GUIPages.CS_EMPLOYEE_PORTAL, true);
+				setHeaderButtonVisibility(true, false);
+				break;
+			}
+			case CustomerServiceSpecialist:
+			{
+				loadNewScene(GUIPages.SPECIALIST_EMPLOYEE_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
+			case DeliveryPerson:
+			{
+				loadNewScene(GUIPages.DELIVERY_OPERATOR_PORTAL, true);
+				setHeaderButtonVisibility(true, false);				
+			}
 			default:
+				displayErrorMessage("Invalid user role!");
 				break;
 			}
 		} catch (NullPointerException e)
 		{
 			System.out.println("No user");
+			displayErrorMessage("User Error!");
 		}
 		
 	}
