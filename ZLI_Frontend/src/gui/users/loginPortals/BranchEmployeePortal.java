@@ -49,7 +49,6 @@ public class BranchEmployeePortal extends GUIController
 		nameLabel.setText(worker.getFullName());
 		branchController.getWorkerBranch(worker.getUserId(), new IResponse<Branch>()
 		{
-
 			@Override
 			public void executeAfterResponse(Object message)
 			{

@@ -30,5 +30,6 @@ public class CEOPortal extends GUIController
     @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+        
 	}
 }
