@@ -57,11 +57,11 @@ public class ProductElement extends GUIController
 		String details;
 		if (baseProduct.isProduct())
 		{
-			details = ((Product) baseProduct).getProductType().name();
+			details = "Product - " + ((Product) baseProduct).getProductType().name();
 		}
 		else {
 			Item item = ((Item)baseProduct);
-			details = item.getPrimaryColor().name() + " " + item.getItemType().name();
+			details = "Item - " + item.getPrimaryColor().name() + " " + item.getItemType().name();
 		}
 		detailsLabel.setText(details);
 	}
