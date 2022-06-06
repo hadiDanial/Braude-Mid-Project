@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Settings">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.settings.Settings">
    <children>
       <TextField fx:id="hostField" layoutX="50.0" layoutY="179.0">
          <font>
@@ -28,7 +28,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="104.0" layoutY="332.0" mnemonicParsing="false" onAction="#onConnectBtn" style="-fx-background-color: #05595B;" text="Connect" textFill="#e2d784">
+      <Button fx:id="connectBtn" layoutX="104.0" layoutY="332.0" mnemonicParsing="false" onAction="#onConnectBtn" style="-fx-background-color: #05595B;" text="Connect" textFill="#e2d784">
          <font>
             <Font size="20.0" />
          </font>

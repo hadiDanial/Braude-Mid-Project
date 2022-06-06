@@ -7,11 +7,12 @@ public enum GUIPages
 	// TODO: Add all pages
 	MAIN_CONTAINER("client/main/MainView.fxml", "Zerli G13"),
 	ERROR("client/error/ErrorPage.fxml", "Error"),
-	SETTINGS("client/SettingsPage.fxml", "Settings"),
+	SETTINGS("client/settings/Settings.fxml", "Settings"),
 	OPERATION_SUCCESSFUL("client/success/SuccessPage.fxml", "Success"),
 	LOGIN("client/login/LoginPage.fxml", "Login"),
 	STARTUP_PAGE("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
 	NEW_USER("users/customers/NewUser.fxml","Add new user"),
+	CUSTOMERS_LIST("users/customers/CustomerList.fxml","Customer List"),
 
 	
 	ORDERS("orders/OrdersPage.fxml", "Orders"),
@@ -40,6 +41,7 @@ public enum GUIPages
 	VIEW_SURVEY_SPECIALIST("surveys/specialist/SurveyAnalysis.fxml", "Surveys - Specialist"),
 	ADD_SURVEY_RESULT("surveys/branchEmployee/AddSurveyResult.fxml", "Add Survey Result"),
 	VIEW_SURVEYS_BRANCH_EMPLOYEE("surveys/branchEmployee/SurveysList.fxml", "Surveys"),
+	
 	DELIVERY_LIST("orders/delivery/deliveryOperator/DeliveryList.fxml", "Delivery List"),
 	DELIVERY_OPERATOR_PORTAL("orders/delivery/deliveryOperator/DeliveryOperatorPortal.fxml", "Delivery Operator Portal"),
 
