@@ -8,7 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TableColumn;
 
 public class AddAnalysis extends FormController {
 
@@ -19,13 +19,13 @@ public class AddAnalysis extends FormController {
     private Label numSurveyedLabel;
 
     @FXML
-    private TreeTableColumn<?, ?> questionNumberColumn;
+    private TableColumn<?, ?> questionNumberColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> questionTextColumn;
+    private TableColumn<?, ?> questionTextColumn;
 
     @FXML
-    private TreeTableColumn<?, ?> questionScoreColumn;
+    private TableColumn<?, ?> questionScoreColumn;
 
     @FXML
     private TextArea surveyAnalysisAria;
