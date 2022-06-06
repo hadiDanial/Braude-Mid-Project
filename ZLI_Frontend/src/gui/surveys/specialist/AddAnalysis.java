@@ -1,12 +1,16 @@
 package gui.surveys.specialist;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import gui.guimanagement.FormController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeTableColumn;
 
-public class AddAnalysis {
+public class AddAnalysis extends FormController {
 
     @FXML
     private Label surveyIDLabel;
@@ -35,5 +39,10 @@ public class AddAnalysis {
     void onBackBtn(ActionEvent event) {
 
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+	}
 
 }

@@ -1,12 +1,17 @@
 package gui.surveys.csEmployee;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import com.jfoenix.controls.JFXDatePicker;
 
+import gui.guimanagement.FormController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class AddSurvey {
+public class AddSurvey extends FormController
+{
 
     @FXML
     private TextField nameField;
@@ -44,5 +49,10 @@ public class AddSurvey {
     void onBackBtn(ActionEvent event) {
 
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+	}
 
 }

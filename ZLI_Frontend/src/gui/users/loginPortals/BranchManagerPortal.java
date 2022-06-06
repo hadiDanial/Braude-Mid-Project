@@ -40,13 +40,13 @@ public class BranchManagerPortal extends GUIController
 
     @FXML
     void onViewOpenOrdersBtn(ActionEvent event) {
-		SceneManager.loadNewScene(GUIPages.VIEW_SURVEYS_BRANCH_EMPLOYEE, true);
+		SceneManager.loadNewScene(GUIPages.OPEN_ORDERS_LIST, true);
 
     }
 
     @FXML
     void onViewReportsBtn(ActionEvent event) {
-		SceneManager.loadNewScene(GUIPages.VIEW_SURVEYS_BRANCH_EMPLOYEE, true);
+//		SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_PAGE, true);
 
     }
 
