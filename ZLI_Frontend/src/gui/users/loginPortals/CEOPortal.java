@@ -25,11 +25,7 @@ public class CEOPortal extends GUIController
     private Button reviewReportsBtn;
     @FXML
     void onViewReportsBtn(ActionEvent event) {
-<<<<<<< HEAD
         SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_COMPLAINTS_CEO, true);
-=======
-//        SceneManager.loadNewScene(GUIPages.VIEW_REPORTS, saveToHistory);
->>>>>>> 9d442de3b383c66f0a81821bcc1d75750ee083ff
     }
     @Override
 	public void initialize(URL location, ResourceBundle resources)
