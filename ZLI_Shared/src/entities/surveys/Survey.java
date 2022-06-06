@@ -17,9 +17,9 @@ public class Survey implements Serializable
 	private String questions[];
 	private byte[] analysisResults; // Should be saved as a PDF
 	private Instant startDate, endDate;
-	
+	private int score;
 	static final int NUM_QUESTIONS = 6;
-		
+
 	private static final long serialVersionUID = 4685144997413378000L;
 
 	public Survey()
@@ -27,7 +27,7 @@ public class Survey implements Serializable
 		customers = new ArrayList<User>();
 		answers = new ArrayList<SurveyAnswers>();
 	}
-	
+
 	public Survey(ArrayList<User> customers, String[] questions)
 	{
 		super();
@@ -35,9 +35,9 @@ public class Survey implements Serializable
 		this.questions = questions;
 		this.questions = new String[NUM_QUESTIONS];
 	}
-	
+
 	public Survey(User customerServiceSpecialist, ArrayList<User> customers, ArrayList<SurveyAnswers> answers,
-			String[] questions, byte[] analysisResults, Instant surveyDate) throws SurveyException
+			String[] questions, byte[] analysisResults, Instant surveyDate,int score) throws SurveyException
 	{
 		super();
 		this.customerServiceSpecialist = customerServiceSpecialist;
@@ -47,75 +47,80 @@ public class Survey implements Serializable
 		this.questions = questions;
 		this.analysisResults = analysisResults;
 		this.startDate = surveyDate;
+		this.score=score;
 	}
-
+	public int getScore()
+	{
+		return score;
+	}
+	public void setScore(int score)
+	{
+		this.score=score;
+	}
 	private void checkQuestionsLength(String[] questions) throws SurveyException
 	{
-		if(questions.length != NUM_QUESTIONS)
+		if (questions.length != NUM_QUESTIONS)
 			throw new SurveyException("Survey must have " + NUM_QUESTIONS + " questions.");
 	}
 	public int getNumberOfSurveyed(){
 		return customers.size();
 	}
+
 	public int getSurveyId()
 	{
 		return surveyId;
 	}
-	
+
 	public void setSurveyId(int surveyId)
 	{
 		this.surveyId = surveyId;
 	}
-	
+
 	public User getCustomerServiceSpecialist()
 	{
 		return customerServiceSpecialist;
 	}
-	
+
 	public void setCustomerServiceSpecialist(User customerServiceSpecialist)
 	{
 		this.customerServiceSpecialist = customerServiceSpecialist;
 	}
-	
+
 	public ArrayList<User> getCustomers()
 	{
 		return customers;
 	}
-	
+
 	public void setCustomers(ArrayList<User> customers)
 	{
 		this.customers = customers;
 	}
-	
+
 	public byte[] getAnalysisResults()
 	{
 		return analysisResults;
 	}
-	
+
 	public void setAnalysisResults(byte[] analysisResults)
 	{
 		this.analysisResults = analysisResults;
 	}
-	
+
 	public Instant getStartDate()
 	{
 		return startDate;
 	}
-	
+
 	public void setStartDate(Instant surveyDate)
 	{
 		this.startDate = surveyDate;
 	}
-	
+
 	public Instant getEndDate()
 	{
 		return endDate;
 	}
 
-	public void setEndDate(Instant endDate)
-	{
-		this.endDate = endDate;
-	}
 	public String getFormattedStartDate()
 	{
 		return DateFormatter.formatInstant(startDate, true);
@@ -124,6 +129,15 @@ public class Survey implements Serializable
 	public String getFormattedEndDate()
 	{
 		return DateFormatter.formatInstant(endDate, true);
+	}
+
+	public void setEndDate(Instant endDate)
+	{
+		this.endDate = endDate;
+	}
+	public int getNumOfCustomers()
+	{
+		return customers.size();
 	}
 
 	public ArrayList<SurveyAnswers> getAnswers()
@@ -156,6 +170,7 @@ public class Survey implements Serializable
 		result = prime * result + surveyId;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj)
 	{

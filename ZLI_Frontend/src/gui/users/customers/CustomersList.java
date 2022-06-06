@@ -45,7 +45,7 @@ public class CustomersList extends GUIController {
 
     @FXML
     void onAddBtn(ActionEvent event) {
-        SceneManager.loadNewScene(GUIPages.NEW_USER, true);
+        SceneManager.loadModalWindow(GUIPages.NEW_USER, null);
     }
 
     @FXML
@@ -59,7 +59,8 @@ public class CustomersList extends GUIController {
 	{
         userController = UserController.getInstance();
         initializeTableColumn();
-		userController.getAllUsers(new IResponse<ArrayList<User>>()
+        usersTable.setItems(usersList);						
+		userController.getAllUsersByRole(UserRole.Customer, new IResponse<ArrayList<User>>()
 		{
 			
 			@Override
@@ -71,13 +72,11 @@ public class CustomersList extends GUIController {
 					@Override
 					public void run()
 					{
-						VBox scrollPaneContent = new VBox();
 						if(message == null)
 							SceneManager.displayErrorMessage("Failed to load customers!");
 						else
 						{
 							usersList.setAll((ArrayList<User>) message);
-                            usersTable.setItems(usersList);						
 						}
 					}
 				});

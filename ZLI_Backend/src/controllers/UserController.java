@@ -87,28 +87,32 @@ public class UserController
 
 	public boolean register(User user)
 	{
-		int res = databaseConnection.insertToDatabase(Tables.USERS_TABLE_NAME, Tables.usersColumnNames,
-				new IObjectToPreparedStatementParameters<User>()
-				{
-
-					@Override
-					public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
-					{
-						statementToPrepare.setInt(1, user.getUserId());
-						statementToPrepare.setString(2, user.getUsername());
-						statementToPrepare.setString(3, user.getPassword());
-						statementToPrepare.setString(4, user.getFirstName());
-						statementToPrepare.setString(5, user.getLastName());
-						statementToPrepare.setString(6, user.getEmailAddress());
-						statementToPrepare.setString(7, user.getPhoneNumber());
-						statementToPrepare.setString(8, user.getRole().name());
-						statementToPrepare.setString(9, user.getAccountStatus().name());
-						statementToPrepare.setFloat(10, user.getCredit());
-						statementToPrepare.setBoolean(11, false);
-						statementToPrepare.setTimestamp(12, null);
-					}
-				});
+		int res = databaseConnection.insertToDatabase(Tables.USERS_TABLE_NAME, Tables.usersColumnNames,	userToRS(user, true));
 		return res == 1;
+	}
+
+	private IObjectToPreparedStatementParameters<User> userToRS(User user, boolean newUser)
+	{
+		return new IObjectToPreparedStatementParameters<User>()
+		{
+
+			@Override
+			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
+			{
+				statementToPrepare.setInt(1, user.getUserId());
+				statementToPrepare.setString(2, user.getUsername());
+				statementToPrepare.setString(3, user.getPassword());
+				statementToPrepare.setString(4, user.getFirstName());
+				statementToPrepare.setString(5, user.getLastName());
+				statementToPrepare.setString(6, user.getEmailAddress());
+				statementToPrepare.setString(7, user.getPhoneNumber());
+				statementToPrepare.setString(8, user.getRole().name());
+				statementToPrepare.setString(9, user.getAccountStatus().name());
+				statementToPrepare.setFloat(10, user.getCredit());
+				statementToPrepare.setBoolean(11, (newUser) ? false : user.isLoggedIn());
+				statementToPrepare.setTimestamp(12, (newUser) ? null : Timestamp.from(user.getLastLoginDate()));
+			}
+		};
 	}
 
 	public User convertRSToUser(ResultSet rs)
@@ -191,6 +195,12 @@ public class UserController
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public ArrayList<User> getUsersByRole(UserRole role)
+	{
+		ResultSet rs = databaseConnection.getBySimpleCondition("role", role.name(), Tables.USERS_TABLE_NAME);
+		return convertRSToUsersArray(rs);		
 	}
 
 	public User getUserById(int userId)
