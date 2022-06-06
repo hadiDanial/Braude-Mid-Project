@@ -217,7 +217,7 @@ public class OrderController
 			tableNames.add(Tables.ALL_PRODUCTS_TABLE_NAME);
 			String selects = "Orders.orderId, orders_products.quantity, catalog.* ";
 			String conditions = " Orders.branchId = " + branchId + " AND Orders.orderId=" + order.getOrderId()
-					+ " AND Orders.orderId= orders_products.orderId AND orders.orderStatus='Pending'"
+					+ " AND Orders.orderId= orders_products.orderId AND orders.orderStatus='" + orderStatus.name() + '"'
 					+ " AND catalog.catalogId = orders_products.catalogId";
 			// Join Order_Product + CatalogItem
 			ResultSet cartRS = databaseConnection.getJoinResultsWithSelectColumns(tableNames, selects, conditions);
