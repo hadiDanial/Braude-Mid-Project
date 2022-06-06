@@ -3,6 +3,8 @@ package gui.users.loginPortals;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controllers.UserController;
+import entities.users.User;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
@@ -26,7 +28,7 @@ public class CEOPortal extends GUIController
     private Button reviewReportsBtn;
     @FXML
     void onViewReportsBtn(ActionEvent event) {
-        SceneManager.loadNewScene(GUIPages.VIEW_REPORTS, saveToHistory);
+//        SceneManager.loadNewScene(GUIPages.VIEW_REPORTS, saveToHistory);
     }
     @Override
 	public void initialize(URL location, ResourceBundle resources)
