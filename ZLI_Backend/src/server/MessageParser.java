@@ -134,6 +134,10 @@ public class MessageParser
 			{
 				return branchController.getAllBranches();
 			}
+			case GET_WORKER_BRANCH:
+			{
+				return branchController.getWorkerBranch((Integer) req.getMessage());
+			}
 			default:
 			break;
 		}
