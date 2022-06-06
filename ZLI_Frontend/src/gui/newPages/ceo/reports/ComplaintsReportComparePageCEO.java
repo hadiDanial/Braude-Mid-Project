@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 public class ComplaintsReportComparePageCEO {
 
     @FXML
-    private MenuButton firstQuarterDropDown;
+    private ChoiceBox firstQuarterDropDown;
 
     @FXML
     private Label quarterErrLabel;
@@ -29,7 +29,7 @@ public class ComplaintsReportComparePageCEO {
     private Label branchErrLabel1;
 
     @FXML
-    private MenuButton secondQuarterDropDown;
+    private ChoiceBox secondQuarterDropDown;
 
     @FXML
     private Label quarterErrLabel1;

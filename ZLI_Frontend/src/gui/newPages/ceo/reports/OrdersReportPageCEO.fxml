@@ -61,17 +61,8 @@
                         </Label>
                         <StackPane>
                            <children>
-                              <MenuButton fx:id="quarterDropDown" mnemonicParsing="false" style="-fx-background-radius: 15;" text="Quarter">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" text="Q1" />
-                                  <MenuItem mnemonicParsing="false" text="Q2" />
-                                    <MenuItem mnemonicParsing="false" text="Q3" />
-                                    <MenuItem mnemonicParsing="false" text="Q4" />
-                                </items>
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </MenuButton>
+                              <ChoiceBox prefWidth="150.0" fx:id="quarterDropDown" />
+                                
                               <TextFlow translateY="60.0">
                                  <children>
                                     <Label fx:id="quarterErrLabel" text="Label" textFill="RED" />

@@ -41,7 +41,7 @@
                      </graphic>
                   </Button>
                   <Pane layoutX="1256.0" layoutY="10.0" minWidth="20.0" prefHeight="50.0" prefWidth="20.0" />
-                  <Button fx:id="shoppingCartBtn1" layoutX="1222.0" layoutY="22.0" mnemonicParsing="false" onAction="#onShoppingCartBtn" style="-fx-background-color: #062C30;" textFill="WHITE">
+                  <Button fx:id="homeBtn" layoutX="1222.0" layoutY="22.0" mnemonicParsing="false" onAction="#onHomeBtn" style="-fx-background-color: #062C30;" textFill="WHITE">
                      <graphic>
                         <MaterialIconView fill="WHITE" glyphName="HOME" size="18" />
                      </graphic>

@@ -3,6 +3,7 @@ package gui.branchManager.reports;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
@@ -10,7 +11,7 @@ import javafx.scene.control.TextField;
 public class ComplaintsReportPage {
 
     @FXML
-    private MenuButton quarterDropDown;
+    private ChoiceBox quarterDropDown;
 
     @FXML
     private Label quarterErrLabel;
