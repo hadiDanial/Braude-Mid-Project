@@ -1,4 +1,4 @@
-package gui.branchManager.customers;
+package gui.users.customers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
