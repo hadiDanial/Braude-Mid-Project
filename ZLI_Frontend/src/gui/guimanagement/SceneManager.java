@@ -536,21 +536,25 @@ public class SceneManager
 			{
 				loadNewScene(GUIPages.BRANCH_EMPLOYEE_PORTAL, true);
 				setHeaderButtonVisibility(true, false);				
+				break;
 			}
 			case BranchManager:
 			{
 				loadNewScene(GUIPages.BRANCH_MANAGER_PORTAL, true);
 				setHeaderButtonVisibility(true, false);				
+				break;
 			}
 			case CEO:
 			{
 				loadNewScene(GUIPages.CEO_PORTAL, true);
 				setHeaderButtonVisibility(true, false);				
+				break;
 			}
 			case ChainEmployee:
 			{
 				loadNewScene(GUIPages.CHAIN_EMPLOYEE_PORTAL, true);
 				setHeaderButtonVisibility(true, false);				
+				break;
 			}
 			case CustomerServiceEmployee:
 			{
@@ -562,11 +566,13 @@ public class SceneManager
 			{
 				loadNewScene(GUIPages.SPECIALIST_EMPLOYEE_PORTAL, true);
 				setHeaderButtonVisibility(true, false);				
+				break;
 			}
 			case DeliveryPerson:
 			{
 				loadNewScene(GUIPages.DELIVERY_OPERATOR_PORTAL, true);
 				setHeaderButtonVisibility(true, false);				
+				break;
 			}
 			default:
 				displayErrorMessage("Invalid user role!");
