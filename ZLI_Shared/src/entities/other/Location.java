@@ -70,6 +70,10 @@ public class Location implements Serializable
 		this.notes = notes;
 	}
 	
-	
+	@Override
+	public String toString()
+	{
+		return street + ", " + city + " - " + notes;
+	}
 
 }

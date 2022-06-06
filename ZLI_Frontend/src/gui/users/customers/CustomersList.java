@@ -73,7 +73,7 @@ public class CustomersList extends GUIController {
 					{
 						VBox scrollPaneContent = new VBox();
 						if(message == null)
-							SceneManager.displayErrorMessage("Failed to load Discounts!");
+							SceneManager.displayErrorMessage("Failed to load customers!");
 						else
 						{
 							usersList.setAll((ArrayList<User>) message);

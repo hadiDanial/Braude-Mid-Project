@@ -1,6 +1,5 @@
 package gui.guimanagement;
 
-import gui.discountManagement.DiscountManagement;
 
 public enum GUIPages
 {
@@ -12,7 +11,7 @@ public enum GUIPages
 	LOGIN("client/login/LoginPage.fxml", "Login"),
 	STARTUP_PAGE("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
 	NEW_USER("users/customers/NewUser.fxml","Add new user"),
-	CUSTOMERS_LIST("users/customers/CustomerList.fxml","Customer List"),
+	CUSTOMERS_LIST("users/customers/CustomersList.fxml","Customers List"),
 
 	
 	ORDERS("orders/OrdersPage.fxml", "Orders"),
