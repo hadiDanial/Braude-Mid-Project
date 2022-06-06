@@ -118,7 +118,10 @@ public class MessageParser
 			{
 				return productController.getAllCatalogItems();
 			}
-			
+			case GET_ALL_ITEMS:
+			{
+				return productController.getAllItems();
+			}
 			// Branches
 			case GET_ALL_BRANCHES:
 			{

@@ -5,17 +5,23 @@ import gui.discountManagement.DiscountManagement;
 public enum GUIPages
 {
 	// TODO: Add all pages
-	LOGIN("client/login/LoginPage.fxml", "Login"),
 	MAIN_CONTAINER("client/main/MainView.fxml", "Zerli G13"),
-	OPERATION_SUCCESSFUL("client/success/SuccessPage.fxml", "Success"),
 	ERROR("client/error/ErrorPage.fxml", "Error"),
-	STARTUP_PAGE("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
 	SETTINGS("client/SettingsPage.fxml", "Settings"),
+	OPERATION_SUCCESSFUL("client/success/SuccessPage.fxml", "Success"),
+	LOGIN("client/login/LoginPage.fxml", "Login"),
+	STARTUP_PAGE("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
+
+	
 	ORDERS("orders/OrdersPage.fxml", "Orders"),
 	UPDATE_ORDER("orders/OrderUpdatePage.fxml", "Update Order"), 
 	LOADING("client/main/LoadingPage.fxml", "LOADING"),
 	CATALOG_PAGE("catalog/CatalogPage.fxml", "Catalog"),
 	PRODUCT_ELEMENT("catalog/ProductElement.fxml", ""),
+	
+	ADD_PRODUCT("catalog/ProductEditor.fxml", "Add Product"),
+	EDIT_PRODUCT("catalog/ProductEditor.fxml", "Edit Product"),
+	
 	CART("orders/cart/CartPage.fxml", "Cart"),
 	CART_ELEMENT("orders/cart/CartProductElement.fxml", ""),
 	CHECKOUT_GREETING("orders/delivery/info/SenderInfoPage.fxml", "Checkout"),

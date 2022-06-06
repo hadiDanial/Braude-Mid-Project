@@ -286,7 +286,7 @@ public class SceneManager
 	 * 
 	 * @param pageToLoad Page to load.
 	 */
-	public static Stage loadModalWindow(GUIPages pageToLoad, Object data)
+	public static GUIController loadModalWindow(GUIPages pageToLoad, Object data)
 	{
 		Stage modalWindow = new Stage();
 		GUIController guiController = null;
@@ -308,7 +308,7 @@ public class SceneManager
 		{
 			e.printStackTrace();
 		}
-		return modalWindow;
+		return guiController;
 	}
 
 	/**
@@ -321,17 +321,17 @@ public class SceneManager
 
 	public static void openLoadingWindow()
 	{
-		loadingWindow = loadModalWindow(GUIPages.LOADING, null);
+		loadModalWindow(GUIPages.LOADING, null);
 	}
 
-	public static void closeLoadingWindow()
-	{
-		if (loadingWindow != null)
-		{
-			loadingWindow.close();
-			loadingWindow = null;
-		}
-	}
+//	public static void closeLoadingWindow()
+//	{
+//		if (loadingWindow != null)
+//		{
+//			loadingWindow.close();
+//			loadingWindow = null;
+//		}
+//	}
 
 	/**
 	 * Set whether the user drop down and the shopping cart buttons will be visible.

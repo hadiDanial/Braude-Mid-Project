@@ -11,111 +11,147 @@ import entities.products.BaseProduct;
 import entities.products.CatalogItem;
 import entities.products.Item;
 import entities.products.Product;
+import entities.users.Order;
+import enums.ColorEnum;
+import enums.ItemType;
+import enums.ProductType;
+import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.FormController;
+import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
+import gui.orders.UpdateOrder;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import utility.FileManager;
 import utility.IResponse;
 
 public class ProductEditor extends FormController
 {
-	public static ObservableList<Item> items = FXCollections.observableArrayList();
+	private ObservableList<Item> itemsList = FXCollections.observableArrayList();
+	private ObservableList<Item> itemsInProductList = FXCollections.observableArrayList();
+	private ObservableList<ColorEnum> colors = FXCollections.observableArrayList();
+	private ObservableList<ProductType> productTypes = FXCollections.observableArrayList();
+	private ObservableList<ItemType> itemTypes = FXCollections.observableArrayList();
+
+	@FXML
+	private Label titleLabel;
+
+	@FXML
+	private ImageView productImage;
+
+	@FXML
+	private JFXToggleButton productItemToggle;
+
+	@FXML
+	private TextField nameField;
+
+	@FXML
+	private TextField priceField;
+
+	@FXML
+	private HBox productTypeSelect;
+
+	@FXML
+	private ChoiceBox<ProductType> productTypeDropDown;
+
+	@FXML
+	private HBox itemTypeSelect;
+
+	@FXML
+	private ChoiceBox<ItemType> itemTypeDropDown;
+
+	@FXML
+	private HBox colorSelect;
+
+	@FXML
+	private ChoiceBox<ColorEnum> colorDropDown;
+
+	@FXML
+	private HBox addItemsPane;
+
+	@FXML
+	private ChoiceBox<Item> itemDropDown;
+
+	@FXML
+	private TableView<Item> detailsTable;
+
+	@FXML
+	private TableColumn<Item, String> itemNameColumn;
+
+	@FXML
+	private TableColumn<Item, Item> quantityColumn;
+
+	@FXML
+	private TableColumn<Item, Item> deleteColumn;
 
 
-    @FXML
-    private Label titleLabel;
-
-    @FXML
-    private ImageView productImage;
-
-    @FXML
-    private JFXToggleButton productItemToggle;
-
-    @FXML
-    private TextField nameField;
-
-    @FXML
-    private TextField priceField;
-
-    @FXML
-    private HBox productTypeSelect;
-
-    @FXML
-    private MenuButton productTypeDropDown;
-
-    @FXML
-    private HBox itemTypeSelect;
-
-    @FXML
-    private MenuButton itemTypeDropDown;
-
-    @FXML
-    private HBox colorSelect;
-
-    @FXML
-    private MenuButton colorDropDown;
-
-    @FXML
-    private HBox addItemsPane;
-
-    @FXML
-    private MenuButton detailDropDown;
-
-    @FXML
-    private TreeTableView<?> detailsTable;
-
-    @FXML
-    private TreeTableColumn<?, ?> itemNameColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> quantityColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> deleteColumn;
-
-	
+    @FXML private Button imgBtn;
+    @FXML private Button addBtn;
+    @FXML private Button backBtn;
+    @FXML private Button saveBtn;
+    
+    
 	private boolean isNewProduct = true;
 	private boolean isProduct = true;
 	private Product product;
 	private Item item;
+	private BaseProduct activeProduct;
 	
 	private ProductController productController;
 
 	private CatalogItem catalogItem;
 
-    @FXML
-    void onAddBtn(ActionEvent event) {
+	@FXML
+	void onAddBtn(ActionEvent event)
+	{
 
-    }
+	}
 
-    @FXML
-    void onAddItemBtn(ActionEvent event) {
+	@FXML
+	void onAddItemBtn(ActionEvent event)
+	{
+		product.addItem(itemDropDown.getValue());
+		itemsInProductList.setAll(product.getItems().keySet());
+	}
 
-    }
+	@FXML
+	void onImageSaveBtn(ActionEvent event)
+	{
+		byte[] img = FileManager.chooseImage();
+		product.setImage(img);
+		item.setImage(img);
+		productImage.setImage(FileManager.bytesToImage(img));
+	}
 
-    @FXML
-    void onImageSaveBtn(ActionEvent event) {
-//    	FileManager.chooseImage()
-    }
-
-    @FXML
-    void onProductItemToggle(ActionEvent event) {
-    	if(productItemToggle.isSelected())
-    	{
-//    		Base
-    	}
-    }
+	@FXML
+	void onProductItemToggle(ActionEvent event)
+	{
+		isProduct = productItemToggle.isSelected();
+		if(isProduct)
+			activeProduct = product;
+		else activeProduct = item;
+		if(isNewProduct)
+		setVisibility();
+		// TODO: change validators
+	}
 
 	@FXML
 	void onBackBtn(ActionEvent event)
@@ -129,12 +165,20 @@ public class ProductEditor extends FormController
 		product = new Product();
 		item = new Item();
 		titleLabel.setText("Add Product");
-		colorSelect.managedProperty().bind(colorSelect.visibleProperty());
-		itemTypeSelect.managedProperty().bind(itemTypeSelect.visibleProperty());
-		productTypeSelect.managedProperty().bind(productTypeSelect.visibleProperty());
-		addItemsPane.managedProperty().bind(addItemsPane.visibleProperty());
+		detailsTable.setItems(itemsInProductList);
+		setManagedProperties();
+		setupDropdowns();
+		setupTableColumns();
+
 		
-		
+		//
+		product.addItem(new Item( "A", 5, null, ItemType.Seedling, ColorEnum.Blue));
+		product.addItem(new Item( "B", 55, null, ItemType.Branch, ColorEnum.White));
+		product.addItem(new Item( "C", 35, null, ItemType.Flower, ColorEnum.Purple));
+		itemsInProductList.setAll(product.getItems().keySet());
+
+		//
+		onProductItemToggle(null);
 		productController = ProductController.getInstance();
 		productController.getAllItems(new IResponse<ArrayList<Item>>()
 		{
@@ -146,36 +190,131 @@ public class ProductEditor extends FormController
 					SceneManager.displayErrorMessage("Failed to load items!");
 				else
 				{
-					items.setAll((ArrayList<Item>) message);
-					Platform.runLater(() -> {});
+					itemsList.setAll((ArrayList<Item>) message);
 				}
 			}
 
 		});
+		
+		ButtonAnimator.addButtonAnimations(addBtn, backBtn, imgBtn, saveBtn);
 	}
-	private void initFields()
+
+	private void setManagedProperties()
 	{
-		if(catalogItem.getBaseProduct().isProduct())
+		colorSelect.managedProperty().bind(colorSelect.visibleProperty());
+		itemTypeSelect.managedProperty().bind(itemTypeSelect.visibleProperty());
+		productTypeSelect.managedProperty().bind(productTypeSelect.visibleProperty());
+		addItemsPane.managedProperty().bind(addItemsPane.visibleProperty());
+	}
+
+	private void setupDropdowns()
+	{
+		colors.setAll(ColorEnum.values());
+		productTypes.setAll(ProductType.values());
+		itemTypes.setAll(ItemType.values());
+
+		itemDropDown.setItems(itemsList);
+		colorDropDown.setItems(colors);
+		productTypeDropDown.setItems(productTypes);
+		itemTypeDropDown.setItems(itemTypes);
+	}
+
+	private void setupTableColumns()
+	{
+		itemNameColumn.setCellValueFactory(new PropertyValueFactory<Item, String>("productName"));
+		quantityColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Item>());
+		quantityColumn.setCellFactory(param -> new TableCell<Item, Item>()
 		{
-			productItemToggle.setSelected(true);
+			@Override
+			protected void updateItem(Item item, boolean empty)
+			{
+				super.updateItem(item, empty);
+
+				if (item == null)
+				{
+					setGraphic(null);
+					return;
+				}
+				setText(String.valueOf(product.getItemQuantity(item)));
+			}
+		});
+		deleteColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		deleteColumn.setCellFactory(param -> new TableCell<Item, Item>()
+		{
+			private final Button editButton = new Button("Delete");
+
+			@Override
+			protected void updateItem(Item item, boolean empty)
+			{
+				super.updateItem(item, empty);
+
+				if (item == null)
+				{
+					setGraphic(null);
+					return;
+				}
+				setGraphic(editButton);
+				editButton.setOnAction(event -> {
+					product.removeItem(item);
+					itemsInProductList.setAll(product.getItems().keySet());
+				});
+			}
+		});
+	}
+
+	private void initFieldsToEdit()
+	{
+		BaseProduct base;
+		if (catalogItem.getBaseProduct().isProduct())
+		{
+			isProduct = true;
 			product = (Product) catalogItem.getBaseProduct();
-			titleLabel.setText("Edit Product - " + product.getProductName());
-		}
-		else
+			base = product;
+			productItemToggle.setSelected(isProduct);
+			setVisibility();
+			setTitle();
+			itemsInProductList.setAll(product.getItems().keySet());
+		} else
 		{
-			productItemToggle.setSelected(false);
-			item = (Item) catalogItem.getBaseProduct();			
-			titleLabel.setText("Edit Item - " + item.getProductName());
+			isProduct = false;
+			item = (Item) catalogItem.getBaseProduct();
+			base = item;
+			setVisibility();
+			setTitle();
 		}
+		nameField.setText(base.getProductName());
+		priceField.setText(String.valueOf(base.getPrice()));
+		productImage.setImage(FileManager.bytesToImage(base.getImage()));
+	}
+
+	private void setVisibility()
+	{
+		productTypeSelect.setVisible(isProduct);
+		colorSelect.setVisible(!isProduct);
+		itemTypeSelect.setVisible(!isProduct);
+		addItemsPane.setVisible(isProduct);
+	}
+
+	private void setTitle()
+	{
+		String title = "";
+		if(isNewProduct)
+		 title = "Add ";
+		else title = "Edit ";
+		if(isProduct)
+			title += "Product - " + product.getProductName();
+		else
+			title += "Item - " + item.getProductName();
+		titleLabel.setText(title);
 	}
 
 	public void setIsEditing(CatalogItem catalogItem)
 	{
 		isNewProduct = false;
 		this.catalogItem = catalogItem;
-		initFields();
+		initFieldsToEdit();
 	}
-	
+
 	@Override
 	public void setData(Object data)
 	{

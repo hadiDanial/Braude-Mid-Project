@@ -71,5 +71,9 @@ public class Item extends BaseProduct
 		return true;
 	}
 	
-	
+	@Override
+	public String toString()
+	{
+		return getProductName() + " (" + getItemType() + ", " + getPrimaryColor() + ")";
+	}
 }

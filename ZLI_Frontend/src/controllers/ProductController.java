@@ -10,6 +10,7 @@ import utility.IResponse;
 public class ProductController
 {
 	ArrayList<CatalogItem> catalog;
+	ArrayList<Item> items;
 
 	private static ProductController instance;
 	private UserController userController;
@@ -29,28 +30,34 @@ public class ProductController
 		return instance;
 	}
 
-	public boolean createProduct()
-	{
-		// TODO - implement ProductController.createProduct
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param productId
-	 */
-	public Product getProduct(int productId)
-	{
-		// TODO - implement ProductController.getProduct
-		throw new UnsupportedOperationException();
-	}
-
-	public void getAllProducts(IResponse<ArrayList<CatalogItem>> response)
+	public void getAllCatalogItems(IResponse<ArrayList<CatalogItem>> response)
 	{
 		if(catalog == null || catalog.isEmpty())
 		{			
-			Request req = new Request(RequestType.GET_ALL_PRODUCTS, null, userController.getLoggedInUser());
+			Request req = new Request(RequestType.GET_CATALOG);
 			ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
+		}
+		else 
+		{
+			response.executeAfterResponse(catalog);
+		}
+	}
+
+	/**
+	 * Gets the catalog by branch
+	 */
+	public void getCatalogByBranch(int branchId, IResponse<ArrayList<CatalogItem>> response)
+	{
+		Request req = new Request(RequestType.GET_CATALOG_BY_BRANCH, branchId);
+		ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
+	}
+
+	public void getAllItems(IResponse<ArrayList<Item>> response)
+	{
+		if(items == null || items.isEmpty())
+		{			
+			Request req = new Request(RequestType.GET_ALL_ITEMS);
+			ClientController.getInstance().sendRequest(req, executeResponseAndSaveItems(response));
 		}
 		else 
 		{
@@ -72,43 +79,28 @@ public class ProductController
 			}
 		};
 	}
+	private IResponse<ArrayList<Item>> executeResponseAndSaveItems(IResponse<ArrayList<Item>> response)
+	{
+		return new IResponse<ArrayList<Item>>()
+		{
+			
+			@Override
+			public void executeAfterResponse(Object message)
+			{
+				ProductController.getInstance().setItems((ArrayList<Item>)message);
+				response.executeAfterResponse(message);
+			}
+		};
+	}
 
 	protected void setCatalog(ArrayList<CatalogItem> catalog)
 	{
 		this.catalog = catalog;
 	}
 
-	/**
-	 * Gets the catalog by branch
-	 */
-	public void getCatalogByBranch(int branchId, IResponse<ArrayList<CatalogItem>> response)
+	protected void setItems(ArrayList<Item> message)
 	{
-		Request req = new Request(RequestType.GET_CATALOG_BY_BRANCH, branchId, userController.getLoggedInUser());
-		ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
+		this.items = message;
 	}
-
-	/**
-	 * 
-	 * @param productToEdit
-	 * @param editedProduct
-	 */
-	public boolean editProduct(Product productToEdit, Product editedProduct)
-	{
-		// TODO - implement ProductController.editProduct
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param product
-	 * @param onSale
-	 */
-	public boolean setProductDiscountStatus(Product product, boolean onSale)
-	{
-		// TODO - implement ProductController.setProductDiscountStatus
-		throw new UnsupportedOperationException();
-	}
-
-
 
 }
