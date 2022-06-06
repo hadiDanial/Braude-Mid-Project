@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -8,59 +13,67 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.users.loginPortals.ChainEmployeePortal">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.users.loginPortals.ChainEmployeePortal">
    <children>
-      <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="900.0" style="-fx-background-radius: 15; -fx-background-color: #078082; -fx-border-width: 5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox>
          <children>
-            <Pane layoutX="76.0" layoutY="10.0" prefHeight="63.0" prefWidth="39.0" />
-            <Label text="Employee Portal" textFill="#e2d784">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Group>
+               <children>
+                  <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="900.0" style="-fx-background-radius: 15; -fx-background-color: #078082; -fx-border-width: 5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Pane layoutX="76.0" layoutY="10.0" prefHeight="63.0" prefWidth="39.0" />
+                        <Label text="Employee Portal" textFill="#e2d784">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="branchLabel" layoutX="174.0" layoutY="186.0" text="Haifa" textFill="#078082">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="321.0" layoutY="376.0" mnemonicParsing="false" onAction="#onManageCatalogBtn" prefHeight="56.0" prefWidth="257.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Manage Catalog " textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="nameLabel" layoutX="289.0" layoutY="92.0" text="Eugene" textFill="#078082">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="92.0" text="Employee Name: " textFill="#062c30">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="138.0" text="Job Title: " textFill="#062c30">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="321.0" layoutY="465.0" mnemonicParsing="false" onAction="#onManageDiscountsBtn" prefHeight="56.0" prefWidth="257.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Manage Discounts" textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Separator layoutX="2.0" layoutY="254.0" prefWidth="898.0" style="-fx-background-color: #078082; -fx-border-color: #078082;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" />
+                  <Label fx:id="jobTitleLabel" layoutX="190.0" layoutY="138.0" text="Branch Employee" textFill="#078082">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="186.0" text="Branch: " textFill="#062c30">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
          </children>
-      </HBox>
-      <Label layoutX="82.0" layoutY="92.0" text="Employee Name: " textFill="#062c30">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="nameLabel" layoutX="289.0" layoutY="92.0" text="Eugene" textFill="#078082">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label layoutX="82.0" layoutY="138.0" text="Job Title: " textFill="#062c30">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="jobTitleLabel" layoutX="190.0" layoutY="138.0" text="Branch Employee" textFill="#078082">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label layoutX="82.0" layoutY="186.0" text="Branch: " textFill="#062c30">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="branchLabel" layoutX="174.0" layoutY="186.0" text="Haifa" textFill="#078082">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Separator layoutX="2.0" layoutY="254.0" prefWidth="898.0" style="-fx-background-color: #078082; -fx-border-color: #078082;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" />
-      <Button layoutX="321.0" layoutY="376.0" mnemonicParsing="false" onAction="#onManageCatalogBtn" prefHeight="56.0" prefWidth="257.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Manage Catalog " textFill="#e2d784">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Button>
-      <Button layoutX="321.0" layoutY="465.0" mnemonicParsing="false" onAction="#onManageDiscountsBtn" prefHeight="56.0" prefWidth="257.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Manage Discounts" textFill="#e2d784">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Button>
+      </VBox>
    </children>
 </AnchorPane>

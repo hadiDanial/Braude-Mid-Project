@@ -1,4 +1,4 @@
-package gui.branchManager.orders;
+package gui.orders.openOrders;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

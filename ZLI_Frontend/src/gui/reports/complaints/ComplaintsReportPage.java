@@ -1,5 +1,4 @@
-package gui.branchManager.reports;
-
+package gui.reports.complaints;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -8,31 +7,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-public class ComplaintsReportComparePage {
+public class ComplaintsReportPage {
 
     @FXML
-    private ChoiceBox firstQuarterDropDown;
+    private ChoiceBox quarterDropDown;
 
     @FXML
     private Label quarterErrLabel;
 
     @FXML
-    private TextField firstYearField;
+    private TextField yearField;
 
     @FXML
     private Label yearErrLabel;
-
-    @FXML
-    private ChoiceBox secondQuarterDropDown;
-
-    @FXML
-    private Label quarterErrLabel1;
-
-    @FXML
-    private TextField secondYearField;
-
-    @FXML
-    private Label yearErrLabel1;
 
     @FXML
     private BarChart<?, ?> complaintsChart;

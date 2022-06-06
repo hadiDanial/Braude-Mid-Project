@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="225.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.error.ErrorPage">
+<AnchorPane prefHeight="225.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.client.error.ErrorPage">
    <children>
       <VBox alignment="CENTER" layoutX="52.0" layoutY="30.0" spacing="30.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="30.0">
          <children>

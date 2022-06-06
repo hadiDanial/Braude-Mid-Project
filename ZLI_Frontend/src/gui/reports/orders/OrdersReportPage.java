@@ -1,44 +1,28 @@
-package gui.branchManager.reports;
-
+package gui.reports.orders;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-public class SalesReportComparePage {
-
-    private String firstColor="#05595B";
-    private String secondColor="#E2D784";
+public class OrdersReportPage {
 
     @FXML
-    private ChoiceBox firstQuarterDropDown;
+    private ChoiceBox quarterDropDown;
 
     @FXML
     private Label quarterErrLabel;
 
     @FXML
-    private TextField firstYearField;
+    private TextField yearField;
 
     @FXML
     private Label yearErrLabel;
 
     @FXML
-    private ChoiceBox secondQuarterDropDown;
-
-    @FXML
-    private Label quarterErrLabel1;
-
-    @FXML
-    private TextField secondYearField;
-
-    @FXML
-    private Label yearErrLabel1;
-
-    @FXML
-    private BarChart<?, ?> salesChart;
+    private PieChart pieChart;
 
     @FXML
     void onBackBtn(ActionEvent event) {

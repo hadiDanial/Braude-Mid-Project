@@ -63,8 +63,13 @@ public class BranchController
 	
 	public void getWorkerBranch(int workerId, IResponse<Branch> response)
 	{
-		Request req = new Request(RequestType.GET_WORKER_BRANCH, workerId);
+		if(workerBranch != null)
+		{
+			response.executeAfterResponse(workerBranch);
+			return;
+		}
 		
+		Request req = new Request(RequestType.GET_WORKER_BRANCH, workerId);
 		clientController.sendRequest(req, new IResponse<Branch>()
 		{
 

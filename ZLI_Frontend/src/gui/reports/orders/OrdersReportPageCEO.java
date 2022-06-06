@@ -1,14 +1,13 @@
-package gui.ceo.reports;
-
+package gui.reports.orders;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-public class SalesReportPageCEO {
+public class OrdersReportPageCEO {
 
     @FXML
     private ChoiceBox quarterDropDown;
@@ -29,7 +28,7 @@ public class SalesReportPageCEO {
     private Label branchErrLabel;
 
     @FXML
-    private BarChart<?, ?> salesChart;
+    private PieChart pieChart;
 
     @FXML
     void onBackBtn(ActionEvent event) {

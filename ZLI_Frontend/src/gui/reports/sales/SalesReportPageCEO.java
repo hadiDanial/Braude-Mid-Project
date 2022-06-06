@@ -1,5 +1,4 @@
-package gui.branchManager.reports;
-
+package gui.reports.sales;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -8,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-public class ComplaintsReportPage {
+public class SalesReportPageCEO {
 
     @FXML
     private ChoiceBox quarterDropDown;
@@ -23,7 +22,13 @@ public class ComplaintsReportPage {
     private Label yearErrLabel;
 
     @FXML
-    private BarChart<?, ?> complaintsChart;
+    private ChoiceBox<?> branchChoice;
+
+    @FXML
+    private Label branchErrLabel;
+
+    @FXML
+    private BarChart<?, ?> salesChart;
 
     @FXML
     void onBackBtn(ActionEvent event) {
