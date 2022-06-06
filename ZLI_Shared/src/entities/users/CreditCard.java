@@ -7,14 +7,14 @@ public class CreditCard implements Serializable
 {
 	private int creditCardId;
 	private User customer;
-	private int creditCardNumber;
+	private String creditCardNumber;
 	private int cvv;
 	private Instant expirationDate;
 	private String cardHolderName;
 	
 	private static final long serialVersionUID = -8841530215525127937L;
 
-	public CreditCard(User customer, int creditCardNumber, int cvv, Instant expirationDate, String cardHolderName)
+	public CreditCard(User customer, String creditCardNumber, int cvv, Instant expirationDate, String cardHolderName)
 	{
 		super();
 		this.customer = customer;
@@ -39,11 +39,11 @@ public class CreditCard implements Serializable
 	{
 		this.customer = customer;
 	}
-	public int getCreditCardNumber()
+	public String getCreditCardNumber()
 	{
 		return creditCardNumber;
 	}
-	public void setCreditCardNumber(int creditCardNumber)
+	public void setCreditCardNumber(String creditCardNumber)
 	{
 		this.creditCardNumber = creditCardNumber;
 	}

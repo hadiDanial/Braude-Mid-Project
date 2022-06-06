@@ -56,7 +56,7 @@ CREATE TABLE `User_Orders`(`userId` INT NOT NULL, `orderId` INT NOT NULL, PRIMAR
         FOREIGN KEY (orderId) REFERENCES Orders(orderId) ON DELETE CASCADE) ;
         
 CREATE TABLE `Credit_Cards`(`creditCardId` INT PRIMARY KEY AUTO_INCREMENT, `customerId` INT NOT NULL, 
-							`creditCardNumber` INT NOT NULL, `cvv` INT NOT NULL, `expirationDate` timestamp, 
+							`creditCardNumber` VARCHAR(16) NOT NULL, `cvv` INT NOT NULL, `expirationDate` timestamp, 
 							`cardHolderName` varchar(50) NOT NULL,
 		FOREIGN KEY (customerId) REFERENCES Users(userId) ON DELETE CASCADE);
 
@@ -106,6 +106,8 @@ INSERT INTO Users (userId, username, password, firstName, lastName, emailAddress
 INSERT INTO Users (userId, username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('1', 'amr','123','Amr','Kalany','AmrKal@gmail.com','0504707027','CEO','Active');
 INSERT INTO Users (userId, username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('2', 'amre','123','Amre','Kalanye','AmrKale@gmail.com','0504707028','ChainEmployee','Active');
 
+INSERT INTO Credit_Cards (creditCardId, customerId, creditCardNumber, cvv, expirationDate, cardHolderName) values (default, 123456789, 1111111111111111, 123, now(), 'Hadi');
+INSERT INTO Credit_Cards (creditCardId, customerId, creditCardNumber, cvv, expirationDate, cardHolderName) values (default, 987654321, 9999999999999999, 987, now(), 'Yosef');
 
 INSERT INTO Locations (city, zipCode, street) VALUES ('Haifa', 1234, '123 Street');
 INSERT INTO Locations (city, zipCode, street) VALUES ('Karmiel', 5678, 'Braude Street');

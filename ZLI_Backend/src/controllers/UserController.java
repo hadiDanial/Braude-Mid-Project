@@ -157,7 +157,7 @@ public class UserController
 				Tables.CREDIT_CARD_TABLE_NAME);
 		try
 		{
-			CreditCard cc = new CreditCard(user, rs.getInt(2), rs.getInt(3), rs.getTimestamp(4).toInstant(), rs.getString(5));
+			CreditCard cc = new CreditCard(user, rs.getString(2), rs.getInt(3), rs.getTimestamp(4).toInstant(), rs.getString(5));
 			cc.setCreditCardId(rs.getInt(1));
 			rs.close();
 			return cc;
