@@ -1,5 +1,4 @@
-package gui.branchManager.reports;
-
+package gui.reports.sales;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;

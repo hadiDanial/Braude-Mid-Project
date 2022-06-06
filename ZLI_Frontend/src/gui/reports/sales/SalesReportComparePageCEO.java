@@ -1,13 +1,13 @@
-package gui.branchManager.reports;
-
+package gui.reports.sales;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-public class OrdersReportComparePage {
+public class SalesReportComparePageCEO {
 
     @FXML
     private ChoiceBox firstQuarterDropDown;
@@ -22,6 +22,12 @@ public class OrdersReportComparePage {
     private Label yearErrLabel;
 
     @FXML
+    private ChoiceBox<?> branchChoice;
+
+    @FXML
+    private Label branchErrLabel1;
+
+    @FXML
     private ChoiceBox secondQuarterDropDown;
 
     @FXML
@@ -34,7 +40,13 @@ public class OrdersReportComparePage {
     private Label yearErrLabel1;
 
     @FXML
-    private PieChart pieChart;
+    private ChoiceBox<?> branchChoice1;
+
+    @FXML
+    private Label branchErrLabel2;
+
+    @FXML
+    private BarChart<?, ?> salesChart;
 
     @FXML
     void onBackBtn(ActionEvent event) {

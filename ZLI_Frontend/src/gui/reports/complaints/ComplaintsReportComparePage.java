@@ -1,29 +1,41 @@
-package gui.branchManager.reports;
+package gui.reports.complaints;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-public class OrdersReportPage {
+public class ComplaintsReportComparePage {
 
     @FXML
-    private ChoiceBox quarterDropDown;
+    private ChoiceBox firstQuarterDropDown;
 
     @FXML
     private Label quarterErrLabel;
 
     @FXML
-    private TextField yearField;
+    private TextField firstYearField;
 
     @FXML
     private Label yearErrLabel;
 
     @FXML
-    private PieChart pieChart;
+    private ChoiceBox secondQuarterDropDown;
+
+    @FXML
+    private Label quarterErrLabel1;
+
+    @FXML
+    private TextField secondYearField;
+
+    @FXML
+    private Label yearErrLabel1;
+
+    @FXML
+    private BarChart<?, ?> complaintsChart;
 
     @FXML
     void onBackBtn(ActionEvent event) {

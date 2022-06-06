@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="767.0" prefWidth="900.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ceo.reports.SalesReportPageCEO">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="847.0" prefWidth="900.0"  xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.reports.sales.SalesReportComparePageCEO">
    <children>
       <VBox layoutX="1.0" layoutY="1.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -52,19 +52,19 @@
                   <Pane prefHeight="200.0" prefWidth="647.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <VBox alignment="TOP_CENTER">
+            <VBox alignment="TOP_CENTER" spacing="30.0">
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="30.0">
                      <children>
-                        <Label text="Choose quarter to view: ">
+                        <Label text="Choose first quarter:       ">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
                         <StackPane>
                            <children>
-                              <ChoiceBox prefWidth="150.0" fx:id="quarterDropDown" />
-                                
+                              <ChoiceBox prefWidth="150.0" fx:id="firstQuarterDropDown"/>
+                               
                               <TextFlow translateY="60.0">
                                  <children>
                                     <Label fx:id="quarterErrLabel" text="Label" textFill="RED" />
@@ -74,7 +74,7 @@
                         </StackPane>
                         <StackPane>
                            <children>
-                              <TextField fx:id="yearField" alignment="CENTER" prefHeight="51.0" prefWidth="125.0" promptText="Year" style="-fx-background-radius: 15;">
+                              <TextField fx:id="firstYearField" alignment="CENTER" prefHeight="51.0" prefWidth="125.0" promptText="Year" style="-fx-background-radius: 15;">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -91,7 +91,51 @@
                               <ChoiceBox fx:id="branchChoice" prefWidth="150.0" />
                               <TextFlow translateY="60.0">
                                  <children>
-                                    <Label fx:id="branchErrLabel" text="Label" textFill="RED" />
+                                    <Label fx:id="branchErrLabel1" text="Label" textFill="RED" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="30.0">
+                     <children>
+                        <Label text="Choose second quarter: ">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <StackPane>
+                           <children>
+                              <ChoiceBox prefWidth="150.0" fx:id="secondQuarterDropDown" />
+                                
+                              <TextFlow translateY="60.0">
+                                 <children>
+                                    <Label fx:id="quarterErrLabel1" text="Label" textFill="RED" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <TextField fx:id="secondYearField" alignment="CENTER" prefHeight="51.0" prefWidth="125.0" promptText="Year" style="-fx-background-radius: 15;">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </TextField>
+                              <TextFlow translateY="60.0">
+                                 <children>
+                                    <Label fx:id="yearErrLabel1" text="Label" textFill="RED" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <ChoiceBox fx:id="branchChoice1" prefWidth="150.0" />
+                              <TextFlow translateY="60.0">
+                                 <children>
+                                    <Label fx:id="branchErrLabel2" text="Label" textFill="RED" />
                                  </children>
                               </TextFlow>
                            </children>

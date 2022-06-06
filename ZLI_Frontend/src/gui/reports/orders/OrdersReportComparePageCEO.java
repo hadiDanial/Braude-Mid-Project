@@ -1,5 +1,4 @@
-package gui.ceo.reports;
-
+package gui.reports.orders;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
