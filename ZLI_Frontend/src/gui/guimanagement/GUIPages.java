@@ -32,7 +32,8 @@ public enum GUIPages
 	DISCOUNT_MANAGEMENT("discountManagement/DiscountManagement.fxml", "Discount Management"),
 	NEW_PRODUCT("catalog/NewProduct.fxml", "Add new product"),
 	
-	COMPLAINT_PAGE("complaints/NewComplaint.fxml", "Complaints"),
+	COMPLAINT_OPENED_PAGE("complaints/OpenedComplaints.fxml", "Opened Complaints"),
+	NEW_COMPLAINT_PAGE("complaints/NewComplaint.fxml", "New Complaint"),
 	ADD_SURVEY("surveys/csEmployee/AddSurvey.fxml", "Add new Survey"),
 	ADD_SURVEY_ANALYSIS("surveys/specialist/AddAnalysis.fxml", "Add survey analysis"),
 	VIEW_SURVEY_SPECIALIST("surveys/specialist/SurveyAnalysis.fxml", "Surveys - Specialist"),

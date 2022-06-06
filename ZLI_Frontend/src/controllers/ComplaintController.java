@@ -1,6 +1,12 @@
 package controllers;
 
 import entities.users.*;
+import requests.Request;
+import requests.RequestType;
+import utility.IResponse;
+
+import java.util.ArrayList;
+
 import entities.other.*;
 
 public class ComplaintController
@@ -8,10 +14,12 @@ public class ComplaintController
 	private static ComplaintController instance;
 	
 	private ClientController clientController;
-	
+	private UserController userController;
+
 	private ComplaintController()
 	{
 		clientController = ClientController.getInstance();
+		userController	= UserController.getInstance();
 	}
 	
 	public static synchronized ComplaintController getInstance()
@@ -26,48 +34,26 @@ public class ComplaintController
 	 * 
 	 * @param complaint
 	 */
-	public boolean createComplaint(Complaint complaint)
+	public void createComplaint(Complaint complaint, IResponse<Boolean> response)
 	{
-		// TODO - implement ComplaintController.createComplaint
-		throw new UnsupportedOperationException();
+		Request req=new Request(RequestType.CREATE_COMPLAINTS, complaint,userController.getLoggedInUser());
+		clientController.sendRequest(req, response);
 	}
 
 	/**
 	 * 
 	 * @param complaint
-	 * @param message
+	 * @param response
 	 */
-	public boolean handleComplaint(Complaint complaint, String message)
+	public void handleComplaint(Complaint complaint, String response)
 	{
-		// TODO - implement ComplaintController.handleComplaint
-		throw new UnsupportedOperationException();
+		complaint.setComplaintResult(response);
 	}
 
-	public Complaint[] getAllComplaints()
+	public void getAllComplaints(IResponse <ArrayList<Complaint>> response)
 	{
-		// TODO - implement ComplaintController.getAllComplaints
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param employee
-	 * @param opened
-	 */
-	public Complaint[] getComplaintsByCSEmployee(User employee, Boolean opened)
-	{
-		// TODO - implement ComplaintController.getComplaintsByCSEmployee
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param branch
-	 */
-	public Complaint[] getComplaintsByBranch(Branch branch)
-	{
-		// TODO - implement ComplaintController.getComplaintsByBranch
-		throw new UnsupportedOperationException();
+		Request req=new Request(RequestType.GET_ALL_COMPLAINTS,userController.getLoggedInUser());
+		clientController.sendRequest(req, response);
 	}
 
 }
