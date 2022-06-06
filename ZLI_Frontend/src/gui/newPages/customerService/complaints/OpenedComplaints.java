@@ -76,7 +76,8 @@ public class OpenedComplaints extends FormController{
         });
     }
 
-    private void initializeTableColumns() {
+    private void initializeTableColumns() 
+    {
         complaintIDColumn.setCellValueFactory(new PropertyValueFactory<Complaint,Integer>("ComplaintId"));
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<Complaint,Integer>("Customer"));
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<Complaint,String>("Customer"));
