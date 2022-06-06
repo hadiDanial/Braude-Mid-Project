@@ -97,6 +97,10 @@ public class MessageParser
 			{
 				return orderController.createNewOrder((Order) req.getMessage());
 			}
+			case GET_ALL_ORDER_STATUS:
+			{
+				return orderController.getOrdersByStatus((OrderStatus) req.getMessage());
+			}
 			
 			
 			case GET_ALL_DELIVERY_BRANCH:

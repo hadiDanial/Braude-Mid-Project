@@ -8,6 +8,7 @@ import java.util.HashSet;
 import entities.discounts.Discount;
 import entities.discounts.IDiscountable;
 import entities.other.Branch;
+import entities.other.Location;
 import entities.products.CartItem;
 import enums.ColorEnum;
 import enums.OrderStatus;
@@ -135,6 +136,16 @@ public class Order implements Serializable, IDiscountable
 	public void setDeliveryDate(Instant deliveryDate)
 	{
 		this.deliveryDate = deliveryDate;
+	}
+
+	public int getOrderQuantity()
+	{
+		return products.size();
+	}
+
+	public Location getOrderLocation()
+	{
+		return deliveryDetails.getLocation();
 	}
 
 	/**

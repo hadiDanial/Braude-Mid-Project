@@ -110,6 +110,12 @@ public class OrderController
         clientController.sendRequest(requests, response);
 
     }
+	
+	public void getAllOrdersByStatus(IResponse<ArrayList<Order>> iResponse,OrderStatus orderStatus)
+    {
+        Request request = new Request(RequestType.GET_ALL_ORDER_STATUS,orderStatus);
+        clientController.sendRequest(request, iResponse);
+    }
 
 	public Order getOrder()
 	{

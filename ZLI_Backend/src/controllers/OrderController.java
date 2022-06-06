@@ -265,6 +265,14 @@ public class OrderController
 		}
 		return pendingOrders;
 	}
+	public ArrayList<Order> getOrdersByStatus(OrderStatus orderStatus)
+	{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("orderStatus", orderStatus.name());
+		ResultSet ordersRS = databaseConnection.getByConditions(Tables.ORDERS_TABLE_NAME, map);
+		ArrayList<Order> pendingOrders = convertRSToOrderArray(ordersRS);
+		return pendingOrders;
+	}
 
 	private Branch convertRSToBranch(ResultSet deliveryRS)
 	{
