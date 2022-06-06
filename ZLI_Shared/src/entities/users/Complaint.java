@@ -12,7 +12,7 @@ public class Complaint implements Serializable
 	private Instant submissionTime;
 	private String complaintResult;
 	private boolean wasHandled;
-	
+
 	private static final long serialVersionUID = 8137391902399453083L;
 
 	public Complaint(User customer, User customerServiceEmployee, String complaintDetails,
@@ -82,6 +82,8 @@ public class Complaint implements Serializable
 	{
 		this.wasHandled = wasHandled;
 	}
+	
+	
 	@Override
 	public int hashCode()
 	{
