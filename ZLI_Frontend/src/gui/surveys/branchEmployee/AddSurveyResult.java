@@ -1,12 +1,22 @@
 package gui.surveys.branchEmployee;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import controllers.SurveyController;
+import entities.surveys.Survey;
+import gui.guimanagement.GUIController;
+import gui.guimanagement.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class AddSurveyResult {
+public class AddSurveyResult extends GUIController{
 
+    SurveyController surveyController;
+    String [] questions = new String[6];
     @FXML
     private Label surveyNameLabel;
 
@@ -50,18 +60,29 @@ public class AddSurveyResult {
     private TextField q6AnswerField;
 
     @FXML
-    void onAddAnotherBtn(ActionEvent event) {
+    void onAddAnotherBtn(ActionEvent event) {  
 
     }
 
     @FXML
     void onBackBtn(ActionEvent event) {
-
+        SceneManager.loadPreviousPage();
     }
 
     @FXML
     void onFinishBtn(ActionEvent event) {
+        SceneManager.loadPreviousPage();
+    }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        surveyController=SurveyController.getInstance();
+        initializeTableColumns();
+	}
+
+    private void initializeTableColumns() {
+       /* surveyNameLabel.setCellValueFactory(new PropertyValueFactory<Survey,String>("surveyId"));
+        surveyIDLabel.setCellValueFactory(new PropertyValueFactory<Survey,Integer>("questions"));*/
     }
 
 }
