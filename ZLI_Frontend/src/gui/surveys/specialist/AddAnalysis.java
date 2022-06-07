@@ -79,6 +79,7 @@ public class AddAnalysis extends FormController {
 	public void initialize(URL location, ResourceBundle resources)
 	{
         ButtonAnimator.addButtonAnimations(saveBtn,backBtn);
+        initializeTableColumns();
         surveyController=SurveyController.getInstance();
         surveyTable.setItems(surveyList);
         surveyAnalysisAria.setText(survey.getAnalysisResults().toString());
