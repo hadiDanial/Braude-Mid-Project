@@ -108,7 +108,6 @@ public class DeliveryList extends GUIController{
         deliveryDateColumn.setCellValueFactory(new PropertyValueFactory<Delivery,String >("FormattedDeliveryDate"));
         numOfItemsColumn.setCellValueFactory(new PropertyValueFactory<Delivery,Integer >("ItemsCount")); 
         preiceColumn.setCellValueFactory(new PropertyValueFactory<Delivery,Float >("Price"));
-        confirmColumn.setCellValueFactory(new PropertyValueFactory<Delivery,Delivery >("DiscountValue")); 
 
         confirmColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Delivery>(param.getValue()));
         confirmColumn.setCellFactory(param -> new TableCell<Delivery, Delivery>()
