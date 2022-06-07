@@ -47,24 +47,26 @@ public class SurveyController {
 		try
 		{
             String [] questions= new String[6];
-			String[] usersColumnNames = Tables.usersColumnNames;
+			String[] surveyColumnNames = Tables.surveysColumnNames;
 			if (rs.next())
 			{
-//				{ "surveyid, specialistId, surveyDate, analysisResults, q1, q2, q3, q4, q5, q6 };
+//				{ "surveyid, specialistId, surveyDate, surveyEndDate analysisResults, q1, q2, q3, q4, q5, q6 };
 				Survey survey = new Survey();
-				survey.setSurveyId(rs.getInt(usersColumnNames[0]));
+				survey.setSurveyId(rs.getInt(surveyColumnNames[0]));
                 User customer = new User();
-                customer.setUserId(rs.getInt(usersColumnNames[1]));
+                customer.setUserId(rs.getInt(surveyColumnNames[1]));
                 survey.setCustomerServiceSpecialist(customer);
-				Timestamp startDate = rs.getTimestamp(usersColumnNames[2]);
+				Timestamp startDate = rs.getTimestamp(surveyColumnNames[2]);
 				survey.setStartDate((startDate == null) ? null : startDate.toInstant());
-				survey.setAnalysisResults(rs.getBytes(usersColumnNames[3]));
-                questions[0] = (rs.getString(usersColumnNames[4]));
-                questions[1] = (rs.getString(usersColumnNames[5]));
-                questions[2] = (rs.getString(usersColumnNames[6]));
-                questions[3] = (rs.getString(usersColumnNames[7]));
-                questions[4] = (rs.getString(usersColumnNames[8]));
-                questions[5] = (rs.getString(usersColumnNames[9]));
+				Timestamp endDate = rs.getTimestamp(surveyColumnNames[3]);
+				survey.setEndDate((startDate == null) ? null : startDate.toInstant());
+				survey.setAnalysisResults(rs.getBytes(surveyColumnNames[4]));
+                questions[0] = (rs.getString(surveyColumnNames[5]));
+                questions[1] = (rs.getString(surveyColumnNames[6]));
+                questions[2] = (rs.getString(surveyColumnNames[7]));
+                questions[3] = (rs.getString(surveyColumnNames[8]));
+                questions[4] = (rs.getString(surveyColumnNames[9]));
+                questions[5] = (rs.getString(surveyColumnNames[10]));
 				survey.setQuestions(questions);
 				return survey;
 			} else
