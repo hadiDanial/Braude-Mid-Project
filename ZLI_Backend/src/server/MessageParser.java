@@ -187,7 +187,10 @@ public class MessageParser
 			{
 				return surveyController.getAllSurvey();
 			}
-			
+			case GET_ALL_SURVEY_ANALYSYS:
+			{
+				return surveyController.getAllSurvey();				
+			}
 			default:
 			break;
 		}

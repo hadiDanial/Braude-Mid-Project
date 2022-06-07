@@ -59,7 +59,7 @@
                      </font>
                   </Button>
                   <Separator layoutX="2.0" layoutY="254.0" prefWidth="898.0" style="-fx-background-color: #078082; -fx-border-color: #078082;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" />
-                  <Label fx:id="jobTitleLabel" layoutX="190.0" layoutY="138.0" text="Branch Employee" textFill="#078082">
+                  <Label fx:id="jobTitleLabel" layoutX="190.0" layoutY="138.0" text="Chain Employee" textFill="#078082">
                      <font>
                         <Font size="26.0" />
                      </font>
