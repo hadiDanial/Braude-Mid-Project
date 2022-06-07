@@ -227,16 +227,16 @@ public class SceneManager
 					((VBox) parent).setSpacing(20);
 				}
 				parent.setMaxWidth(scrollPane.getPrefViewportWidth());
-				scrollPaneAnchor.getChildren().clear();
-				scrollPaneAnchor.getChildren().add(parent);
+//				scrollPaneAnchor.getChildren().clear();
+//				scrollPaneAnchor.getChildren().add(parent);
 			}
 			panesToResize.remove(scrollPaneAnchor);
 			AnchorPane.setLeftAnchor(scrollPaneAnchor, 0.0);
 			AnchorPane.setRightAnchor(scrollPaneAnchor, 0.0);
 			panesToResize.add(scrollPaneAnchor);
-			scrollPane.setContent(scrollPaneAnchor);
+//			scrollPane.setContent(scrollPaneAnchor);
 //			scrollPane.setStyle("-fx-min-height: " + getHeightPercentWithoutHeader() + "%;");
-			scrollPane.setVisible(true);
+//			scrollPane.setVisible(true);
 			resizeAllContent();
 
 		} catch (IOException e)

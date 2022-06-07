@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import utility.IResponse;
 
@@ -25,7 +26,9 @@ public class CatalogPage extends GUIController
 	private ProductController productController;
 
 	private VBox scrollPaneContent;
-	
+    @FXML
+    private ScrollPane scrollPane;
+
 	
 	/** 
 	 * @param location
@@ -55,7 +58,7 @@ public class CatalogPage extends GUIController
 							productsList.setAll((ArrayList<CatalogItem>) message);
 							for(CatalogItem item : productsList)
 							{
-								ProductElement element = (ProductElement)SceneManager.loadAdditiveSceneFromParent(GUIPages.PRODUCT_ELEMENT, scrollPaneContent);
+								ProductElement element = (ProductElement)SceneManager.loadAdditiveSceneFromParent(GUIPages.PRODUCT_ELEMENT, productsListView);
 								element.setData(item);
 							}
 							
