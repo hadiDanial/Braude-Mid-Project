@@ -48,14 +48,14 @@ public class AddAnalysis extends FormController {
     private TextArea surveyAnalysisAria;
 
     @FXML 
-    private Button addBtn;
+    private Button saveBtn;
 
     @FXML 
     private Button backBtn;
 
     @FXML
-    void onAddBtn(ActionEvent event) {
-
+    void onSaveBtn(ActionEvent event) {
+        initializeTableColumns();
     }
 
     @FXML
@@ -68,7 +68,6 @@ public class AddAnalysis extends FormController {
 	{
         ButtonAnimator.addButtonAnimations(addBtn,backBtn);
         surveyController=SurveyController.getInstance();
-        initializeTableColumns();
         surveyTable.setItems(surveyList);
         surveyAnalysisAria.setText(""+survey.getAnalysisResults());               
         surveyController.getAllSurvey(new IResponse<ArrayList<Survey>>() {
@@ -76,7 +75,7 @@ public class AddAnalysis extends FormController {
             @Override
             public void executeAfterResponse(Object message) {
                 if (message == null)
-                SceneManager.displayErrorMessage("Failed to load complaints!");
+                SceneManager.displayErrorMessage("Failed to load questions!");
                 else 
                     surveyList.setAll((ArrayList<Survey>)message);
             }
@@ -87,6 +86,8 @@ public class AddAnalysis extends FormController {
     private void initializeTableColumns() {
         questionNumberColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer>("surveyId"));
         questionTextColumn.setCellValueFactory(new PropertyValueFactory<Survey,String>("questions"));
+        questionScoreColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer>("score"));
+
     }
 
 }
