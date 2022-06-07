@@ -63,7 +63,7 @@
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <Button fx:id="viewCustomersBtn" layoutX="296.0" layoutY="377.0" mnemonicParsing="false" onAction="#onViewCustomersBtn" prefHeight="56.0" prefWidth="328.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Customers" textFill="#e2d784">
+                  <Button fx:id="viewCustomersBtn" layoutX="296.0" layoutY="377.0" mnemonicParsing="false" onAction="#onViewCustomersBtn" prefHeight="56.0" prefWidth="328.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Users" textFill="#e2d784">
                      <font>
                         <Font size="26.0" />
                      </font>
