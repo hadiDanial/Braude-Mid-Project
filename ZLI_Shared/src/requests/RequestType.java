@@ -24,7 +24,7 @@ public enum RequestType
 	CHECK_IF_FIRST_ORDER(new UserRole[] {UserRole.Customer }), 
 	GET_ALL_ORDER_STATUS(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
 	GET_ALL_ORDER_STATUS_AND_BRANCH(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
-	UPDATES_ORDER_STATUS(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
+	UPDATES_ORDER_STATUS(UserRole.values()),
 	
 	// Products/Catalog
 	ADD_PRODUCT(new UserRole[] { UserRole.ChainEmployee }),

@@ -93,6 +93,7 @@ public class DeliveryList extends GUIController{
         orderController = OrderController.getInstance();
         branchController = BranchController.getInstance();
         clientController = ClientController.getInstance();
+        deliveryTable.setItems(deliveryList);
         ButtonAnimator.addButtonAnimations(backBtn);
         branchController.getAllBranches(new IResponse<ArrayList<Branch>>() {
             @Override
@@ -108,7 +109,12 @@ public class DeliveryList extends GUIController{
                 @Override
                 public void executeAfterResponse(Object message)
                 {
-                    deliveryList = (ObservableList<Delivery>) message;
+                	deliveryList.clear();
+                    ArrayList<Order> o = (ArrayList<Order>) message;
+                    for (Order order : o)
+					{
+                    	deliveryList.add(order.getDeliveryDetails());
+					}
                 }
             },(newValue).getBranchId());
         });
