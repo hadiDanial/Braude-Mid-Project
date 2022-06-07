@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.junit.runner.Request;
+
 import controllers.SurveyController;
 import entities.surveys.Survey;
 import gui.guimanagement.ButtonAnimator;
@@ -17,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import utility.FileManager;
 import utility.IResponse;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -54,8 +57,15 @@ public class AddAnalysis extends FormController {
     private Button backBtn;
 
     @FXML
+    private Button chooseFile;
+
+    @FXML
+    void OnChooseFile(ActionEvent event) {
+         bytes[]=FileManager.choosePDFFile();
+    }
+    @FXML
     void onSaveBtn(ActionEvent event) {
-        initializeTableColumns();
+        surveyController.addSurveyAnalysis(survey,)
     }
 
     @FXML
