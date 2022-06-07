@@ -49,7 +49,7 @@ public class ProductController
 	public boolean addProduct(BaseProduct newProduct)
 	{
 		String[] columns = Arrays.copyOfRange(Tables.allProductsColumnNames, 1,
-				Tables.allProductsColumnNames.length - 1);
+				Tables.allProductsColumnNames.length);
 		int res = databaseConnection.insertAndReturnGeneratedId(Tables.ALL_PRODUCTS_TABLE_NAME, columns,
 				convertBaseProductToPS(newProduct));
 		if (res == -1)
@@ -70,7 +70,7 @@ public class ProductController
 		// ArrayList<String> keys, IObjectToPreparedStatementParameters<T> objToPS
 		int id = updateRequest.getEntityId();
 		List<String> keys = Arrays
-				.asList(Arrays.copyOfRange(Tables.allProductsColumnNames, 0, Tables.allProductsColumnNames.length - 1));
+				.asList(Arrays.copyOfRange(Tables.allProductsColumnNames, 0, Tables.allProductsColumnNames.length));
 		return databaseConnection.updateAllMatchingCondition(Tables.allProductsColumnNames[0], id + "",
 				Tables.ALL_PRODUCTS_TABLE_NAME, (ArrayList<String>) keys,
 				convertBaseProductToPS(updateRequest.getEntity()));
@@ -215,9 +215,15 @@ public class ProductController
 				// "productOrItem" };
 				statementToPrepare.setString(1, newProduct.getProductName());
 				statementToPrepare.setFloat(2, newProduct.getPrice());
+					
 				Blob blob = databaseConnection.createBlob();
-				blob.setBytes(1, newProduct.getImage());
+				if(newProduct.getImage() != null)				
+					blob.setBytes(1, newProduct.getImage());
+				else
+					blob.setBytes(1, new byte[1]);
 				statementToPrepare.setBlob(3, blob);
+				statementToPrepare.setBlob(3, blob);
+				
 				if (newProduct.isProduct())
 				{
 					statementToPrepare.setString(4, ((Product) newProduct).getProductType().name());
