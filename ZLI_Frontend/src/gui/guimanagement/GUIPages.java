@@ -22,6 +22,7 @@ public enum GUIPages
 	OPEN_ORDERS_LIST("orders/openOrders/OpenOrdersList.fxml", "Pending Orders"),
 	ADD_PRODUCT("catalog/ProductEditor.fxml", "Add Product"),
 	EDIT_PRODUCT("catalog/ProductEditor.fxml", "Edit Product"),
+	CATALOG_MANAGEMENT("catalog/CatalogManagement.fxml", "Catalog Management"),
 	
 	CART("orders/cart/CartPage.fxml", "Cart"),
 	CART_ELEMENT("orders/cart/CartProductElement.fxml", ""),
@@ -31,7 +32,7 @@ public enum GUIPages
 	CHECKOUT_END("orders/checkoutEnd/CheckOutEnd.fxml", "Sending order..."),
 	NewDiscount("discountManagement/NewDiscount.fxml", "Add new discount"),
 	DISCOUNT_MANAGEMENT("discountManagement/DiscountManagement.fxml", "Discount Management"),
-	NEW_PRODUCT("catalog/NewProduct.fxml", "Add new product"),
+	NEW_PRODUCT("catalog/ProductEditor.fxml", "Add new product"),
 	
 	OPENED_COMPLAINTS_PAGE("complaints/OpenedComplaints.fxml", "Opened Complaints"),
 	NEW_COMPLAINT_PAGE("complaints/NewComplaint.fxml", "New Complaint"),
