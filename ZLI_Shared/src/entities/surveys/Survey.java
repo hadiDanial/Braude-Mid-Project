@@ -53,6 +53,9 @@ public class Survey implements Serializable
 		if (questions.length != NUM_QUESTIONS)
 			throw new SurveyException("Survey must have " + NUM_QUESTIONS + " questions.");
 	}
+	public int getNumberOfSurveyed(){
+		return customers.size();
+	}
 
 	public int getSurveyId()
 	{
@@ -123,7 +126,6 @@ public class Survey implements Serializable
 	{
 		this.endDate = endDate;
 	}
-
 	public int getNumOfCustomers()
 	{
 		return customers.size();

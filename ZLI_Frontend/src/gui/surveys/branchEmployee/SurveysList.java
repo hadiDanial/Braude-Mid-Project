@@ -18,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import utility.IResponse;
 
 public class SurveysList extends GUIController{
 
@@ -51,12 +52,10 @@ public class SurveysList extends GUIController{
     public void initialize(URL location, ResourceBundle resources) {    
         surveyController = SurveyController.getInstance();
         initializeTableColumn();
-		surveyController.getAllDiscounts(new IResponse<ArrayList<Survey>>()
-		{
-			
-			@Override
-			public void executeAfterResponse(Object message)
-			{
+        surveyController.getAllSurvey(new IResponse<ArrayList<Survey>>() {
+
+            @Override
+            public void executeAfterResponse(Object message) {
 				Platform.runLater(new Runnable()
 				{
 					
@@ -73,17 +72,18 @@ public class SurveysList extends GUIController{
 						}
 					}
 				});
-			}
-		});
+            }
+            
+        });
 	}
 
     private void initializeTableColumn()
     {
-        surveyIDColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer >("FormattedDiscountStartDate"));
-        startDateColumn.setCellValueFactory(new PropertyValueFactory<Survey,String >("FormattedDiscountEndDate"));
-        endDateColumn.setCellValueFactory(new PropertyValueFactory<Survey,String >("ProductsSize"));
-        numOfSurveyedCustomersColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer >("DiscountValue"));
-        resultColumn.setCellValueFactory(new PropertyValueFactory<Survey,Button >("DiscountValue"));  
+        surveyIDColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer >("SurveyId"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<Survey,String >("FormattedStartDate"));
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<Survey,String >("FormattedEndDate"));
+        numOfSurveyedCustomersColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer >("NumberOfSurveyed"));
+        resultColumn.setCellValueFactory(new PropertyValueFactory<Survey,Button >("AnalysisResults"));  
     }
 
 }

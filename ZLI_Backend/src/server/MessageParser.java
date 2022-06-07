@@ -182,7 +182,7 @@ public class MessageParser
 
 			case GET_ALL_SURVEY:
 			{
-				return surveyController.getAllSurvey(req.getMessage());
+				return surveyController.getAllSurvey();
 			}
 			
 			default:
