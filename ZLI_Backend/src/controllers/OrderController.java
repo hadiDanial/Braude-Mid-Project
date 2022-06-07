@@ -173,7 +173,10 @@ public class OrderController
 
 	public Order getOrder(int orderId)
 	{
-		return convertRSToOrder(databaseConnection.getByID(orderId, Tables.ORDERS_TABLE_NAME, ID_FIELD_NAME), true);
+		Order o = convertRSToOrder(databaseConnection.getByID(orderId, Tables.ORDERS_TABLE_NAME, ID_FIELD_NAME), true);
+		User u = UserController.getInstance().getUserById(o.getCustomer().getUserId());
+		o.setCustomer(u);
+		return o;
 	}
 
 	/**
@@ -187,7 +190,7 @@ public class OrderController
 	{
 		Order order = getOrder(id);
 		boolean res = databaseConnection.updateById(id, ID_FIELD_NAME, Tables.ORDERS_TABLE_NAME,
-				Tables.ordersColumnNames[2], orderStatus.name());
+				Tables.ordersColumnNames[2], "'"+orderStatus.name()+"'");
 		if (res)
 		{
 			EmailManager.sendEmail("Zerli - Order #" + id + " Status Update",
@@ -198,14 +201,38 @@ public class OrderController
 			{
 				databaseConnection.updateById(id, "orderId", Tables.DELIVERIES_TABLE_NAME, "delivered", "true");
 			}
-		 	if(orderStatus == OrderStatus.Canceled)
-			{
-				userController.updateUserCredit(order.getCustomer(),order.getTotalCost());
-			}
+//		 	if(orderStatus == OrderStatus.Canceled)
+//			{
+//				userController.updateUserCredit(order.getCustomer(),order.getTotalCost());
+//			}
 		}
 		return res;
 	}
-
+//	
+//	public ArrayList<Order> getFullOrdersByStatus(OrderStatus status)
+//	{
+//		String selects = "orders.*, catalog.*, deliveries.recipientName, deliveries.recipientPhoneNumber";
+//		String conditions = "deliveries.orderId=orders.orderID ";//and orders.orderId=orders_products.orderId and orders_products.catalogId=catalog.catalogId
+//		ArrayList<String> tables = new ArrayList<String>();
+//		tables.add(Tables.ORDERS_TABLE_NAME);
+////		tables.add(Tables.ORDERS_PRODUCTS_TABLE_NAME);
+//		tables.add(Tables.ALL_PRODUCTS_TABLE_NAME);
+//		tables.add(Tables.DELIVERIES_TABLE_NAME);
+//		ResultSet rs = databaseConnection.getJoinResultsWithSelectColumns(tables, selects, conditions);
+//		ArrayList<Order> orders = new ArrayList<Order>();
+//		try
+//		{
+//			while(rs.next())
+//			{
+//				Order order = convertRSToOrder(rs, false);
+//				
+//			}
+//		} catch (SQLException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		
+//	}
 	public ArrayList<Order> getOrdersByStatusAndBranch(int branchId, OrderStatus orderStatus)
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -308,6 +335,7 @@ public class OrderController
 		}
 	}
 
+
 	public Order convertRSToOrder(ResultSet resultSet, boolean isOnlyRecordExpected)
 	{
 		String[] ordersColumnNames = Tables.ordersColumnNames;
@@ -329,9 +357,9 @@ public class OrderController
 			order.setOrderStatus(OrderStatus.valueOf(resultSet.getString(ordersColumnNames[2])));
 			order.setTotalCost(resultSet.getFloat(ordersColumnNames[3]));
 			order.setGreetingCard(resultSet.getString(ordersColumnNames[4]));
-			order.setOrderDetails(resultSet.getString(ordersColumnNames[6]));
-			order.setOrderDate(resultSet.getTimestamp(ordersColumnNames[7]).toInstant());
-			order.setDeliveryDate(resultSet.getTimestamp(ordersColumnNames[8]).toInstant());
+			order.setOrderDetails(resultSet.getString(ordersColumnNames[5]));
+			order.setOrderDate(resultSet.getTimestamp(ordersColumnNames[6]).toInstant());
+			order.setDeliveryDate(resultSet.getTimestamp(ordersColumnNames[7]).toInstant());
 			if (isOnlyRecordExpected)
 				resultSet.close();
 			return order;

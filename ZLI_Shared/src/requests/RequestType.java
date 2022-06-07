@@ -23,6 +23,7 @@ public enum RequestType
 	UPDATE_ORDER(new UserRole[] { UserRole.BranchManager }),
 	CHECK_IF_FIRST_ORDER(new UserRole[] {UserRole.Customer }), 
 	GET_ALL_ORDER_STATUS(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
+	GET_ALL_ORDER_STATUS_AND_BRANCH(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
 	UPDATES_ORDER_STATUS(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
 	
 	// Products/Catalog
@@ -31,7 +32,7 @@ public enum RequestType
 	GET_CATALOG(UserRole.values()),
 	GET_CATALOG_BY_BRANCH(UserRole.values()),
 	GET_ALL_ITEMS(UserRole.values()),
-	GET_ALL_DELIVERY_BRANCH(UserRole.values()),
+	GET_ALL_DELIVERY_BRANCH(new UserRole[] { UserRole.DeliveryPerson }),
 	
 	//Survey
 	CREATE_SURVEY(new UserRole[]{UserRole.BranchManager}),
@@ -39,7 +40,7 @@ public enum RequestType
 	GET_SURVEY_BY_ID(new UserRole[]{UserRole.BranchManager}),
 	GET_SURVEY_BY_DATE(new UserRole[]{UserRole.BranchManager}),
 	GET_ALL_SURVEY(new UserRole[]{UserRole.BranchManager}),
-	GET_ALL_SURVEY_ANALYSYS(new UserRole[]{UserRole.BranchEmployee}),
+	GET_ALL_SURVEY_ANALYSYS(new UserRole[]{UserRole.CustomerServiceSpecialist}),
 	
 	// Discounts
 	GET_DISCOUNTS_BY_BRANCH(UserRole.values()),
@@ -55,7 +56,7 @@ public enum RequestType
 			UserRole.CustomerServiceSpecialist, UserRole.DeliveryPerson } ),
 	// Complaints
 	CREATE_COMPLAINTS(new UserRole[] {UserRole.Customer}),
-	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee}), ;
+	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee}),;
 	
 	private UserRole[] permittedRoles;
 

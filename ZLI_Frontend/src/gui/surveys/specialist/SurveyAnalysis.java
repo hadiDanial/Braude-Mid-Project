@@ -23,8 +23,7 @@ import utility.IResponse;
 public class SurveyAnalysis extends GUIController{
     private SurveyController surveyController;
     public static ObservableList<Survey> surveyList = FXCollections.observableArrayList();
-    private Survey survey;
-
+   
     @FXML
     private TableView<Survey> surveyTable;
 

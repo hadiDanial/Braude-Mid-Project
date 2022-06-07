@@ -48,7 +48,6 @@ public class NewUser extends FormController
 	@FXML private ChoiceBox<UserRole> roleDropDown;
 	@FXML private Label loginNameErrLabel;
 	@FXML private Label emailErrLabel;
-	@FXML private Label emailErrLabel1;
 	@FXML private Label passwordErrLabel;
 	@FXML private Label roleErrLabel;
 	@FXML private Label logN;
@@ -108,6 +107,8 @@ public class NewUser extends FormController
 				 new InputLengthValidator(firstNameField, fnameErrLabel1, true, "First Name", this, 2, 15),
 				 new InputLengthValidator(lastNameField, lnameErrLabel1, true, "Last Name", this, 2, 15),
 				 new DigitsOnlyValidator(phoneNumField, phoneErrLabel, true, this),
+				 new DigitsOnlyValidator(idField, idErrLabel, true, this),
+				 new InputLengthValidator(idField, idErrLabel, true, "ID", this, 9, 9),
 				 new InputLengthValidator(phoneNumField, phoneErrLabel1, true, "Phone Number", this, 9, 10),
 				 new InputLengthValidator(userNameField, loginNameErrLabel, true, "Username", this, 3, 20),
 				 new InputLengthValidator(passwordField, passwordErrLabel, true, "Password", this, 3, 20),

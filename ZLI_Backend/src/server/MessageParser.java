@@ -122,15 +122,18 @@ public class MessageParser
 			}
 			case UPDATES_ORDER_STATUS:
 			{
-				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId) req.getMessage();
+				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId<OrderStatus>) req.getMessage();
 				return orderController.updateOrderStatus(entityRequestWithId.getEntityId(),entityRequestWithId.getEntity());
 			}
-			
-			
 			case GET_ALL_DELIVERY_BRANCH:
 			{
-				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId) req.getMessage();
+				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId<OrderStatus>) req.getMessage();
 				return orderController.getOrdersByStatusAndBranch(entityRequestWithId.getEntityId(),entityRequestWithId.getEntity());
+			}					
+			case GET_ALL_ORDER_STATUS_AND_BRANCH:
+			{
+				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId<OrderStatus>) req.getMessage();
+				return orderController.getOrdersByStatusAndBranch(entityRequestWithId.getEntityId(),entityRequestWithId.getEntity());				
 			}
 			
 			// Discounts

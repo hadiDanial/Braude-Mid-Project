@@ -98,12 +98,12 @@ public class CatalogItem implements IDiscountable, Serializable
 		if(baseProduct.isProduct())
 		{
 			Product p = (Product) baseProduct;
-			return p.getProductType() + ", " + p.getItemList();
+			return "[Product]" + p.getProductType() + ", " + p.getItemList();
 		}
 		else
 		{
 			Item i = (Item) baseProduct;
-			return i.getItemType() + ", " + i.getPrimaryColor();
+			return "[Item]" + i.getItemType() + ", " + i.getPrimaryColor();
 		}
 	}
 	

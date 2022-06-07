@@ -264,7 +264,7 @@ public class Order implements Serializable, IDiscountable
 	public String getAddress()
 	{
 		if(deliveryDetails == null)
-			return "Pickup, " + branch.getBranchName() + " branch (" + branch.getLocation().getCity() + ")";
+			return "Pickup, " + branch.getBranchName();// + " branch (" + branch.getLocation().getCity() + ")";
 		else
 			return deliveryDetails.getLocation().toString();
 	}

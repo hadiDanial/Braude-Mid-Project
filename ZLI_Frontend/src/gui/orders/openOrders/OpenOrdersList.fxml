@@ -35,11 +35,11 @@
             <TableView fx:id="ordersTable" prefHeight="454.0" prefWidth="898.0">
                <columns>
                   <TableColumn fx:id="orderIdColumn" prefWidth="75.0" text="Order Id" />
-                  <TableColumn fx:id="orderDetailsColumn" prefWidth="75.0" text="Details" />
-                  <TableColumn fx:id="addressColumn" prefWidth="75.0" text="Address" />
+                  <!-- <TableColumn fx:id="orderDetailsColumn" prefWidth="75.0" text="Details" /> -->
+                  <!-- <TableColumn fx:id="addressColumn" prefWidth="75.0" text="Address" /> -->
                   <TableColumn fx:id="orderDateColumn" prefWidth="75.0" text="Order Date" />
-                  <TableColumn fx:id="numOfItemsColumn" prefWidth="75.0" text="# Items" />
-                  <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                  <!-- <TableColumn fx:id="numOfItemsColumn" prefWidth="75.0" text="# Items" /> -->
+                  <!-- <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" /> -->
                   <TableColumn fx:id="acceptColumn" prefWidth="75.0" text="Accept" />
                   <TableColumn fx:id="cancelColumn" prefWidth="75.0" text="Cancel" />
                </columns>

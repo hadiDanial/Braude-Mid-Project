@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import controllers.UserController;
 import entities.users.User;
 import enums.UserRole;
+import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.GUIPages;
 import gui.guimanagement.SceneManager;
@@ -15,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -41,7 +43,11 @@ public class CustomersList extends GUIController {
 
     @FXML
     private TableColumn<User, String> lastLoginDateColumn;
+    @FXML
+    private Button backBtn;
 
+    @FXML
+    private Button addBtn;
 
     @FXML
     void onAddBtn(ActionEvent event) {
@@ -59,7 +65,8 @@ public class CustomersList extends GUIController {
 	{
         userController = UserController.getInstance();
         initializeTableColumn();
-        usersTable.setItems(usersList);						
+        usersTable.setItems(usersList);				
+        ButtonAnimator.addButtonAnimations(addBtn,backBtn);
 		userController.getAllUsersByRole(UserRole.Customer, new IResponse<ArrayList<User>>()
 		{
 			

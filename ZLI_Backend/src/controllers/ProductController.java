@@ -72,7 +72,7 @@ public class ProductController
 		List<String> keys = Arrays
 				.asList(Arrays.copyOfRange(Tables.allProductsColumnNames, 0, Tables.allProductsColumnNames.length));
 		return databaseConnection.updateAllMatchingCondition(Tables.allProductsColumnNames[0], id + "",
-				Tables.ALL_PRODUCTS_TABLE_NAME, (ArrayList<String>) keys,
+				Tables.ALL_PRODUCTS_TABLE_NAME, new ArrayList<String>(keys),
 				convertBaseProductToPS(updateRequest.getEntity()));
 	}
 
