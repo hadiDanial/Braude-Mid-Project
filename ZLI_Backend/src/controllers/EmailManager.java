@@ -73,7 +73,7 @@ public class EmailManager
 		properties.put("mail.smtp.starttls.enable", "true");
 		properties.put("mail.smtp.host", "smtp.gmail.com");
 		properties.put("mail.smtp.port", "587");
-		
+		if(recipientEmailAddress == null) return;
 		Session session = Session.getInstance(properties, new Authenticator()
 		{
 			@Override

@@ -102,11 +102,11 @@ public class OpenOrdersList extends GUIController
 	private void initializeTableColumns()
 	{
 		orderIdColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("orderId"));
-		orderDetailsColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("details"));
-		addressColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("address"));
+//		orderDetailsColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderDetails"));
+//		addressColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("address"));
 		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("formattedOrderDate"));
-		numOfItemsColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("numProducts"));
-		priceColumn.setCellValueFactory(new PropertyValueFactory<Order, Float>("totalCost"));
+//		numOfItemsColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("numProducts"));
+//		priceColumn.setCellValueFactory(new PropertyValueFactory<Order, Float>("totalCost"));
 
 		acceptColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Order>(param.getValue()));
 		acceptColumn.setCellFactory(param -> new TableCell<Order, Order>()
