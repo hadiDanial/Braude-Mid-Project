@@ -102,4 +102,10 @@ public class SurveyController
 		Request req=new Request(RequestType.GET_ALL_SURVEY);
 		ClientController.getInstance().sendRequest(req, response);
 	}
+	
+	public void getAllSurveyAnalysis(IResponse<ArrayList<Survey>> response)
+	{
+		Request req= new Request(RequestType.GET_ALL_SURVEY_ANALYSYS);
+		ClientController.getInstance().sendRequest(req, response);
+	}
 }

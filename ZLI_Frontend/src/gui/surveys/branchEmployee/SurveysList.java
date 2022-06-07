@@ -64,7 +64,7 @@ public class SurveysList extends GUIController{
 					{
 						VBox scrollPaneContent = new VBox();
 						if(message == null)
-							SceneManager.displayErrorMessage("Failed to load Discounts!");
+							SceneManager.displayErrorMessage("Failed to load surveys!");
 						else
 						{
 							surveyList.setAll((ArrayList<Survey>) message);

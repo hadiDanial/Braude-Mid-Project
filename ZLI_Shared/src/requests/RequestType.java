@@ -32,7 +32,7 @@ public enum RequestType
 	GET_CATALOG(UserRole.values()),
 	GET_CATALOG_BY_BRANCH(UserRole.values()),
 	GET_ALL_ITEMS(UserRole.values()),
-	GET_ALL_DELIVERY_BRANCH(UserRole.values()),
+	GET_ALL_DELIVERY_BRANCH(new UserRole[] { UserRole.DeliveryPerson }),
 	
 	//Survey
 	CREATE_SURVEY(new UserRole[]{UserRole.BranchManager}),
@@ -40,6 +40,7 @@ public enum RequestType
 	GET_SURVEY_BY_ID(new UserRole[]{UserRole.BranchManager}),
 	GET_SURVEY_BY_DATE(new UserRole[]{UserRole.BranchManager}),
 	GET_ALL_SURVEY(new UserRole[]{UserRole.BranchManager}),
+	GET_ALL_SURVEY_ANALYSYS(new UserRole[]{UserRole.CustomerServiceSpecialist}),
 	
 	// Discounts
 	GET_DISCOUNTS_BY_BRANCH(UserRole.values()),

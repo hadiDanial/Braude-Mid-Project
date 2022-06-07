@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="906.0" prefWidth="900.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.specialist.surveys.AddAnalysis">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="906.0" prefWidth="900.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.surveys.specialist.AddAnalysis">
    <children>
       <VBox layoutX="1.0" layoutY="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -89,7 +89,7 @@
             <Pane prefHeight="17.0" prefWidth="898.0" VBox.vgrow="ALWAYS" />
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" onAction="#onBackBtn" prefWidth="100.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="WHITE">
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#onBackBtn" prefWidth="100.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="WHITE">
                      <font>
                         <Font size="26.0" />
                      </font>
@@ -102,7 +102,7 @@
                            </font>
                         </Button>
                      </children></Pane>
-                  <Button fx:id="saveBtn1" mnemonicParsing="false" onAction="#onSaveBtn" prefWidth="100.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Save" textFill="#e2d784">
+                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#onSaveBtn" prefWidth="100.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Save" textFill="#e2d784">
                      <font>
                         <Font size="26.0" />
                      </font>
