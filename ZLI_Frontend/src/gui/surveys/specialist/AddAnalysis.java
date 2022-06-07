@@ -59,13 +59,15 @@ public class AddAnalysis extends FormController {
     @FXML
     private Button chooseFile;
 
+    private byte[] PDFFile;
+
     @FXML
     void OnChooseFile(ActionEvent event) {
-         bytes[]=FileManager.choosePDFFile();
+        PDFFile =FileManager.choosePDFFile();
     }
     @FXML
     void onSaveBtn(ActionEvent event) {
-        surveyController.addSurveyAnalysis(survey,)
+        surveyController.addSurveyAnalysis(survey,PDFFile);
     }
 
     @FXML
@@ -76,7 +78,7 @@ public class AddAnalysis extends FormController {
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-        ButtonAnimator.addButtonAnimations(addBtn,backBtn);
+        ButtonAnimator.addButtonAnimations(saveBtn,backBtn);
         surveyController=SurveyController.getInstance();
         surveyTable.setItems(surveyList);
         surveyAnalysisAria.setText(""+survey.getAnalysisResults());               
