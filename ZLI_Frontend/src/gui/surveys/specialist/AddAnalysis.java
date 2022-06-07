@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import utility.IResponse;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -83,7 +84,9 @@ public class AddAnalysis extends FormController {
 	}
 
     private void initializeTableColumns() {
-
+        questionNumberColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer>("surveyId"));
+        questionTextColumn.setCellValueFactory(new PropertyValueFactory<Survey,String>("questions"));
+        questionScoreColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer>("score"));
     }
 
 }

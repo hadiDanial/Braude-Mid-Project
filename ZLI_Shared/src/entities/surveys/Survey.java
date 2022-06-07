@@ -17,7 +17,6 @@ public class Survey implements Serializable
 	private String questions[];
 	private byte[] analysisResults; // Should be saved as a PDF
 	private Instant startDate, endDate;
-	private int score;
 	static final int NUM_QUESTIONS = 6;
 
 	private static final long serialVersionUID = 4685144997413378000L;
@@ -37,7 +36,7 @@ public class Survey implements Serializable
 	}
 
 	public Survey(User customerServiceSpecialist, ArrayList<User> customers, ArrayList<SurveyAnswers> answers,
-			String[] questions, byte[] analysisResults, Instant surveyDate,int score) throws SurveyException
+			String[] questions, byte[] analysisResults, Instant surveyDate) throws SurveyException
 	{
 		super();
 		this.customerServiceSpecialist = customerServiceSpecialist;
@@ -47,16 +46,8 @@ public class Survey implements Serializable
 		this.questions = questions;
 		this.analysisResults = analysisResults;
 		this.startDate = surveyDate;
-		this.score=score;
 	}
-	public int getScore()
-	{
-		return score;
-	}
-	public void setScore(int score)
-	{
-		this.score=score;
-	}
+
 	private void checkQuestionsLength(String[] questions) throws SurveyException
 	{
 		if (questions.length != NUM_QUESTIONS)
