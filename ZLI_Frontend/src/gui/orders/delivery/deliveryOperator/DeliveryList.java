@@ -112,7 +112,7 @@ public class DeliveryList extends GUIController{
         confirmColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Delivery>(param.getValue()));
         confirmColumn.setCellFactory(param -> new TableCell<Delivery, Delivery>()
 		{
-			private final Button acceptButton = new Button("Mark Delivered");
+			private final Button acceptButton = new Button("Confirm");
 
 			@Override
 			protected void updateItem(Delivery delivery, boolean empty)
@@ -145,6 +145,6 @@ public class DeliveryList extends GUIController{
 					deliveryList.remove(delivery);
 				}
 			}};
-//			orderController.updateOrderStatus(response, delivery.getOrderId(), status);
+			orderController.updateOrderStatus(response, delivery.getId(), OrderStatus.Delivered);
 	}
 }
