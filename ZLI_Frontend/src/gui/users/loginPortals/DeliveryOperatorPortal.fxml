@@ -59,7 +59,7 @@
                      </font>
                   </Label>
                   <Separator layoutX="1.0" layoutY="263.0" prefWidth="898.0" style="-fx-background-color: #078082; -fx-border-color: #078082;" />
-                  <Button layoutX="268.0" layoutY="337.0" mnemonicParsing="false" onAction="#onVrydlBtn" prefHeight="56.0" prefWidth="293.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Verify Delivery" textFill="#e2d784">
+                  <Button fx:id="verifyBtn" layoutX="268.0" layoutY="337.0" mnemonicParsing="false" onAction="#onVrydlBtn" prefHeight="56.0" prefWidth="293.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Verify Delivery" textFill="#e2d784">
                      <font>
                         <Font size="26.0" />
                      </font>

@@ -36,7 +36,7 @@ public class DeliveryOperatorPortal extends GUIController{
     private Label branchLabel;
 
     @FXML
-    private Button VrydlBtn;
+    private Button verifyBtn;
 
     
     /** 
@@ -55,6 +55,7 @@ public class DeliveryOperatorPortal extends GUIController{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userController = UserController.getInstance();
+        ButtonAnimator.addButtonAnimations(verifyBtn);
         orderController = OrderController.getInstance();
         branchController = BranchController.getInstance();
         worker = userController.getLoggedInUser();
