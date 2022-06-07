@@ -81,7 +81,7 @@ public class AddAnalysis extends FormController {
         ButtonAnimator.addButtonAnimations(saveBtn,backBtn);
         surveyController=SurveyController.getInstance();
         surveyTable.setItems(surveyList);
-        surveyAnalysisAria.setText(""+survey.getAnalysisResults());               
+        surveyAnalysisAria.setText(survey.getAnalysisResults().toString());
         surveyController.getAllSurvey(new IResponse<ArrayList<Survey>>() {
 
             @Override
@@ -99,7 +99,6 @@ public class AddAnalysis extends FormController {
         questionNumberColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer>("surveyId"));
         questionTextColumn.setCellValueFactory(new PropertyValueFactory<Survey,String>("questions"));
         questionScoreColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer>("score"));
-
     }
 
 }
