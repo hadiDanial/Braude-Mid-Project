@@ -6,8 +6,10 @@ import java.util.ResourceBundle;
 
 import controllers.OrderController;
 import controllers.ProductController;
+import controllers.UserController;
 import entities.products.CartItem;
 import entities.users.Order;
+import enums.AccountStatus;
 import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.GUIPages;
@@ -68,7 +70,10 @@ public class CartPage extends GUIController
 	@FXML
 	void onCheckOutBtn(ActionEvent event)
 	{
-		SceneManager.loadNewScene(GUIPages.CHECKOUT_GREETING, true);
+		if(UserController.getInstance().getLoggedInUser().getAccountStatus() == AccountStatus.Frozen)
+			SceneManager.displayErrorMessage("Your account has been frozen! You can't order. Please talk with a manager.");
+		else
+			SceneManager.loadNewScene(GUIPages.CHECKOUT_GREETING, true);
 	}
 
 	
