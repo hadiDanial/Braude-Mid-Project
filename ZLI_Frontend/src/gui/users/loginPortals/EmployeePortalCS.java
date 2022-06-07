@@ -34,7 +34,7 @@ public class EmployeePortalCS extends GUIController
     private Label branchLabel;
 
     @FXML 
-    private Button reviewComplaintsbButton;
+    private Button reviewComplaintsButton;
 
     @FXML 
     private Button addSurveyButton;
@@ -53,7 +53,7 @@ public class EmployeePortalCS extends GUIController
 	public void initialize(URL location, ResourceBundle resources)
 	{
         userController = UserController.getInstance();
-        ButtonAnimator.addButtonAnimations(addSurveyButton,reviewComplaintsbButton);
+        ButtonAnimator.addButtonAnimations(addSurveyButton,reviewComplaintsButton);
 		branchController = BranchController.getInstance();
 		worker = userController.getLoggedInUser();
 		nameLabel.setText(worker.getFullName());
