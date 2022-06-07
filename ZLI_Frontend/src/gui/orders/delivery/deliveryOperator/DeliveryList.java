@@ -15,6 +15,7 @@ import entities.other.Location;
 import entities.users.Delivery;
 import entities.users.Order;
 import enums.OrderStatus;
+import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.SceneManager;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -69,6 +70,8 @@ public class DeliveryList extends GUIController{
 
     @FXML
     private TableColumn<Delivery, Delivery> confirmColumn;
+    @FXML
+    private Button backBtn;
 
     
     /** 
@@ -90,6 +93,7 @@ public class DeliveryList extends GUIController{
         orderController = OrderController.getInstance();
         branchController = BranchController.getInstance();
         clientController = ClientController.getInstance();
+        ButtonAnimator.addButtonAnimations(backBtn);
         branchController.getAllBranches(new IResponse<ArrayList<Branch>>() {
             @Override
             public void executeAfterResponse(Object message) {

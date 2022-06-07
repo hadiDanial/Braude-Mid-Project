@@ -1,61 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.users.loginPortals.DeliveryOperatorPortal">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.users.loginPortals.DeliveryOperatorPortal">
    <children>
-      <HBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="900.0" style="-fx-background-radius: 15; -fx-background-color: #078082; -fx-border-width: 5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" layoutX="35.0" layoutY="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane layoutX="76.0" layoutY="10.0" prefHeight="63.0" prefWidth="39.0" />
-            <Label text="Employee Portal" textFill="#e2d784">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Group>
+               <children>
+                  <HBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="900.0" style="-fx-background-radius: 15; -fx-background-color: #078082; -fx-border-width: 5;">
+                     <children>
+                        <Pane layoutX="76.0" layoutY="10.0" prefHeight="63.0" prefWidth="39.0" />
+                        <Label text="Employee Portal" textFill="#e2d784">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <Label layoutX="48.0" layoutY="101.0" text="Employee Name: " textFill="#062c30">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nameLabel" layoutX="255.0" layoutY="101.0" text="Eugene" textFill="#078082">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="48.0" layoutY="147.0" text="Job Title: " textFill="#062c30">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="jobTitleLabel" layoutX="156.0" layoutY="147.0" text="Delivery Operator" textFill="#078082">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="48.0" layoutY="195.0" text="Branch: " textFill="#062c30">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="branchLabel" layoutX="140.0" layoutY="195.0" text="Haifa" textFill="#078082">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="1.0" layoutY="263.0" prefWidth="898.0" style="-fx-background-color: #078082; -fx-border-color: #078082;" />
+                  <Button fx:id="verifyBtn" layoutX="268.0" layoutY="337.0" mnemonicParsing="false" onAction="#onVrydlBtn" prefHeight="56.0" prefWidth="293.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Verify Delivery" textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Group>
          </children>
-      </HBox>
-      <Label layoutX="82.0" layoutY="92.0" text="Employee Name: " textFill="#062c30">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="nameLabel" layoutX="289.0" layoutY="92.0" text="Eugene" textFill="#078082">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label layoutX="82.0" layoutY="138.0" text="Job Title: " textFill="#062c30">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="jobTitleLabel" layoutX="190.0" layoutY="138.0" text="Delivery Operator" textFill="#078082">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label layoutX="82.0" layoutY="186.0" text="Branch: " textFill="#062c30">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label fx:id="branchLabel" layoutX="174.0" layoutY="186.0" text="Haifa" textFill="#078082">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Separator layoutX="2.0" layoutY="254.0" prefWidth="898.0" style="-fx-background-color: #078082; -fx-border-color: #078082;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" />
-      <Button layoutX="303.0" layoutY="372.0" mnemonicParsing="false" onAction="#onVrydlBtn" prefHeight="56.0" prefWidth="293.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="Verify Delivery" textFill="#e2d784">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Button>
+      </VBox>
    </children>
+   <padding>
+      <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+   </padding>
 </AnchorPane>

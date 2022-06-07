@@ -18,11 +18,8 @@ import javafx.scene.control.TextField;
 public class SenderInfoPage extends FormController
 {
 
-    @FXML
-    private TextField nameInput;
 
-    @FXML
-    private TextField phoneInput;
+   
 
     @FXML
     private TextArea greetingInput;

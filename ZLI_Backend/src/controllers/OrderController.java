@@ -246,7 +246,7 @@ public class OrderController
 			tableNames.add(Tables.ALL_PRODUCTS_TABLE_NAME);
 			String selects = "Orders.orderId, orders_products.quantity, catalog.* ";
 			String conditions = " Orders.branchId = " + branchId + " AND Orders.orderId=" + order.getOrderId()
-					+ " AND Orders.orderId= orders_products.orderId AND orders.orderStatus='" + orderStatus.name() + '"'
+					+ " AND Orders.orderId= orders_products.orderId AND orders.orderStatus='" + orderStatus.name() + "'"
 					+ " AND catalog.catalogId = orders_products.catalogId";
 			// Join Order_Product + CatalogItem
 			ResultSet cartRS = databaseConnection.getJoinResultsWithSelectColumns(tableNames, selects, conditions);
@@ -257,7 +257,7 @@ public class OrderController
 			tableNames.add(Tables.DELIVERIES_TABLE_NAME);
 			tableNames.add(Tables.LOCATIONS_TABLE_NAME);
 			tableNames.add(Tables.BRANCHES_TABLE_NAME);
-			selects = "deliveries.*, locations.city, locations.zipCode, locations.street, locations.building, "
+			selects = "deliveries.*, locations.city, locations.zipCode, locations.street, "
 					+ "locations.notes, branches.branchId, branches.managerId, branches.branchName";
 			conditions = "Deliveries.orderId=" + order.getOrderId()
 					+ " AND deliveries.locationId = locations.locationId AND locations.locationId = branches.branchId";
