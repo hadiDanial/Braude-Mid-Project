@@ -43,7 +43,7 @@ public enum GUIPages
 	VIEW_SURVEYS_BRANCH_EMPLOYEE("surveys/branchEmployee/SurveysList.fxml", "Surveys"),
 	
 	DELIVERY_LIST("orders/delivery/deliveryOperator/DeliveryList.fxml", "Delivery List"),
-	DELIVERY_OPERATOR_PORTAL("orders/delivery/deliveryOperator/DeliveryOperatorPortal.fxml", "Delivery Operator Portal"),
+	DELIVERY_OPERATOR_PORTAL("users/loginPortals/DeliveryOperatorPortal.fxml", "Delivery Operator Portal"),
 
 	BRANCH_EMPLOYEE_PORTAL("users/loginPortals/BranchEmployeePortal.fxml", "Home - Branch Employee"),
 	BRANCH_MANAGER_PORTAL("users/loginPortals/BranchManagerPortal.fxml", "Home - Branch Manager"),

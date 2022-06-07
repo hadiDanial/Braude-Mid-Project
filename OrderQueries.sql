@@ -105,6 +105,7 @@ INSERT INTO Users (userId, username, password, firstName, lastName, emailAddress
 INSERT INTO Users (userId, username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('987654321', 'Yosef','bestpassword456','Yosef','Awad','yosef@gmail.com','052231132','BranchManager','Active');
 INSERT INTO Users (userId, username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('1', 'amr','123','Amr','Kalany','AmrKal@gmail.com','0504707027','CEO','Active');
 INSERT INTO Users (userId, username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('2', 'amre','123','Amre','Kalanye','AmrKale@gmail.com','0504707028','ChainEmployee','Active');
+INSERT INTO Users (userId, username, password, firstName, lastName, emailAddress, phoneNumber, role, status) values ('3', 'Delivery','123','Amre','Kalanye','AmrKale@gmail.com','0504707028','DeliveryPerson','Active');
 
 INSERT INTO Credit_Cards (creditCardId, customerId, creditCardNumber, cvv, expirationDate, cardHolderName) values (default, 123456789, 1111111111111111, 123, now(), 'Hadi');
 INSERT INTO Credit_Cards (creditCardId, customerId, creditCardNumber, cvv, expirationDate, cardHolderName) values (default, 987654321, 9999999999999999, 987, now(), 'Yosef');
