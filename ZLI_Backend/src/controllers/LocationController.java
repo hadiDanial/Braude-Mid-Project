@@ -32,11 +32,11 @@ public class LocationController
 	}
 
 	
-	/** 
+	/** function that initializes location details from database and put it in input
 	 * @param resultSet
 	 * @param useNext
 	 * @param closeRS
-	 * @return Location
+	 * @return Location 
 	 */
 	public static Location convertRSToLocation(ResultSet resultSet, boolean useNext, boolean closeRS)
 	{
@@ -62,9 +62,9 @@ public class LocationController
 	}
 
 	
-	/** 
+	/** function that gets the id of the location from the database
 	 * @param locationId
-	 * @return Location
+	 * @return Location of the database
 	 */
 	public Location getLocationById(int locationId)
 	{

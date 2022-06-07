@@ -41,6 +41,12 @@ public class BranchController
 		return branch;
 	}
 
+	/**
+	 * function that takes details of branch table and move it to branch object
+	 * @param rs
+	 * @param useNext
+	 * @return a branch details from database 
+	 */
 	public static Branch convertRSToBranch(ResultSet rs, boolean useNext)
 	{
 		String[] columnNames = Tables.branchColumnNames;
@@ -66,7 +72,10 @@ public class BranchController
 		}
 		return null;
 	}
-
+	/**
+	 * 
+	 * @return an arraylist of branches that are moved from branch table of the database
+	 */
 	public ArrayList<Branch> getAllBranches()
 	{
 		ArrayList<String> names = new ArrayList<String>();
@@ -95,6 +104,11 @@ public class BranchController
 		}
 	}
 
+	/**function that searches for branch employee using his id in the database
+	 * 
+	 * @param userId of the branch employee
+	 * @return branch object of the branch employee from branch table in the database
+	 */
 	public Branch getWorkerBranch(int userId)
 	{
 		ArrayList<String> names = new ArrayList<String>();
@@ -104,9 +118,6 @@ public class BranchController
 		String selects = " branches.branchId, branches.managerId, branches.locationId, branches.branchName, "
 				+ "locations.city, locations.notes, locations.street, locations.zipCode";
 		String conditions = "branch_workers.workerId=" + userId + " AND branch_workers.branchId=branches.branchId AND locations.locationId = branches.locationId";
-		//select branches.branchId, branches.managerId, branches.locationId, branches.branchName,
-		//locations.city, locations.notes, locations.street, locations.zipCode
-		//from branch_workers join branches join locations where 
 		ResultSet rs = databaseConnection.getJoinResultsWithSelectColumns(names, selects, conditions);
 		return convertRSToBranch(rs, true);
 	}

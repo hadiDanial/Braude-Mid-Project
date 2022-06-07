@@ -24,10 +24,10 @@ public class EmailManager
 	private static final String password = "thlvanlofmpfrxuh";
 	
 	
-	/** 
-	 * @param title
-	 * @param content
-	 * @param recipientEmailAddress
+	/** function to send email to user of any types
+	 * @param title of the mail 
+	 * @param content of the mail 
+	 * @param recipientEmailAddress the user that recieves the mail
 	 */
 	public static void sendEmail(String title, String content, String recipientEmailAddress)
 	{
@@ -42,7 +42,7 @@ public class EmailManager
 		thread.run();
 	}
 	
-	/** 
+	/**
 	 * @param title
 	 * @param content
 	 * @param recipient
@@ -61,7 +61,7 @@ public class EmailManager
 	}
 	
 	
-	/** 
+	/** function that uses details of the recipient and send it using Java library function
 	 * @param title
 	 * @param content
 	 * @param recipientEmailAddress

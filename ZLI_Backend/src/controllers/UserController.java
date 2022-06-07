@@ -41,7 +41,7 @@ public class UserController
 	}
 
 	
-	/** 
+	/** function for logging in of a user with valid username and password and isn't already logged in 
 	 * @param username
 	 * @param password
 	 * @return User
@@ -79,7 +79,7 @@ public class UserController
 	}
 
 	
-	/** 
+	/** function used to set database of the user that he's logged out
 	 * @param userId
 	 * @return boolean
 	 */
@@ -101,7 +101,7 @@ public class UserController
 	}
 
 	
-	/** 
+	/** function used to insert a new user with his details to the database 
 	 * @param user
 	 * @return boolean
 	 */
@@ -112,7 +112,7 @@ public class UserController
 	}
 
 	
-	/** 
+	/** function sets user details in the database 
 	 * @param user
 	 * @param newUser
 	 * @return IObjectToPreparedStatementParameters<User>
@@ -142,7 +142,7 @@ public class UserController
 	}
 
 	
-	/** 
+	/** function initializes user details to the database
 	 * @param rs
 	 * @return User
 	 */
@@ -153,8 +153,6 @@ public class UserController
 			String[] usersColumnNames = Tables.usersColumnNames;
 			if (rs.next())
 			{
-//				{ "userId", "username", "password", "firstName", "lastName", "emailAddress", "phoneNumber", "role", "status",
-//					"credit", "isLoggedIn", "lastLoginDate" };
 				User user = new User();
 				user.setUserId(rs.getInt(usersColumnNames[0]));
 				user.setUsername(rs.getString(usersColumnNames[1]));
@@ -180,7 +178,7 @@ public class UserController
 	}
 
 	
-	/** 
+	/** function used to compensate/refund user with certain amount of money
 	 * @param user
 	 * @param totalCost
 	 */
@@ -192,7 +190,7 @@ public class UserController
 	}
 
 	
-	/** 
+	/** getter of the database for creditcard 
 	 * @param user
 	 * @return CreditCard
 	 */
@@ -248,7 +246,7 @@ public class UserController
 	}
 	
 	
-	/** 
+	/** getter of the role of the user 
 	 * @param role
 	 * @return ArrayList<User>
 	 */
@@ -259,7 +257,7 @@ public class UserController
 	}
 
 	
-	/** 
+	/** getter for the user id
 	 * @param userId
 	 * @return User
 	 */
@@ -268,45 +266,4 @@ public class UserController
 		ResultSet rs = databaseConnection.getByID(userId, Tables.USERS_TABLE_NAME, ID_FIELD_NAME);		
 		return convertRSToUser(rs);
 	}
-
-/* 	public User convertRSToUser(ResultSet resultSet, boolean isOnlyRecordExpected)
-	{
-		String[] ordersColumnNames = Tables.ordersColumnNames;
-		try
-		{
-			if (isOnlyRecordExpected)
-			{
-				if (!resultSet.next())
-					return null;
-			}
-			User user = new User();
-			user.setUserId(resultSet.getInt(ID_FIELD_NAME));
-			user.setUsername(resultSet.getString(ordersColumnNames[1]));
-			user.setPassword(resultSet.getString(ordersColumnNames[2]));
-			user.setFirstName(resultSet.getString(ordersColumnNames[3]));
-			user.setLastName(resultSet.getString(ordersColumnNames[4]));
-			user.setEmailAddress(resultSet.getString(ordersColumnNames[5]));
-			user.setPhoneNumber(resultSet.getString(ordersColumnNames[6]));
-			user.setRole(UserRole.valueOf(resultSet.getString(ordersColumnNames[7])));
-			User customer = new User();
-			order.setCustomer(customer);
-			Branch branch = new Branch();
-			branch.setBranchId(resultSet.getInt(ordersColumnNames[1]));
-			user.setBranch(branch);
-			user.setOrderStatus(OrderStatus.valueOf(resultSet.getString(ordersColumnNames[2])));
-			user.setTotalCost(resultSet.getFloat(ordersColumnNames[3]));
-			user.setGreetingCard(resultSet.getString(ordersColumnNames[4]));
-			user.setColor(ColorEnum.valueOf(resultSet.getString(ordersColumnNames[5])));
-			user.setOrderDetails(resultSet.getString(ordersColumnNames[6]));
-			user.setOrderDate(resultSet.getTimestamp(ordersColumnNames[7]).toInstant());
-			user.setDeliveryDate(resultSet.getTimestamp(ordersColumnNames[8]).toInstant());
-			if (isOnlyRecordExpected)
-				resultSet.close();
-			return user;
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-			return null;
-		}
-	}*/
 }

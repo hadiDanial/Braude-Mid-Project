@@ -70,8 +70,6 @@ public class ProductController
 	 */
 	public boolean updateBaseProduct(EntityRequestWithId<BaseProduct> updateRequest)
 	{
-		// String conditionFieldName, String conditionValue, String tableName,
-		// ArrayList<String> keys, IObjectToPreparedStatementParameters<T> objToPS
 		int id = updateRequest.getEntityId();
 		List<String> keys = Arrays
 				.asList(Arrays.copyOfRange(Tables.allProductsColumnNames, 0, Tables.allProductsColumnNames.length));
@@ -90,7 +88,7 @@ public class ProductController
 	}
 
 	
-	/** 
+	/** function that moves all the Item from the database and put it in arraylist of Item
 	 * @return ArrayList<Item>
 	 */
 	public ArrayList<Item> getAllItems()
@@ -149,7 +147,7 @@ public class ProductController
 	}
 	
 	
-	/** 
+	/** function that moves all the items from the database and put it in itemlist of orders
 	 * @param rs
 	 * @return ArrayList<Item>
 	 */
@@ -217,7 +215,7 @@ public class ProductController
 	}
 
 	
-	/** 
+	/** function that moves all the baseorders from the database and put it in baseorderslist of orders
 	 * @param newProduct
 	 * @return IObjectToPreparedStatementParameters<BaseProduct>
 	 */

@@ -143,8 +143,8 @@ public class OrderController
 	}
 
 	
-	/** 
-	 * @param order
+	/** function that sends mail using the email manager to send to the branch manager 
+	 * @param order used to get order details
 	 */
 	private void notifyManager(Order order)
 	{
@@ -175,7 +175,7 @@ public class OrderController
 	}
 
 	
-	/** 
+	/** function that moves all the orders from the database and put it in arraylist of orders
 	 * @return ArrayList<Order>
 	 */
 	public ArrayList<Order> getAllOrders()
@@ -184,8 +184,8 @@ public class OrderController
 	}
 
 	
-	/** 
-	 * @param orderId
+	/** function used to get order from the database
+	 * @param orderId used to get the order of this ID
 	 * @return Order
 	 */
 	public Order getOrder(int orderId)
@@ -218,42 +218,16 @@ public class OrderController
 			{
 				databaseConnection.updateById(id, "orderId", Tables.DELIVERIES_TABLE_NAME, "delivered", "true");
 			}
-//		 	if(orderStatus == OrderStatus.Canceled)
-//			{
-//				userController.updateUserCredit(order.getCustomer(),order.getTotalCost());
-//			}
 		}
 		return res;
 	}
 
-/** 
- * @return ArrayList<Order>
- */
-//	
-//	public ArrayList<Order> getFullOrdersByStatus(OrderStatus status)
-//	{
-//		String selects = "orders.*, catalog.*, deliveries.recipientName, deliveries.recipientPhoneNumber";
-//		String conditions = "deliveries.orderId=orders.orderID ";//and orders.orderId=orders_products.orderId and orders_products.catalogId=catalog.catalogId
-//		ArrayList<String> tables = new ArrayList<String>();
-//		tables.add(Tables.ORDERS_TABLE_NAME);
-////		tables.add(Tables.ORDERS_PRODUCTS_TABLE_NAME);
-//		tables.add(Tables.ALL_PRODUCTS_TABLE_NAME);
-//		tables.add(Tables.DELIVERIES_TABLE_NAME);
-//		ResultSet rs = databaseConnection.getJoinResultsWithSelectColumns(tables, selects, conditions);
-//		ArrayList<Order> orders = new ArrayList<Order>();
-//		try
-//		{
-//			while(rs.next())
-//			{
-//				Order order = convertRSToOrder(rs, false);
-//				
-//			}
-//		} catch (SQLException e)
-//		{
-//			e.printStackTrace();
-//		}
-//		
-//	}
+	/**function check the pending orders by their status and put it in customer's cart from this branch
+	 * 
+	 * @param branchId
+	 * @param orderStatus different types of status
+	 * @return 
+	 */
 	public ArrayList<Order> getOrdersByStatusAndBranch(int branchId, OrderStatus orderStatus)
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -315,8 +289,8 @@ public class OrderController
 		return pendingOrders;
 	}
 	
-	/** 
-	 * @param orderStatus
+	/** function that gets the order by it's status type
+	 * @param orderStatus 
 	 * @return ArrayList<Order>
 	 */
 	public ArrayList<Order> getOrdersByStatus(OrderStatus orderStatus)
@@ -329,7 +303,7 @@ public class OrderController
 	}
 
 	
-	/** 
+	/** function that takes details of branch table and move it to branch object
 	 * @param deliveryRS
 	 * @return Branch
 	 */
@@ -349,7 +323,7 @@ public class OrderController
 	}
 
 	
-	/** 
+	/** function that moves all the orders from the database and put it in arraylist of orders
 	 * @param resultSet
 	 * @return ArrayList<Order>
 	 */
@@ -373,7 +347,7 @@ public class OrderController
 
 
 	
-	/** 
+	/** function that initializes order details from database and put it in input
 	 * @param resultSet
 	 * @param isOnlyRecordExpected
 	 * @return Order
@@ -413,7 +387,7 @@ public class OrderController
 	}
 
 	
-	/** 
+	/** function that initializes delivery details of the order from database and put it in input
 	 * @param resultSet
 	 * @return Delivery
 	 */
@@ -421,8 +395,6 @@ public class OrderController
 	{
 		try
 		{
-//			if (resultSet.next())
-//			{
 			String[] deliveriesColumnNames = Tables.deliveriesColumnNames;
 			Delivery delivery = new Delivery();
 			delivery.setDelivered(false);
@@ -431,8 +403,6 @@ public class OrderController
 			Location loc = LocationController.convertRSToLocation(resultSet, false, false);
 			delivery.setLocation(loc);
 			return delivery;
-//			} else
-//				return null;
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -441,14 +411,12 @@ public class OrderController
 		return null;
 	}
 
-	/**
+	/**function that moves all the cartItem from the database and put it in arraylist of cartItem
 	 * @param resultSet
 	 * @param deliveriesColumnNames
 	 * @return
 	 * @throws SQLException
 	 */
-	
-
 	public ArrayList<CartItem> convertRSToCart(ResultSet cartRS)
 	{
 		ArrayList<CartItem> cart = new ArrayList<CartItem>();
@@ -474,7 +442,7 @@ public class OrderController
 	}
 
 	
-	/** 
+	/** function that updates input order in the database
 	 * @param orderToUpdate
 	 * @return boolean
 	 */
@@ -493,24 +461,8 @@ public class OrderController
 					}
 				});
 	}
-
-	/**
-	 * 
-	 */
-	private void testCreateOrder()
-	{
-		Order o = new Order();
-		o.setBranch(new Branch("TEST"));
-		o.setTotalCost(100);
-		o.setGreetingCard("Hello create tests");
-		o.setOrderDetails("This is a newly created order to test if adding works...");
-		o.setDeliveryDate(Instant.now());
-		o.setOrderDate(Instant.now());
-		createNewOrder(o);
-	}
-
 	
-	/** 
+	/**getter for the number of orders that this user made 
 	 * @param userId
 	 * @return int
 	 */

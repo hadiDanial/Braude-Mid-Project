@@ -22,7 +22,6 @@ public class DatabaseConnection
 	{
 	}
 
-	
 	/** 
 	 * @return DatabaseConnection
 	 */

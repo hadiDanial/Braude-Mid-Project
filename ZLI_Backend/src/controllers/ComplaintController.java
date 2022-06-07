@@ -24,8 +24,8 @@ public class ComplaintController {
 		databaseConnection = DatabaseConnection.getInstance();
 	}
     
-	/** 
-	 * @return ComplaintController
+	/** function the gets instance of the controller
+	 * @return instance ComplaintController
 	 */
 	public static synchronized ComplaintController getInstance()
 	{
@@ -36,9 +36,9 @@ public class ComplaintController {
 		return instance;
 	}
     
-	/** 
-	 * @param complaint
-	 * @return boolean
+	/** function that creates a complaint and inserts it in the database using input complaint
+	 * @param complaint 
+	 * @return boolean checks if we can create a complaint in the database and send it via email 
 	 */
 	public boolean createComplaint(Complaint complaint)
     {
@@ -68,9 +68,9 @@ public class ComplaintController {
 		return res == 1;
     }
     
-	/** 
-	 * @param complaint
-	 * @param title
+	/** function that made to be used in other functions to notify the customer service employee and send the notifcation to the database
+	 * @param complaint 
+	 * @param title of the sent email 
 	 */
 	public void notifyEmployee(Complaint complaint,String title)
     {
@@ -92,10 +92,11 @@ public class ComplaintController {
 		}
     }
     
-	/** 
+	/** function that handles complaint and also in case to warn customer service employee via email
+	 * and compensate customer in case if the complaint wasn't handled via refunding credit
 	 * @param complaint
-	 * @param handled
-	 * @param user
+	 * @param handled if the complaint is handled or not
+	 * @param user the type of user to send the email to 
 	 */
 	public void handleComplaint(Complaint complaint, Boolean handled, User user) 
     {
@@ -128,8 +129,8 @@ public class ComplaintController {
 		}
 	}
 	
-	/** 
-	 * @return ArrayList<Complaint>
+	/** a getter for all the complaints from the database 
+	 * @return ArrayList<Complaint> for input of all complaints from the database
 	 */
 	public ArrayList<Complaint> getAllComplaints()
 	{
@@ -137,9 +138,9 @@ public class ComplaintController {
 		return rsToComplaintArrayList(rs);
 	}
 	
-	/** 
-	 * @param rs
-	 * @return ArrayList<Complaint>
+	/** function that moves all the complaints from the database and put it in arraylist of complaints 
+	 * @param rs used to get input from SQL database
+	 * @return ArrayList<Complaint> of complaints from the database
 	 */
 	private ArrayList<Complaint> rsToComplaintArrayList(ResultSet rs)
 	{

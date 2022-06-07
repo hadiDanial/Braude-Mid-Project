@@ -1,6 +1,5 @@
 package controllers;
 
-import java.time.Instant;
 import java.sql.ResultSet;
 
 import database.DatabaseConnection;
@@ -8,23 +7,10 @@ import database.Tables;
 import entities.surveys.Survey;
 import entities.users.User;
 
-import java.sql.Blob;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import database.IObjectToPreparedStatementParameters;
-import entities.other.Branch;
-import entities.products.BaseProduct;
-import entities.products.CatalogItem;
-import entities.products.Item;
-import entities.products.Product;
-import enums.ColorEnum;
-import enums.ItemType;
-import enums.ProductType;
-import requests.EntityRequestWithId;
+
 public class SurveyController {
 	private static SurveyController instance;
 	private final DatabaseConnection databaseConnection;
@@ -34,7 +20,6 @@ public class SurveyController {
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
-	
 	/** 
 	 * @return SurveyController
 	 */
@@ -47,7 +32,7 @@ public class SurveyController {
 		return instance;
 	}
 	
-	/** 
+	/** function that takes details of survey table and move it to survey object
 	 * @param rs
 	 * @return Survey
 	 */
@@ -59,7 +44,6 @@ public class SurveyController {
 			String[] surveyColumnNames = Tables.surveysColumnNames;
 			if (rs.next())
 			{
-//				{ "surveyid, specialistId, surveyDate, surveyEndDate analysisResults, q1, q2, q3, q4, q5, q6 };
 				Survey survey = new Survey();
 				survey.setSurveyId(rs.getInt(surveyColumnNames[0]));
                 User customer = new User();
@@ -88,7 +72,7 @@ public class SurveyController {
 	}
 
 	
-	/** 
+	/** function that uses convertRSToSurvey and add it to arraylist of surveys
 	 * @param resultSet
 	 * @return ArrayList<Survey>
 	 */

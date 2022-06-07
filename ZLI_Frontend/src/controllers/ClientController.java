@@ -38,7 +38,7 @@ public class ClientController
 	}
 
 	
-	/** 
+	/** sends request for the client  
 	 * @param request
 	 * @param response
 	 */
@@ -60,6 +60,7 @@ public class ClientController
 		}
 	}
 
+	//closes connection when logged out and returns to the first page
 	public void closeConnection()
 	{
 		if(client != null)

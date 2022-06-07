@@ -28,8 +28,8 @@ public class DiscountController
 	}
 
 	
-	/** 
-	 * @return DiscountController
+	/** function the gets instance of the controller
+	 * @return instance DiscountController
 	 */
 	public static synchronized DiscountController getInstance()
 	{
@@ -40,8 +40,8 @@ public class DiscountController
 		return instance;
 	}
 	
-	/** 
-	 * @return ArrayList<Discount>
+	/** getter for all discounts from the database
+	 * @return ArrayList<Discount> of all discounts table details
 	 */
 	public ArrayList<Discount> getAllDiscounts()
 	{
@@ -50,12 +50,9 @@ public class DiscountController
 	}
 	
 	
-	/** 
+	/** function that adds input discount to database
 	 * @param discount
-	 */
-	// TODO getActiveDiscounts
-	// select * from discounts join discounts_products join catalog where discounts.discountId=discounts_products.discountId AND discounts_products.catalogId=catalog.catalogId AND discounts.discountStartDate <= now() AND discounts.discountEndDate >= now();
-	
+	 */	
 	public void addProductsDiscount(Discount discount)
 	{
 		Discount discount2;
@@ -79,9 +76,9 @@ public class DiscountController
 	}
 	}
 	
-	/** 
-	 * @param rs
-	 * @return ArrayList<Discount>
+	/** function that moves all the discounts from the database and put it in arraylist of discounts
+	 * @param rs used to get input from SQL database
+	 * @return ArrayList<Discount> of discounts from the database
 	 */
 	private ArrayList<Discount> convertRSToDiscountArrayList(ResultSet rs) {
 		ArrayList<Discount> discounts = new ArrayList<Discount>();
@@ -102,9 +99,9 @@ public class DiscountController
 	}
 
 	
-	/** 
+	/** function that creates input discount and insert it to the database
 	 * @param discount
-	 * @return boolean
+	 * @return boolean if we succeeded to connect to the database and insert discount details
 	 */
 	public boolean createDiscount(Discount discount) 
 	{
@@ -125,39 +122,13 @@ public class DiscountController
 		return res == 1;
 	}
 	
-	/** 
-	 * @return Discount
+	/**function that initializes discount details from database and put it in input
+	 * 
+	 * @param rs input to SQL
+	 * @param closeRS if query is closed
+	 * @param goToNext if there's still columns from the table
+	 * @return
 	 */
-	/*public ArrayList<Discount> getDiscountsByBranch(int branchId)
-	{
-		ArrayList<String> joins = new ArrayList<String>();
-		joins.add(Tables.DISCOUNTS_PRODUCTS_TABLE_NAME);
-		joins.add(Tables.DISCOUNTS_TABLE_NAME);
-		String conditions = "catalog.catalogId = catalogiteminbranch.catalogId AND catalogiteminbranch.branchId = "
-				+ branchId + " AND catalogiteminbranch.quantityInStock > 0";
-		Branch branch = BranchController.getInstance().getBranchById(branchId);
-		ResultSet rs = databaseConnection.getSimpleJoinResult(joins, conditions);
-		return convertRSToCatalogItemArray(rs, branch);
-	}
-	/*public boolean removeDiscount(Discount discount, int userId)
-	{
-		if (discount.getDiscountEndDate().equals(Instant.now()))
-		{
-			ArrayList<String> keys = new ArrayList<>();
-			keys.add("totalCost");
-			databaseConnection.updateById(userId, ID_FIELD_NAME, Tables.DISCOUNTS_TABLE_NAME, keys,
-					new IObjectToPreparedStatementParameters<Order>()
-					{
-						@Override
-						public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException
-						{
-	                       statementToPrepare.setFloat(1,order.getTotalCost());
-							
-						}
-					});
-		}
-		return false;
-	}*/
 	public Discount convertRSToDiscount(ResultSet rs,boolean closeRS,boolean goToNext)
 	{
 		try
