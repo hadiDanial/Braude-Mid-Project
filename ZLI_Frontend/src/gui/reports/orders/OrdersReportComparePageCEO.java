@@ -1,4 +1,8 @@
 package gui.reports.orders;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import gui.guimanagement.GUIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
@@ -7,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-public class OrdersReportComparePageCEO {
+public class OrdersReportComparePageCEO extends GUIController{
 
     @FXML
     private ChoiceBox firstQuarterDropDown;
@@ -91,6 +95,13 @@ public class OrdersReportComparePageCEO {
     @FXML
     void onViewSalesReportsBtn(ActionEvent event) {
 
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
