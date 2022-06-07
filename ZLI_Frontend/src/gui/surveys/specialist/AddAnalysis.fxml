@@ -69,6 +69,7 @@
                           <columns>
                             <TableColumn fx:id="questionNumberColumn" prefWidth="34.0" text="#" />
                             <TableColumn fx:id="questionTextColumn" prefWidth="399.0" text="Question" />
+                              <TableColumn fx:id="questionScoreColumn" prefWidth="63.0" text="Score" />
                           </columns>
                         </TableView>
                         <VBox spacing="5.0" VBox.vgrow="ALWAYS">

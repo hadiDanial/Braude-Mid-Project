@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -86,7 +87,6 @@ public class AddAnalysis extends FormController {
     private void initializeTableColumns() {
         questionNumberColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer>("surveyId"));
         questionTextColumn.setCellValueFactory(new PropertyValueFactory<Survey,String>("questions"));
-        questionScoreColumn.setCellValueFactory(new PropertyValueFactory<Survey,Integer>("score"));
     }
 
 }
