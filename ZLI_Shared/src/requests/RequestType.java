@@ -39,6 +39,7 @@ public enum RequestType
 	GET_SURVEY_BY_ID(new UserRole[]{UserRole.BranchManager}),
 	GET_SURVEY_BY_DATE(new UserRole[]{UserRole.BranchManager}),
 	GET_ALL_SURVEY(new UserRole[]{UserRole.BranchManager}),
+	GET_ALL_SURVEY_ANALYSYS(new UserRole[]{UserRole.BranchEmployee}),
 	
 	// Discounts
 	GET_DISCOUNTS_BY_BRANCH(UserRole.values()),
