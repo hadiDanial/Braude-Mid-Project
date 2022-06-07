@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -11,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="906.0" prefWidth="900.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.specialist.surveys.AddAnalysis">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="906.0" prefWidth="900.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.specialist.surveys.AddAnalysis">
    <children>
       <VBox layoutX="1.0" layoutY="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -33,7 +37,7 @@
                         <Pane prefWidth="497.0" />
                         <HBox alignment="CENTER">
                            <children>
-                              <Label text="Survey ID:">
+                              <Label fx:id="surveyIDLabel" text="Survey ID:">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
@@ -48,7 +52,7 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0">
                            <children>
-                              <Label text="Number Surveyed:">
+                              <Label fx:id="numSurveyedLabel" text="Number Surveyed:">
                                  <font>
                                     <Font size="26.0" />
                                  </font>

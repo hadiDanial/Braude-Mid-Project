@@ -7,6 +7,7 @@ import controllers.ComplaintController;
 import controllers.DiscountController;
 import controllers.OrderController;
 import controllers.ProductController;
+import controllers.SurveyController;
 import controllers.UserController;
 import entities.discounts.Discount;
 import entities.other.Branch;
@@ -14,6 +15,7 @@ import entities.products.BaseProduct;
 import entities.users.Order;
 import entities.users.User;
 import enums.OrderStatus;
+import enums.UserRole;
 import exceptions.UnauthenticatedUserException;
 import exceptions.UnauthorizedRoleException;
 import requests.Request;
@@ -28,6 +30,7 @@ public class MessageParser
 	private static OrderController orderController = OrderController.getInstance();
 	private static BranchController branchController = BranchController.getInstance();
 	private static ComplaintController complaintController = ComplaintController.getInstance();
+	private static SurveyController surveyController = SurveyController.getInstance();
 	/**
 	 * Handle the request - activate the correct function based on the request type.
 	 * 
@@ -86,7 +89,16 @@ public class MessageParser
 			{
 				return userController.getAllUsers();
 			}
-
+			case GET_ALL_USERS_BY_ROLE:
+			{
+				return userController.getUsersByRole((UserRole) req.getMessage());
+			}
+			case CREATE_NEW_USER:
+			{
+				return userController.register((User) req.getMessage());
+			}
+			
+			
 			// Orders
 			case GET_ALL_ORDERS:
 			{
@@ -166,6 +178,11 @@ public class MessageParser
 			case GET_ALL_COMPLAINTS:
 			{
 				return complaintController.getAllComplaints();
+			}
+
+			case GET_ALL_SURVEY:
+			{
+				return surveyController.getAllSurvey();
 			}
 			
 			default:

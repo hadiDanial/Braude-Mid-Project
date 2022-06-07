@@ -11,7 +11,8 @@ public enum RequestType
 	REGISTER(new UserRole[] { UserRole.BranchManager }),
 	GET_ALL_USERS(UserRole.values()),
 	GET_ALL_CUSTOMERS(new UserRole[] {UserRole.BranchManager}),
-	
+	GET_ALL_USERS_BY_ROLE(new UserRole[] {UserRole.ChainEmployee, UserRole.CEO, UserRole.BranchManager} ),
+	CREATE_NEW_USER(new UserRole[] {UserRole.BranchManager}),
 	// Orders
 	CREATE_ORDER(new UserRole[] { UserRole.BranchManager, UserRole.Customer }),
 	CREATE_DISCOUNT(new UserRole[] { UserRole.ChainEmployee }),
@@ -37,6 +38,7 @@ public enum RequestType
 	GET_SURVEY_BY_BRANCH(new UserRole[]{UserRole.BranchManager}),
 	GET_SURVEY_BY_ID(new UserRole[]{UserRole.BranchManager}),
 	GET_SURVEY_BY_DATE(new UserRole[]{UserRole.BranchManager}),
+	GET_ALL_SURVEY(new UserRole[]{UserRole.BranchManager}),
 	
 	// Discounts
 	GET_DISCOUNTS_BY_BRANCH(UserRole.values()),
@@ -52,7 +54,7 @@ public enum RequestType
 			UserRole.CustomerServiceSpecialist, UserRole.DeliveryPerson } ),
 	// Complaints
 	CREATE_COMPLAINTS(new UserRole[] {UserRole.Customer}),
-	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee});
+	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee}), ;
 	
 	private UserRole[] permittedRoles;
 
