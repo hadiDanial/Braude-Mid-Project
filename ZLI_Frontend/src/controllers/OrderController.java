@@ -115,6 +115,14 @@ public class OrderController
         Request request = new Request(RequestType.GET_ALL_ORDER_STATUS,orderStatus);
         clientController.sendRequest(request, iResponse);
     }
+	public void getAllOrdersByStatusAndBranch(IResponse<ArrayList<Order>> iResponse, OrderStatus orderStatus, int branchId)
+	{
+		  EntityRequestWithId<OrderStatus> e = new EntityRequestWithId<OrderStatus>();
+	        e.setEntityId(branchId);
+	        e.setEntity(orderStatus);
+		Request request = new Request(RequestType.GET_ALL_ORDER_STATUS_AND_BRANCH,e);
+		clientController.sendRequest(request, iResponse);
+	}
 
 	public void updateOrderStatus(IResponse<Boolean> response, int orderId, OrderStatus orderStatus)
 	{

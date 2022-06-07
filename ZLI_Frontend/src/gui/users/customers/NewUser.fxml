@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.branchManager.users.NewUser">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.users.customers.NewUser">
    <children>
       <VBox layoutX="1.0" layoutY="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -41,20 +41,20 @@
                                        <children>
                                           <Label text="First Name:">
                                              <font>
-                                                <Font size="26.0" />
+                                                <Font size="24.0" />
                                              </font>
                                           </Label>
                                           <TextField fx:id="firstNameField" prefHeight="56.0" prefWidth="160.0" style="-fx-background-radius: 15;" translateX="15.0">
                                              <font>
-                                                <Font size="26.0" />
+                                                <Font size="24.0" />
                                              </font>
                                           </TextField>
                                        </children>
                                     </HBox>
                                     <TextFlow translateY="60.0">
                                        <children>
-                                          <Label fx:id="lnameErrLabel" text="fname err " textFill="RED" />
-                                          <Label fx:id="lnameErrLabel1" layoutX="10.0" layoutY="10.0" text="fname err " textFill="RED" />
+                                          <Label fx:id="fnameErrLabel" text="fname err " textFill="RED" />
+                                          <Label fx:id="fnameErrLabel1" layoutX="10.0" layoutY="10.0" text="fname err " textFill="RED" />
                                        </children>
                                     </TextFlow>
                                  </children>
@@ -66,20 +66,20 @@
                                        <children>
                                           <Label text="Last Name:" translateX="-15.0">
                                              <font>
-                                                <Font size="26.0" />
+                                                <Font size="24.0" />
                                              </font>
                                           </Label>
                                           <TextField fx:id="lastNameField" prefHeight="56.0" prefWidth="160.0" style="-fx-background-radius: 15;">
                                              <font>
-                                                <Font size="26.0" />
+                                                <Font size="24.0" />
                                              </font>
                                           </TextField>
                                        </children>
                                     </HBox>
                                     <TextFlow translateX="-15.0" translateY="60.0">
                                        <children>
-                                          <Label fx:id="fnameErrLabel" text="fname err" textFill="RED" />
-                                          <Label fx:id="fnameErrLabel1" layoutX="10.0" layoutY="10.0" text="fname err" textFill="RED" />
+                                          <Label fx:id="lnameErrLabel" text="fname err" textFill="RED" />
+                                          <Label fx:id="lnameErrLabel1" layoutX="10.0" layoutY="10.0" text="fname err" textFill="RED" />
                                        </children>
                                     </TextFlow>
                                  </children>
@@ -92,13 +92,13 @@
                                  <children>
                                     <Label text="ID:">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </Label>
                                     <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                     <TextField fx:id="idField" prefWidth="324.0" style="-fx-background-radius: 15;">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </TextField>
                                  </children>
@@ -106,7 +106,6 @@
                               <TextFlow translateY="60.0">
                                  <children>
                                     <Label fx:id="idErrLabel" text="fname err" textFill="RED" />
-                                    <Label fx:id="idErrLabel1" layoutX="10.0" layoutY="10.0" text="fname err" textFill="RED" />
                                  </children>
                               </TextFlow>
                            </children>
@@ -117,13 +116,13 @@
                                  <children>
                                     <Label text="Phone Number:">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </Label>
                                     <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                     <TextField fx:id="phoneNumField" prefWidth="324.0" style="-fx-background-radius: 15;">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </TextField>
                                  </children>
@@ -142,13 +141,13 @@
                                  <children>
                                     <Label fx:id="logN" text="Login Name:">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </Label>
                                     <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                     <TextField fx:id="userNameField" prefWidth="324.0" style="-fx-background-radius: 15;">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </TextField>
                                  </children>
@@ -166,13 +165,13 @@
                                  <children>
                                     <Label text="Email:">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </Label>
                                     <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                     <TextField fx:id="emailField" prefWidth="324.0" style="-fx-background-radius: 15;">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </TextField>
                                  </children>
@@ -180,7 +179,6 @@
                               <TextFlow translateY="60.0">
                                  <children>
                                     <Label fx:id="emailErrLabel" text="fname err" textFill="RED" />
-                                    <Label fx:id="emailErrLabel1" layoutX="10.0" layoutY="10.0" text="fname err" textFill="RED" />
                                  </children>
                               </TextFlow>
                            </children>
@@ -191,13 +189,13 @@
                                  <children>
                                     <Label text="Password:">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </Label>
                                     <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                     <TextField fx:id="passwordField" prefWidth="324.0" style="-fx-background-radius: 15;">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </TextField>
                                  </children>
@@ -215,7 +213,7 @@
                                  <children>
                                     <Label text="Role:">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font size="24.0" />
                                        </font>
                                     </Label>
                                     <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />

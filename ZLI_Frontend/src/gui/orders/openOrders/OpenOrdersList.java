@@ -97,9 +97,9 @@ public class OpenOrdersList extends GUIController
 		addressColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("address"));
 		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("formattedOrderDate"));
 		numOfItemsColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("numProducts"));
-		priceColumn.setCellValueFactory(new PropertyValueFactory<Order, Float>("priceAfterDiscounts"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<Order, Float>("totalCost"));
 
-		acceptColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Order>());
+		acceptColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Order>(param.getValue()));
 		acceptColumn.setCellFactory(param -> new TableCell<Order, Order>()
 		{
 			private final Button acceptButton = new Button("Accept");
@@ -122,7 +122,7 @@ public class OpenOrdersList extends GUIController
 
 			
 		});
-		cancelColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Order>());
+		cancelColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Order>(param.getValue()));
 		cancelColumn.setCellFactory(param -> new TableCell<Order, Order>()
 		{
 			private final Button denyButton = new Button("Deny");

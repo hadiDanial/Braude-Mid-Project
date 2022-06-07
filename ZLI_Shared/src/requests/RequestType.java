@@ -23,6 +23,7 @@ public enum RequestType
 	UPDATE_ORDER(new UserRole[] { UserRole.BranchManager }),
 	CHECK_IF_FIRST_ORDER(new UserRole[] {UserRole.Customer }), 
 	GET_ALL_ORDER_STATUS(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
+	GET_ALL_ORDER_STATUS_AND_BRANCH(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
 	UPDATES_ORDER_STATUS(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
 	
 	// Products/Catalog
@@ -54,7 +55,7 @@ public enum RequestType
 			UserRole.CustomerServiceSpecialist, UserRole.DeliveryPerson } ),
 	// Complaints
 	CREATE_COMPLAINTS(new UserRole[] {UserRole.Customer}),
-	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee}), ;
+	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee}),;
 	
 	private UserRole[] permittedRoles;
 

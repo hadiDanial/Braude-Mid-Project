@@ -11,6 +11,7 @@ public class DateFormatter
 
 	    public static String formatInstant(Instant time, boolean includeHour) 
 	    {
+	    	if(time == null) return "";
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(includeHour ? DATE_TIME_PATTERN_FORMAT : DATE_PATTERN_FORMAT)
 	            .withZone(ZoneId.systemDefault());
 	        return formatter.format(time);

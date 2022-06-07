@@ -318,6 +318,7 @@ public class ProductEditor extends FormController
 	private void initFieldsToEdit()
 	{
 		BaseProduct base;
+		productItemToggle.setDisable(true);
 		if (catalogItem.getBaseProduct().isProduct())
 		{
 			isProduct = true;
