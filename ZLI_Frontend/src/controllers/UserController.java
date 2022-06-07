@@ -104,8 +104,11 @@ public class UserController
 
 	public void checkIfFirstOrder(IResponse<Boolean> response)
 	{
-		Request req = new Request(RequestType.CHECK_IF_FIRST_ORDER, loggedInUser.getUserId());
-		clientController.sendRequest(req, response);
+		if(loggedInUser.getRole() == UserRole.Customer)
+		{			
+			Request req = new Request(RequestType.CHECK_IF_FIRST_ORDER, loggedInUser.getUserId());
+			clientController.sendRequest(req, response);
+		}
 	}
     public void getAllUsers(IResponse<ArrayList<User>> response) {
 		Request req = new Request(RequestType.GET_ALL_USERS, loggedInUser);
