@@ -34,12 +34,21 @@ public class BranchEmployeePortal extends GUIController
 	@FXML
 	private Label branchLabel;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onViewSurveyBtn(ActionEvent event)
 	{
 		SceneManager.loadNewScene(GUIPages.VIEW_SURVEYS_BRANCH_EMPLOYEE, true);
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

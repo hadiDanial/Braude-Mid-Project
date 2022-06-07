@@ -342,6 +342,10 @@ public class SceneManager
 		shoppingCartButton.setDisable(!showShoppingCartButton);
 	}
 
+	
+	/** 
+	 * @param messageString
+	 */
 	public static void displayErrorMessage(String messageString)
 	{
 		Platform.runLater(new Runnable()
@@ -502,11 +506,19 @@ public class SceneManager
 		guiController.setStage(mainWindow);
 	}
 	
+	
+	/** 
+	 * @return double
+	 */
 	public static double getStageHeight()
 	{
 		return mainWindow.getHeight();
 	}
 
+	
+	/** 
+	 * @param listener
+	 */
 	public static void addHeightListener(ChangeListener<? super Number> listener)
 	{
 		mainWindow.heightProperty().addListener(listener);

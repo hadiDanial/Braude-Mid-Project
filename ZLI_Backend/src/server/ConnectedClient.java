@@ -15,38 +15,74 @@ public class ConnectedClient {
         this.client = client;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getIp() {
         return ip;
     }
 
+    
+    /** 
+     * @param ip
+     */
     public void setIp(String ip) {
         this.ip = ip;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getHost() {
         return host;
     }
 
+    
+    /** 
+     * @param host
+     */
     public void setHost(String host) {
         this.host = host;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getStatus() {
         return status;
     }
 
+    
+    /** 
+     * @param status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    
+    /** 
+     * @return ConnectionToClient
+     */
     public ConnectionToClient getClient() {
         return client;
     }
 
+    
+    /** 
+     * @param client
+     */
     public void setClient(ConnectionToClient client) {
         this.client = client;
     }
 
+    
+    /** 
+     * @return int
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -57,6 +93,11 @@ public class ConnectedClient {
         return result;
     }
 
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

@@ -21,6 +21,10 @@ public class DateValidator extends Validator
 		this.canBePastDate = canBePastDate;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	@Override
 	protected boolean validate()
 	{
@@ -40,6 +44,10 @@ public class DateValidator extends Validator
 		}
 	}
 
+	
+	/** 
+	 * @return JFXDatePicker
+	 */
 	public JFXDatePicker getDatePicker()
 	{
 		return (JFXDatePicker) control;

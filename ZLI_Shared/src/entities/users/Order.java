@@ -54,6 +54,10 @@ public class Order implements Serializable, IDiscountable
 		discounts = new HashSet<Discount>();
 	}
 
+	
+	/** 
+	 * @return float
+	 */
 	@Override
 	public float getPriceAfterDiscounts()
 	{
@@ -65,12 +69,20 @@ public class Order implements Serializable, IDiscountable
 		return finalPrice;
 	}
 	
+	
+	/** 
+	 * @param discounts
+	 */
 	@Override
 	public void setDiscounts(HashSet<Discount> discounts)
 	{
 		this.discounts = discounts;
 	}
 
+	
+	/** 
+	 * @param discount
+	 */
 	@Override
 	public void addDiscount(Discount discount)
 	{
@@ -78,71 +90,127 @@ public class Order implements Serializable, IDiscountable
 		discounts.add(discount);
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getOrderId()
 	{
 		return orderId;
 	}
 
+	
+	/** 
+	 * @param orderId
+	 */
 	public void setOrderId(int orderId)
 	{
 		this.orderId = orderId;
 	}
 
+	
+	/** 
+	 * @return Delivery
+	 */
 	public Delivery getDeliveryDetails()
 	{
 		return deliveryDetails;
 	}
 
+	
+	/** 
+	 * @param deliveryDetails
+	 */
 	public void setDeliveryDetails(Delivery deliveryDetails)
 	{
 		this.deliveryDetails = deliveryDetails;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getGreetingCard()
 	{
 		return greetingCard;
 	}
 
+	
+	/** 
+	 * @param greetingCard
+	 */
 	public void setGreetingCard(String greetingCard)
 	{
 		this.greetingCard = greetingCard;
 	}
 
+	
+	/** 
+	 * @return Instant
+	 */
 	public Instant getOrderDate()
 	{
 		return orderDate;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getFormattedOrderDate()
 	{
 		return DateFormatter.formatInstant(orderDate, true);
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getFormattedDeliveryDate()
 	{
 		return DateFormatter.formatInstant(deliveryDate, true);
 	}
 
+	
+	/** 
+	 * @param orderDate
+	 */
 	public void setOrderDate(Instant orderDate)
 	{
 		this.orderDate = orderDate;
 	}
 
+	
+	/** 
+	 * @return Instant
+	 */
 	public Instant getDeliveryDate()
 	{
 		return deliveryDate;
 	}
 
+	
+	/** 
+	 * @param deliveryDate
+	 */
 	public void setDeliveryDate(Instant deliveryDate)
 	{
 		this.deliveryDate = deliveryDate;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getOrderQuantity()
 	{
 		return products.size();
 	}
 
+	
+	/** 
+	 * @return Location
+	 */
 	public Location getOrderLocation()
 	{
 		return deliveryDetails.getLocation();
@@ -163,47 +231,83 @@ public class Order implements Serializable, IDiscountable
 		return totalCost;
 	}
 
+	
+	/** 
+	 * @param totalCost
+	 */
 	public void setTotalCost(float totalCost)
 	{
 		this.totalCost = totalCost;
 	}
 
+	
+	/** 
+	 * @return OrderStatus
+	 */
 	public OrderStatus getOrderStatus()
 	{
 		return orderStatus;
 	}
 
+	
+	/** 
+	 * @param orderStatus
+	 */
 	public void setOrderStatus(OrderStatus orderStatus)
 	{
 		this.orderStatus = orderStatus;
 	}
 
+	
+	/** 
+	 * @return Branch
+	 */
 	public Branch getBranch()
 	{
 		return branch;
 	}
 
+	
+	/** 
+	 * @param branch
+	 */
 	public void setBranch(Branch branch)
 	{
 		this.branch = branch;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getBranchName()
 	{
 		return branch.getBranchName();
 	}
 
 
+	
+	/** 
+	 * @return ArrayList<CartItem>
+	 */
 	public ArrayList<CartItem> getProducts()
 	{
 		return products;
 	}
 
+	
+	/** 
+	 * @param products
+	 */
 	public void setProducts(ArrayList<CartItem> products)
 	{
 		this.products = products;
 	}
 	
+	
+	/** 
+	 * @param cartItem
+	 */
 	public void addProduct(CartItem cartItem)
 	{
 		if(products.contains(cartItem))
@@ -217,6 +321,11 @@ public class Order implements Serializable, IDiscountable
 		}
 	}
 
+	
+	/** 
+	 * @param cartItem
+	 * @param i
+	 */
 	public void removeProduct(CartItem cartItem, int i)
 	{
 		if(products.contains(cartItem))
@@ -228,6 +337,10 @@ public class Order implements Serializable, IDiscountable
 
 		}
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getNumProducts()
 	{
 		int count = 0;
@@ -237,16 +350,28 @@ public class Order implements Serializable, IDiscountable
 		}
 		return count;
 	}
+	
+	/** 
+	 * @return User
+	 */
 	public User getCustomer()
 	{
 		return customer;
 	}
 
+	
+	/** 
+	 * @param customer
+	 */
 	public void setCustomer(User customer)
 	{
 		this.customer = customer;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getOrderDetails()
 	{
 		orderDetails = "";
@@ -257,10 +382,18 @@ public class Order implements Serializable, IDiscountable
 		return orderDetails;
 	}
 
+	
+	/** 
+	 * @param orderDetails
+	 */
 	public void setOrderDetails(String orderDetails)
 	{
 		this.orderDetails = orderDetails;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getAddress()
 	{
 		if(deliveryDetails == null)
@@ -268,6 +401,10 @@ public class Order implements Serializable, IDiscountable
 		else
 			return deliveryDetails.getLocation().toString();
 	}
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -280,6 +417,11 @@ public class Order implements Serializable, IDiscountable
 		return result;
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -329,6 +471,10 @@ public class Order implements Serializable, IDiscountable
 		return true;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString()
 	{

@@ -48,11 +48,19 @@ public class ComplaintHandling extends FormController {
     @FXML
     private Button resolveBtn;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onResolveBtn(ActionEvent event) {
         complaint.setWasHandled(true);
@@ -61,6 +69,11 @@ public class ComplaintHandling extends FormController {
         SceneManager.loadPreviousPage();
     }
 
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (complaint == null) {

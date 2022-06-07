@@ -18,6 +18,10 @@ public class SurveyController
 		clientController = ClientController.getInstance();
 	}
 	
+	
+	/** 
+	 * @return SurveyController
+	 */
 	public static synchronized SurveyController getInstance()
 	{
 		if(instance == null)
@@ -97,12 +101,20 @@ public class SurveyController
 		ClientController.getInstance().sendRequest(req, response);
 	}
 
+	
+	/** 
+	 * @param response
+	 */
 	public void getAllSurvey(IResponse<ArrayList<Survey>> response)
 	{
 		Request req=new Request(RequestType.GET_ALL_SURVEY);
 		ClientController.getInstance().sendRequest(req, response);
 	}
 	
+	
+	/** 
+	 * @param response
+	 */
 	public void getAllSurveyAnalysis(IResponse<ArrayList<Survey>> response)
 	{
 		Request req= new Request(RequestType.GET_ALL_SURVEY_ANALYSYS);

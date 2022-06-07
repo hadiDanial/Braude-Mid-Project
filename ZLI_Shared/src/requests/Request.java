@@ -29,26 +29,50 @@ public class Request implements Serializable
 		this.message = message;
 		this.user = user;
 	}
+	
+	/** 
+	 * @return RequestType
+	 */
 	public RequestType getRequestType()
 	{
 		return requestType;
 	}
+	
+	/** 
+	 * @param requestType
+	 */
 	public void setRequestType(RequestType requestType)
 	{
 		this.requestType = requestType;
 	}
+	
+	/** 
+	 * @return Object
+	 */
 	public Object getMessage()
 	{
 		return message;
 	}
+	
+	/** 
+	 * @param message
+	 */
 	public void setMessage(Object message)
 	{
 		this.message = message;
 	}
+	
+	/** 
+	 * @return User
+	 */
 	public User getUser()
 	{
 		return user;
 	}
+	
+	/** 
+	 * @param user
+	 */
 	public void setUser(User user)
 	{
 		this.user = user;

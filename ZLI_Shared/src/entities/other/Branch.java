@@ -32,51 +32,100 @@ public class Branch implements Serializable
 		this.location = location;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getBranchId() {
 		return branchId;
 	}
 
+	
+	/** 
+	 * @param branchId
+	 */
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;
 	}
 
+	
+	/** 
+	 * @return User
+	 */
 	public User getManager() {
 		return manager;
 	}
 
+	
+	/** 
+	 * @param manager
+	 */
 	public void setManager(User manager) {
 		this.manager = manager;
 	}
 
+	
+	/** 
+	 * @return ArrayList<User>
+	 */
 	public ArrayList<User> getWorkers() {
 		return workers;
 	}
 
+	
+	/** 
+	 * @param workers
+	 */
 	public void setWorkers(ArrayList<User> workers) {
 		this.workers = workers;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getBranchName() {
 		return branchName;
 	}
 
+	
+	/** 
+	 * @param branchName
+	 */
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
 
+	
+	/** 
+	 * @return Location
+	 */
 	public Location getLocation() {
 		return location;
 	}
 
+	
+	/** 
+	 * @param location
+	 */
 	public void setLocation(Location location) {
 		this.location = location;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(branchId);
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -89,6 +138,10 @@ public class Branch implements Serializable
 		return branchId == other.branchId;
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString()
 	{

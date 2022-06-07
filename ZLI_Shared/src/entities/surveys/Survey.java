@@ -49,116 +49,210 @@ public class Survey implements Serializable
 		this.startDate = surveyDate;
 		this.score=score;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getScore()
 	{
 		return score;
 	}
+	
+	/** 
+	 * @param score
+	 */
 	public void setScore(int score)
 	{
 		this.score=score;
 	}
+	
+	/** 
+	 * @param questions
+	 * @throws SurveyException
+	 */
 	private void checkQuestionsLength(String[] questions) throws SurveyException
 	{
 		if (questions.length != NUM_QUESTIONS)
 			throw new SurveyException("Survey must have " + NUM_QUESTIONS + " questions.");
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getSurveyId()
 	{
 		return surveyId;
 	}
 
+	
+	/** 
+	 * @param surveyId
+	 */
 	public void setSurveyId(int surveyId)
 	{
 		this.surveyId = surveyId;
 	}
 
+	
+	/** 
+	 * @return User
+	 */
 	public User getCustomerServiceSpecialist()
 	{
 		return customerServiceSpecialist;
 	}
 
+	
+	/** 
+	 * @param customerServiceSpecialist
+	 */
 	public void setCustomerServiceSpecialist(User customerServiceSpecialist)
 	{
 		this.customerServiceSpecialist = customerServiceSpecialist;
 	}
 
+	
+	/** 
+	 * @return ArrayList<User>
+	 */
 	public ArrayList<User> getCustomers()
 	{
 		return customers;
 	}
 
+	
+	/** 
+	 * @param customers
+	 */
 	public void setCustomers(ArrayList<User> customers)
 	{
 		this.customers = customers;
 	}
 
+	
+	/** 
+	 * @return byte[]
+	 */
 	public byte[] getAnalysisResults()
 	{
 		return analysisResults;
 	}
 
+	
+	/** 
+	 * @param analysisResults
+	 */
 	public void setAnalysisResults(byte[] analysisResults)
 	{
 		this.analysisResults = analysisResults;
 	}
 
+	
+	/** 
+	 * @return Instant
+	 */
 	public Instant getStartDate()
 	{
 		return startDate;
 	}
 
+	
+	/** 
+	 * @param surveyDate
+	 */
 	public void setStartDate(Instant surveyDate)
 	{
 		this.startDate = surveyDate;
 	}
 
+	
+	/** 
+	 * @return Instant
+	 */
 	public Instant getEndDate()
 	{
 		return endDate;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getFormattedStartDate()
 	{
 		return DateFormatter.formatInstant(startDate, true);
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getFormattedEndDate()
 	{
 		return DateFormatter.formatInstant(endDate, true);
 	}
 
+	
+	/** 
+	 * @param endDate
+	 */
 	public void setEndDate(Instant endDate)
 	{
 		this.endDate = endDate;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getNumOfCustomers()
 	{
 		return customers.size();
 	}
 
+	
+	/** 
+	 * @return ArrayList<SurveyAnswers>
+	 */
 	public ArrayList<SurveyAnswers> getAnswers()
 	{
 		return answers;
 	}
 
+	
+	/** 
+	 * @param answers
+	 */
 	public void setAnswers(ArrayList<SurveyAnswers> answers)
 	{
 		this.answers = answers;
 	}
 
+	
+	/** 
+	 * @return String[]
+	 */
 	public String[] getQuestions()
 	{
 		return questions;
 	}
 
+	
+	/** 
+	 * @param questions
+	 * @throws SurveyException
+	 */
 	public void setQuestions(String[] questions) throws SurveyException
 	{
 		checkQuestionsLength(questions);
 		this.questions = questions;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -169,6 +263,11 @@ public class Survey implements Serializable
 		return result;
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{

@@ -48,16 +48,29 @@ public class DiscountManagement extends GUIController {
     @FXML
     private TableColumn<Discount, Integer> numSoldColumn;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onAddBtn(ActionEvent event) {
         SceneManager.loadNewScene(GUIPages.NewDiscount, true);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources)
 	{

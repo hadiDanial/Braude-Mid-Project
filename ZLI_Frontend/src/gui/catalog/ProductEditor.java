@@ -119,6 +119,10 @@ public class ProductEditor extends FormController
 
 	private CatalogItem catalogItem;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onAddBtn(ActionEvent event)
 	{
@@ -180,6 +184,10 @@ public class ProductEditor extends FormController
 		}
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onAddItemBtn(ActionEvent event)
 	{
@@ -187,6 +195,10 @@ public class ProductEditor extends FormController
 		itemsInProductList.setAll(product.getItems().keySet());
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onImageSaveBtn(ActionEvent event)
 	{
@@ -196,6 +208,10 @@ public class ProductEditor extends FormController
 		productImage.setImage(FileManager.bytesToImage(img));
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onProductItemToggle(ActionEvent event)
 	{
@@ -209,12 +225,21 @@ public class ProductEditor extends FormController
 		// TODO: change validators
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onBackBtn(ActionEvent event)
 	{
 		SceneManager.loadPreviousPage();
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -366,6 +391,10 @@ public class ProductEditor extends FormController
 		titleLabel.setText(title);
 	}
 
+	
+	/** 
+	 * @param catalogItem
+	 */
 	public void setIsEditing(CatalogItem catalogItem)
 	{
 		isNewProduct = false;
@@ -373,6 +402,10 @@ public class ProductEditor extends FormController
 		initFieldsToEdit();
 	}
 
+	
+	/** 
+	 * @param data
+	 */
 	@Override
 	public void setData(Object data)
 	{

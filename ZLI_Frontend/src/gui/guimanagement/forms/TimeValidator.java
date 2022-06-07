@@ -19,6 +19,10 @@ public class TimeValidator extends Validator
 		this.mustBeAfterCurrentTime = mustBeAfterCurrentTime;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	@Override
 	protected boolean validate()
 	{

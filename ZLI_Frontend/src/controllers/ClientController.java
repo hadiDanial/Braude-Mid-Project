@@ -24,6 +24,10 @@ public class ClientController
 		connectionListeners = new HashSet<IEventListener>();
 	}
 	
+	
+	/** 
+	 * @return ClientController
+	 */
 	public static synchronized ClientController getInstance() 
 	{
 		if(instance == null)
@@ -33,6 +37,11 @@ public class ClientController
 		return instance;
 	}
 
+	
+	/** 
+	 * @param request
+	 * @param response
+	 */
 	public <T> void sendRequest(Request request, IResponse<T> response)
 	{
 		request.setUser(UserController.getInstance().getLoggedInUser());
@@ -63,9 +72,17 @@ public class ClientController
 		}
 	}
 	
+	
+	/** 
+	 * @param listener
+	 */
 	public void registerConnectionListener(IEventListener listener){
 	    connectionListeners.add(listener);
 	}
+	
+	/** 
+	 * @param listener
+	 */
 	public void removeConnectionListener(IEventListener listener){
 		connectionListeners.remove(listener);
 	}

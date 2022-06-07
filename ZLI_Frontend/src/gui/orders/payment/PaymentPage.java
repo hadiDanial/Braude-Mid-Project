@@ -69,18 +69,31 @@ public class PaymentPage extends FormController
 	private Order order;
 	private CreditCard creditCard;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onBackBtn(ActionEvent event)
 	{
 		SceneManager.loadPreviousPage();
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onPayBtn(ActionEvent event)
 	{
 		SceneManager.loadNewScene(GUIPages.CHECKOUT_END, false);		
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

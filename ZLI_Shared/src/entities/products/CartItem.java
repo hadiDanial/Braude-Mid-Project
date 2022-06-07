@@ -25,42 +25,75 @@ public class CartItem implements Serializable
 		this.quantity = quantity;
 	}
 	
+	
+	/** 
+	 * @return CatalogItem
+	 */
 	public CatalogItem getCatalogItem()
 	{
 		return catalogItem;
 	}
 	
+	
+	/** 
+	 * @param catalogItem
+	 */
 	public void setCatalogItem(CatalogItem catalogItem)
 	{
 		this.catalogItem = catalogItem;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getQuantity()
 	{
 		return quantity;
 	}
 	
+	
+	/** 
+	 * @param quantity
+	 */
 	public void setQuantity(int quantity)
 	{
 		this.quantity = quantity;
 	}
 
+	
+	/** 
+	 * @return Order
+	 */
 	public Order getOrder()
 	{
 		return order;
 	}
 
+	
+	/** 
+	 * @param order
+	 */
 	public void setOrder(Order order)
 	{
 		this.order = order;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
 		return Objects.hash(catalogItem);
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -72,6 +105,10 @@ public class CartItem implements Serializable
 		return Objects.equals(catalogItem, other.catalogItem);
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString()
 	{

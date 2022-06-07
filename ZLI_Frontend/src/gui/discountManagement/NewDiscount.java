@@ -119,6 +119,10 @@ public class NewDiscount extends FormController {
 
     private ArrayList<CatalogItem> products;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onAddBtn(ActionEvent event) {
         LocalDateTime startDateTime, endDateTime;
@@ -142,6 +146,10 @@ public class NewDiscount extends FormController {
         });
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onAddProductBtn(ActionEvent event) {
         if (!products.isEmpty()) {
@@ -181,11 +189,20 @@ public class NewDiscount extends FormController {
         });
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeValidation();

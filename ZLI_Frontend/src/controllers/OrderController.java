@@ -36,6 +36,10 @@ public class OrderController
 		});
 	}
 
+	
+	/** 
+	 * @return OrderController
+	 */
 	public static synchronized OrderController getInstance()
 	{
 		if (instance == null)
@@ -45,18 +49,32 @@ public class OrderController
 		return instance;
 	}
 
+	
+	/** 
+	 * @param response
+	 */
 	public void getAllOrders(IResponse<ArrayList<Order>> response)
 	{
 		Request request = new Request(RequestType.GET_ALL_ORDERS, null, userController.getLoggedInUser());
 		clientController.sendRequest(request, response);
 	}
 
+	
+	/** 
+	 * @param response
+	 * @param updatedOrder
+	 */
 	public void updateOrder(IResponse<Boolean> response, Order updatedOrder)
 	{
 		Request request = new Request(RequestType.UPDATE_ORDER, updatedOrder, userController.getLoggedInUser());
 		clientController.sendRequest(request, response);
 	}
 
+	
+	/** 
+	 * @param catalogItem
+	 * @param quantity
+	 */
 	public void addCatalogItemToOrder(CatalogItem catalogItem, int quantity)
 	{
 		if (order == null)
@@ -74,6 +92,10 @@ public class OrderController
 		throw new UnsupportedOperationException();
 	}
 
+	
+	/** 
+	 * @param response
+	 */
 	public void sendOrderToServer(IResponse<Boolean> response)
 	{
 		if (order == null)
@@ -84,6 +106,11 @@ public class OrderController
 		clientController.sendRequest(req, response);
 	}
 
+	
+	/** 
+	 * @param response
+	 * @param order
+	 */
 	public void orderIsDelivered(IResponse<Boolean> response,Order order)
 	{
 		order.setOrderStatus(OrderStatus.Delivered);
@@ -91,6 +118,10 @@ public class OrderController
 		clientController.sendRequest(request, response);
 	}
 	
+	
+	/** 
+	 * @param product
+	 */
 	public void addProductToCart(CatalogItem product)
 	{
 		CartItem item = new CartItem();
@@ -101,6 +132,11 @@ public class OrderController
 		System.out.println("Added product to order. Cart:\n" + order.getProducts());
 	}
 
+	
+	/** 
+	 * @param response
+	 * @param BranchId
+	 */
 	public void getDeliveryByBranch(IResponse<Order> response, int BranchId)
     {
         EntityRequestWithId<OrderStatus> request = new EntityRequestWithId<OrderStatus>();
@@ -110,11 +146,22 @@ public class OrderController
         clientController.sendRequest(requests, response);
     }
 	
+	
+	/** 
+	 * @param iResponse
+	 * @param orderStatus
+	 */
 	public void getAllOrdersByStatus(IResponse<ArrayList<Order>> iResponse, OrderStatus orderStatus)
     {
         Request request = new Request(RequestType.GET_ALL_ORDER_STATUS,orderStatus);
         clientController.sendRequest(request, iResponse);
     }
+	
+	/** 
+	 * @param iResponse
+	 * @param orderStatus
+	 * @param branchId
+	 */
 	public void getAllOrdersByStatusAndBranch(IResponse<ArrayList<Order>> iResponse, OrderStatus orderStatus, int branchId)
 	{
 		  EntityRequestWithId<OrderStatus> e = new EntityRequestWithId<OrderStatus>();
@@ -124,6 +171,12 @@ public class OrderController
 		clientController.sendRequest(request, iResponse);
 	}
 
+	
+	/** 
+	 * @param response
+	 * @param orderId
+	 * @param orderStatus
+	 */
 	public void updateOrderStatus(IResponse<Boolean> response, int orderId, OrderStatus orderStatus)
 	{
         EntityRequestWithId<OrderStatus> request = new EntityRequestWithId<OrderStatus>();
@@ -133,6 +186,10 @@ public class OrderController
         clientController.sendRequest(requests, response);
 	}
 
+	
+	/** 
+	 * @return Order
+	 */
 	public Order getOrder()
 	{
 		return order;

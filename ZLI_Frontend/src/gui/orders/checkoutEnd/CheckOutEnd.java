@@ -32,7 +32,11 @@ public class CheckOutEnd extends GUIController
     @FXML
     private Button catalogBtn;
     
-    @FXML
+    
+	/** 
+	 * @param event
+	 */
+	@FXML
     void onNextBtn(ActionEvent event) {
     	SceneManager.clearHistory();
     	SceneManager.loadNewScene(GUIPages.CATALOG_PAGE, true);
@@ -46,6 +50,11 @@ public class CheckOutEnd extends GUIController
     	reviewLabel.setVisible(true);
     }
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

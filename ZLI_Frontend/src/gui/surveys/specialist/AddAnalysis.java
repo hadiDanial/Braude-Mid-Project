@@ -83,7 +83,12 @@ public class AddAnalysis extends FormController
 		SceneManager.loadPreviousPage();
 	}
 
-	@Override
+	
+    /** 
+     * @param location
+     * @param resources
+     */
+    @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 //		ButtonAnimator.addButtonAnimations(backBtn, downloadBtn, saveBtn, chooseFile);

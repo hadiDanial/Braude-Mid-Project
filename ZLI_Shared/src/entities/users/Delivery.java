@@ -33,67 +33,127 @@ public class Delivery implements Serializable
 		delivered = false;
 	}
 	
+	
+	/** 
+	 * @return Order
+	 */
 	public Order getOrderWithDelivery()
 	{
 		return orderWithDelivery;
 	}
+	
+	/** 
+	 * @param orderWithDelivery
+	 */
 	public void setOrderWithDelivery(Order orderWithDelivery)
 	{
 		this.orderWithDelivery = orderWithDelivery;
 	}
 	
+	
+	/** 
+	 * @return Location
+	 */
 	public Location getLocation()
 	{
 		return location;
 	}
 
+	
+	/** 
+	 * @param location
+	 */
 	public void setLocation(Location location)
 	{
 		this.location = location;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getRecipientName()
 	{
 		return recipientName;
 	}
+	
+	/** 
+	 * @param recipientName
+	 */
 	public void setRecipientName(String recipientName)
 	{
 		this.recipientName = recipientName;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getRecipientPhoneNumber()
 	{
 		return recipientPhoneNumber;
 	}
+	
+	/** 
+	 * @param recipientPhoneNumber
+	 */
 	public void setRecipientPhoneNumber(String recipientPhoneNumber)
 	{
 		this.recipientPhoneNumber = recipientPhoneNumber;
 	}
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isDelivered()
 	{
 		return delivered;
 	}
+	
+	/** 
+	 * @param delivered
+	 */
 	public void setDelivered(boolean delivered)
 	{
 		this.delivered = delivered;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getId()
 	{
 		return orderWithDelivery.getOrderId();
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getItemsCount()
 	{
 		return orderWithDelivery.getProducts().size();
 	}
+	
+	/** 
+	 * @return float
+	 */
 	public float getPrice()
 	{
 		return orderWithDelivery.getPriceAfterDiscounts();
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getFormattedDeliveryDate()
 	{
 		return DateFormatter.formatInstant(orderWithDelivery.getDeliveryDate(), true);
 	}
 
 	
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -104,6 +164,11 @@ public class Delivery implements Serializable
 		return result;
 	}
 	
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{

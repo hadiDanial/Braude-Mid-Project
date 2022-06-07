@@ -45,6 +45,10 @@ public class MainView extends Application implements Initializable
 
 	private static AnchorPane root;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	private void onShoppingCartBtn(ActionEvent event)
 	{
@@ -54,12 +58,22 @@ public class MainView extends Application implements Initializable
 		}
 	}
 
+	
+	/** 
+	 * @param primaryStage
+	 * @throws Exception
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
 		SceneManager.initUI(primaryStage);
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -67,56 +81,100 @@ public class MainView extends Application implements Initializable
 //				"fx-background-color: #062C30;", settingsBtn, shoppingCartBtn);
 	}
 
+	
+	/** 
+	 * @param args
+	 */
 	public static void main(String[] args)
 	{
 		launch(args);
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	private void onSettingsBtn(ActionEvent event)
 	{
 		SceneManager.openSettingsPage();
 	}
 
+	
+	/** 
+	 * @return Pane
+	 */
 	public Pane getRoot()
 	{
 		return root;
 	}
 
+	
+	/** 
+	 * @return VBox
+	 */
 	public VBox getContent()
 	{
 		return centerView;
 	}
 
+	
+	/** 
+	 * @return HBox
+	 */
 	public HBox getHeader()
 	{
 		return header;
 	}
 
+	
+	/** 
+	 * @return MenuButton
+	 */
 	public MenuButton getUserDropDown()
 	{
 		return userDropDown;
 	}
 
+	
+	/** 
+	 * @return Button
+	 */
 	public Button getShoppingCartButton()
 	{
 		return shoppingCartBtn;
 	}
 
+	
+	/** 
+	 * @return ScrollPane
+	 */
 	public ScrollPane getScrollPane()
 	{
 		return scrollPane;
 	}
 
+	
+	/** 
+	 * @return Button
+	 */
 	public Button getHomeBtn()
 	{
 		return homeBtn;
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	private void onLogOutBtn(ActionEvent event){
 		UserController.getInstance().logout();
 	}
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	private void onHomeBtn(ActionEvent event){
 		SceneManager.openHomePage();

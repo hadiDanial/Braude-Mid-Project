@@ -72,11 +72,21 @@ public class DeliveryList extends GUIController{
     private TableColumn<Delivery, Delivery> confirmColumn;
     @FXML
     private Button backBtn;
+
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeTableColumn();
@@ -136,6 +146,10 @@ public class DeliveryList extends GUIController{
 			
 		});
     }
+    
+    /** 
+     * @param delivery
+     */
     private void updateStatus(Delivery delivery)
 	{
 		IResponse<Boolean> response = new IResponse<Boolean>() {

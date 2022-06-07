@@ -49,17 +49,30 @@ public class CustomersList extends GUIController {
     @FXML
     private Button addBtn;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onAddBtn(ActionEvent event) {
         SceneManager.loadModalWindow(GUIPages.NEW_USER, null);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
     
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources)
 	{

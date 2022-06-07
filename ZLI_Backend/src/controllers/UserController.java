@@ -27,6 +27,10 @@ public class UserController
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
+	
+	/** 
+	 * @return UserController
+	 */
 	public static synchronized UserController getInstance()
 	{
 		if (instance == null)
@@ -36,6 +40,12 @@ public class UserController
 		return instance;
 	}
 
+	
+	/** 
+	 * @param username
+	 * @param password
+	 * @return User
+	 */
 	public User login(String username, String password)
 	{
 		ResultSet userRS = databaseConnection.getBySimpleCondition(Tables.usersColumnNames[1], username,
@@ -68,6 +78,11 @@ public class UserController
 
 	}
 
+	
+	/** 
+	 * @param userId
+	 * @return boolean
+	 */
 	public boolean logout(int userId)
 	{
 		ArrayList<String> keys = new ArrayList<>();
@@ -85,12 +100,23 @@ public class UserController
 		return false;
 	}
 
+	
+	/** 
+	 * @param user
+	 * @return boolean
+	 */
 	public boolean register(User user)
 	{
 		int res = databaseConnection.insertToDatabase(Tables.USERS_TABLE_NAME, Tables.usersColumnNames,	userToRS(user, true));
 		return res == 1;
 	}
 
+	
+	/** 
+	 * @param user
+	 * @param newUser
+	 * @return IObjectToPreparedStatementParameters<User>
+	 */
 	private IObjectToPreparedStatementParameters<User> userToRS(User user, boolean newUser)
 	{
 		return new IObjectToPreparedStatementParameters<User>()
@@ -115,6 +141,11 @@ public class UserController
 		};
 	}
 
+	
+	/** 
+	 * @param rs
+	 * @return User
+	 */
 	public User convertRSToUser(ResultSet rs)
 	{
 		try
@@ -148,6 +179,11 @@ public class UserController
 		}
 	}
 
+	
+	/** 
+	 * @param user
+	 * @param totalCost
+	 */
 	public void updateUserCredit(User user, float totalCost)
 	{
 		user.setCredit(user.getCredit() + totalCost);
@@ -155,6 +191,11 @@ public class UserController
 				user.getCredit() + "");
 	}
 
+	
+	/** 
+	 * @param user
+	 * @return CreditCard
+	 */
 	public CreditCard getCreditCard(User user)
 	{
 		ResultSet rs = databaseConnection.getBySimpleCondition(Tables.creditCardColumnNames[1], String.valueOf(user.getUserId()),
@@ -175,10 +216,19 @@ public class UserController
 		}
 		return null;
 	}
+	
+	/** 
+	 * @return ArrayList<User>
+	 */
 	public ArrayList<User> getAllUsers()
 	{
 		return convertRSToUsersArray(databaseConnection.getAll(Tables.USERS_TABLE_NAME));
 	}
+	
+	/** 
+	 * @param resultSet
+	 * @return ArrayList<User>
+	 */
 	public ArrayList<User> convertRSToUsersArray(ResultSet resultSet)
 	{
 		ArrayList<User> user = new ArrayList<User>();
@@ -197,12 +247,22 @@ public class UserController
 		}
 	}
 	
+	
+	/** 
+	 * @param role
+	 * @return ArrayList<User>
+	 */
 	public ArrayList<User> getUsersByRole(UserRole role)
 	{
 		ResultSet rs = databaseConnection.getBySimpleCondition("role", role.name(), Tables.USERS_TABLE_NAME);
 		return convertRSToUsersArray(rs);		
 	}
 
+	
+	/** 
+	 * @param userId
+	 * @return User
+	 */
 	public User getUserById(int userId)
 	{
 		ResultSet rs = databaseConnection.getByID(userId, Tables.USERS_TABLE_NAME, ID_FIELD_NAME);		

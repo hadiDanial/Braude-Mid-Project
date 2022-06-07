@@ -39,6 +39,10 @@ public class OrderController
 		userController = UserController.getInstance();
 	}
 
+	
+	/** 
+	 * @return OrderController
+	 */
 	public static synchronized OrderController getInstance()
 	{
 		if (instance == null)
@@ -138,6 +142,10 @@ public class OrderController
 		return res;
 	}
 
+	
+	/** 
+	 * @param order
+	 */
 	private void notifyManager(Order order)
 	{
 		int branchId = order.getBranch().getBranchId();
@@ -166,11 +174,20 @@ public class OrderController
 
 	}
 
+	
+	/** 
+	 * @return ArrayList<Order>
+	 */
 	public ArrayList<Order> getAllOrders()
 	{
 		return convertRSToOrderArray(databaseConnection.getAll(Tables.ORDERS_TABLE_NAME));
 	}
 
+	
+	/** 
+	 * @param orderId
+	 * @return Order
+	 */
 	public Order getOrder(int orderId)
 	{
 		Order o = convertRSToOrder(databaseConnection.getByID(orderId, Tables.ORDERS_TABLE_NAME, ID_FIELD_NAME), true);
@@ -208,6 +225,10 @@ public class OrderController
 		}
 		return res;
 	}
+
+/** 
+ * @return ArrayList<Order>
+ */
 //	
 //	public ArrayList<Order> getFullOrdersByStatus(OrderStatus status)
 //	{
@@ -293,6 +314,11 @@ public class OrderController
 		}
 		return pendingOrders;
 	}
+	
+	/** 
+	 * @param orderStatus
+	 * @return ArrayList<Order>
+	 */
 	public ArrayList<Order> getOrdersByStatus(OrderStatus orderStatus)
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -302,6 +328,11 @@ public class OrderController
 		return pendingOrders;
 	}
 
+	
+	/** 
+	 * @param deliveryRS
+	 * @return Branch
+	 */
 	private Branch convertRSToBranch(ResultSet deliveryRS)
 	{
 		Branch branch = new Branch();
@@ -317,6 +348,11 @@ public class OrderController
 		}
 	}
 
+	
+	/** 
+	 * @param resultSet
+	 * @return ArrayList<Order>
+	 */
 	public ArrayList<Order> convertRSToOrderArray(ResultSet resultSet)
 	{
 		ArrayList<Order> orders = new ArrayList<Order>();
@@ -336,6 +372,12 @@ public class OrderController
 	}
 
 
+	
+	/** 
+	 * @param resultSet
+	 * @param isOnlyRecordExpected
+	 * @return Order
+	 */
 	public Order convertRSToOrder(ResultSet resultSet, boolean isOnlyRecordExpected)
 	{
 		String[] ordersColumnNames = Tables.ordersColumnNames;
@@ -370,6 +412,11 @@ public class OrderController
 		}
 	}
 
+	
+	/** 
+	 * @param resultSet
+	 * @return Delivery
+	 */
 	public Delivery convertRSToOrderDelivery(ResultSet resultSet)
 	{
 		try
@@ -426,6 +473,11 @@ public class OrderController
 		}
 	}
 
+	
+	/** 
+	 * @param orderToUpdate
+	 * @return boolean
+	 */
 	public boolean updateOrder(Order orderToUpdate)
 	{
 		ArrayList<String> keys = new ArrayList<String>();
@@ -457,6 +509,11 @@ public class OrderController
 		createNewOrder(o);
 	}
 
+	
+	/** 
+	 * @param userId
+	 * @return int
+	 */
 	public int getNumberOfUserOrders(int userId)
 	{
 		int count = 0;

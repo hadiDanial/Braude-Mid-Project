@@ -18,6 +18,10 @@ public class LocationController
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
+	
+	/** 
+	 * @return LocationController
+	 */
 	public static synchronized LocationController getInstance()
 	{
 		if (instance == null)
@@ -27,6 +31,13 @@ public class LocationController
 		return instance;
 	}
 
+	
+	/** 
+	 * @param resultSet
+	 * @param useNext
+	 * @param closeRS
+	 * @return Location
+	 */
 	public static Location convertRSToLocation(ResultSet resultSet, boolean useNext, boolean closeRS)
 	{
 		try
@@ -50,6 +61,11 @@ public class LocationController
 		}
 	}
 
+	
+	/** 
+	 * @param locationId
+	 * @return Location
+	 */
 	public Location getLocationById(int locationId)
 	{
 		ResultSet rs = databaseConnection.getByID(locationId, Tables.LOCATIONS_TABLE_NAME, ID_FIELD_NAME);

@@ -25,21 +25,37 @@ public class Product extends BaseProduct
 		this.items = new HashMap<Item, Integer>();
 	}
 
+	
+	/** 
+	 * @return ProductType
+	 */
 	public ProductType getProductType()
 	{
 		return productType;
 	}
 
+	
+	/** 
+	 * @param productType
+	 */
 	public void setProductType(ProductType productType)
 	{
 		this.productType = productType;
 	}
 
+	
+	/** 
+	 * @return HashMap<Item, Integer>
+	 */
 	public HashMap<Item, Integer> getItems()
 	{
 		return items;
 	}
 
+	
+	/** 
+	 * @param item
+	 */
 	public void addItem(Item item)
 	{
 		if (items.containsKey(item))
@@ -48,6 +64,10 @@ public class Product extends BaseProduct
 			items.put(item, 1);
 	}
 
+	
+	/** 
+	 * @param item
+	 */
 	public void removeItem(Item item)
 	{
 		if (items.containsKey(item))
@@ -61,11 +81,19 @@ public class Product extends BaseProduct
 		}
 	}
 
+	
+	/** 
+	 * @param items
+	 */
 	public void setItems(HashMap<Item, Integer> items)
 	{
 		this.items = items;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getItemList()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -82,6 +110,11 @@ public class Product extends BaseProduct
 		return sb.toString();
 	}
 
+	
+	/** 
+	 * @param item
+	 * @return int
+	 */
 	public int getItemQuantity(Item item)
 	{
 		return items.get(item);

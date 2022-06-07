@@ -19,22 +19,42 @@ public class Item extends BaseProduct
 	{
 		super(BaseProduct.ITEM_DISCRIMINATOR);
 	}
+	
+	/** 
+	 * @return ItemType
+	 */
 	public ItemType getItemType()
 	{
 		return itemType;
 	}
+	
+	/** 
+	 * @param itemType
+	 */
 	public void setItemType(ItemType itemType)
 	{
 		this.itemType = itemType;
 	}
+	
+	/** 
+	 * @return ColorEnum
+	 */
 	public ColorEnum getPrimaryColor()
 	{
 		return primaryColor;
 	}
+	
+	/** 
+	 * @param primaryColor
+	 */
 	public void setPrimaryColor(ColorEnum primaryColor)
 	{
 		this.primaryColor = primaryColor;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -44,6 +64,11 @@ public class Item extends BaseProduct
 		result = prime * result + ((primaryColor == null) ? 0 : primaryColor.hashCode());
 		return result;
 	}
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -71,6 +96,10 @@ public class Item extends BaseProduct
 		return true;
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString()
 	{

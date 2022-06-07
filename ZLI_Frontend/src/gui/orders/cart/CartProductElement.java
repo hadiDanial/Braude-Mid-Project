@@ -35,7 +35,11 @@ public class CartProductElement extends GUIController{
     private CartItem cartItem;
 
 	private CartPage cartPage;
-    @FXML
+    
+	/** 
+	 * @param event
+	 */
+	@FXML
     void onDeleteBtn(ActionEvent event) {
     	cartItem.getOrder().removeProduct(cartItem, 1);
     	countNumLabel.setText(cartItem.getQuantity() + "");
@@ -50,11 +54,20 @@ public class CartProductElement extends GUIController{
     	System.out.println("Remove");
     }
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 	}
 	
+	
+	/** 
+	 * @param data
+	 */
 	@Override
 	public void setData(Object data)
 	{
@@ -66,6 +79,10 @@ public class CartProductElement extends GUIController{
 		countNumLabel.setText(cartItem.getQuantity() + "");
 	}
 
+	
+	/** 
+	 * @param cartPage
+	 */
 	public void setCartPage(CartPage cartPage)
 	{
 		this.cartPage = cartPage;

@@ -20,6 +20,10 @@ public class BranchController
 		clientController = ClientController.getInstance();
 	}
 	
+	
+	/** 
+	 * @return BranchController
+	 */
 	public static synchronized BranchController getInstance()
 	{
 		if(instance == null)
@@ -29,6 +33,10 @@ public class BranchController
 		return instance;
 	}
 	
+	
+	/** 
+	 * @param response
+	 */
 	public void getAllBranches(IResponse<ArrayList<Branch>> response)
 	{
 		if(branches == null || branches.isEmpty())
@@ -51,6 +59,11 @@ public class BranchController
 		}
 	}
 	
+	
+	/** 
+	 * @param branches
+	 * @return HashSet<String>
+	 */
 	public HashSet<String> getBranchCities(ArrayList<Branch> branches)
 	{
 		HashSet<String> set = new HashSet<String>();
@@ -61,6 +74,11 @@ public class BranchController
 		return set;
 	}
 	
+	
+	/** 
+	 * @param workerId
+	 * @param response
+	 */
 	public void getWorkerBranch(int workerId, IResponse<Branch> response)
 	{
 		if(workerBranch != null)

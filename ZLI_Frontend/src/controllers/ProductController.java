@@ -24,6 +24,10 @@ public class ProductController
 		clientController = ClientController.getInstance();
 	}
 
+	
+	/** 
+	 * @return ProductController
+	 */
 	public static synchronized ProductController getInstance()
 	{
 		if (instance == null)
@@ -33,6 +37,10 @@ public class ProductController
 		return instance;
 	}
 
+	
+	/** 
+	 * @param response
+	 */
 	public void getAllCatalogItems(IResponse<ArrayList<CatalogItem>> response)
 	{
 		if(catalog == null || catalog.isEmpty())
@@ -55,6 +63,10 @@ public class ProductController
 		ClientController.getInstance().sendRequest(req, executeResponseAndSaveCatalog(response));
 	}
 
+	
+	/** 
+	 * @param response
+	 */
 	public void getAllItems(IResponse<ArrayList<Item>> response)
 	{
 		if(items == null || items.isEmpty())
@@ -69,6 +81,11 @@ public class ProductController
 	}
 
 
+	
+	/** 
+	 * @param response
+	 * @return IResponse<ArrayList<CatalogItem>>
+	 */
 	private IResponse<ArrayList<CatalogItem>> executeResponseAndSaveCatalog(IResponse<ArrayList<CatalogItem>> response)
 	{
 		return new IResponse<ArrayList<CatalogItem>>()
@@ -82,6 +99,11 @@ public class ProductController
 			}
 		};
 	}
+	
+	/** 
+	 * @param response
+	 * @return IResponse<ArrayList<Item>>
+	 */
 	private IResponse<ArrayList<Item>> executeResponseAndSaveItems(IResponse<ArrayList<Item>> response)
 	{
 		return new IResponse<ArrayList<Item>>()
@@ -96,22 +118,41 @@ public class ProductController
 		};
 	}
 
+	
+	/** 
+	 * @param catalog
+	 */
 	protected void setCatalog(ArrayList<CatalogItem> catalog)
 	{
 		this.catalog = catalog;
 	}
 
+	
+	/** 
+	 * @param message
+	 */
 	protected void setItems(ArrayList<Item> message)
 	{
 		this.items = message;
 	}
 
+	
+	/** 
+	 * @param newProduct
+	 * @param response
+	 */
 	public void createProduct(BaseProduct newProduct, IResponse<Boolean> response)
 	{
 		Request req = new Request(RequestType.ADD_PRODUCT, newProduct);
 		clientController.sendRequest(req, response);
 	}
 
+	
+	/** 
+	 * @param productId
+	 * @param activeProduct
+	 * @param response
+	 */
 	public void updateProduct(int productId, BaseProduct activeProduct, IResponse<Boolean> response)
 	{
 		EntityRequestWithId<BaseProduct> e = new EntityRequestWithId<BaseProduct>();

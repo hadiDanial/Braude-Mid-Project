@@ -55,16 +55,29 @@ public class NewComplaint extends FormController{
     private ComplaintController complaintController;
     private Complaint complaint;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onAddBtn(ActionEvent event) {
         SceneManager.loadNewScene(GUIPages.OPENED_COMPLAINTS_PAGE, true);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ButtonAnimator.addButtonAnimations(addBtn,backBtn);

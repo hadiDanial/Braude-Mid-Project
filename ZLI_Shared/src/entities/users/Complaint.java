@@ -39,10 +39,18 @@ public class Complaint implements Serializable
 		this.openedDate = openedDate;
 		this.wasHandled = false;
 	}
+	
+	/** 
+	 * @param duration
+	 */
 	public void setDuration(Duration duration)
 	{
 		this.duration=duration;
 	}
+	
+	/** 
+	 * @return long
+	 */
 	public long getDuration()
 	{
 		if(openedDate == null) return 0;
@@ -50,69 +58,133 @@ public class Complaint implements Serializable
 		return duration.toHours();
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	public String getFormattedopenedDate()
 	{
 		if(openedDate == null) return "";
 		return DateFormatter.formatInstant(openedDate, true);
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getComplaintId()
 	{
 		return complaintId;
 	}
+	
+	/** 
+	 * @param complaintId
+	 */
 	public void setComplaintId(int complaintId)
 	{
 		this.complaintId = complaintId;
 	}
+	
+	/** 
+	 * @return User
+	 */
 	public User getCustomer()
 	{
 		return customer;
 	}
+	
+	/** 
+	 * @param customer
+	 */
 	public void setCustomer(User customer)
 	{
 		this.customer = customer;
 	}
+	
+	/** 
+	 * @return User
+	 */
 	public User getCustomerServiceEmployee()
 	{
 		return customerServiceEmployee;
 	}
+	
+	/** 
+	 * @param customerServiceEmployee
+	 */
 	public void setCustomerServiceEmployee(User customerServiceEmployee)
 	{
 		this.customerServiceEmployee = customerServiceEmployee;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getComplaintDetails()
 	{
 		return complaintDetails;
 	}
+	
+	/** 
+	 * @param complaintDetails
+	 */
 	public void setComplaintDetails(String complaintDetails)
 	{
 		this.complaintDetails = complaintDetails;
 	}
+	
+	/** 
+	 * @return Instant
+	 */
 	public Instant getSubmissionTime()
 	{
 		return submissionTime;
 	}
+	
+	/** 
+	 * @param submissionTime
+	 */
 	public void setSubmissionTime(Instant submissionTime)
 	{
 		this.submissionTime = submissionTime;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getComplaintResult()
 	{
 		return complaintResult;
 	}
+	
+	/** 
+	 * @param complaintResult
+	 */
 	public void setComplaintResult(String complaintResult)
 	{
 		this.complaintResult = complaintResult;
 	}
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isWasHandled()
 	{
 		return wasHandled;
 	}
+	
+	/** 
+	 * @param wasHandled
+	 */
 	public void setWasHandled(boolean wasHandled)
 	{
 		this.wasHandled = wasHandled;
 	}
 	
 	
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -124,6 +196,11 @@ public class Complaint implements Serializable
 		result = prime * result + ((submissionTime == null) ? 0 : submissionTime.hashCode());
 		return result;
 	}
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{

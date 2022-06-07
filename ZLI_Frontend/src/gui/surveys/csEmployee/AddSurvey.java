@@ -40,17 +40,30 @@ public class AddSurvey extends FormController
     @FXML
     private TextField q6Field;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onAddBtn(ActionEvent event) {
 
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
 
     }
 
-	@Override
+	
+    /** 
+     * @param location
+     * @param resources
+     */
+    @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 	}

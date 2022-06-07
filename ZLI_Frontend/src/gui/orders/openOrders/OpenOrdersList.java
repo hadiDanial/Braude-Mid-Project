@@ -50,7 +50,11 @@ public class OpenOrdersList extends GUIController
 	private TableColumn<Order, Order> cancelColumn;
 
 
-    @FXML
+    
+	/** 
+	 * @param event
+	 */
+	@FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
@@ -65,7 +69,12 @@ public class OpenOrdersList extends GUIController
 
 
 
-    @Override
+    
+	/** 
+	 * @param location
+	 * @param resources
+	 */
+	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		orderController = OrderController.getInstance();
@@ -145,6 +154,11 @@ public class OpenOrdersList extends GUIController
 		});
 	}
 	
+	
+	/** 
+	 * @param order
+	 * @param status
+	 */
 	private void updateStatus(Order order, OrderStatus status)
 	{
 		IResponse<Boolean> response = new IResponse<Boolean>() {

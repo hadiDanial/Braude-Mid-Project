@@ -54,7 +54,12 @@ public class SurveyAnalysis extends GUIController{
         SceneManager.loadPreviousPage();
     }
 
-	@Override
+	
+    /** 
+     * @param location
+     * @param resources
+     */
+    @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
         surveyController=SurveyController.getInstance();

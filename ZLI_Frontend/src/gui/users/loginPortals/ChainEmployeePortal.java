@@ -39,17 +39,30 @@ public class ChainEmployeePortal extends GUIController
     @FXML
     private Button manageDiscountsBtn;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onManageCatalogBtn(ActionEvent event) {
         SceneManager.loadNewScene(GUIPages.CATALOG_MANAGEMENT, true);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onManageDiscountsBtn(ActionEvent event) {
         SceneManager.loadNewScene(GUIPages.DISCOUNT_MANAGEMENT, true);
     }
 
-	@Override
+	
+    /** 
+     * @param location
+     * @param resources
+     */
+    @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
         userController = UserController.getInstance();

@@ -52,6 +52,11 @@ public class UpdateOrder extends GUIController
 
 	protected boolean waitingForResponse;
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -74,6 +79,10 @@ public class UpdateOrder extends GUIController
 		});
 	}
 
+	
+	/** 
+	 * @param order
+	 */
 	public void setOrderToUpdate(Order order)
 	{
 		this.order = order;
@@ -99,6 +108,10 @@ public class UpdateOrder extends GUIController
 		orderDetails.appendText(order.getOrderDetails() + "\n");
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void checkValidDate(ActionEvent event)
 	{
@@ -108,6 +121,10 @@ public class UpdateOrder extends GUIController
 		}
 	}
 
+	
+	/** 
+	 * @param update
+	 */
 	private void closeSceneAndOpenOrdersTable(boolean update)
 	{
 		OrdersPage ordersPage = (OrdersPage) SceneManager.loadPreviousPage();
@@ -117,6 +134,10 @@ public class UpdateOrder extends GUIController
 		}
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onUpdateBtnClicked(ActionEvent event)
 	{
@@ -148,6 +169,10 @@ public class UpdateOrder extends GUIController
 		}, order);
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onCancelBtnClicked(ActionEvent event)
 	{

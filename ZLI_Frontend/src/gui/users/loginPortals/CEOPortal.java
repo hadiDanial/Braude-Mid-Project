@@ -38,19 +38,36 @@ public class CEOPortal extends GUIController
     @FXML
     private Button viewComplaintsReportsBtn;
    
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewSalesReportsBtn(ActionEvent event) {
       SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_SALES, true);
     }
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewOrdersReportsBtn(ActionEvent event) {
       SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_ORDERS,true);
     }
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewComplaintsReportsBtn(ActionEvent event) {
       SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_COMPLAINTS,true);
     }
     
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
