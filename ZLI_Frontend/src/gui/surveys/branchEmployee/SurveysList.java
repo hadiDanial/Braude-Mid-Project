@@ -43,11 +43,20 @@ public class SurveysList extends GUIController{
     @FXML
     private TableColumn<Survey, Button> resultColumn;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {    
         surveyController = SurveyController.getInstance();

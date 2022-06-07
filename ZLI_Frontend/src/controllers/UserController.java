@@ -22,6 +22,10 @@ public class UserController
 		clientController = ClientController.getInstance();
 	}
 
+	
+	/** 
+	 * @return UserController
+	 */
 	public static synchronized UserController getInstance()
 	{
 		if (instance == null)
@@ -31,6 +35,11 @@ public class UserController
 		return instance;
 	}
 
+	
+	/** 
+	 * @param response
+	 * @param newUser
+	 */
 	public void register(IResponse<Boolean> response, User newUser)
 	{
 		Request req = new Request(RequestType.REGISTER, newUser);
@@ -75,33 +84,59 @@ public class UserController
 		}
 	}
 
+	
+	/** 
+	 * @param user
+	 * @param accountStatus
+	 * @return boolean
+	 */
 	public boolean setUserStatus(User user, AccountStatus accountStatus)
 	{
 		// TODO - implement UserController.setUserStatus
 		throw new UnsupportedOperationException();
 	}
 
+	
+	/** 
+	 * @param response
+	 */
 	public void getUserCreditCard(IResponse<CreditCard> response)
 	{
 		Request req = new Request(RequestType.GET_USER_CREDIT_CARD, loggedInUser);
 		clientController.sendRequest(req, response);
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isLoggedIn()
 	{
 		return loggedInUser != null;
 	}
 
+	
+	/** 
+	 * @return User
+	 */
 	public User getLoggedInUser()
 	{
 		return loggedInUser;
 	}
 
+	
+	/** 
+	 * @param loggedInUser
+	 */
 	public void setLoggedInUser(User loggedInUser)
 	{
 		this.loggedInUser = loggedInUser;
 	}
 
+	
+	/** 
+	 * @param response
+	 */
 	public void checkIfFirstOrder(IResponse<Boolean> response)
 	{
 		if(loggedInUser.getRole() == UserRole.Customer)
@@ -110,17 +145,30 @@ public class UserController
 			clientController.sendRequest(req, response);
 		}
 	}
-    public void getAllUsers(IResponse<ArrayList<User>> response) {
+    
+	/** 
+	 * @param response
+	 */
+	public void getAllUsers(IResponse<ArrayList<User>> response) {
 		Request req = new Request(RequestType.GET_ALL_USERS, loggedInUser);
 		clientController.sendRequest(req, response);
     }
 
+	
+	/** 
+	 * @param response
+	 */
 	public void getAllUsersByRole(UserRole customer, IResponse<ArrayList<User>> response)
 	{
 		Request req = new Request(RequestType.GET_ALL_USERS_BY_ROLE, customer);
 		clientController.sendRequest(req, response);
 	}
 
+	
+	/** 
+	 * @param user
+	 * @param response
+	 */
 	public void createNewUser(User user, IResponse<Boolean> response)
 	{
 		Request req = new Request(RequestType.CREATE_NEW_USER, user);

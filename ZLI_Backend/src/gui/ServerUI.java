@@ -89,6 +89,11 @@ public class ServerUI extends Application implements Initializable {
 		}
 	}
 
+	
+	/** 
+	 * @param primaryStage
+	 * @throws Exception
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -103,12 +108,21 @@ public class ServerUI extends Application implements Initializable {
 		primaryStage.show();
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	public void onExitBtnClick(ActionEvent event) {
 		disconnectServer();
 		System.exit(0);
 	}
 
+	
+	/** 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	public void onConnectBtn(ActionEvent event) throws Exception {
 		try {
@@ -136,6 +150,10 @@ public class ServerUI extends Application implements Initializable {
 		}
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	public void onDisconnectBtn(ActionEvent event) {
 		disconnectServer();
@@ -149,6 +167,11 @@ public class ServerUI extends Application implements Initializable {
 		passwordField.setDisable(false);
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ipField.setText(Server.getInstance().getHostAddress());
@@ -162,6 +185,10 @@ public class ServerUI extends Application implements Initializable {
 		consoleTable.setItems(consoleTxtList);
 	}
 
+	
+	/** 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

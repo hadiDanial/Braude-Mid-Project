@@ -11,6 +11,11 @@ public abstract class FormController extends GUIController implements IEventList
 	protected List<ValidatorList> validatorLists;
 	protected Button submissionButton;
 	
+	
+	/** 
+	 * @param validatorLists
+	 * @param submissionButton
+	 */
 	public void setupFormController(List<ValidatorList> validatorLists, Button submissionButton)
 	{
 		this.validatorLists = validatorLists;
@@ -19,6 +24,10 @@ public abstract class FormController extends GUIController implements IEventList
 			this.submissionButton.setDisable(true);
 	}
 	
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isValidForm()
 	{
 		if(validatorLists == null) 

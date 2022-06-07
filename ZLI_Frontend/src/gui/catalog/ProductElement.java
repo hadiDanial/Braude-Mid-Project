@@ -35,17 +35,30 @@ public class ProductElement extends GUIController
 
 	private CatalogItem product;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onAddToCart(ActionEvent event)
 	{
 		OrderController.getInstance().addProductToCart(product);
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 	}
 
+	
+	/** 
+	 * @param data
+	 */
 	@Override
 	public void setData(Object data)
 	{

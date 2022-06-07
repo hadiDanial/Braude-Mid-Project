@@ -59,21 +59,38 @@ public class AddSurveyResult extends GUIController{
     @FXML
     private TextField q6AnswerField;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onAddAnotherBtn(ActionEvent event) {  
 
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onFinishBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         surveyController=SurveyController.getInstance();

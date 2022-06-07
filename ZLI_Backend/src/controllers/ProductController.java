@@ -31,6 +31,10 @@ public class ProductController
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
+	
+	/** 
+	 * @return ProductController
+	 */
 	public static synchronized ProductController getInstance()
 	{
 		if (instance == null)
@@ -85,6 +89,10 @@ public class ProductController
 		return convertRSToCatalogItemArray(rs, null);
 	}
 
+	
+	/** 
+	 * @return ArrayList<Item>
+	 */
 	public ArrayList<Item> getAllItems()
 	{
 		ResultSet rs = databaseConnection.getBySimpleCondition("productOrItem", BaseProduct.ITEM_DISCRIMINATOR, Tables.ALL_PRODUCTS_TABLE_NAME);
@@ -140,6 +148,11 @@ public class ProductController
 		}
 	}
 	
+	
+	/** 
+	 * @param rs
+	 * @return ArrayList<Item>
+	 */
 	private ArrayList<Item> convertRSToItemArray(ResultSet rs)
 	{
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -203,6 +216,11 @@ public class ProductController
 		}
 	}
 
+	
+	/** 
+	 * @param newProduct
+	 * @return IObjectToPreparedStatementParameters<BaseProduct>
+	 */
 	private IObjectToPreparedStatementParameters<BaseProduct> convertBaseProductToPS(BaseProduct newProduct)
 	{
 		return new IObjectToPreparedStatementParameters<BaseProduct>()

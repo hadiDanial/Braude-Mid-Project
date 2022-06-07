@@ -61,21 +61,38 @@ public class AddAnalysis extends FormController {
 
     private byte[] PDFFile;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void OnChooseFile(ActionEvent event) {
         PDFFile =FileManager.choosePDFFile();
     }
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onSaveBtn(ActionEvent event) {
         surveyController.addSurveyAnalysis(survey,PDFFile);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
-	@Override
+	
+    /** 
+     * @param location
+     * @param resources
+     */
+    @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
         ButtonAnimator.addButtonAnimations(saveBtn,backBtn);

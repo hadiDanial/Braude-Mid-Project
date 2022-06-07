@@ -17,6 +17,10 @@ public class ReportController
 		clientController = ClientController.getInstance();
 	}
 	
+	
+	/** 
+	 * @return ReportController
+	 */
 	public static synchronized ReportController getInstance()
 	{
 		if(instance == null)

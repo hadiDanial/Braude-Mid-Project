@@ -39,17 +39,30 @@ public class EmployeePortalCS extends GUIController
     @FXML 
     private Button addSurveyButton;
     
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onFeedBackSurveyBtn(ActionEvent event) {
         SceneManager.loadNewScene(GUIPages.ADD_SURVEY, true);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onReviewComplaintsBtn(ActionEvent event) {
         SceneManager.loadNewScene(GUIPages.OPENED_COMPLAINTS_PAGE,true);
     }
 
-	@Override
+	
+    /** 
+     * @param location
+     * @param resources
+     */
+    @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
         userController = UserController.getInstance();

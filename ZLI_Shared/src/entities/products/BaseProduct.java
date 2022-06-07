@@ -34,56 +34,100 @@ public abstract class BaseProduct implements Serializable
 		this.type = type;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getProductId()
 	{
 		return productId;
 	}
 
+	
+	/** 
+	 * @param productId
+	 */
 	public void setProductId(int productId)
 	{
 		this.productId = productId;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getProductName()
 	{
 		return productName;
 	}
 
+	
+	/** 
+	 * @param productName
+	 */
 	public void setProductName(String productName)
 	{
 		this.productName = productName;
 	}
 
+	
+	/** 
+	 * @return float
+	 */
 	public float getPrice()
 	{
 		return price;
 	}
 
+	
+	/** 
+	 * @param price
+	 */
 	public void setPrice(float price)
 	{
 		this.price = price;
 	}
 
+	
+	/** 
+	 * @return byte[]
+	 */
 	public byte[] getImage()
 	{
 		return image;
 	}
 
+	
+	/** 
+	 * @param image
+	 */
 	public void setImage(byte[] image)
 	{
 		this.image = image;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isProduct()
 	{
 		return type.equals(PRODUCT_DISCRIMINATOR);
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isItem()
 	{
 		return type.equals(ITEM_DISCRIMINATOR);
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -94,6 +138,11 @@ public abstract class BaseProduct implements Serializable
 		return result;
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -123,6 +172,10 @@ public abstract class BaseProduct implements Serializable
 		return true;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString()
 	{

@@ -22,6 +22,10 @@ public class ComplaintController
 		userController	= UserController.getInstance();
 	}
 	
+	
+	/** 
+	 * @return ComplaintController
+	 */
 	public static synchronized ComplaintController getInstance()
 	{
 		if(instance == null)
@@ -50,6 +54,10 @@ public class ComplaintController
 		complaint.setComplaintResult(response);
 	}
 
+	
+	/** 
+	 * @param response
+	 */
 	public void getAllComplaints(IResponse <ArrayList<Complaint>> response)
 	{
 		Request req=new Request(RequestType.GET_ALL_COMPLAINTS);

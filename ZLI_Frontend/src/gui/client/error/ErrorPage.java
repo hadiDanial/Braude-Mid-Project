@@ -19,11 +19,20 @@ public class ErrorPage extends GUIController
 	@FXML
 	private Button okBtn;
 	
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	public void onBtnClick(ActionEvent event)
 	{
 		SceneManager.clearHistory();
@@ -32,6 +41,10 @@ public class ErrorPage extends GUIController
 		stage.close();
 	}
 
+	
+	/** 
+	 * @param data
+	 */
 	@Override
 	public void setData(Object data)
 	{

@@ -23,50 +23,98 @@ public class CreditCard implements Serializable
 		this.expirationDate = expirationDate;
 		this.cardHolderName = cardHolderName;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getCreditCardId()
 	{
 		return creditCardId;
 	}
+	
+	/** 
+	 * @param creditCardId
+	 */
 	public void setCreditCardId(int creditCardId)
 	{
 		this.creditCardId = creditCardId;
 	}
+	
+	/** 
+	 * @return User
+	 */
 	public User getCustomer()
 	{
 		return customer;
 	}
+	
+	/** 
+	 * @param customer
+	 */
 	public void setCustomer(User customer)
 	{
 		this.customer = customer;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getCreditCardNumber()
 	{
 		return creditCardNumber;
 	}
+	
+	/** 
+	 * @param creditCardNumber
+	 */
 	public void setCreditCardNumber(String creditCardNumber)
 	{
 		this.creditCardNumber = creditCardNumber;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getCvv()
 	{
 		return cvv;
 	}
+	
+	/** 
+	 * @param cvv
+	 */
 	public void setCvv(int cvv)
 	{
 		this.cvv = cvv;
 	}
+	
+	/** 
+	 * @return Instant
+	 */
 	public Instant getExpirationDate()
 	{
 		return expirationDate;
 	}
+	
+	/** 
+	 * @param expirationDate
+	 */
 	public void setExpirationDate(Instant expirationDate)
 	{
 		this.expirationDate = expirationDate;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getCardHolderName()
 	{
 		return cardHolderName;
 	}
+	
+	/** 
+	 * @param cardHolderName
+	 */
 	public void setCardHolderName(String cardHolderName)
 	{
 		this.cardHolderName = cardHolderName;

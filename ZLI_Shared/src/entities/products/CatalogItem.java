@@ -32,6 +32,10 @@ public class CatalogItem implements IDiscountable, Serializable
 		discounts = new HashSet<Discount>();
 	}
 
+	
+	/** 
+	 * @return float
+	 */
 	@Override
 	public float getPriceAfterDiscounts()
 	{
@@ -43,56 +47,100 @@ public class CatalogItem implements IDiscountable, Serializable
 		return finalPrice;
 	}
 
+	
+	/** 
+	 * @param discounts
+	 */
 	@Override
 	public void setDiscounts(HashSet<Discount> discounts)
 	{
 		this.discounts = discounts;
 	}
 
+	
+	/** 
+	 * @param discount
+	 */
 	@Override
 	public void addDiscount(Discount discount)
 	{
 		if(discounts == null) discounts = new HashSet<Discount>();
 		discounts.add(discount);
 	}
+	
+	/** 
+	 * @return BaseProduct
+	 */
 	public BaseProduct getBaseProduct()
 	{
 		return baseProduct;
 	}
 
+	
+	/** 
+	 * @param baseProduct
+	 */
 	public void setBaseProduct(BaseProduct baseProduct)
 	{
 		this.baseProduct = baseProduct;
 	}
 
+	
+	/** 
+	 * @return Branch
+	 */
 	public Branch getBranch()
 	{
 		return branch;
 	}
 
+	
+	/** 
+	 * @param branch
+	 */
 	public void setBranch(Branch branch)
 	{
 		this.branch = branch;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getQuantityInStock()
 	{
 		return quantityInStock;
 	}
 
+	
+	/** 
+	 * @param quantityInStock
+	 */
 	public void setQuantityInStock(int quantityInStock)
 	{
 		this.quantityInStock = quantityInStock;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getProductName()
 	{
 		return baseProduct.getProductName();
 	}
+	
+	/** 
+	 * @return Float
+	 */
 	public Float getBasePrice()
 	{
 		return baseProduct.getPrice();
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getDetails()
 	{
 		if(baseProduct.isProduct())
@@ -107,18 +155,31 @@ public class CatalogItem implements IDiscountable, Serializable
 		}
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString()
 	{
 		return baseProduct.toString();
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
 		return Objects.hash(baseProduct, branch);
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{

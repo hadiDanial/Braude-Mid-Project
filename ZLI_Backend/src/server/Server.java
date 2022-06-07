@@ -26,6 +26,10 @@ public class Server extends AbstractServer {
 		}
 	}
 
+	
+	/** 
+	 * @return Server
+	 */
 	public static synchronized Server getInstance() {
 		if (instance == null) {
 			instance = new Server(ServerProperties.DEFAULT_PORT);
@@ -78,6 +82,10 @@ public class Server extends AbstractServer {
 		return runServer(port);
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getHostAddress() {
 		if (hostAddress == null) {
 			try {
@@ -89,6 +97,11 @@ public class Server extends AbstractServer {
 		return this.hostAddress;
 	}
 
+	
+	/** 
+	 * @param message
+	 * @param client
+	 */
 	public void sendToClient(Object message, ConnectionToClient client) {
 		try {
 			client.sendToClient(message);
@@ -97,6 +110,11 @@ public class Server extends AbstractServer {
 		}
 	}
 
+	
+	/** 
+	 * @param msg
+	 * @param client
+	 */
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		try {
@@ -117,18 +135,30 @@ public class Server extends AbstractServer {
 
 	}
 
+	
+	/** 
+	 * @param client
+	 */
 	@Override
 	protected void clientConnected(ConnectionToClient client) {
 		super.clientConnected(client);
 		ServerUI.clients.add(new ConnectedClient(client));
 	}
 
+	
+	/** 
+	 * @param client
+	 */
 	@Override
 	protected synchronized void clientDisconnected(ConnectionToClient client) {
 		ServerUI.clients.remove(new ConnectedClient(client));
 		super.clientDisconnected(client);
 	}
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	public void closeServer() throws Exception {
 		this.close();
 		timer.cancel();

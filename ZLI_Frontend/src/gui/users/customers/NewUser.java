@@ -62,6 +62,10 @@ public class NewUser extends FormController
 	@FXML private TextField emailField;
 	@FXML private TextField passwordField;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onAddBtn(ActionEvent event)
 	{
@@ -85,12 +89,21 @@ public class NewUser extends FormController
 			}});
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onBackBtn(ActionEvent event)
 	{
 		SceneManager.loadPreviousPage();
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

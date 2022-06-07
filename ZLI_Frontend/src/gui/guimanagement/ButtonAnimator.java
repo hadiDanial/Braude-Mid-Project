@@ -44,6 +44,14 @@ public class ButtonAnimator
 		}
 	}
 
+	
+	/** 
+	 * @param style
+	 * @param normalColor
+	 * @param hoverColor
+	 * @param disabledColor
+	 * @param buttons
+	 */
 	public static void addButtonAnimations(String style, String normalColor, String hoverColor, String disabledColor,
 			Button... buttons)
 	{
@@ -96,11 +104,20 @@ public class ButtonAnimator
 		}
 	}
 
+	
+	/** 
+	 * @param buttons
+	 */
 	public static void addButtonAnimations(Button... buttons)
 	{
 		addButtonAnimations(STYLE, NORMAL_COLOR, HOVER_COLOR, DISABLED_COLOR, buttons);
 	}
 
+	
+	/** 
+	 * @param btn
+	 * @param style
+	 */
 	private static void scaleUp(Button btn, String style)
 	{
 		ScaleTransition scaleUp = new ScaleTransition();
@@ -114,6 +131,11 @@ public class ButtonAnimator
 		scaleUp.play();
 	}
 
+	
+	/** 
+	 * @param btn
+	 * @param style
+	 */
 	private static void scaleDown(Button btn, String style)
 	{
 

@@ -38,11 +38,20 @@ public class DeliveryOperatorPortal extends GUIController{
     @FXML
     private Button VrydlBtn;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onVrydlBtn(ActionEvent event) {
         SceneManager.loadNewScene(GUIPages.DELIVERY_LIST, true);
     }
 
+    
+    /** 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userController = UserController.getInstance();

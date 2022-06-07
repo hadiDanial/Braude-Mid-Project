@@ -36,17 +36,30 @@ public class SenderInfoPage extends FormController
 	private Order order;
 	
 	
-    @FXML
+    
+	/** 
+	 * @param event
+	 */
+	@FXML
     void onBackBtn(ActionEvent event) {
 		SceneManager.loadPreviousPage();
     }
 
-    @FXML
+    
+	/** 
+	 * @param event
+	 */
+	@FXML
     void onNextBtn(ActionEvent event) {
     	order.setGreetingCard(greetingInput.getText());
     	SceneManager.loadNewScene(GUIPages.CHECKOUT_DELIVERY, true);
     }
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

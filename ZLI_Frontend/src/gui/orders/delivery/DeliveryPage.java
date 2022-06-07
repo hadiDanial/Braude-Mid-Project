@@ -129,12 +129,20 @@ public class DeliveryPage extends FormController
 	private List<ValidatorList> pickupChecker;
 	private List<ValidatorList> deliveryChecker;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onBackBtn(ActionEvent event)
 	{
 		SceneManager.loadPreviousPage();
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onNextBtn(ActionEvent event)
 	{
@@ -163,6 +171,10 @@ public class DeliveryPage extends FormController
 		SceneManager.loadNewScene(GUIPages.CHECKOUT_PAYMENT, true);
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onDeliverySelect(ActionEvent event)
 	{
@@ -170,6 +182,10 @@ public class DeliveryPage extends FormController
 		isDelivery = true;
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onPickupSelect(ActionEvent event)
 	{
@@ -177,6 +193,11 @@ public class DeliveryPage extends FormController
 		isDelivery = false;
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

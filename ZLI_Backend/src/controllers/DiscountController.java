@@ -27,6 +27,10 @@ public class DiscountController
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
+	
+	/** 
+	 * @return DiscountController
+	 */
 	public static synchronized DiscountController getInstance()
 	{
 		if (instance == null)
@@ -35,12 +39,20 @@ public class DiscountController
 		}
 		return instance;
 	}
+	
+	/** 
+	 * @return ArrayList<Discount>
+	 */
 	public ArrayList<Discount> getAllDiscounts()
 	{
 		ResultSet resultSet=databaseConnection.getAll(Tables.DISCOUNTS_TABLE_NAME);
 		return convertRSToDiscountArrayList(resultSet);
 	}
 	
+	
+	/** 
+	 * @param discount
+	 */
 	// TODO getActiveDiscounts
 	// select * from discounts join discounts_products join catalog where discounts.discountId=discounts_products.discountId AND discounts_products.catalogId=catalog.catalogId AND discounts.discountStartDate <= now() AND discounts.discountEndDate >= now();
 	
@@ -66,6 +78,11 @@ public class DiscountController
 		}
 	}
 	}
+	
+	/** 
+	 * @param rs
+	 * @return ArrayList<Discount>
+	 */
 	private ArrayList<Discount> convertRSToDiscountArrayList(ResultSet rs) {
 		ArrayList<Discount> discounts = new ArrayList<Discount>();
 		try
@@ -84,6 +101,11 @@ public class DiscountController
 		}
 	}
 
+	
+	/** 
+	 * @param discount
+	 * @return boolean
+	 */
 	public boolean createDiscount(Discount discount) 
 	{
 		int res = databaseConnection.insertToDatabase(Tables.DISCOUNTS_TABLE_NAME, Tables.discountsProductsColumnNames,
@@ -102,6 +124,10 @@ public class DiscountController
 	
 		return res == 1;
 	}
+	
+	/** 
+	 * @return Discount
+	 */
 	/*public ArrayList<Discount> getDiscountsByBranch(int branchId)
 	{
 		ArrayList<String> joins = new ArrayList<String>();

@@ -22,12 +22,20 @@ public class SettingsPage extends GUIController
 	@FXML
 	private Button cancelBtn;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onCancelButtonClick(ActionEvent event)
 	{
 		stage.close();
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onConfirmBtnClick(ActionEvent event)
 	{
@@ -36,6 +44,11 @@ public class SettingsPage extends GUIController
 		stage.close();
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

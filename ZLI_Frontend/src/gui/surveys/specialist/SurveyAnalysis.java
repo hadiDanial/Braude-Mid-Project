@@ -42,12 +42,21 @@ public class SurveyAnalysis extends GUIController{
     @FXML
     private TableColumn<Survey,Button> addAnalysisColumn;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
         SceneManager.loadPreviousPage();
     }
 
-	@Override
+	
+    /** 
+     * @param location
+     * @param resources
+     */
+    @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
         surveyController=SurveyController.getInstance();

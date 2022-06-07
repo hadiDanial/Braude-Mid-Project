@@ -21,7 +21,11 @@ public class Settings extends FormController{
     @FXML
     private TextField portField;
     @FXML private Button connectBtn;
-    @FXML
+    
+	/** 
+	 * @param event
+	 */
+	@FXML
     void onConnectBtn(ActionEvent event) {
     	ClientProperties.setHostAddress(hostField.getText());
     	ClientProperties.setHostPort(Integer.parseInt(portField.getText()));
@@ -29,11 +33,20 @@ public class Settings extends FormController{
 		stage.close();
     }
 
-    @FXML
+    
+	/** 
+	 * @param event
+	 */
+	@FXML
     void onExitBtn(ActionEvent event) {
 		stage.close();
     }
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

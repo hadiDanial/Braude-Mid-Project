@@ -53,11 +53,20 @@ public class OrdersPage extends GUIController
 	private double left;
 	private double right;
 
+	
+	/** 
+	 * @param event
+	 */
 	public void onRefreshBtnClick(ActionEvent event)
 	{
 		updateTableItems();
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

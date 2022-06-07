@@ -38,6 +38,10 @@ public class LoginPage extends FormController
 	@FXML
 	private Button loginButton;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onLoginBtn(ActionEvent event)
 	{
@@ -76,6 +80,11 @@ public class LoginPage extends FormController
 		});
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

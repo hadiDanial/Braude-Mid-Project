@@ -22,6 +22,10 @@ public class DatabaseConnection
 	{
 	}
 
+	
+	/** 
+	 * @return DatabaseConnection
+	 */
 	public static DatabaseConnection getInstance()
 	{
 		if (instance == null)

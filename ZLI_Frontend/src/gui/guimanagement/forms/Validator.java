@@ -70,12 +70,21 @@ public abstract class Validator
 		return isValid;
 	}
 
+	
+	/** 
+	 * @param getMessage(
+	 * @return boolean
+	 */
 	/**
 	 * Validate the control. This should be overwritten by child classes to perform custom validation as needed.
 	 * @return True if the form is valid.
 	 */
 	protected abstract boolean validate();
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getMessage()
 	{
 		return message;

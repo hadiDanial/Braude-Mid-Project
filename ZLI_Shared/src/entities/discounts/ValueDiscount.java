@@ -19,6 +19,11 @@ public class ValueDiscount extends Discount
 			throw new InvalidParameterException("Discount Value must be non-negative: (" + discountValue + ").");
 	}
 
+	
+	/** 
+	 * @param price
+	 * @return float
+	 */
 	@Override
 	public float applyDiscount(float price)
 	{

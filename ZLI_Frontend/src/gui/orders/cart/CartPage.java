@@ -51,18 +51,31 @@ public class CartPage extends GUIController
 	@FXML
 	private TableView<CartProductElement> cartTable;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onBackBtn(ActionEvent event)
 	{
 		SceneManager.loadPreviousPage();
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onCheckOutBtn(ActionEvent event)
 	{
 		SceneManager.loadNewScene(GUIPages.CHECKOUT_GREETING, true);
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -128,6 +141,10 @@ public class CartPage extends GUIController
 		scrollPane.setPrefViewportHeight(v);
 	}
 
+	
+	/** 
+	 * @param cartProductElement
+	 */
 	public void removeFromCart(CartProductElement cartProductElement)
 	{
 		cartProductsList.remove(cartProductElement);

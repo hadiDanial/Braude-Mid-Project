@@ -30,26 +30,46 @@ public class OrdersReportPageCEO {
     @FXML
     private PieChart pieChart;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onBackBtn(ActionEvent event) {
 
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onSetQuarterBtn(ActionEvent event) {
 
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewComplaintsReportsBtn(ActionEvent event) {
 
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewOrdersReportsBtn(ActionEvent event) {
 
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewSalesReportsBtn(ActionEvent event) {
 

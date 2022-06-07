@@ -23,6 +23,12 @@ public class EmailManager
 	private static final String email = "zerli.g13@gmail.com";
 	private static final String password = "thlvanlofmpfrxuh";
 	
+	
+	/** 
+	 * @param title
+	 * @param content
+	 * @param recipientEmailAddress
+	 */
 	public static void sendEmail(String title, String content, String recipientEmailAddress)
 	{
 		Thread thread = new Thread(new Runnable()
@@ -35,6 +41,12 @@ public class EmailManager
 		});
 		thread.run();
 	}
+	
+	/** 
+	 * @param title
+	 * @param content
+	 * @param recipient
+	 */
 	public static void sendEmail(String title, String content, User recipient)
 	{
 		Thread thread = new Thread(new Runnable()
@@ -48,6 +60,12 @@ public class EmailManager
 		thread.run();
 	}
 	
+	
+	/** 
+	 * @param title
+	 * @param content
+	 * @param recipientEmailAddress
+	 */
 	private static void send(String title, String content, String recipientEmailAddress)
 	{
 		Properties properties = new Properties();

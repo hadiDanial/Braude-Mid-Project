@@ -23,7 +23,11 @@ public class ComplaintController {
 	{
 		databaseConnection = DatabaseConnection.getInstance();
 	}
-    public static synchronized ComplaintController getInstance()
+    
+	/** 
+	 * @return ComplaintController
+	 */
+	public static synchronized ComplaintController getInstance()
 	{
 		if (instance == null)
 		{
@@ -31,7 +35,12 @@ public class ComplaintController {
 		}
 		return instance;
 	}
-    public boolean createComplaint(Complaint complaint)
+    
+	/** 
+	 * @param complaint
+	 * @return boolean
+	 */
+	public boolean createComplaint(Complaint complaint)
     {
         int res = databaseConnection.insertToDatabase(Tables.COMPLAINTS_TABLE_NAME, Tables.complaintsColumnNames,
 				new IObjectToPreparedStatementParameters<Complaint>()
@@ -58,7 +67,12 @@ public class ComplaintController {
                 }
 		return res == 1;
     }
-    public void notifyEmployee(Complaint complaint,String title)
+    
+	/** 
+	 * @param complaint
+	 * @param title
+	 */
+	public void notifyEmployee(Complaint complaint,String title)
     {
         int customerServiceEmployeeId = complaint.getCustomerServiceEmployee().getUserId();
 		ArrayList<String> tables = (ArrayList<String>) Arrays.asList(new String[]
@@ -77,7 +91,13 @@ public class ComplaintController {
 			e.printStackTrace();
 		}
     }
-    public void handleComplaint(Complaint complaint, Boolean handled, User user) 
+    
+	/** 
+	 * @param complaint
+	 * @param handled
+	 * @param user
+	 */
+	public void handleComplaint(Complaint complaint, Boolean handled, User user) 
     {
 		int customerId = complaint.getCustomer().getUserId();
 		ArrayList<String> tables = (ArrayList<String>) Arrays.asList(new String[]
@@ -107,11 +127,20 @@ public class ComplaintController {
 		e.printStackTrace();
 		}
 	}
+	
+	/** 
+	 * @return ArrayList<Complaint>
+	 */
 	public ArrayList<Complaint> getAllComplaints()
 	{
 		ResultSet rs = databaseConnection.getAll(Tables.COMPLAINTS_TABLE_NAME);
 		return rsToComplaintArrayList(rs);
 	}
+	
+	/** 
+	 * @param rs
+	 * @return ArrayList<Complaint>
+	 */
 	private ArrayList<Complaint> rsToComplaintArrayList(ResultSet rs)
 	{
 		ArrayList<Complaint> complaints = new ArrayList<Complaint>();

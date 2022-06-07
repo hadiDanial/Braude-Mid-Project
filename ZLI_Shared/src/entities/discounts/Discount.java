@@ -46,89 +46,170 @@ public abstract class Discount implements Serializable
 
 	public abstract float applyDiscount(float price);
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getDiscountId()
 	{
 		return discountId;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getProductsSize()
 	{
 		return products.size();
 	}
+	
+	/** 
+	 * @param discountId
+	 */
 	public void setDiscountId(int discountId)
 	{
 		this.discountId = discountId;
 	}
+	
+	/** 
+	 * @return Instant
+	 */
 	public Instant getDiscountStartDate()
 	{
 		return discountStartDate;
 	}
+	
+	/** 
+	 * @param discountStartDate
+	 */
 	public void setDiscountStartDate(Instant discountStartDate)
 	{
 		this.discountStartDate = discountStartDate;
 	}
+	
+	/** 
+	 * @return Instant
+	 */
 	public Instant getDiscountEndDate()
 	{
 		return discountEndDate;
 	}
+	
+	/** 
+	 * @param discountEndDate
+	 */
 	public void setDiscountEndDate(Instant discountEndDate)
 	{
 		this.discountEndDate = discountEndDate;
 	}
+	
+	/** 
+	 * @return HashSet<CatalogItem>
+	 */
 	public HashSet<CatalogItem> getProducts()
 	{
 		return products;
 	}
+	
+	/** 
+	 * @param products
+	 */
 	public void setProducts(HashSet<CatalogItem> products)
 	{
 		this.products = products;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getDiscountName()
 	{
 		return discountName;
 	}
+	
+	/** 
+	 * @param discountName
+	 */
 	public void setDiscountName(String discountName)
 	{
 		this.discountName = discountName;
 	}
 	
+	
+	/** 
+	 * @return float
+	 */
 	public float getDiscountValue()
 	{
 		return discountValue;
 	}
 
 
+	
+	/** 
+	 * @param discountValue
+	 */
 	public void setDiscountValue(float discountValue)
 	{
 		this.discountValue = discountValue;
 	}
 	
+	
+	/** 
+	 * @return boolean
+	 */
 	protected boolean isActive()
 	{
 		return Instant.now().isAfter(getDiscountStartDate()) && Instant.now().isBefore(getDiscountEndDate());
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getDiscountType()
 	{
 		return discountType;
 	}
 
+	
+	/** 
+	 * @param discountType
+	 */
 	public void setDiscountType(String discountType)
 	{
 		this.discountType = discountType;
 	}
+	
+	/** 
+	 * @param catalogItem
+	 */
 	public void addProduct(CatalogItem catalogItem)
 	{
 		products.add(catalogItem);
 	}
+	
+	/** 
+	 * @param catalogItem
+	 */
 	public void removeProduct(CatalogItem catalogItem)
 	{
 		products.remove(catalogItem);
 	}
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
 		return Objects.hash(discountEndDate, discountId, discountName, discountStartDate, products);
 	}
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -144,6 +225,10 @@ public abstract class Discount implements Serializable
 				&& Objects.equals(discountStartDate, other.discountStartDate)
 				&& Objects.equals(products, other.products);
 	}
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString()
 	{
@@ -151,12 +236,20 @@ public abstract class Discount implements Serializable
 				+ discountEndDate + ", products=" + products + ", discountName=" + discountName + "]";
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getFormattedDiscountStartDate()
 	{
 		return DateFormatter.formatInstant(discountStartDate, true);
 	}
 
 	
+	
+	/** 
+	 * @return String
+	 */
 	public String getFormattedDiscountEndDate()
 	{
 		return DateFormatter.formatInstant(discountEndDate, true);

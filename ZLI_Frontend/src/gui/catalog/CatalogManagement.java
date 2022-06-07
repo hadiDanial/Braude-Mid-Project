@@ -53,18 +53,31 @@ public class CatalogManagement extends GUIController
 	@FXML private Button backBtn;
 	@FXML private Button addBtn;
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onAddBtn(ActionEvent event)
 	{
 		SceneManager.loadModalWindow(GUIPages.NEW_PRODUCT, true);
 	}
 
+	
+	/** 
+	 * @param event
+	 */
 	@FXML
 	void onBackBtn(ActionEvent event)
 	{
 		SceneManager.loadPreviousPage();
 	}
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

@@ -12,6 +12,10 @@ public class EmptyValidator extends Validator
 		super(control, invalidLabel, autoValidate, fieldName + " can't be empty.", eventListener);	
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	@Override
 	public boolean validate()
 	{

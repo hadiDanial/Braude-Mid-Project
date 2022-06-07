@@ -23,6 +23,10 @@ public class ClientUI extends Application
 	@FXML
 	public ScrollPane scrollPane;
 	
+	
+	/** 
+	 * @param args
+	 */
 	public static void main(String[] args)
 	{
 		launch(args);
@@ -37,16 +41,28 @@ public class ClientUI extends Application
 		SceneManager.initUI(primaryStage);
 	}
 	
+	
+	/** 
+	 * @param event
+	 */
 	public void onSettingsButtonClicked(ActionEvent event)
 	{
 		SceneManager.openSettingsPage();
 	}
 
+	
+	/** 
+	 * @return Pane
+	 */
 	public Pane getRoot()
 	{
 		return root;
 	}
 
+	
+	/** 
+	 * @return AnchorPane
+	 */
 	public AnchorPane getContent()
 	{
 		return content;

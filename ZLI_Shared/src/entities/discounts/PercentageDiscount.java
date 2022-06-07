@@ -19,6 +19,11 @@ public class PercentageDiscount extends Discount
 			throw new InvalidParameterException("Discount Percentage must be between 0 and 1: (" + discountValue + ").");		
 	}
 
+	
+	/** 
+	 * @param price
+	 * @return float
+	 */
 	@Override
 	public float applyDiscount(float price)
 	{

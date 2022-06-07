@@ -8,6 +8,11 @@ import gui.guimanagement.GUIController;
 public class DiscountManagementPage extends GUIController
 {
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

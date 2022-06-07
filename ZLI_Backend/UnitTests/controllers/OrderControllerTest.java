@@ -25,12 +25,20 @@ import enums.UserRole;
 public class OrderControllerTest
 {
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception
 	{
 		DatabaseConnection.getInstance().connectToDB("localhost", "zlig13", "root", "mYtsb46Ql97");
 	}
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception
 	{

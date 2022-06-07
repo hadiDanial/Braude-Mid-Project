@@ -12,15 +12,27 @@ public class ValidatorList
 		super();
 		this.validators = validators;
 	}
+	
+	/** 
+	 * @return List<Validator>
+	 */
 	public List<Validator> getValidators()
 	{
 		return validators;
 	}
+	
+	/** 
+	 * @param validators
+	 */
 	public void setValidators(List<Validator> validators)
 	{
 		this.validators = validators;
 	}
 	
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean validateAll()
 	{
 		for(Validator validator : validators)

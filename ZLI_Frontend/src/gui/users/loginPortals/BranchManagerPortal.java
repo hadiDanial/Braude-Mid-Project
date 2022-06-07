@@ -47,30 +47,55 @@ public class BranchManagerPortal extends GUIController
     @FXML
     private Button viewComplaintsReportsBtn;
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewCustomersBtn(ActionEvent event) {
 		SceneManager.loadNewScene(GUIPages.CUSTOMERS_LIST, true);
     }
     
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewOpenOrdersBtn(ActionEvent event) {
 		SceneManager.loadNewScene(GUIPages.OPEN_ORDERS_LIST, true);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewSalesReportsBtn(ActionEvent event) {
       SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_SALES, true);
     }
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewOrdersReportsBtn(ActionEvent event) {
       SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_ORDERS,true);
     }
+    
+    /** 
+     * @param event
+     */
     @FXML
     void onViewComplaintsReportsBtn(ActionEvent event) {
       SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_COMPLAINTS,true);
     }
 
-	@Override
+	
+  /** 
+   * @param location
+   * @param resources
+   */
+  @Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		ButtonAnimator.addButtonAnimations(viewSalesReportsBtn,viewComplaintsReportsBtn,viewOrdersReportsBtn,viewCustomersBtn, viewOpenOrdersBtn);

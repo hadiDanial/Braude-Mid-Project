@@ -34,6 +34,10 @@ public class SurveyController {
 		databaseConnection = DatabaseConnection.getInstance();
 	}
 
+	
+	/** 
+	 * @return SurveyController
+	 */
 	public static synchronized SurveyController getInstance()
 	{
 		if (instance == null)
@@ -42,6 +46,11 @@ public class SurveyController {
 		}
 		return instance;
 	}
+	
+	/** 
+	 * @param rs
+	 * @return Survey
+	 */
 	public Survey convertRSToSurvey(ResultSet rs)
 	{
 		try
@@ -78,6 +87,11 @@ public class SurveyController {
 		}
 	}
 
+	
+	/** 
+	 * @param resultSet
+	 * @return ArrayList<Survey>
+	 */
 	public ArrayList<Survey> convertRSToSurveyArray(ResultSet resultSet)
 	{
 		ArrayList<Survey> survey = new ArrayList<Survey>();
@@ -96,7 +110,11 @@ public class SurveyController {
 		}
 	}
 
-    public ArrayList<Survey> getAllSurvey()
+    
+	/** 
+	 * @return ArrayList<Survey>
+	 */
+	public ArrayList<Survey> getAllSurvey()
 	{
         return convertRSToSurveyArray(databaseConnection.getAll(Tables.SURVEYS_TABLE_NAME));
     }

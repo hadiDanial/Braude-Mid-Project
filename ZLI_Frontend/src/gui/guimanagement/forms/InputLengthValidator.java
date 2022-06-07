@@ -20,6 +20,10 @@ public class InputLengthValidator extends Validator
 			this.message = fieldName + " must be exactly " + minLength + " characters long.  ";
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	@Override
 	public boolean validate()
 	{

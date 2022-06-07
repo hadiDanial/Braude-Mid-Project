@@ -21,46 +21,87 @@ public class Report implements Serializable
 		this.reportType = reportType;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getReportId()
 	{
 		return reportId;
 	}
 
+	
+	/** 
+	 * @param reportId
+	 */
 	public void setReportId(int reportId)
 	{
 		this.reportId = reportId;
 	}
 
 
+	
+	/** 
+	 * @return Branch
+	 */
 	public Branch getBranch()
 	{
 		return branch;
 	}
+	
+	/** 
+	 * @param branch
+	 */
 	public void setBranch(Branch branch)
 	{
 		this.branch = branch;
 	}
+	
+	/** 
+	 * @return Date
+	 */
 	public Date getReportDate()
 	{
 		return reportDate;
 	}
+	
+	/** 
+	 * @param reportDate
+	 */
 	public void setReportDate(Date reportDate)
 	{
 		this.reportDate = reportDate;
 	}
+	
+	/** 
+	 * @return ReportType
+	 */
 	public ReportType getReportType()
 	{
 		return reportType;
 	}
+	
+	/** 
+	 * @param reportType
+	 */
 	public void setReportType(ReportType reportType)
 	{
 		this.reportType = reportType;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
 		return Objects.hash(branch, reportDate, reportType);
 	}
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{

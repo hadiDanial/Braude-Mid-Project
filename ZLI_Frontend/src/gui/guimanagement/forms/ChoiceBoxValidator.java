@@ -13,6 +13,10 @@ public class ChoiceBoxValidator<T> extends Validator
 		
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	@Override
 	protected boolean validate()
 	{

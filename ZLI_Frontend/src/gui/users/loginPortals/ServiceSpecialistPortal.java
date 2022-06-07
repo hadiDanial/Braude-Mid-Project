@@ -37,11 +37,20 @@ public class ServiceSpecialistPortal extends GUIController
     @FXML 
     private Button insertSurveyAnalysisBtn;
 
-    @FXML
+    
+	/** 
+	 * @param event
+	 */
+	@FXML
     void onInsertSurveyAnalysisBtn(ActionEvent event) {
         SceneManager.loadNewScene(GUIPages.ADD_SURVEY_ANALYSIS,true);
     }
 
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

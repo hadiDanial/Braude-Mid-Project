@@ -19,18 +19,33 @@ public class DiscountController {
         discounts=new ArrayList<Discount>();
         userController=UserController.getInstance();
     }
-    public static synchronized DiscountController getInstance(){
+    
+	/** 
+	 * @return DiscountController
+	 */
+	public static synchronized DiscountController getInstance(){
         if (instance == null)
 		{
 			instance = new DiscountController();
 		}
 		return instance;
     }
-    public void createDiscount(Discount discount,IResponse<Boolean> response)
+    
+	/** 
+	 * @param discount
+	 * @param response
+	 */
+	public void createDiscount(Discount discount,IResponse<Boolean> response)
 	{
 		Request req=new Request(RequestType.CREATE_DISCOUNT, discount,userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, response);
 	}
+	
+	/** 
+	 * @param products
+	 * @param discount
+	 * @param response
+	 */
 	public void addProductsToDiscount(ArrayList<CatalogItem> products,Discount discount,IResponse<Boolean> response)
 	{
 		for(CatalogItem p : products)
@@ -40,6 +55,12 @@ public class DiscountController {
 		Request req=new Request(RequestType.ADD_PRODUCTS_TO_DISCOUNT,discount,userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, response);
 	}
+	
+	/** 
+	 * @param products
+	 * @param discount
+	 * @param response
+	 */
 	public void removeProductsToDiscount(ArrayList<CatalogItem> products,Discount discount,IResponse<Boolean> response)
 	{
 		for(CatalogItem p : products)
@@ -49,17 +70,30 @@ public class DiscountController {
 		Request req=new Request(RequestType.REMOVE_PRODUCTS_FROM_DISCOUNT,discount,userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, response);
 	}
+	
+	/** 
+	 * @param response
+	 */
 	public void getDiscountsByBranch(int branchId,IResponse<ArrayList<Discount>> response)
 	{
 		Request req=new Request(RequestType.GET_DISCOUNTS_BY_BRANCH, branchId,userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, response);
 	}
-    public void getAllDiscounts(IResponse<ArrayList<Discount>> response)
+    
+	/** 
+	 * @param response
+	 */
+	public void getAllDiscounts(IResponse<ArrayList<Discount>> response)
 	{
 		Request req = new Request(RequestType.GET_ALL_DISCOUNTS, null, userController.getLoggedInUser());
 		ClientController.getInstance().sendRequest(req, executeResponseAndSaveDiscount(response));
 	}
-    private IResponse<ArrayList<Discount>> executeResponseAndSaveDiscount(IResponse<ArrayList<Discount>> response)
+    
+	/** 
+	 * @param response
+	 * @return IResponse<ArrayList<Discount>>
+	 */
+	private IResponse<ArrayList<Discount>> executeResponseAndSaveDiscount(IResponse<ArrayList<Discount>> response)
 	{
 		return new IResponse<ArrayList<Discount>>()
 		{
@@ -71,10 +105,20 @@ public class DiscountController {
 			}
 		};
 	}
-    protected void setDiscount(ArrayList<Discount> discounts) {
+    
+	/** 
+	 * @param discounts
+	 */
+	protected void setDiscount(ArrayList<Discount> discounts) {
         this.discounts =discounts;
     }
-    public boolean editDiscount(int discountId, Discount editeDiscount)
+    
+	/** 
+	 * @param discountId
+	 * @param editeDiscount
+	 * @return boolean
+	 */
+	public boolean editDiscount(int discountId, Discount editeDiscount)
 	{
 		throw new UnsupportedOperationException();
 	}

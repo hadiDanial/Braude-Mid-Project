@@ -18,6 +18,10 @@ public class RegexValidator extends Validator
 		this.pattern = pattern;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	@Override
 	protected boolean validate()
 	{

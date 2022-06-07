@@ -26,6 +26,11 @@ public class CatalogPage extends GUIController
 
 	private VBox scrollPaneContent;
 	
+	
+	/** 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

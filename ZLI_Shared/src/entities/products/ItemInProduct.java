@@ -18,36 +18,64 @@ public class ItemInProduct implements Serializable
 		this.itemQuantityInProduct = itemQuantityInProduct;
 	}
 
+	
+	/** 
+	 * @return Product
+	 */
 	public Product getProduct()
 	{
 		return product;
 	}
 
+	
+	/** 
+	 * @param product
+	 */
 	public void setProduct(Product product)
 	{
 		this.product = product;
 	}
 
+	
+	/** 
+	 * @return BaseProduct
+	 */
 	public BaseProduct getItem()
 	{
 		return item;
 	}
 
+	
+	/** 
+	 * @param item
+	 */
 	public void setItem(BaseProduct item)
 	{
 		this.item = item;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getItemQuantityInProduct()
 	{
 		return itemQuantityInProduct;
 	}
 
+	
+	/** 
+	 * @param itemQuantityInProduct
+	 */
 	public void setItemQuantityInProduct(int itemQuantityInProduct)
 	{
 		this.itemQuantityInProduct = itemQuantityInProduct;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -59,6 +87,11 @@ public class ItemInProduct implements Serializable
 		return result;
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
