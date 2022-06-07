@@ -39,7 +39,7 @@ public class ServiceSpecialistPortal extends GUIController
 
     @FXML
     void onInsertSurveyAnalysisBtn(ActionEvent event) {
-        SceneManager.loadNewScene(GUIPages.ADD_SURVEY_ANALYSIS,true);
+        SceneManager.loadNewScene(GUIPages.VIEW_SURVEY_SPECIALIST,true);
     }
 
 	@Override

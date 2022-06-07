@@ -53,7 +53,7 @@
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <Label fx:id="jobTitleLabel" layoutX="190.0" layoutY="138.0" text="Branch Employee" textFill="#078082">
+                  <Label fx:id="jobTitleLabel" layoutX="190.0" layoutY="138.0" text="Customer Service Specialist" textFill="#078082">
                      <font>
                         <Font size="26.0" />
                      </font>
