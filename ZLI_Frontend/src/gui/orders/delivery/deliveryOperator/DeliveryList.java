@@ -16,6 +16,7 @@ import entities.users.Delivery;
 import entities.users.Order;
 import gui.guimanagement.GUIController;
 import gui.guimanagement.SceneManager;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,12 +37,13 @@ public class DeliveryList extends GUIController{
     private OrderController orderController;
     private BranchController branchController;
     private ClientController clientController;
+    ArrayList<Branch> branchArray;
 
     @FXML
     private TableView<Delivery> deliveryTable;
 
     @FXML
-    private ChoiceBox branchDropDown;
+    private ChoiceBox<Branch> branchDropDown;
 
     @FXML
     private TableColumn<Delivery,Integer > orderIDColumn;
@@ -78,18 +80,21 @@ public class DeliveryList extends GUIController{
         branchController.getAllBranches(new IResponse<ArrayList<Branch>>() {
             @Override
             public void executeAfterResponse(Object message) {
-                branchList = (ObservableList<Branch>) message;
+            branchArray = (ArrayList<Branch>) message;
+            branchList.setAll(branchArray);
             }
         });
         branchDropDown.setItems(branchList);
-        orderController.getDeliveryByBranch(new IResponse<Order>()
-		{
-			@Override
-			public void executeAfterResponse(Object message)
-			{
-				deliveryList = (ObservableList<Delivery>) message;
-			}
-		},((Branch) branchDropDown.getValue()).getBranchId());
+        branchDropDown.valueProperty().addListener((ChangeListener<Branch>) (observable, oldValue, newValue) -> {
+            orderController.getDeliveryByBranch(new IResponse<Order>()
+            {
+                @Override
+                public void executeAfterResponse(Object message)
+                {
+                    deliveryList = (ObservableList<Delivery>) message;
+                }
+            },(newValue).getBranchId());
+        });
 	}
     private void initializeTableColumn()
     {

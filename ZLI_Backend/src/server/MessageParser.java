@@ -130,7 +130,7 @@ public class MessageParser
 			case GET_ALL_DELIVERY_BRANCH:
 			{
 				EntityRequestWithId<OrderStatus> entityRequestWithId = (EntityRequestWithId) req.getMessage();
-				return orderController.getOrdersByStatusAndBranch(entityRequestWithId.getEntityId(),entityRequestWithId.getEntity());
+				return orderController.getOrdersByStatusAndBranch(entityRequestWithId.getEntityId(),(OrderStatus)entityRequestWithId.getEntity());
 			}
 			
 			// Discounts

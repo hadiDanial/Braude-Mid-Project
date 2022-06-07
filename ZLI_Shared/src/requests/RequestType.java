@@ -31,7 +31,7 @@ public enum RequestType
 	GET_CATALOG(UserRole.values()),
 	GET_CATALOG_BY_BRANCH(UserRole.values()),
 	GET_ALL_ITEMS(UserRole.values()),
-	GET_ALL_DELIVERY_BRANCH(UserRole.values()),
+	GET_ALL_DELIVERY_BRANCH(new UserRole[] { UserRole.DeliveryPerson }),
 	
 	//Survey
 	CREATE_SURVEY(new UserRole[]{UserRole.BranchManager}),
