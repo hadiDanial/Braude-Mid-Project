@@ -94,8 +94,15 @@
                         <Font size="26.0" />
                      </font>
                   </Button>
-                  <Pane prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onAddBtn" prefWidth="100.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Add" textFill="#e2d784">
+                  <Pane prefWidth="200.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="chooseFile" layoutX="215.0" mnemonicParsing="false" onAction="#OnChooseFile" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Choose PDF File" textFill="WHITE">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Button>
+                     </children></Pane>
+                  <Button fx:id="saveBtn1" mnemonicParsing="false" onAction="#onSaveBtn" prefWidth="100.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Save" textFill="#e2d784">
                      <font>
                         <Font size="26.0" />
                      </font>
