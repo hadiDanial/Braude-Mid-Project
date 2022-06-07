@@ -41,7 +41,7 @@ public class ChainEmployeePortal extends GUIController
 
     @FXML
     void onManageCatalogBtn(ActionEvent event) {
-        SceneManager.loadNewScene(GUIPages.EDIT_PRODUCT,true);
+        SceneManager.loadNewScene(GUIPages.CATALOG_MANAGEMENT, true);
     }
 
     @FXML

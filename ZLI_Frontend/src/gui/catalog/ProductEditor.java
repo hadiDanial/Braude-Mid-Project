@@ -122,7 +122,19 @@ public class ProductEditor extends FormController
 	@FXML
 	void onAddBtn(ActionEvent event)
 	{
-		activeProduct = (isProduct) ? product : item;
+		if(isProduct)
+		{
+			product.setProductType(productTypeDropDown.getValue());
+			activeProduct = product;
+		}
+		else
+		{
+			item.setItemType(itemTypeDropDown.getValue());
+			item.setPrimaryColor(colorDropDown.getValue());
+			activeProduct = item;
+		}
+		activeProduct.setPrice(Float.parseFloat(priceField.getText()));
+		activeProduct.setProductName(nameField.getText());
 		if(isNewProduct)
 		{
 			productController.createProduct(activeProduct, new IResponse<Boolean>()
@@ -139,6 +151,7 @@ public class ProductEditor extends FormController
 					else
 					{
 						SceneManager.displayErrorMessage("Failed to add new product/item!");
+						stage.close();
 					}
 				}
 				
@@ -160,6 +173,7 @@ public class ProductEditor extends FormController
 							else
 							{
 								SceneManager.displayErrorMessage("Failed to update product/item!");
+								stage.close();
 							}
 						}}
 			);
@@ -191,6 +205,7 @@ public class ProductEditor extends FormController
 		else activeProduct = item;
 		if(isNewProduct)
 		setVisibility();
+		setTitle();
 		// TODO: change validators
 	}
 
@@ -210,15 +225,6 @@ public class ProductEditor extends FormController
 		setManagedProperties();
 		setupDropdowns();
 		setupTableColumns();
-
-		
-		//
-		product.addItem(new Item( "A", 5, null, ItemType.Seedling, ColorEnum.Blue));
-		product.addItem(new Item( "B", 55, null, ItemType.Branch, ColorEnum.White));
-		product.addItem(new Item( "C", 35, null, ItemType.Flower, ColorEnum.Purple));
-		itemsInProductList.setAll(product.getItems().keySet());
-
-		//
 		onProductItemToggle(null);
 		productController = ProductController.getInstance();
 		productController.getAllItems(new IResponse<ArrayList<Item>>()
@@ -228,7 +234,10 @@ public class ProductEditor extends FormController
 			public void executeAfterResponse(Object message)
 			{
 				if (message == null)
+				{
 					SceneManager.displayErrorMessage("Failed to load items!");
+					stage.close();
+				}
 				else
 				{
 					itemsList.setAll((ArrayList<Item>) message);
@@ -263,7 +272,7 @@ public class ProductEditor extends FormController
 	private void setupTableColumns()
 	{
 		itemNameColumn.setCellValueFactory(new PropertyValueFactory<Item, String>("productName"));
-		quantityColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Item>());
+		quantityColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		quantityColumn.setCellFactory(param -> new TableCell<Item, Item>()
 		{
 			@Override
@@ -274,9 +283,12 @@ public class ProductEditor extends FormController
 				if (item == null)
 				{
 					setGraphic(null);
+					setText(null);
 					return;
 				}
-				setText(String.valueOf(product.getItemQuantity(item)));
+				String t = String.valueOf(product.getItemQuantity(item));
+				System.out.println(t);
+				setText(t);
 			}
 		});
 		deleteColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
@@ -311,9 +323,10 @@ public class ProductEditor extends FormController
 			isProduct = true;
 			product = (Product) catalogItem.getBaseProduct();
 			base = product;
-			productItemToggle.setSelected(isProduct);
 			setVisibility();
 			setTitle();
+			productTypeDropDown.setValue(product.getProductType());
+			itemTypeDropDown.setValue(item.getItemType());
 			itemsInProductList.setAll(product.getItems().keySet());
 		} else
 		{
@@ -321,8 +334,11 @@ public class ProductEditor extends FormController
 			item = (Item) catalogItem.getBaseProduct();
 			base = item;
 			setVisibility();
+			itemTypeDropDown.setValue(item.getItemType());
+			colorDropDown.setValue(item.getPrimaryColor());
 			setTitle();
 		}
+		productItemToggle.setSelected(isProduct);
 		nameField.setText(base.getProductName());
 		priceField.setText(String.valueOf(base.getPrice()));
 		productImage.setImage(FileManager.bytesToImage(base.getImage()));

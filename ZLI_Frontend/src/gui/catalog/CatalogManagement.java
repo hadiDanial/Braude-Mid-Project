@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -19,6 +20,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+
+import gui.guimanagement.ButtonAnimator;
 import gui.guimanagement.GUIController;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import utility.FileManager;
@@ -47,11 +50,13 @@ public class CatalogManagement extends GUIController
 
 	@FXML
 	private TableColumn<CatalogItem, CatalogItem> editColumn;
+	@FXML private Button backBtn;
+	@FXML private Button addBtn;
 
 	@FXML
 	void onAddBtn(ActionEvent event)
 	{
-		SceneManager.loadNewScene(GUIPages.NEW_PRODUCT, true);
+		SceneManager.loadModalWindow(GUIPages.NEW_PRODUCT, true);
 	}
 
 	@FXML
@@ -66,6 +71,7 @@ public class CatalogManagement extends GUIController
 		productController = ProductController.getInstance();
 		initializeTableColumns();
 		productsTable.setItems(productsList);
+		ButtonAnimator.addButtonAnimations(addBtn, backBtn);
 		productController.getAllCatalogItems(new IResponse<ArrayList<CatalogItem>>()
 		{
 
@@ -89,7 +95,7 @@ public class CatalogManagement extends GUIController
 		detailsColumn.setCellValueFactory(new PropertyValueFactory<CatalogItem, String>("details"));
 		priceColumn.setCellValueFactory(new PropertyValueFactory<CatalogItem, Float>("basePrice"));
 
-		imageColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<CatalogItem>());
+		imageColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<CatalogItem>(param.getValue()));
 		imageColumn.setCellFactory(param -> new TableCell<CatalogItem, CatalogItem>()
 		{
 			private final ImageView imageView = new ImageView();
@@ -98,7 +104,9 @@ public class CatalogManagement extends GUIController
 			protected void updateItem(CatalogItem item, boolean empty)
 			{
 				super.updateItem(item, empty);
-
+//				imageView.setViewport(new Rectangle2D(0, 0, 50, 50));
+				imageView.setFitHeight(50);
+				imageView.setFitWidth(50);
 				if (item == null)
 				{
 					setGraphic(null);
@@ -110,7 +118,7 @@ public class CatalogManagement extends GUIController
 			}
 		});
 
-		editColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<CatalogItem>());
+		editColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		editColumn.setCellFactory(param -> new TableCell<CatalogItem, CatalogItem>()
 		{
 			private final Button editButton = new Button("Edit");
