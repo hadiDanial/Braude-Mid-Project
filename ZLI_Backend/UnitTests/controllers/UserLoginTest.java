@@ -18,14 +18,17 @@ import enums.UserRole;
 
 public class UserLoginTest {
     DatabaseConnection databaseConnection;
+	User user;
 	
-	/** 
+    /** 
 	 * @throws Exception
 	 */
 	@Before
 	public void setUp() throws Exception
 	{
 		DatabaseConnection.getInstance().connectToDB("localhost", "zlig13", "root", "6plle2nmfr4m");
+        user=new User("amr", "123", "Amr", "Kalany", "AmrKal@gmail.com", "0504707027",
+        UserRole.CEO, AccountStatus.Active, 0);
 	}
 
 	
@@ -41,15 +44,14 @@ public class UserLoginTest {
     public void testLogin()
     {
        boolean expected;
-       User user=new User("amr", "123", "Amr", "Kalany", "AmrKal@gmail.com", "0504707027",
-       UserRole.CEO, AccountStatus.Active, 0);
        UserController.getInstance().login(user.getUsername(),user.getPassword());
-          try{
-          ResultSet rs=databaseConnection.getByID(1, Tables.USERS_TABLE_NAME,"isLoggedIn");
-          expected =rs.getBoolean(Tables.usersColumnNames[10]);
-            assertEquals(expected,true);
-      } catch (SQLException e) {
-          e.printStackTrace();
-      }
+       try
+       {
+       ResultSet rs = databaseConnection.getByID(1, Tables.USERS_TABLE_NAME,"isLoggedIn");
+       expected = rs.getBoolean(Tables.usersColumnNames[10]);
+       assertEquals(expected,true);
+       }catch (SQLException e) {
+        e.printStackTrace();
+       }
     }
 }
