@@ -1,1 +1,1 @@
- java -jar G13_client.jar
+java -jar G13_client.jar

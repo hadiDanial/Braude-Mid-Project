@@ -71,8 +71,7 @@ public class Client extends AbstractClient
 			e.printStackTrace();
 			this.response = null;
 			this.awaitResponse = false;
-			SceneManager.displayErrorMessage("Could not send message to server: Terminating client." + e.getMessage());
-//			clientUI.display();
+//			clientUI.display("Could not send message to server: Terminating client." + e);
 //			quit();
 		}
 	}
