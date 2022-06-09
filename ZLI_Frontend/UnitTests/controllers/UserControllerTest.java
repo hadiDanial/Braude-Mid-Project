@@ -7,6 +7,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.concurrent.*;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 import entities.users.User;
 import requests.Request;
@@ -24,6 +27,9 @@ public class UserControllerTest
 	}
 	UserController userController;
 	User user;
+	User user1;
+	boolean result;
+
 	@Before
 	public void setUp() throws Exception
 	{
@@ -64,14 +70,25 @@ public class UserControllerTest
     @Test
     public void testLogin_wrongPassword()
     {
+		CompletableFuture completableFuture =new CompletableFuture<User>();
+		user1 = null;
+		user = new User();
 		userController.login("amr","1233", new IResponse<User>() {
 
 			@Override
 			public void executeAfterResponse(Object message) {
-				Assert.fail();
+				user1 = (User) message;
+				completableFuture.complete(user1);
 			}
-
-		   });     
+		   });
+		   try {
+			Thread.currentThread().sleep(2000);
+			completableFuture.get(2,TimeUnit.SECONDS);
+			Assert.assertEquals(user1, user);
+		} catch (InterruptedException | ExecutionException | TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 /* 	@Test
