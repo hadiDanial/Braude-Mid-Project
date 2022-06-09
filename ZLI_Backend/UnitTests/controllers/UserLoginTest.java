@@ -26,6 +26,7 @@ public class UserLoginTest {
 	@Before
 	public void setUp() throws Exception
 	{
+        databaseConnection=DatabaseConnection.getInstance();
 		DatabaseConnection.getInstance().connectToDB("localhost", "zlig13", "root", "6plle2nmfr4m");
         user=new User("amr", "123", "Amr", "Kalany", "AmrKal@gmail.com", "0504707027",
         UserRole.CEO, AccountStatus.Active, 0);
