@@ -8,6 +8,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.mysql.cj.xdevapi.Table;
+
 import database.DatabaseConnection;
 import database.IObjectToPreparedStatementParameters;
 import database.Tables;
@@ -189,7 +191,6 @@ public class UserController
 				user.getCredit() + "");
 	}
 
-	
 	/** getter of the database for creditcard 
 	 * @param user
 	 * @return CreditCard

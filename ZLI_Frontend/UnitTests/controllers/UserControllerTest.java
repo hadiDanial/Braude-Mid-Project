@@ -7,6 +7,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.concurrent.*;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 import entities.users.User;
 import requests.Request;
@@ -19,15 +22,27 @@ public class UserControllerTest
 		boolean result;
 		@Override
 		public <T> void sendRequest(Request request, IResponse<T> response) {
+			response.executeAfterResponse(user);
 		}
 		
 	}
+	public class UserResponse implements IResponse<User>{
+
+		@Override
+		public void executeAfterResponse(Object message) {
+			user1 = (User) message;
+		}
+
+	}
 	UserController userController;
 	User user;
+	User user1;
+	boolean result;
+
 	@Before
 	public void setUp() throws Exception
 	{
-		userController = UserController.getInstance();
+		userController = UserController.getInstance(new ClientControllerStub());
 		user = new User();
 	}
 
@@ -35,82 +50,66 @@ public class UserControllerTest
 	public void tearDown() throws Exception
 	{
 	}
+
+
  	@Test
     public void testLogin_existingUser()
     {
-       userController.login("amr","123", new IResponse<User>() {
-
-		@Override
-		public void executeAfterResponse(Object message) {
-			assertNotNull(message);
-		}
-		
-	   });
+       userController.login("amr","123", new UserResponse());
     }
 
     @Test
     public void testLogin_nonExistingUser()
     {
-	   userController.login("stam","123", new IResponse<User>() {
-
-		@Override
-		public void executeAfterResponse(Object message) {
-			assertNull(message);
-		}
-		
-	   });
+	   userController.login("stam","123", new UserResponse());
     }
 
     @Test
     public void testLogin_wrongPassword()
     {
-		userController.login("amr","1233", new IResponse<User>() {
-
-			@Override
-			public void executeAfterResponse(Object message) {
-				Assert.fail();
-			}
-
-		   });     
+		user1 = new User();
+		user = new User();
+		userController.login("amr","1233",new UserResponse());
+			Assert.assertEquals(user1, user);
     }
 
-/* 	@Test
+ 	@Test
     public void testLogin_nullUser()
     {
-       userController.login(null,"123", null);
-       assertNull(user);
+       userController.login(null,"123", new UserResponse());
+       assertNotNull(user);
     }
 
 	@Test
     public void testLogin_nullPassword()
     {
-        userController.login("amr",null, null);
-        assertNull(user);        
+        userController.login("amr",null, new UserResponse());
+        assertNotNull(user);        
     }
 
 	@Test
     public void testLogin_nullUserPassword()
     {
-        userController.login(null,null, null);
-        assertNull(user);        
+        userController.login(null,null, new UserResponse());
+        assertNotNull(user);        
     }
 	@Test
     public void testLogin_blankUserPassword()
     {
-        userController.login("","", null);
-        assertNull(user);        
+        userController.login("","", new UserResponse());
+        assertNotNull(user);        
     }
 	@Test
     public void testLogin_blankPassword()
     {
-        userController.login("amr","", null);
-        assertNull(user);        
+        userController.login("amr","", new UserResponse());
+        assertNotNull(user);        
     }
 	@Test
     public void testLogin_blankUser()
     {
-        userController.login("","123", null);
-        assertNull(user);       
-    }*/
+        userController.login("","123", new UserResponse());
+        assertNotNull(user);       
+    }
 
 }
