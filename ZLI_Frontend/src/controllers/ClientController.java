@@ -11,7 +11,7 @@ import requests.Request;
 import utility.IEventListener;
 import utility.IResponse;
 
-public class ClientController
+public class ClientController implements ClientControllerIF
 {
 
 	private static ClientController instance;

@@ -21,6 +21,7 @@ import enums.UserRole;
 public class UserLoginTest {
     DatabaseConnection databaseConnection;
 	User user;
+    UserController userController;
 	
     /** 
 	 * @throws Exception
@@ -30,6 +31,7 @@ public class UserLoginTest {
 	{
 		databaseConnection = DatabaseConnection.getInstance();
 		databaseConnection.connectToDB("localhost", "zlig13", "root", "6plle2nmfr4m"); 
+        userController = UserController.getInstance();
 	}
 
 	/** 
@@ -45,7 +47,7 @@ public class UserLoginTest {
     public void testLogin_existingUser()
     {
        boolean expected;
-       user=UserController.getInstance().login("amr","123");
+       user=userController.login("amr","123");
        try
        {
        ResultSet rs = databaseConnection.getByID(1, Tables.USERS_TABLE_NAME,"isLoggedIn");
@@ -66,14 +68,52 @@ public class UserLoginTest {
     @Test
     public void testLogin_nonExistingUser()
     {
-       user=UserController.getInstance().login("stam","123");
+       user=userController.login("stam","123");
        assertNull(user);
     }
 
     @Test
     public void testLogin_wrongPassword()
     {
-        user=UserController.getInstance().login("amr","1233");
+        user=userController.login("amr","1233");
+        assertNull(user);        
+    }
+    @Test
+    public void testLogin_nullUser()
+    {
+       user=userController.login(null,"123");
+       assertNull(user);
+    }
+
+    @Test
+    public void testLogin_nullPassword()
+    {
+        user=userController.login("amr",null);
+        assertNull(user);        
+    }
+
+	@Test
+    public void testLogin_nullUserPassword()
+    {
+        user=userController.login(null,null);
+        assertNull(user);        
+    }
+	@Test
+    public void testLogin_blankUserPassword()
+    {
+        user=userController.login("","");
+        assertNull(user);        
+    }
+	@Test
+    public void testLogin_blankPassword()
+    {
+        user=userController.login("amr","");
+        assertNull(user);        
+    }
+	@Test
+    public void testLogin_blankUser()
+    {
+        user=userController.login("","123");
         assertNull(user);        
     }
 }
