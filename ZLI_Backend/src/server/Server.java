@@ -126,10 +126,11 @@ public class Server extends AbstractServer {
 				Object response = MessageParser.handleRequest(request);
 				sendToClient(response, client);
 			} else {
-				return;
+				sendToClient(null, client);
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
+			sendToClient(e, client);
 		}
 
 
