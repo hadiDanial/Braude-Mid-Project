@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import com.mysql.cj.xdevapi.Result;
+
 import gui.ServerUI;
 import server.ConsoleString;
 
@@ -359,6 +362,19 @@ public class DatabaseConnection
 		}
 	}
 
+	public ResultSet deleteByCondition(String tablename, String condition)
+	{
+		Statement stmt;
+		try{
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery("DELETE FROM "+tablename+" WHERE "+condition);
+			return rs;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 	/**
 	 * Returns all records when joining the two tables with the given conditions.
 	 * 
