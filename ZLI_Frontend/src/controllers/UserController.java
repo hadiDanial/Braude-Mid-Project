@@ -14,12 +14,29 @@ import utility.IResponse;
 public class UserController
 {
 	public static UserController instance;
-	private ClientController clientController;
+	private ClientControllerIF clientController;
 	private User loggedInUser = null;
 
 	private UserController()
 	{
 		clientController = ClientController.getInstance();
+	}
+
+	private UserController(ClientControllerIF clientControllerIF)
+	{
+		clientController = clientControllerIF;
+	}
+		/** 
+	 * @return UserController
+	 */
+	public static synchronized UserController getInstance(ClientControllerIF clientControllerIF)
+	{
+
+		if (instance == null)
+		{
+			instance = new UserController(clientControllerIF);
+		}
+		return instance;
 	}
 
 	
