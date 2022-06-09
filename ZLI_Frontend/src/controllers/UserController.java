@@ -81,6 +81,8 @@ public class UserController
 			clientController.sendRequest(req, null);
 			loggedInUser = null;
 			SceneManager.loadNewScene(GUIPages.LOGIN, false);
+			OrderController.getInstance().reset();
+			ProductController.getInstance().reset();
 		}
 	}
 

@@ -161,5 +161,11 @@ public class ProductController
 		Request req = new Request(RequestType.UPDATE_PRODUCT, e);
 		clientController.sendRequest(req, response);
 	}
+	
+	public void reset()
+	{
+		this.items.clear();
+		this.catalog.clear();
+	}
 
 }

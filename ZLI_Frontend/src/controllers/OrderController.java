@@ -194,4 +194,9 @@ public class OrderController
 	{
 		return order;
 	}
+	
+	public void reset()
+	{
+		order = new Order();
+	}
 }
