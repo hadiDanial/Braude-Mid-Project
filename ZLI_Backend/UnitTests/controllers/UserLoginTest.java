@@ -158,6 +158,7 @@ public class UserLoginTest {
 
     /*Tester for logout function in the usercontroller 
      *tests the user's logging out if it worked
+      expecting to be able to log out 
      */
     @Test
     public void testLogin_loggingOut()
