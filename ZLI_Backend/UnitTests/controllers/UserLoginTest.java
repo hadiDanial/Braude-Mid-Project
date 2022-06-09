@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import controllers.UserController;
 import database.DatabaseConnection;
@@ -29,11 +30,8 @@ public class UserLoginTest {
 	{
 		databaseConnection = DatabaseConnection.getInstance();
 		databaseConnection.connectToDB("localhost", "zlig13", "root", "6plle2nmfr4m"); 
-        user=new User("amr", "123", "Amr", "Kalany", "AmrKal@gmail.com", "0504707027",
-        UserRole.CEO, AccountStatus.Active, 0);
 	}
 
-	
 	/** 
 	 * @throws Exception
 	 */
@@ -44,26 +42,38 @@ public class UserLoginTest {
 	}
 	
     @Test
-    public void testLogin()
+    public void testLogin_existingUser()
     {
        boolean expected;
-       UserController.getInstance().login(user.getUsername(),user.getPassword());
+       user=UserController.getInstance().login("amr","123");
        try
        {
        ResultSet rs = databaseConnection.getByID(1, Tables.USERS_TABLE_NAME,"isLoggedIn");
        if(rs.next())
        {
-    	   
        expected = rs.getBoolean(Tables.usersColumnNames[10]);
-       assertEquals(expected,true);
+       assertTrue(expected);
        }
        else
-    	   
        {
     	   Assert.fail();
        }
        }catch (SQLException e) {
         e.printStackTrace();
        }
+    }
+
+    @Test
+    public void testLogin_nonExistingUser()
+    {
+       user=UserController.getInstance().login("stam","123");
+       assertNull(user);
+    }
+
+    @Test
+    public void testLogin_wrongPassword()
+    {
+        user=UserController.getInstance().login("amr","1233");
+        assertNull(user);        
     }
 }
