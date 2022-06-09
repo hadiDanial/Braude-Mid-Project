@@ -35,11 +35,11 @@ public enum RequestType
 	GET_ALL_DELIVERY_BRANCH(new UserRole[] { UserRole.DeliveryPerson }),
 	
 	//Survey
-	CREATE_SURVEY(new UserRole[]{UserRole.BranchManager}),
-	GET_SURVEY_BY_BRANCH(new UserRole[]{UserRole.BranchManager}),
-	GET_SURVEY_BY_ID(new UserRole[]{UserRole.BranchManager}),
-	GET_SURVEY_BY_DATE(new UserRole[]{UserRole.BranchManager}),
-	GET_ALL_SURVEY(new UserRole[]{UserRole.BranchManager}),
+	CREATE_SURVEY(new UserRole[]{UserRole.CustomerServiceEmployee}),
+	GET_SURVEY_BY_BRANCH(new UserRole[]{UserRole.BranchManager, UserRole.CustomerServiceEmployee, UserRole.CustomerServiceSpecialist }),
+	GET_SURVEY_BY_ID(new UserRole[]{UserRole.BranchManager, UserRole.CustomerServiceEmployee, UserRole.CustomerServiceSpecialist }),
+	GET_SURVEY_BY_DATE(new UserRole[]{UserRole.BranchManager, UserRole.CustomerServiceEmployee, UserRole.CustomerServiceSpecialist }),
+	GET_ALL_SURVEY(new UserRole[]{UserRole.BranchManager, UserRole.CustomerServiceEmployee, UserRole.CustomerServiceSpecialist }),
 	GET_ALL_SURVEY_ANALYSYS(new UserRole[]{UserRole.CustomerServiceSpecialist}),
 	
 	// Discounts
