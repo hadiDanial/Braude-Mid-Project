@@ -84,7 +84,10 @@ public class MessageParser
 				else
 					return null;
 			}
-			
+			case GET_UPDATED_CREDIT:
+			{
+				return userController.getCredit((Integer) req.getMessage());
+			}
 			case GET_ALL_CUSTOMERS:
 			{
 				return userController.getAllUsers();

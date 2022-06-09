@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -45,6 +46,7 @@ public class SceneManager
 	private static HashSet<Pane> panesToResize;
 	private static AnchorPane scrollPaneAnchor;
 	private static Button homeButton;
+	private static MenuItem myOrders;
 
 	/**
 	 * Initialize the UI. This method should only be called <b>once!</b>
@@ -102,6 +104,7 @@ public class SceneManager
 			homeButton = mainViewController.getHomeBtn();
 			scrollPane = mainViewController.getScrollPane();
 			container = mainViewController.getContent();
+			myOrders = mainViewController.getMyOrdersItem();
 			container.setAlignment(Pos.TOP_CENTER);
 			currentScene = new Scene(root);
 			mainViewPane.setPrefWidth(ClientProperties.getClientWidth());
@@ -334,12 +337,11 @@ public class SceneManager
 	/**
 	 * Set whether the user drop down and the shopping cart buttons will be visible.
 	 */
-	public static void setHeaderButtonVisibility(boolean showUserDropDown, boolean showShoppingCartButton)
+	public static void setHeaderButtonVisibility(boolean showUserDropDown, boolean isUser)
 	{
 		userDropDown.setVisible(showUserDropDown);
-		shoppingCartButton.setVisible(showShoppingCartButton);
-		userDropDown.setDisable(!showUserDropDown);
-		shoppingCartButton.setDisable(!showShoppingCartButton);
+		shoppingCartButton.setVisible(isUser);
+		myOrders.setVisible(isUser);
 	}
 
 	
@@ -596,5 +598,13 @@ public class SceneManager
 			displayErrorMessage("User Error!");
 		}
 		
+	}
+
+	public static void openMyOrdersPage()
+	{
+		if(UserController.getInstance().getLoggedInUser().getRole() == UserRole.Customer)
+		{
+			loadNewScene(GUIPages.CUSTOMER_ORDERS, true);
+		}
 	}
 }

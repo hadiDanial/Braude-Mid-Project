@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -45,6 +46,8 @@ public class MainView extends Application implements Initializable
 
 	private static AnchorPane root;
 
+	@FXML
+    private MenuItem myOrdersItem;
 	
 	/** 
 	 * @param event
@@ -100,7 +103,11 @@ public class MainView extends Application implements Initializable
 		SceneManager.openSettingsPage();
 	}
 
-	
+    @FXML
+    void onMyOrdersBtn(ActionEvent event) {
+    	SceneManager.openMyOrdersPage();
+    }
+    
 	/** 
 	 * @return Pane
 	 */
@@ -179,4 +186,12 @@ public class MainView extends Application implements Initializable
 	private void onHomeBtn(ActionEvent event){
 		SceneManager.openHomePage();
 	}
+
+
+	public MenuItem getMyOrdersItem()
+	{
+		return myOrdersItem;
+	}
+	
+	
 }

@@ -177,4 +177,22 @@ public class UserController
 		clientController.sendRequest(req, response);		
 	}
 
+
+	public void updateCredit()
+	{
+		if(isLoggedIn())
+		{			
+		Request req = new Request(RequestType.GET_UPDATED_CREDIT, loggedInUser.getUserId());
+		clientController.sendRequest(req, new IResponse<Float>()
+		{
+
+			@Override
+			public void executeAfterResponse(Object message)
+			{
+				loggedInUser.setCredit((Float) message);
+			}
+		});		
+		}
+	}
+
 }

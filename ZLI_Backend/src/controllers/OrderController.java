@@ -218,6 +218,18 @@ public class OrderController
 			{
 				databaseConnection.updateById(id, "orderId", Tables.DELIVERIES_TABLE_NAME, "delivered", "true");
 			}
+			if(orderStatus == OrderStatus.Canceled)
+			{
+				Instant deliveryTime = order.getDeliveryDate(), now = Instant.now();
+				if(now.isBefore(deliveryTime.minusSeconds(60 * 60)) && (now.isAfter(deliveryTime.minusSeconds( 60 * 60 * 3))))
+				{
+					 userController.updateUserCredit(order.getCustomer(), order.getTotalCost() / 2);
+				}
+				else if(now.isBefore(deliveryTime.minusSeconds( 60 * 60 * 3)))
+				{
+					userController.updateUserCredit(order.getCustomer(), order.getTotalCost());					
+				}
+			}
 		}
 		return res;
 	}

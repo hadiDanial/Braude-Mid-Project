@@ -266,4 +266,21 @@ public class UserController
 		ResultSet rs = databaseConnection.getByID(userId, Tables.USERS_TABLE_NAME, ID_FIELD_NAME);		
 		return convertRSToUser(rs);
 	}
+
+
+	public float getCredit(int userId)
+	{
+		ResultSet rs = databaseConnection.getByID(userId, Tables.USERS_TABLE_NAME, ID_FIELD_NAME);
+		try
+		{
+			if(rs.next())
+			{
+				return rs.getFloat(Tables.usersColumnNames[9]);
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

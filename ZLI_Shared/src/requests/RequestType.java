@@ -25,6 +25,7 @@ public enum RequestType
 	GET_ALL_ORDER_STATUS(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
 	GET_ALL_ORDER_STATUS_AND_BRANCH(new UserRole[] { UserRole.BranchManager, UserRole.BranchEmployee }),
 	UPDATES_ORDER_STATUS(UserRole.values()),
+	GET_UPDATED_CREDIT(UserRole.values()),
 	
 	// Products/Catalog
 	ADD_PRODUCT(new UserRole[] { UserRole.ChainEmployee }),
@@ -56,7 +57,10 @@ public enum RequestType
 			UserRole.CustomerServiceSpecialist, UserRole.DeliveryPerson } ),
 	// Complaints
 	CREATE_COMPLAINTS(new UserRole[] {UserRole.Customer}),
-	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee}),;
+	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee})
+	
+	
+	;
 	
 	private UserRole[] permittedRoles;
 

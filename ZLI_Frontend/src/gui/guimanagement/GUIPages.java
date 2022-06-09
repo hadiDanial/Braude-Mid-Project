@@ -16,6 +16,7 @@ public enum GUIPages
 	
 	ORDERS("orders/OrdersPage.fxml", "Orders"),
 	UPDATE_ORDER("orders/OrderUpdatePage.fxml", "Update Order"), 
+	CUSTOMER_ORDERS("orders/customerOrders/CustomerOrders.fxml", "My Orders"),
 	LOADING("client/main/LoadingPage.fxml", "LOADING"),
 	CATALOG_PAGE("catalog/CatalogPage.fxml", "Catalog"),
 	PRODUCT_ELEMENT("catalog/ProductElement.fxml", ""),
