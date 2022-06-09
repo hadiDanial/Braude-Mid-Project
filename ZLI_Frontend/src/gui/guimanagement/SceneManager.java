@@ -341,6 +341,8 @@ public class SceneManager
 	{
 		userDropDown.setVisible(showUserDropDown);
 		shoppingCartButton.setVisible(isUser);
+		userDropDown.setDisable(!showUserDropDown);
+		shoppingCartButton.setDisable(!isUser);
 		myOrders.setVisible(isUser);
 	}
 
@@ -594,6 +596,7 @@ public class SceneManager
 			}
 		} catch (NullPointerException e)
 		{
+			e.printStackTrace();
 			System.out.println("No user");
 			displayErrorMessage("User Error!");
 		}

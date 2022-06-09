@@ -30,7 +30,7 @@ public class CustomerOrdersList extends GUIController
 	private OrderController orderController;
 	private ObservableList<Order> ordersList = FXCollections.observableArrayList();
 	private ArrayList<Order> orders;
-	
+
 	@FXML
 	private TableView<Order> ordersTable;
 
@@ -39,9 +39,11 @@ public class CustomerOrdersList extends GUIController
 
 	@FXML
 	private TableColumn<Order, String> orderDateColumn;
-	
+
 	@FXML
 	private TableColumn<Order, String> greetingColumn;
+	@FXML
+	private TableColumn<Order, String> orderStatusColumn;
 
 	@FXML
 	private TableColumn<Order, Integer> numOfItemsColumn;
@@ -52,17 +54,18 @@ public class CustomerOrdersList extends GUIController
 	@FXML
 	private TableColumn<Order, Order> cancelColumn;
 
-	  @FXML
-	    private Label creditLabel;
+	@FXML
+	private Label creditLabel;
 
-    
-	/** 
+	/**
 	 * @param event
 	 */
 	@FXML
-    void onBackBtn(ActionEvent event) {
-        SceneManager.loadPreviousPage();
-    }
+	void onBackBtn(ActionEvent event)
+	{
+		SceneManager.loadPreviousPage();
+	}
+
 	@FXML
 	private TableColumn<Order, Integer> orderIdColumn;
 
@@ -71,13 +74,10 @@ public class CustomerOrdersList extends GUIController
 
 	@FXML
 	private Button backBtn;
-	
+
 	private User user;
 
-
-
-    
-	/** 
+	/**
 	 * @param location
 	 * @param resources
 	 */
@@ -87,7 +87,7 @@ public class CustomerOrdersList extends GUIController
 		orderController = OrderController.getInstance();
 		user = UserController.getInstance().getLoggedInUser();
 		creditLabel.setText(String.valueOf(user.getCredit()));
-		orderController.getAllOrdersByStatus(new IResponse<ArrayList<Order>>()
+		orderController.getAllUserOrders(new IResponse<ArrayList<Order>>()
 		{
 
 			@Override
@@ -101,8 +101,7 @@ public class CustomerOrdersList extends GUIController
 					ordersList.setAll(orders);
 				}
 			}
-		},OrderStatus.Pending);
-	
+		}, user.getUserId());
 
 		ordersTable.setItems(ordersList);
 		initializeTableColumns();
@@ -113,49 +112,54 @@ public class CustomerOrdersList extends GUIController
 		orderIdColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("orderId"));
 //		orderDetailsColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderDetails"));
 		greetingColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("GreetingCard"));
+		orderStatusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatus"));
 		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("formattedOrderDate"));
 
 		cancelColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<Order>(param.getValue()));
 		cancelColumn.setCellFactory(param -> new TableCell<Order, Order>()
 		{
 			private final Button denyButton = new Button("Cancel");
-			
+
 			@Override
 			protected void updateItem(Order order, boolean empty)
 			{
 				super.updateItem(order, empty);
-				
+
 				if (order == null)
 				{
 					setGraphic(null);
 					return;
 				}
-				setGraphic(denyButton );
-				denyButton.setOnAction(event -> {
-					updateStatus(order, OrderStatus.Canceled);
-				});
+				if (order.getOrderStatus() == OrderStatus.Accepted || order.getOrderStatus() == OrderStatus.Pending)
+				{
+					setGraphic(denyButton);
+					denyButton.setOnAction(event -> {
+						updateStatus(order, OrderStatus.Canceled);
+					});
+				}
 			}
 		});
 	}
-	
-	
-	/** 
+
+	/**
 	 * @param order
 	 * @param status
 	 */
 	private void updateStatus(Order order, OrderStatus status)
 	{
-		IResponse<Boolean> response = new IResponse<Boolean>() {
+		IResponse<Boolean> response = new IResponse<Boolean>()
+		{
 
 			@Override
 			public void executeAfterResponse(Object message)
 			{
-				if((Boolean) message)
+				if ((Boolean) message)
 				{
 					ordersList.remove(order);
-					UserController.getInstance().updateCredit();
+//					UserController.getInstance().updateCredit();
 				}
-			}};
-			orderController.updateOrderStatus(response, order.getOrderId(), status);
+			}
+		};
+		orderController.updateOrderStatus(response, order.getOrderId(), status);
 	}
 }

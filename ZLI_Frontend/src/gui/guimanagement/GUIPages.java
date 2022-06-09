@@ -12,11 +12,10 @@ public enum GUIPages
 	STARTUP_PAGE("orders/OrdersPage.fxml", "Login (CHANGE TO LOGIN PAGE WHEN IT'S READY!"), 
 	NEW_USER("users/customers/NewUser.fxml","Add new user"),
 	CUSTOMERS_LIST("users/customers/CustomersList.fxml","Customers List"),
-
 	
 	ORDERS("orders/OrdersPage.fxml", "Orders"),
 	UPDATE_ORDER("orders/OrderUpdatePage.fxml", "Update Order"), 
-	CUSTOMER_ORDERS("orders/customerOrders/CustomerOrders.fxml", "My Orders"),
+	CUSTOMER_ORDERS("orders/customerOrders/CustomerOrdersList.fxml", "My Orders"),
 	LOADING("client/main/LoadingPage.fxml", "LOADING"),
 	CATALOG_PAGE("catalog/CatalogPage.fxml", "Catalog"),
 	PRODUCT_ELEMENT("catalog/ProductElement.fxml", ""),

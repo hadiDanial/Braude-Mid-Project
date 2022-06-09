@@ -88,6 +88,10 @@ public class MessageParser
 			{
 				return userController.getCredit((Integer) req.getMessage());
 			}
+			case GET_ALL_USER_ORDERS:
+			{
+				return orderController.getAllUserOrders((Integer) req.getMessage());
+			}
 			case GET_ALL_CUSTOMERS:
 			{
 				return userController.getAllUsers();

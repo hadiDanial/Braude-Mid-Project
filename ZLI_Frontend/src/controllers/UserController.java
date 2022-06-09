@@ -98,6 +98,7 @@ public class UserController
 			clientController.sendRequest(req, null);
 			loggedInUser = null;
 			SceneManager.loadNewScene(GUIPages.LOGIN, false);
+			SceneManager.setHeaderButtonVisibility(false, false);
 			OrderController.getInstance().reset();
 			ProductController.getInstance().reset();
 		}
@@ -158,7 +159,7 @@ public class UserController
 	 */
 	public void checkIfFirstOrder(IResponse<Boolean> response)
 	{
-		if(loggedInUser.getRole() == UserRole.Customer)
+		if(isLoggedIn() && loggedInUser.getRole() == UserRole.Customer)
 		{			
 			Request req = new Request(RequestType.CHECK_IF_FIRST_ORDER, loggedInUser.getUserId());
 			clientController.sendRequest(req, response);

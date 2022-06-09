@@ -227,7 +227,7 @@ public class OrderController
 				}
 				else if(now.isBefore(deliveryTime.minusSeconds( 60 * 60 * 3)))
 				{
-					userController.updateUserCredit(order.getCustomer(), order.getTotalCost());					
+					userController.updateUserCredit(order.getCustomer(), getOrder(order.getOrderId()).getTotalCost());					
 				}
 			}
 		}
@@ -300,7 +300,12 @@ public class OrderController
 		}
 		return pendingOrders;
 	}
-	
+
+	public ArrayList<Order> getAllUserOrders(int userId)
+	{
+		ResultSet rs = databaseConnection.getBySimpleCondition("userId", String.valueOf(userId), Tables.ORDERS_TABLE_NAME);
+		return convertRSToOrderArray(rs);
+	}
 	/** function that gets the order by it's status type
 	 * @param orderStatus 
 	 * @return ArrayList<Order>
@@ -494,5 +499,7 @@ public class OrderController
 		}
 		return count;
 	}
+
+
 
 }

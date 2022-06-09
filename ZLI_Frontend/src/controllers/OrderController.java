@@ -156,7 +156,11 @@ public class OrderController
         Request request = new Request(RequestType.GET_ALL_ORDER_STATUS,orderStatus);
         clientController.sendRequest(request, iResponse);
     }
-	
+	public void getAllUserOrders(IResponse<ArrayList<Order>> iResponse, int userId)
+	{
+		Request request = new Request(RequestType.GET_ALL_USER_ORDERS, userId);
+        clientController.sendRequest(request, iResponse);
+	}
 	/** 
 	 * @param iResponse
 	 * @param orderStatus
@@ -199,4 +203,7 @@ public class OrderController
 	{
 		order = new Order();
 	}
+
+
+	
 }

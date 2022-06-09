@@ -221,6 +221,7 @@ public class Order implements Serializable, IDiscountable
 	 */
 	public float getTotalCost()
 	{
+		if(totalCost != 0) return totalCost;
 		totalCost = 0;
 		for (CartItem cartItem : products)
 		{
