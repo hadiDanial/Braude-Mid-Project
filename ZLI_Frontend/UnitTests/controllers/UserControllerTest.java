@@ -16,10 +16,9 @@ public class UserControllerTest
 {
 	public class ClientControllerStub implements ClientControllerIF
 	{
-
+		boolean result;
 		@Override
 		public <T> void sendRequest(Request request, IResponse<T> response) {
-			
 		}
 		
 	}
@@ -69,49 +68,49 @@ public class UserControllerTest
 
 			@Override
 			public void executeAfterResponse(Object message) {
-				assertNull(message);
+				Assert.fail();
 			}
-			
+
 		   });     
     }
 
-	@Test
+/* 	@Test
     public void testLogin_nullUser()
     {
        userController.login(null,"123", null);
        assertNull(user);
     }
 
-   /*  @Test
+	@Test
     public void testLogin_nullPassword()
     {
-        user=userController.login("amr",null, null);
+        userController.login("amr",null, null);
         assertNull(user);        
     }
 
 	@Test
     public void testLogin_nullUserPassword()
     {
-        user=userController.login(null,null, null);
+        userController.login(null,null, null);
         assertNull(user);        
     }
 	@Test
     public void testLogin_blankUserPassword()
     {
-        user=userController.login("","", null);
+        userController.login("","", null);
         assertNull(user);        
     }
 	@Test
     public void testLogin_blankPassword()
     {
-        user=userController.login("amr","", null);
+        userController.login("amr","", null);
         assertNull(user);        
     }
 	@Test
     public void testLogin_blankUser()
     {
-        user=userController.login("","123", null);
-        assertNull(user);        
+        userController.login("","123", null);
+        assertNull(user);       
     }*/
 
 }
