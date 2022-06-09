@@ -36,6 +36,9 @@ public class OpenOrdersList extends GUIController
 
 	@FXML
 	private TableColumn<Order, String> orderDateColumn;
+	
+	@FXML
+	private TableColumn<Order, String> greetingColumn;
 
 	@FXML
 	private TableColumn<Order, Integer> numOfItemsColumn;
@@ -104,6 +107,7 @@ public class OpenOrdersList extends GUIController
 		orderIdColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("orderId"));
 //		orderDetailsColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderDetails"));
 //		addressColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("address"));
+		greetingColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("GreetingCard"));
 		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("formattedOrderDate"));
 //		numOfItemsColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("numProducts"));
 //		priceColumn.setCellValueFactory(new PropertyValueFactory<Order, Float>("totalCost"));

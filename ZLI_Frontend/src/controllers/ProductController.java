@@ -164,7 +164,9 @@ public class ProductController
 	
 	public void reset()
 	{
+		if(items != null)
 		this.items.clear();
+		if(catalog != null)
 		this.catalog.clear();
 	}
 

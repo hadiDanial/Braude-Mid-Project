@@ -37,6 +37,7 @@
                   <TableColumn fx:id="orderIdColumn" prefWidth="75.0" text="Order Id" />
                   <!-- <TableColumn fx:id="orderDetailsColumn" prefWidth="75.0" text="Details" /> -->
                   <!-- <TableColumn fx:id="addressColumn" prefWidth="75.0" text="Address" /> -->
+                  <TableColumn fx:id="greetingColumn" prefWidth="75.0" text="Greeting Card" />
                   <TableColumn fx:id="orderDateColumn" prefWidth="75.0" text="Order Date" />
                   <!-- <TableColumn fx:id="numOfItemsColumn" prefWidth="75.0" text="# Items" /> -->
                   <!-- <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" /> -->
