@@ -45,8 +45,8 @@ public class ReportsController {
 
 	public boolean createNewReport(Report report) {
 		boolean res = false;
-		int insertedReportId=databaseConnection.insertAndReturnGeneratedId(Tables.REPORTS_TABLE_NAME,Tables.reportsColumnNames, reportToPS(report));
-
+		int insertedReportId = databaseConnection.insertAndReturnGeneratedId(Tables.REPORTS_TABLE_NAME,
+				Tables.reportsColumnNames, reportToPS(report));
 
 		if (insertedReportId == -1) {
 			return false;
@@ -56,8 +56,7 @@ public class ReportsController {
 		return true;
 	}
 
-	private IObjectToPreparedStatementParameters<Report> reportToPS(Report report)
-	{
+	private IObjectToPreparedStatementParameters<Report> reportToPS(Report report) {
 		return new IObjectToPreparedStatementParameters<Report>() {
 			@Override
 			public void convertObjectToPSQuery(PreparedStatement statementToPrepare) throws SQLException {
@@ -66,7 +65,7 @@ public class ReportsController {
 				statementToPrepare.setInt(3, report.getMonth());
 				statementToPrepare.setInt(4, report.getBranch().getBranchId());
 				statementToPrepare.setString(5, report.getReportType().name().toString());
-				statementToPrepare.setString(6, report.getAllDataString());
+				statementToPrepare.setString(6, report.getDataString());
 				statementToPrepare.setTimestamp(7, Timestamp.from(report.getReportDate().toInstant()));
 			}
 		};
@@ -85,7 +84,7 @@ public class ReportsController {
 		map.put("reportType", type.name());
 		ResultSet reportsRS = databaseConnection.getByConditions(Tables.REPORTS_TABLE_NAME, map);
 		Report report = convertRSToReport(reportsRS);
-		
+
 		return report;
 	}
 
@@ -110,23 +109,20 @@ public class ReportsController {
 
 		return report;
 	}
-	
-	public Report generateIncomeReport(Date startDate, Date endDate, int branchId)
-	{
-		ArrayList<Order> orders = OrderController.getInstance().getOrdersByDatesAndBranch(startDate, endDate, branchId, OrderStatus.Delivered);
+
+	public Report generateIncomeReport(Date startDate, Date endDate, int branchId) {
+		ArrayList<Order> orders = OrderController.getInstance().getOrdersByDatesAndBranch(startDate, endDate, branchId,
+				OrderStatus.Delivered);
 		Report report = new Report();
 		report.setReportDate(Date.from(Instant.now()));
 		HashMap<String, Number> map = new HashMap<String, Number>();
-		orders.sort(new Comparator<Order>()
-		{
+		orders.sort(new Comparator<Order>() {
 			@Override
-			public int compare(Order o1, Order o2)
-			{
+			public int compare(Order o1, Order o2) {
 				return o1.getOrderDate().compareTo(o2.getOrderDate());
 			}
 		});
-		for (Order order : orders)
-		{
+		for (Order order : orders) {
 			map.put(String.valueOf(Date.from(order.getOrderDate()).getDay()), order.getTotalCost());
 		}
 		report.setReportType(ReportType.IncomeReport);

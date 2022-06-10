@@ -1,6 +1,9 @@
 package entities.other;
 
 import java.io.Serializable;
+import java.lang.annotation.Retention;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.*;
 import enums.ReportType;
 
@@ -17,9 +20,10 @@ public class Report implements Serializable {
 
 	private static final long serialVersionUID = 1262150235358849085L;
 
-	public Report(int reportId, Branch branch, Date reportDate, ReportType reportType, int month, int year, String data) {
+	public Report(int reportId, Branch branch, Date reportDate, ReportType reportType, int month, int year,
+			String data) {
 		super();
-		this.reportId=reportId;
+		this.reportId = reportId;
 		this.branch = branch;
 		this.reportDate = reportDate;
 		this.reportType = reportType;
@@ -28,44 +32,68 @@ public class Report implements Serializable {
 		this.data = data;
 	}
 
-	public Report()
-	{
+	public Report() {
 	}
 
-	public String getAllDataString(){
-		return data;
+	public void setData(HashMap<String, Number> map) {
+		this.map = map;
+		buildReportDataString();
 	}
 
-	public void setData(HashMap<String, Number> map)
-	{
-		this.map= map;
-	}
-	public HashMap<String, Number> getDataByReportType(ReportType type) {
+	private String buildReportDataString() {
+		if (map != null) {
+			String dataString = "";
+
+			for (int i = 0; i < 31; i++) {
+				if (map.containsKey(i + "")) {
+					Number value = map.get(i + "");
+					dataString += i + ":" + value.toString();
+				}
+				if (map.containsKey((i + 1) + "")) {
+					dataString += ",";
+				}
+			}
+
+			this.data = dataString;
+			return dataString;
+		}
 		return null;
 	}
 
-	private HashMap<String, Number> buildReportMapForIncome(){
+	private HashMap<String, Number> buildReportMap() {
+		HashMap<String, Number> map = new HashMap<>();
+		if (data != null) {
+			String[] dataSplitByComma = this.data.split(",");
+			for (String string : dataSplitByComma) {
+				try {
+					map.put(string.split(":")[0], NumberFormat.getInstance().parse(string.split(":")[1]));
+				} catch (ParseException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+			this.map = map;
+		}
 
-		return null; // map = {"number": amount,...}
+		return null;
 	}
 
-	private HashMap<String, Number> buildReportMapForComplaints(){
-
-		return null; // map = {"number": amount,...}
+	public String getDataString() {
+		if (data != null)
+			return data;
+		return buildReportDataString();
 	}
-	private HashMap<String, Number> buildReportMapForOrders(){
 
-		return null; // map = {"string": amount,...}
+	public HashMap<String, Number> getDataMap() {
+		if (this.map != null)
+			return this.map;
+
+		return buildReportMap();
 	}
 
 	public void setData(String data) {
-		// select * where 
-		// maybe make it get a hashMap and then translate it to a string
-		// or make multiple functions depending on the need
-		for(int i=0;i<31;i++){
-			String str=i+"";
-		}
 		this.data = data;
+		buildReportMap();
 	}
 
 	public int getMonth() {
@@ -166,6 +194,5 @@ public class Report implements Serializable {
 		return branch.equals(other.branch) && reportDate.equals(other.reportDate)
 				&& reportType == other.reportType;
 	}
-
 
 }
