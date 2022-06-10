@@ -6,8 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -331,6 +333,48 @@ public class DatabaseConnection
 			System.out.println(query);
 			ResultSet rs = stmt.executeQuery(query);
 			return rs;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	/**
+	 * Returns records from the given table that match all of the conditions between start and end dates.
+	 * 
+	 * @param tableName     Name of the table.
+	 * @param conditionsMap HashMap containing the conditions - column names and
+	 *                      their values.
+	 *                      @param dateFieldName Name of the date field.
+	 *                      @param startDate Start date
+	 *                      @param endDate End date
+	 *                    
+	 * @return ResultSet containing the results of the query.
+	 */
+	public ResultSet getByConditionsBetweenDates(String tableName, HashMap<String, String> conditionsMap, String dateFieldName,
+			Date startDate, Date endDate)
+	{
+		PreparedStatement ps;
+		try
+		{
+			StringBuilder sb = new StringBuilder();
+			String AND = " AND ";
+			for (Entry<String, String> entry : conditionsMap.entrySet())
+			{
+				String key = entry.getKey();
+				String val = entry.getValue();
+				sb.append(key + "='" + val + "'" + AND);
+			}
+			sb.delete(sb.length() - AND.length(), sb.length());
+			System.out.println(sb.toString());
+
+			String query = "SELECT * FROM " + tableName + " WHERE " + sb.toString() + "AND " + dateFieldName + 
+					" <=? AND "+dateFieldName + ">=?;";
+			ps = conn.prepareStatement(query);
+			ps.setTimestamp(1, Timestamp.from(endDate.toInstant()));
+			ps.setTimestamp(2, Timestamp.from(startDate.toInstant()));
+			System.out.println(query);
+			return ps.executeQuery();
 		} catch (Exception e)
 		{
 			e.printStackTrace();
