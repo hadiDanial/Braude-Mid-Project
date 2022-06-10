@@ -32,8 +32,7 @@ public class Report implements Serializable {
 		this.data = data;
 	}
 
-	public Report()
-	{
+	public Report() {
 		data = "";
 	}
 
@@ -51,7 +50,7 @@ public class Report implements Serializable {
 					Number value = map.get(i + "");
 					dataString += i + ":" + value.toString();
 				}
-				if (map.containsKey((i + 1) + "")) {
+				if (map.containsKey((i + 1) + "") && map.containsKey(i + "")) {
 					dataString += ",";
 				}
 			}
