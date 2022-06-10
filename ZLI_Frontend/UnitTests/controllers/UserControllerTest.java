@@ -59,16 +59,24 @@ public class UserControllerTest
 	{
 	}
 
-
+	/* 
+	 * Functionality: Tests logging in with user and a valid username and password.<br>
+	 * Input data: Username="amr", password="123", User "amr".<br>
+	 * Expected result: successfully logged with user.
+	*/
  	@Test
     public void testLogin_existingUser()
     {
 		expected.setUsername("amr");
 		expected.setPassword("123");
        userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
-	   assertTrue("",user.equals(expected));
+	   assertTrue("successful User",user.equals(expected));
     }
-
+	/* 
+	*Functionality: Tests logging in with a null username.<br>
+	* Input data: null username, password="123".<br>
+	* Expected result: Failed to login.
+	*/
  	@Test
     public void testLogin_nullUser()
     {
@@ -77,7 +85,11 @@ public class UserControllerTest
        userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
 	   assertFalse("",user.equals(expected));
     }
-
+	/* 
+	*Functionality: Tests logging in with a null username.<br>
+	* Input data: null username, password="123".<br>
+	* Expected result: null pointer exception thrown, failed to login.
+	*/
 	@Test
     public void testLogin_nullPassword()
     {
@@ -86,7 +98,11 @@ public class UserControllerTest
        userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
 	   assertTrue("",user.equals(expected));        
     }
-
+	/* 
+	 * Functionality: Tests logging in with a null password.<br>
+	 * Input data: Username="amr", null password.<br>
+	 * Expected result: Failed.
+	*/
 	@Test
     public void testLogin_nullUserPassword()
     {
@@ -95,6 +111,11 @@ public class UserControllerTest
        userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
 	   assertFalse("",user.equals(expected));     
     }
+		/* 
+    *Tester for login function in the usercontroller 
+    * tests a (invalid) user with blank input  
+    *expecting test should be a false
+	*/
 	@Test
     public void testLogin_blankUserPassword()
     {
@@ -103,6 +124,11 @@ public class UserControllerTest
        userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
 	   assertFalse("",user.equals(expected));   
     }
+		/* 
+	 * Functionality: Tests logging in with a blank password.<br>
+	 * Input data: Username="amr", password="".<br>
+	 * Expected result: failed to login.
+	*/
 	@Test
     public void testLogin_blankPassword()
     {
@@ -111,6 +137,11 @@ public class UserControllerTest
        userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
 	   assertTrue("",user.equals(expected));       
     }
+		/* 
+	 * Functionality: Tests logging in with a blank username.<br>
+	 * Input data: blank username (""), password="123".<br>
+	 * Expected result:failed to login.
+	*/
 	@Test
     public void testLogin_blankUser()
     {
