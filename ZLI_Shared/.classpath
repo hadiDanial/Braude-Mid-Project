@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="UnitTests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/ZLI_G13/lib/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="lib" path="/ZLI_G13/lib/junit-4.13.2.jar"/>
