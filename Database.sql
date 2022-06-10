@@ -20,8 +20,7 @@ DROP TABLE IF EXISTS `Reports`;
 
 
 CREATE TABLE `Reports`(`reportId` INT primary key AUTO_INCREMENT,`year` INT NOT NULL,`month` INT NOT NULL,`branchId` INT NOT NULL,
-					   `reportType` varchar(20) NOT NULL, `data` varchar(1024) NOT NULL);
-
+					   `reportType` varchar(20) NOT NULL, `data` varchar(1024) NOT NULL, `reportDate` timestamp);
 
 CREATE TABLE `Users`(`userId` INT primary key, `username` varchar(20) NOT NULL UNIQUE, `password` varchar(64) NOT NULL, 
 					  `firstName` varchar(20) NOT NULL,`lastName` varchar(20) NOT NULL, `emailAddress` varchar(32) NOT NULL, `phoneNumber` varchar(20) NOT NULL,
@@ -144,4 +143,4 @@ INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a
 INSERT INTO Complaints (customerId, customerServiceEmployeeId, complaintDetails, complaintResult, submissionTime, wasHandled) VALUES (123456789,987654321, 'YOUR SERVICE SUCKS', 'GO HOME', now(), true);
 INSERT INTO Complaints (customerId, customerServiceEmployeeId, complaintDetails, complaintResult, submissionTime, wasHandled) VALUES (987654321,123456789, 'help me pls', 'nope', now(), false);
 
-INSERT INTO Reports (year, month, branchId, reportType, data) values (2020, 5, 1, 'Income', '[]');						
+INSERT INTO Reports (year, month, branchId, reportType, data, reportDate) values (2020, 5, 1, 'Income', '1:10,2:11,', now());					
