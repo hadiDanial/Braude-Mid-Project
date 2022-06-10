@@ -4,107 +4,146 @@ import java.io.Serializable;
 import java.util.*;
 import enums.ReportType;
 
-public class Report implements Serializable
-{
+public class Report implements Serializable {
 	private int reportId;
 	private Branch branch;
 	private Date reportDate;
 	private ReportType reportType;
-	
+	private int month;
+	private int year;
+	private String data;
+
 	private static final long serialVersionUID = 1262150235358849085L;
 
-	public Report(Branch branch, Date reportDate, ReportType reportType)
-	{
+	public Report(Branch branch, Date reportDate, ReportType reportType, int month, int year, String data) {
 		super();
 		this.branch = branch;
 		this.reportDate = reportDate;
 		this.reportType = reportType;
+		this.month = month;
+		this.year = year;
+		this.data = data;
 	}
-	
-	
-	/** 
+
+	public String getAllDataString(){
+		return data;
+	}
+
+	public HashMap<String, Integer> getDataByReportType(ReportType type) {
+
+		return null;
+	}
+
+	private HashMap<String, Integer> buildReportMapForIncome(){
+
+		return null; // map = {"number": amount,...}
+	}
+
+	private HashMap<String, Integer> buildReportMapForComplaints(){
+
+		return null; // map = {"number": amount,...}
+	}
+	private HashMap<String, Integer> buildReportMapForOrders(){
+
+		return null; // map = {"string": amount,...}
+	}
+
+	// public String getAllData() {
+	// 	return data;
+	// }
+
+	public void setData(String data) {
+		// maybe make it get a hashMap and then translate it to a string
+		// or make multiple functions depending on the need
+		this.data = data;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	/**
 	 * @return int
 	 */
-	public int getReportId()
-	{
+	public int getReportId() {
 		return reportId;
 	}
 
-	
-	/** 
+	/**
 	 * @param reportId
 	 */
-	public void setReportId(int reportId)
-	{
+	public void setReportId(int reportId) {
 		this.reportId = reportId;
 	}
 
-
-	
-	/** 
+	/**
 	 * @return Branch
 	 */
-	public Branch getBranch()
-	{
+	public Branch getBranch() {
 		return branch;
 	}
-	
-	/** 
+
+	/**
 	 * @param branch
 	 */
-	public void setBranch(Branch branch)
-	{
+	public void setBranch(Branch branch) {
 		this.branch = branch;
 	}
-	
-	/** 
+
+	/**
 	 * @return Date
 	 */
-	public Date getReportDate()
-	{
+	public Date getReportDate() {
 		return reportDate;
 	}
-	
-	/** 
+
+	/**
 	 * @param reportDate
 	 */
-	public void setReportDate(Date reportDate)
-	{
+	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
 	}
-	
-	/** 
+
+	/**
 	 * @return ReportType
 	 */
-	public ReportType getReportType()
-	{
+	public ReportType getReportType() {
 		return reportType;
 	}
-	
-	/** 
+
+	/**
 	 * @param reportType
 	 */
-	public void setReportType(ReportType reportType)
-	{
+	public void setReportType(ReportType reportType) {
 		this.reportType = reportType;
 	}
-	
-	/** 
+
+	/**
 	 * @return int
 	 */
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		return Objects.hash(branch, reportDate, reportType);
 	}
-	
-	/** 
+
+	/**
 	 * @param obj
 	 * @return boolean
 	 */
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -115,10 +154,5 @@ public class Report implements Serializable
 		return branch.equals(other.branch) && reportDate.equals(other.reportDate)
 				&& reportType == other.reportType;
 	}
-	
-	
-	
 
-	
-	
 }

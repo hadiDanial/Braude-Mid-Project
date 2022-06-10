@@ -60,5 +60,9 @@ public class Tables
 	public static final String[] surveysColumnNames = 
 	{ "surveyId", "specialistId", "startDate", "endDate", "analysisResults", "q1", "q2", "q3", "q4", "q5", "q6"};
 	public static final String USERS_ORDERS_TABLE = "User_Orders";
-		
+
+	public static final String REPORTS_TABLE_NAME = "Reports";
+	public static final String[] reportsColumnNames= 
+	{"reportId","year","month","branch","type","data"};
+	
 }
