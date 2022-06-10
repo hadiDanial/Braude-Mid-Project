@@ -30,6 +30,7 @@ public class Report implements Serializable {
 
 	public Report()
 	{
+		data = "";
 	}
 
 	public String getAllDataString(){
@@ -124,7 +125,7 @@ public class Report implements Serializable {
 	 */
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
-		this.year = reportDate.getYear();
+		this.year = reportDate.getYear() + 1900;
 		this.month = reportDate.getMonth();
 	}
 

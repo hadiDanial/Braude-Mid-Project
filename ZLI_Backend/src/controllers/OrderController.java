@@ -25,9 +25,9 @@ import entities.users.User;
 import enums.ColorEnum;
 import enums.OrderStatus;
 
-public class OrderController
+public class OrderController implements IOrderController
 {
-	private static OrderController instance;
+	private static IOrderController instance;
 	private final UserController userController;
 	private final DatabaseConnection databaseConnection;
 	private final ProductController productController;
@@ -44,7 +44,7 @@ public class OrderController
 	/** 
 	 * @return OrderController
 	 */
-	public static synchronized OrderController getInstance()
+	public static synchronized IOrderController getInstance()
 	{
 		if (instance == null)
 		{
@@ -52,13 +52,14 @@ public class OrderController
 		}
 		return instance;
 	}
-
+	
 	/**
 	 * Register a new order and save it to the database - PENDING manager approval
 	 * 
 	 * @param order Order to save
 	 * @return true if order was saved successfully.
 	 */
+	@Override
 	public boolean createNewOrder(Order order)
 	{
 		boolean res;
@@ -179,6 +180,7 @@ public class OrderController
 	/** function that moves all the orders from the database and put it in arraylist of orders
 	 * @return ArrayList<Order>
 	 */
+	@Override
 	public ArrayList<Order> getAllOrders()
 	{
 		return convertRSToOrderArray(databaseConnection.getAll(Tables.ORDERS_TABLE_NAME));
@@ -189,6 +191,7 @@ public class OrderController
 	 * @param orderId used to get the order of this ID
 	 * @return Order
 	 */
+	@Override
 	public Order getOrder(int orderId)
 	{
 		Order o = convertRSToOrder(databaseConnection.getByID(orderId, Tables.ORDERS_TABLE_NAME, ID_FIELD_NAME), true);
@@ -204,6 +207,7 @@ public class OrderController
 	 * @param orderStatus New order status.
 	 * @return True if update was successful.
 	 */
+	@Override
 	public boolean updateOrderStatus(Integer id, OrderStatus orderStatus)
 	{
 		Order order = getOrder(id);
@@ -241,6 +245,7 @@ public class OrderController
 	 * @param orderStatus different types of status
 	 * @return 
 	 */
+	@Override
 	public ArrayList<Order> getOrdersByStatusAndBranch(int branchId, OrderStatus orderStatus)
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -302,6 +307,7 @@ public class OrderController
 		return pendingOrders;
 	}
 
+	@Override
 	public ArrayList<Order> getAllUserOrders(int userId)
 	{
 		ResultSet rs = databaseConnection.getBySimpleCondition("userId", String.valueOf(userId), Tables.ORDERS_TABLE_NAME);
@@ -311,6 +317,7 @@ public class OrderController
 	 * @param orderStatus 
 	 * @return ArrayList<Order>
 	 */
+	@Override
 	public ArrayList<Order> getOrdersByStatus(OrderStatus orderStatus)
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -464,6 +471,7 @@ public class OrderController
 	 * @param orderToUpdate
 	 * @return boolean
 	 */
+	@Override
 	public boolean updateOrder(Order orderToUpdate)
 	{
 		ArrayList<String> keys = new ArrayList<String>();
@@ -484,6 +492,7 @@ public class OrderController
 	 * @param userId
 	 * @return int
 	 */
+	@Override
 	public int getNumberOfUserOrders(int userId)
 	{
 		int count = 0;
@@ -502,6 +511,7 @@ public class OrderController
 	}
 
 
+	@Override
 	public ArrayList<Order> getOrdersByDatesAndBranch(Date startDate, Date endDate, int branchId, OrderStatus orderStatus)
 	{
 		HashMap<String, String> map = new HashMap<String, String>();

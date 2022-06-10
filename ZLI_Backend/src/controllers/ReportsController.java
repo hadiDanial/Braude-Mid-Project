@@ -26,6 +26,7 @@ import exceptions.UnauthenticatedUserException;
 public class ReportsController {
 	private static ReportsController instance;
 	private final DatabaseConnection databaseConnection;
+	private IOrderController orderController;
 	private static final String ID_FIELD_NAME = "reportId";
 
 	// " Bouquet : 52.3 , BridalBouquet : 6.1 , FlowerPot : 78 "
@@ -34,11 +35,22 @@ public class ReportsController {
 
 	private ReportsController() {
 		databaseConnection = DatabaseConnection.getInstance();
+		orderController = OrderController.getInstance();
+	}
+	private ReportsController(IOrderController orderController) {
+		databaseConnection = DatabaseConnection.getInstance();
+		orderController = OrderController.getInstance();
 	}
 
 	public static synchronized ReportsController getInstance() {
 		if (instance == null) {
 			instance = new ReportsController();
+		}
+		return instance;
+	}
+	public static synchronized ReportsController getInstance(IOrderController orderController) {
+		if (instance == null) {
+			instance = new ReportsController(orderController);
 		}
 		return instance;
 	}
@@ -113,7 +125,7 @@ public class ReportsController {
 	
 	public Report generateIncomeReport(Date startDate, Date endDate, int branchId)
 	{
-		ArrayList<Order> orders = OrderController.getInstance().getOrdersByDatesAndBranch(startDate, endDate, branchId, OrderStatus.Delivered);
+		ArrayList<Order> orders = orderController.getOrdersByDatesAndBranch(startDate, endDate, branchId, OrderStatus.Delivered);
 		Report report = new Report();
 		report.setReportDate(Date.from(Instant.now()));
 		HashMap<String, Number> map = new HashMap<String, Number>();
