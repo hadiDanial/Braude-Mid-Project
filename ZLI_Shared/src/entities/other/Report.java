@@ -12,6 +12,7 @@ public class Report implements Serializable {
 	private int month;
 	private int year;
 	private String data;
+	private HashMap<String, Number> map;
 
 	private static final long serialVersionUID = 1262150235358849085L;
 
@@ -25,25 +26,33 @@ public class Report implements Serializable {
 		this.data = data;
 	}
 
+	public Report()
+	{
+	}
+
 	public String getAllDataString(){
 		return data;
 	}
 
-	public HashMap<String, Integer> getDataByReportType(ReportType type) {
+	public void setData(HashMap<String, Number> map)
+	{
+		this.map= map;
+	}
+	public HashMap<String, Number> getDataByReportType(ReportType type) {
 
 		return null;
 	}
 
-	private HashMap<String, Integer> buildReportMapForIncome(){
+	private HashMap<String, Number> buildReportMapForIncome(){
 
 		return null; // map = {"number": amount,...}
 	}
 
-	private HashMap<String, Integer> buildReportMapForComplaints(){
+	private HashMap<String, Number> buildReportMapForComplaints(){
 
 		return null; // map = {"number": amount,...}
 	}
-	private HashMap<String, Integer> buildReportMapForOrders(){
+	private HashMap<String, Number> buildReportMapForOrders(){
 
 		return null; // map = {"string": amount,...}
 	}
@@ -114,6 +123,8 @@ public class Report implements Serializable {
 	 */
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
+		this.year = reportDate.getYear();
+		this.month = reportDate.getMonth();
 	}
 
 	/**
@@ -154,5 +165,6 @@ public class Report implements Serializable {
 		return branch.equals(other.branch) && reportDate.equals(other.reportDate)
 				&& reportType == other.reportType;
 	}
+
 
 }
