@@ -32,7 +32,9 @@ public class Report implements Serializable {
 		this.data = data;
 	}
 
-	public Report() {
+	public Report()
+	{
+		data = "";
 	}
 
 	public void setData(HashMap<String, Number> map) {
@@ -152,7 +154,7 @@ public class Report implements Serializable {
 	 */
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
-		this.year = reportDate.getYear();
+		this.year = reportDate.getYear() + 1900;
 		this.month = reportDate.getMonth();
 	}
 

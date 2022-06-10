@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import controllers.BranchController;
 import controllers.ComplaintController;
 import controllers.DiscountController;
+import controllers.IOrderController;
 import controllers.OrderController;
 import controllers.ProductController;
 import controllers.SurveyController;
@@ -27,7 +28,7 @@ public class MessageParser
 	private static UserController userController = UserController.getInstance();
 	private static DiscountController discountController = DiscountController.getInstance();
 	private static ProductController productController = ProductController.getInstance();
-	private static OrderController orderController = OrderController.getInstance();
+	private static IOrderController orderController = OrderController.getInstance();
 	private static BranchController branchController = BranchController.getInstance();
 	private static ComplaintController complaintController = ComplaintController.getInstance();
 	private static SurveyController surveyController = SurveyController.getInstance();
