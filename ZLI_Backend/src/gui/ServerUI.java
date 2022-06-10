@@ -3,6 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controllers.TaskScheduler;
 import database.DatabaseConnection;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -191,5 +192,6 @@ public class ServerUI extends Application implements Initializable {
 	 */
 	public static void main(String[] args) {
 		launch(args);
+		TaskScheduler.scheduleReportGeneration();
 	}
 }
