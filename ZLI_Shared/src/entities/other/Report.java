@@ -45,16 +45,12 @@ public class Report implements Serializable {
 		if (map != null) {
 			String dataString = "";
 
-			for (int i = 0; i < 31; i++) {
-				if (map.containsKey(i + "")) {
-					Number value = map.get(i + "");
-					dataString += i + ":" + value.toString();
-				}
-				if (map.containsKey((i + 1) + "") && map.containsKey(i + "")) {
-					dataString += ",";
-				}
+			for (String  key : map.keySet()) {
+				if (dataString.length() > 0)
+						dataString += ",";
+					Number value = map.get(key);
+					dataString += key + ":" + value.toString();
 			}
-
 			this.data = dataString;
 			return dataString;
 		}
