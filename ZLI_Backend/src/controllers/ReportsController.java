@@ -108,15 +108,16 @@ public class ReportsController {
 	}
 	public ArrayList<Report> convertRSToReportArray(ResultSet resultSet)
 	{
-		ArrayList<Report> orders = new ArrayList<Report>();
+		ArrayList<Report> reports = new ArrayList<Report>();
 		try
 		{
 			while (resultSet.next())
 			{
-				orders.add(convertRSToReport(resultSet, false));
+				Report r = convertRSToReport(resultSet, false);
+				if(r != null) reports.add(r);
 			}
 			resultSet.close();
-			return orders;
+			return reports;
 		} catch (SQLException e)
 		{
 			e.printStackTrace();

@@ -51,23 +51,30 @@
                   </Label>
                </children>
             </Group>
+            <Group>
+               <children>
+                  <Button fx:id="viewOrdersReportsBtn" layoutX="1.0" layoutY="70.0" mnemonicParsing="false" onAction="#onViewOrdersReportsBtn" prefHeight="56.0" prefWidth="328.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Orders Reports" textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="viewSalesReportsBtn" mnemonicParsing="false" onAction="#onViewSalesReportsBtn" prefHeight="56.0" prefWidth="328.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Sales Reports" textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="viewComplaintsReportsBtn" layoutX="1.0" layoutY="139.0" mnemonicParsing="false" onAction="#onViewComplaintsReportsBtn" prefHeight="56.0" prefWidth="328.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Complaints Reports" textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="30.0" top="30.0" />
+               </VBox.margin>
+            </Group>
          </children>
       </VBox>
-      <Button fx:id="viewOrdersReportsBtn" layoutX="287.0" layoutY="397.0" mnemonicParsing="false" onAction="#onViewOrdersReportsBtn" prefHeight="56.0" prefWidth="328.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Orders Reports" textFill="#e2d784">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Button>
-      <Button fx:id="viewSalesReportsBtn" layoutX="286.0" layoutY="327.0" mnemonicParsing="false" onAction="#onViewSalesReportsBtn" prefHeight="56.0" prefWidth="328.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Sales Reports" textFill="#e2d784">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Button>
-      <Button fx:id="viewComplaintsReportsBtn" layoutX="287.0" layoutY="466.0" mnemonicParsing="false" onAction="#onViewComplaintsReportsBtn" prefHeight="56.0" prefWidth="328.0" style="-fx-background-radius: 15; -fx-background-color: #05595B;" text="View Complaints Reports" textFill="#e2d784">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Button>
    </children>
    <padding>
       <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />

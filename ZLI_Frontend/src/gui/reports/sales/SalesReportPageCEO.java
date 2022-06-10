@@ -45,7 +45,7 @@ public class SalesReportPageCEO extends GUIController
 	private Label branchErrLabel;
 
 	@FXML
-	private BarChart<String, Float> salesChart;
+	private BarChart<String, Number> salesChart;
 
 	/**
 	 * @param event
@@ -105,20 +105,20 @@ public class SalesReportPageCEO extends GUIController
 			public void executeAfterResponse(Object message)
 			{
 				this.reports = (ArrayList<Report>) message;
-				for (Report report : reportsList)
-				{
+//				for (Report report : reportsList)
+//				{
 					XYChart.Series<String, Number> series = new XYChart.Series<>();
-
-					HashMap<String, Number> map = report.getDataMap();
+					series.setName("Sales");
+					HashMap<String, Number> map = reports.get(0).getDataMap();
 					for (Map.Entry<String, Number> entry : map.entrySet())
 					{
 						String key = entry.getKey();
 						Number val = entry.getValue();
 						series.getData().add(new XYChart.Data<>(key, val));
-
 					}
+					salesChart.getData().addAll(series);
 
-				}
+//				}
 			}
 		});
 
