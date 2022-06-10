@@ -33,7 +33,7 @@ public class MessageParser
 	private static BranchController branchController = BranchController.getInstance();
 	private static ComplaintController complaintController = ComplaintController.getInstance();
 	private static SurveyController surveyController = SurveyController.getInstance();
-	private static ReportsController reportController;
+	private static ReportsController reportController = ReportsController.getInstance();
 	/**
 	 * Handle the request - activate the correct function based on the request type.
 	 * 
