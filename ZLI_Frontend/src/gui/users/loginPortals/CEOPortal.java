@@ -44,7 +44,7 @@ public class CEOPortal extends GUIController
      */
     @FXML
     void onViewSalesReportsBtn(ActionEvent event) {
-      SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_SALES, true);
+      SceneManager.loadNewScene(GUIPages.VIEW_REPORTS_SALES_CEO, true);
     }
     
     /** 

@@ -1,8 +1,12 @@
 package controllers;
 
 import enums.*;
+import requests.Request;
+import requests.RequestType;
+import utility.IResponse;
 
 import java.time.Instant;
+import java.util.ArrayList;
 
 import entities.other.*;
 
@@ -33,10 +37,10 @@ public class ReportController
 	 * 
 	 * @param reportType
 	 */
-	public Report[] getAllReports(ReportType reportType)
+	public void getAllReports(IResponse<ArrayList<Report>> response)
 	{
-		// TODO - implement ReportController.getAllReports
-		throw new UnsupportedOperationException();
+		Request req = new Request(RequestType.GET_ALL_REPORTS, null);
+		clientController.sendRequest(req, response);
 	}
 
 	/**

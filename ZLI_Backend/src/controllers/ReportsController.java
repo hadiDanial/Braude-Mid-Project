@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.Year;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -105,7 +106,23 @@ public class ReportsController {
 
 		return report;
 	}
-
+	public ArrayList<Report> convertRSToReportArray(ResultSet resultSet)
+	{
+		ArrayList<Report> orders = new ArrayList<Report>();
+		try
+		{
+			while (resultSet.next())
+			{
+				orders.add(convertRSToReport(resultSet, false));
+			}
+			resultSet.close();
+			return orders;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 	private Report convertRSToReport(ResultSet resultSet, boolean useNext) {
 		String[] reportsColumnNames = Tables.reportsColumnNames;
 		Report report = null;
@@ -149,11 +166,17 @@ public class ReportsController {
 			}
 		});
 		for (Order order : orders) {
-			map.put(String.valueOf(Date.from(order.getOrderDate()).getDay()), order.getTotalCost());
+			map.put(String.valueOf(order.getOrderDate().atOffset(ZoneOffset.UTC).getDayOfWeek().getValue()), order.getTotalCost());
 		}
 		report.setReportType(ReportType.IncomeReport);
 		report.setBranch(BranchController.getInstance().getBranchById(branchId));
 		report.setData(map);
 		return report;
+	}
+	
+	public ArrayList<Report> getAllReports()
+	{
+		ResultSet rs = databaseConnection.getAll(Tables.REPORTS_TABLE_NAME);
+		return convertRSToReportArray(rs);
 	}
 }

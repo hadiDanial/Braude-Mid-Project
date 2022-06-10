@@ -57,7 +57,7 @@ public enum RequestType
 			UserRole.CustomerServiceSpecialist, UserRole.DeliveryPerson } ),
 	// Complaints
 	CREATE_COMPLAINTS(new UserRole[] {UserRole.Customer}),
-	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee}), 
+	GET_ALL_COMPLAINTS(new UserRole[] { UserRole.CustomerServiceEmployee}), GET_ALL_REPORTS(new UserRole[] {UserRole.BranchManager, UserRole.CEO}), 
 	
 	
 	;

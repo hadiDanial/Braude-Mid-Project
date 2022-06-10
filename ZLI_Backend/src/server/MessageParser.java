@@ -8,6 +8,7 @@ import controllers.DiscountController;
 import controllers.IOrderController;
 import controllers.OrderController;
 import controllers.ProductController;
+import controllers.ReportsController;
 import controllers.SurveyController;
 import controllers.UserController;
 import entities.discounts.Discount;
@@ -32,6 +33,7 @@ public class MessageParser
 	private static BranchController branchController = BranchController.getInstance();
 	private static ComplaintController complaintController = ComplaintController.getInstance();
 	private static SurveyController surveyController = SurveyController.getInstance();
+	private static ReportsController reportController;
 	/**
 	 * Handle the request - activate the correct function based on the request type.
 	 * 
@@ -198,6 +200,11 @@ public class MessageParser
 			case GET_ALL_SURVEY_ANALYSYS:
 			{
 				return surveyController.getAllSurvey();				
+			}
+			
+			case GET_ALL_REPORTS:
+			{
+				return reportController.getAllReports();
 			}
 			default:
 			break;
