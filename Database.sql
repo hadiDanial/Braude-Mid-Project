@@ -16,8 +16,11 @@ DROP TABLE IF EXISTS `Users`;
 DROP TABLE IF EXISTS `Locations`;
 DROP TABLE IF EXISTS `Items_In_Product`;
 DROP TABLE IF EXISTS `Catalog`;
+DROP TABLE IF EXISTS `Reports`;
 
-CREATE TABLE `Reports`(`reportId` INT primary key,`year` INT NOT NULL,`month` INT NOT NULL,`branch` INT NOT NULL,`type` varchar(20) NOT NULL,`data` varchar(256) NOT NULL);
+
+CREATE TABLE `Reports`(`reportId` INT primary key AUTO_INCREMENT,`year` INT NOT NULL,`month` INT NOT NULL,`branchId` INT NOT NULL,
+					   `reportType` varchar(20) NOT NULL, `data` varchar(1024) NOT NULL);
 
 
 CREATE TABLE `Users`(`userId` INT primary key, `username` varchar(20) NOT NULL UNIQUE, `password` varchar(64) NOT NULL, 
@@ -140,5 +143,5 @@ INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a
 INSERT INTO Survey_Answers (customerId, orderId, surveyId, a1, a2, a3, a4, a5, a6) VALUES (1,1,3,6,5,3,4,9,7);
 INSERT INTO Complaints (customerId, customerServiceEmployeeId, complaintDetails, complaintResult, submissionTime, wasHandled) VALUES (123456789,987654321, 'YOUR SERVICE SUCKS', 'GO HOME', now(), true);
 INSERT INTO Complaints (customerId, customerServiceEmployeeId, complaintDetails, complaintResult, submissionTime, wasHandled) VALUES (987654321,123456789, 'help me pls', 'nope', now(), false);
-SELECT * FROM catalog join catalogiteminbranch WHERE catalog.catalogId = catalogiteminbranch.catalogId AND catalogiteminbranch.branchId = 1 AND catalogiteminbranch.quantityInStock > 6;
--- SELECT * FROM Orders;
+
+INSERT INTO Reports (year, month, branchId, reportType, data) values (2020, 5, 1, 'Income', '[]');						

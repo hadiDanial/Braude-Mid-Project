@@ -63,6 +63,6 @@ public class Tables
 
 	public static final String REPORTS_TABLE_NAME = "Reports";
 	public static final String[] reportsColumnNames= 
-	{"reportId","year","month","branch","type","data"};
+	{"reportId", "year", "month", "branchId", "reportType", "data"};
 	
 }
