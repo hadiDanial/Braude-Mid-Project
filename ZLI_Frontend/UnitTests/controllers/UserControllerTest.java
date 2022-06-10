@@ -19,24 +19,29 @@ public class UserControllerTest
 {
 	public class ClientControllerStub implements ClientControllerIF
 	{
-		boolean result;
 		@Override
 		public <T> void sendRequest(Request request, IResponse<T> response) {
-			response.executeAfterResponse(user);
+			response.executeAfterResponse(expected);
 		}
 		
 	}
 	public class UserResponse implements IResponse<User>{
 
+		private User user;
+
 		@Override
 		public void executeAfterResponse(Object message) {
-			user1 = (User) message;
+			expected = this.user;
+		}
+
+		public UserResponse(User user) {
+			this.user=user;
 		}
 
 	}
 	UserController userController;
 	User user;
-	User user1;
+	User expected;
 	boolean result;
 
 	@Before
@@ -44,6 +49,9 @@ public class UserControllerTest
 	{
 		userController = UserController.getInstance(new ClientControllerStub());
 		user = new User();
+		expected = new User();
+		user.setUsername("amr");
+		user.setPassword("123");
 	}
 
 	@After
@@ -55,61 +63,61 @@ public class UserControllerTest
  	@Test
     public void testLogin_existingUser()
     {
-       userController.login("amr","123", new UserResponse());
-    }
-
-    @Test
-    public void testLogin_nonExistingUser()
-    {
-	   userController.login("stam","123", new UserResponse());
-    }
-
-    @Test
-    public void testLogin_wrongPassword()
-    {
-		user1 = new User();
-		user = new User();
-		userController.login("amr","1233",new UserResponse());
-			Assert.assertEquals(user1, user);
+		expected.setUsername("amr");
+		expected.setPassword("123");
+       userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
+	   assertTrue("",user.equals(expected));
     }
 
  	@Test
     public void testLogin_nullUser()
     {
-       userController.login(null,"123", new UserResponse());
-       assertNotNull(user);
+		expected.setUsername(null);
+		expected.setPassword("123");
+       userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
+	   assertFalse("",user.equals(expected));
     }
 
 	@Test
     public void testLogin_nullPassword()
     {
-        userController.login("amr",null, new UserResponse());
-        assertNotNull(user);        
+		expected.setUsername("amr");
+		expected.setPassword(null);
+       userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
+	   assertTrue("",user.equals(expected));        
     }
 
 	@Test
     public void testLogin_nullUserPassword()
     {
-        userController.login(null,null, new UserResponse());
-        assertNotNull(user);        
+		expected.setUsername(null);
+		expected.setPassword(null);
+       userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
+	   assertFalse("",user.equals(expected));     
     }
 	@Test
     public void testLogin_blankUserPassword()
     {
-        userController.login("","", new UserResponse());
-        assertNotNull(user);        
+		expected.setUsername("");
+		expected.setPassword("");
+       userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
+	   assertFalse("",user.equals(expected));   
     }
 	@Test
     public void testLogin_blankPassword()
     {
-        userController.login("amr","", new UserResponse());
-        assertNotNull(user);        
+		expected.setUsername("amr");
+		expected.setPassword("");
+       userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
+	   assertTrue("",user.equals(expected));       
     }
 	@Test
     public void testLogin_blankUser()
     {
-        userController.login("","123", new UserResponse());
-        assertNotNull(user);       
+		expected.setUsername("");
+		expected.setPassword("123");
+       userController.login(expected.getUsername(),expected.getPassword(), new UserResponse(expected));
+	   assertFalse("",user.equals(expected));  
     }
 
 }

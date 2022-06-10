@@ -81,11 +81,11 @@ public class UserController
 	 */
 	public void login(String username, String password, IResponse<User> response)
 	{
-		User user = new User();
-		user.setUsername(username);
-		user.setPassword(password);
-		Request req = new Request(RequestType.LOGIN, user);
-		clientController.sendRequest(req, response);
+			User user = new User();
+			user.setUsername(username);
+			user.setPassword(password);
+			Request req = new Request(RequestType.LOGIN, user);
+			clientController.sendRequest(req, response);
 	}
 
 	/**
