@@ -29,11 +29,7 @@ public class UserLoginTest {
 	public void setUp() throws Exception
 	{
 		databaseConnection = DatabaseConnection.getInstance();
-<<<<<<< HEAD
-		databaseConnection.connectToDB("localhost", "zlig13", "root", "MySql123"); 
-=======
 		databaseConnection.connectToDB("localhost", "zlig13", "root", "mYtsb46Ql97"); 
->>>>>>> c472b97b667f527d8152dbc42ef13558e43c27e1
         userController = UserController.getInstance();
         logOut=false;
 	}
