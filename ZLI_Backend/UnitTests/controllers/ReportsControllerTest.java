@@ -48,7 +48,8 @@ public class ReportsControllerTest
 		b.setBranchId(1);
 		order.setBranch(b);
 		orderController.createNewOrder(order);
-		Report r = reportsController.generateIncomeReport(Date.from(Instant.now().minusSeconds(10000)), Date.from(Instant.now().plusSeconds(10000)), 1);
+		Report r = reportsController.generateIncomeReport(Date.from(Instant.now().minusSeconds(1000000)), Date.from(Instant.now().plusSeconds(1000000)), 1);
+		assertTrue(reportsController.createNewReport(r));
 		System.out.println(r);
 	}
 }
