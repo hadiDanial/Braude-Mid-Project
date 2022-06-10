@@ -79,6 +79,16 @@ public class Report implements Serializable {
 		return null;
 	}
 
+	public Number getDataByKey(String key) {
+		if (map != null) {
+			return map.get(key);
+		} else if (data != null) {
+			buildReportMap();
+			return map.get(key);
+		}
+		return null;
+	}
+
 	public String getDataString() {
 		if (data != null)
 			return data;
