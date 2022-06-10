@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -498,6 +499,16 @@ public class OrderController
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+
+	public ArrayList<Order> getOrdersByDatesAndBranch(Date startDate, Date endDate, int branchId, OrderStatus orderStatus)
+	{
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("branchId", String.valueOf(branchId));
+		map.put("orderStatus", orderStatus.name());
+		ResultSet rs = databaseConnection.getByConditionsBetweenDates(Tables.ORDERS_TABLE_NAME, map, "orderDate", startDate, endDate);
+		return convertRSToOrderArray(rs);
 	}
 
 
