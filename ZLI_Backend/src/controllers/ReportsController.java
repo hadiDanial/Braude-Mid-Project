@@ -37,6 +37,7 @@ public class ReportsController {
 		databaseConnection = DatabaseConnection.getInstance();
 		orderController = OrderController.getInstance();
 	}
+
 	private ReportsController(IOrderController orderController) {
 		databaseConnection = DatabaseConnection.getInstance();
 		orderController = OrderController.getInstance();
@@ -48,6 +49,7 @@ public class ReportsController {
 		}
 		return instance;
 	}
+
 	public static synchronized ReportsController getInstance(IOrderController orderController) {
 		if (instance == null) {
 			instance = new ReportsController(orderController);
@@ -88,6 +90,9 @@ public class ReportsController {
 		if (!(user.getRole() == UserRole.BranchManager || user.getRole() == UserRole.CEO)) {
 			throw new UnauthenticatedUserException("Only CEOs or BranchManagers can view Reports");
 		}
+		if (user.getRole() == UserRole.BranchManager && user.getUserId() != branch.getManager().getUserId()) {
+			throw new UnauthenticatedUserException("Only BranchManagers of the wanted branch can view");
+		}
 
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("branchId", branch.getBranchId() + "");
@@ -95,17 +100,23 @@ public class ReportsController {
 		map.put("year", year + "");
 		map.put("reportType", type.name());
 		ResultSet reportsRS = databaseConnection.getByConditions(Tables.REPORTS_TABLE_NAME, map);
-		Report report = convertRSToReport(reportsRS);
+
+		Report report = convertRSToReport(reportsRS, true);
 
 		return report;
 	}
 
-	private Report convertRSToReport(ResultSet resultSet) {
+	private Report convertRSToReport(ResultSet resultSet, boolean useNext) {
 		String[] reportsColumnNames = Tables.reportsColumnNames;
-		Report report;
+		Report report = null;
 		Branch branch = new Branch();
 
 		try {
+			if (useNext)
+				if (!resultSet.next()) {
+					return null;
+				}
+
 			branch.setBranchId(resultSet.getInt(reportsColumnNames[3]));
 			report = new Report(
 					resultSet.getInt(ID_FIELD_NAME),
@@ -115,16 +126,19 @@ public class ReportsController {
 					resultSet.getInt(reportsColumnNames[2]),
 					resultSet.getInt(reportsColumnNames[1]),
 					resultSet.getString(reportsColumnNames[5]));
+
+			if (useNext)
+				resultSet.close();
 		} catch (Exception e) {
 			report = null;
 		}
 
 		return report;
 	}
-	
-	public Report generateIncomeReport(Date startDate, Date endDate, int branchId)
-	{
-		ArrayList<Order> orders = orderController.getOrdersByDatesAndBranch(startDate, endDate, branchId, OrderStatus.Delivered);
+
+	public Report generateIncomeReport(Date startDate, Date endDate, int branchId) {
+		ArrayList<Order> orders = orderController.getOrdersByDatesAndBranch(startDate, endDate, branchId,
+				OrderStatus.Delivered);
 		Report report = new Report();
 		report.setReportDate(Date.from(Instant.now()));
 		HashMap<String, Number> map = new HashMap<String, Number>();

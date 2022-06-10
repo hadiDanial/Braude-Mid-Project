@@ -27,7 +27,7 @@ public class ReportsControllerTest
 	public void setUp() throws Exception
 	{
 		databaseConnection = DatabaseConnection.getInstance();
-		databaseConnection.connectToDB("localhost", "zlig13", "root", "mYtsb46Ql97");
+		databaseConnection.connectToDB("localhost", "zlig13", "root", "12345");
 		orderController = new StubOrderController();
 		reportsController = ReportsController.getInstance();
 	}
@@ -49,6 +49,6 @@ public class ReportsControllerTest
 		order.setBranch(b);
 		orderController.createNewOrder(order);
 		Report r = reportsController.generateIncomeReport(Date.from(Instant.now().minusSeconds(10000)), Date.from(Instant.now().plusSeconds(10000)), 1);
-		System.out.println(r);
+		System.out.println("1. "+r.getDataString());
 	}
 }
