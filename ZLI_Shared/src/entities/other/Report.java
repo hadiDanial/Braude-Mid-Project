@@ -13,11 +13,13 @@ public class Report implements Serializable {
 	private int year;
 	private String data;
 	private HashMap<String, Number> map;
+	// 0:56,1:89
 
 	private static final long serialVersionUID = 1262150235358849085L;
 
-	public Report(Branch branch, Date reportDate, ReportType reportType, int month, int year, String data) {
+	public Report(int reportId, Branch branch, Date reportDate, ReportType reportType, int month, int year, String data) {
 		super();
+		this.reportId=reportId;
 		this.branch = branch;
 		this.reportDate = reportDate;
 		this.reportType = reportType;
@@ -39,7 +41,6 @@ public class Report implements Serializable {
 		this.map= map;
 	}
 	public HashMap<String, Number> getDataByReportType(ReportType type) {
-
 		return null;
 	}
 
@@ -57,13 +58,13 @@ public class Report implements Serializable {
 		return null; // map = {"string": amount,...}
 	}
 
-	// public String getAllData() {
-	// 	return data;
-	// }
-
 	public void setData(String data) {
+		// select * where 
 		// maybe make it get a hashMap and then translate it to a string
 		// or make multiple functions depending on the need
+		for(int i=0;i<31;i++){
+			String str=i+"";
+		}
 		this.data = data;
 	}
 
