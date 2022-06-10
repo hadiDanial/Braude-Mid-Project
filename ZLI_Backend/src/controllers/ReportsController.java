@@ -154,7 +154,6 @@ public class ReportsController {
 		report.setReportType(ReportType.IncomeReport);
 		report.setBranch(BranchController.getInstance().getBranchById(branchId));
 		report.setData(map);
-		databaseConnection.insertToDatabase(Tables.REPORTS_TABLE_NAME, Tables.reportsColumnNames, reportToPS(report));
 		return report;
 	}
 }

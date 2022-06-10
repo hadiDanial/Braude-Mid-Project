@@ -71,13 +71,13 @@ class StubOrderController implements IOrderController{
 		ArrayList<Order> ordersByDate = new ArrayList<Order>();
 		for (Order order : orders)
 		{
-			if(order.getBranch().getBranchId() == branchId)
-			{
-				if(startDate.toInstant().isAfter(order.getOrderDate()) && endDate.toInstant().isBefore(order.getOrderDate()))
-				{
+//			if(order.getBranch().getBranchId() == branchId)
+//			{
+//				if(startDate.toInstant().isAfter(order.getOrderDate()) && endDate.toInstant().isBefore(order.getOrderDate()))
+//				{
 					ordersByDate.add(order);
-				}
-			}
+//				}
+//			}
 		}
 		ordersByDate.sort(new Comparator<Order>()
 		{
