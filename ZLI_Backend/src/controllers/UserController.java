@@ -50,6 +50,8 @@ public class UserController
 	 */
 	public User login(String username, String password)
 	{
+		if(username == null || password == null)
+			throw new NullPointerException();
 		ResultSet userRS = databaseConnection.getBySimpleCondition(Tables.usersColumnNames[1], username,
 				Tables.USERS_TABLE_NAME);
 
@@ -89,7 +91,7 @@ public class UserController
 	{
 		ArrayList<String> keys = new ArrayList<>();
 		keys.add("isLoggedIn");
-		databaseConnection.updateById(userId, ID_FIELD_NAME, Tables.USERS_TABLE_NAME, keys,
+		return databaseConnection.updateById(userId, ID_FIELD_NAME, Tables.USERS_TABLE_NAME, keys,
 				new IObjectToPreparedStatementParameters<User>()
 				{
 
@@ -99,7 +101,6 @@ public class UserController
 						statementToPrepare.setBoolean(1, false);
 					}
 				});
-		return false;
 	}
 
 	
