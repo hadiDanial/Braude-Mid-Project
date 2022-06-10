@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -28,7 +29,11 @@ public class UserLoginTest {
 	public void setUp() throws Exception
 	{
 		databaseConnection = DatabaseConnection.getInstance();
+<<<<<<< HEAD
 		databaseConnection.connectToDB("localhost", "zlig13", "root", "MySql123"); 
+=======
+		databaseConnection.connectToDB("localhost", "zlig13", "root", "mYtsb46Ql97"); 
+>>>>>>> c472b97b667f527d8152dbc42ef13558e43c27e1
         userController = UserController.getInstance();
         logOut=false;
 	}
@@ -39,88 +44,137 @@ public class UserLoginTest {
 	@After
 	public void tearDown() throws Exception
 	{
+		if(user != null)
+			userController.logout(user.getUserId());				
 		databaseConnection.disconnect();
 	}
 
-	/*Tester for login function in the usercontroller 
-    * tests an existing (valid) user from the database 
-    /*expecting test should be a true output
-    */
+	/**
+	 * Functionality: Tests logging in with an existing user and a valid username and password.<br>
+	 * Input data: Username="amr", password="123", User "amr" in the database.<br>
+	 * Expected result: successfully logged with user.
+	 */
     @Test
     public void testLogin_existingUser()
     {
-       boolean expected;
-       user=userController.login("amr","123");
-       try
-       {
-       ResultSet rs = databaseConnection.getByID(1, Tables.USERS_TABLE_NAME,"isLoggedIn");
-       if(rs.next())
-       {
-       expected = rs.getBoolean(Tables.usersColumnNames[10]);
-       assertTrue(expected);
-       }
-       else
-       {
-    	   Assert.fail();
-       }
-       }catch (SQLException e) {
-        e.printStackTrace();
-       }
+       User expected = new User();
+       expected.setUserId(1);
+       expected.setUsername("amr");
+       user = userController.login("amr","123");
+       assertEquals(expected.getUserId(), user.getUserId());
+       assertEquals(user.isLoggedIn(), true);
+    }
+    /**
+     * Functionality: Tests if the logged-in value is updated in the database after a successful login.<br>
+     * Input data: Username="amr", password="123", User "amr" in the database.<br>
+     * Expected result: successfully logged with user, isLoggedIn changed to true in the database.
+     */
+    @Test
+    public void testLogin_existingUser_IsLoggedInDB()
+    {    	
+    	user = userController.login("amr","123");
+    	ResultSet rs = databaseConnection.getByID(user.getUserId(), Tables.USERS_TABLE_NAME, "userId");
+        try
+		{
+			if(rs.next())
+			 {
+				 assertEquals(rs.getBoolean("isLoggedIn"), true);				 
+			 }
+			else
+			{
+				Assert.fail();
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}         
+        userController.logout(user.getUserId());
     }
 
-    /*Tester for login function in the usercontroller 
-    * tests a non existing (invalid) user from the database 
-    /*expecting test should be a null output
-    */
+	/**
+	 * Functionality: Tests that logging out correctly updates the database.<br>
+	 * Input data: Username="amr", password="123", User "amr" in the database.<br>
+	 * Expected result: null output, failed to login.
+	 */
+    @Test
+    public void testLogin_loggingOut()
+    {
+    	    	
+    	 user = userController.login("amr","123");
+         userController.logout(user.getUserId());
+         ResultSet rs = databaseConnection.getByID(user.getUserId(), Tables.USERS_TABLE_NAME, "userId");
+         try
+		{
+			if(rs.next())
+			 {
+				 assertEquals(rs.getBoolean("isLoggedIn"), false);				 
+			 }
+			else
+			{
+				Assert.fail();
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}         
+    }
+    
+	/**
+	 * Functionality: Tests logging in with a non-existing user.<br>
+	 * Input data: Username="stam", password="123", User "amr" in the database.<br>
+	 * Expected result: null output, failed to login.
+	 */
     @Test
     public void testLogin_nonExistingUser()
     {
-       user=userController.login("stam","123");
+       user = userController.login("stam","123");
        assertNull(user);
     }
 
-    /*Tester for login function in the usercontroller 
-    * tests an existing (invalid) username but with a wrong password 
-    /*expecting test should be a null output
-    */
+
+	/**
+	 * Functionality: Tests logging in with an existing user and a valid username and an invalid password.<br>
+	 * Input data: Username="amr", password="1234", User "amr" in the database.<br>
+	 * Expected result: null output, failed to login.
+	 */
     @Test
     public void testLogin_wrongPassword()
     {
-        user=userController.login("amr","1233");
+        user = userController.login("amr","1234");
         assertNull(user);        
     }
 
-    /*Tester for login function in the usercontroller 
-    * tests a nonexisting (invalid) input from the database (null username)
-    /*expecting test should be a null output
-    */
-    @Test
+	/**
+	 * Functionality: Tests logging in with a null username.<br>
+	 * Input data: null username, password="123".<br>
+	 * Expected result: null pointer exception thrown, failed to login.
+	 */
+    @Test(expected = NullPointerException.class)
     public void testLogin_nullUser()
     {
        user=userController.login(null,"123");
-       assertNull(user);
     }
 
-    /*Tester for login function in the usercontroller 
-    * tests a nonexisting (invalid) user from the database (null password) 
-    /*expecting test should be a null output 
-    */
-    @Test
+    /**
+	 * Functionality: Tests logging in with a null password.<br>
+	 * Input data: Username="amr", null password.<br>
+	 * Expected result: null pointer exception thrown, failed to login.
+	 */
+    @Test(expected = NullPointerException.class)
     public void testLogin_nullPassword()
     {
-        user=userController.login("amr",null);
-        assertNull(user);        
+        user = userController.login("amr",null);
     }
 
-    /*Tester for login function in the usercontroller 
-    * tests a nonexisting (invalid) user from the database (null username and password) 
-    /*expecting test should be a null output
-    */
-	@Test
+    /**
+	 * Functionality: Tests logging in with null inputs.<br>
+	 * Input data: null username, null password.<br>
+	 * Expected result: null pointer exception thrown, failed to login.
+	 */
+    @Test(expected = NullPointerException.class)
     public void testLogin_nullUserPassword()
     {
-        user=userController.login(null,null);
-        assertNull(user);        
+        user = userController.login(null,null);
     }
 
     /*Tester for login function in the usercontroller 
@@ -134,10 +188,11 @@ public class UserLoginTest {
         assertNull(user);        
     }
 
-    /*Tester for login function in the usercontroller 
-    * tests a nonexisting (invalid) user from the database with a blank password  
-    /*expecting test should be a null output
-    */
+	/**
+	 * Functionality: Tests logging in with a blank password.<br>
+	 * Input data: Username="amr", password="".<br>
+	 * Expected result: null output, failed to login.
+	 */
 	@Test
     public void testLogin_blankPassword()
     {
@@ -145,25 +200,16 @@ public class UserLoginTest {
         assertNull(user);        
     }
 
-    /*Tester for login function in the usercontroller 
-    * tests a nonexisting (invalid) user from the database with a blank username 
-    /*expecting test should be a null output
-    */
+	/**
+	 * Functionality: Tests logging in with a blank username.<br>
+	 * Input data: blank username (""), password="123".<br>
+	 * Expected result: null output, failed to login.
+	 */
 	@Test
     public void testLogin_blankUser()
     {
-        user=userController.login("","123");
+        user = userController.login("","123");
         assertNull(user);        
     }
 
-    /*Tester for logout function in the usercontroller 
-     *tests the user's logging out if it worked
-      expecting to be able to log out 
-     */
-    @Test
-    public void testLogin_loggingOut()
-    {
-        logOut=UserController.getInstance().logout(1);
-        assertFalse(logOut);
-    }
 }
