@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS `Users`;
 DROP TABLE IF EXISTS `Locations`;
 DROP TABLE IF EXISTS `Items_In_Product`;
 DROP TABLE IF EXISTS `Catalog`;
+DROP TABLE IF EXISTS `Reports`;
 
 CREATE TABLE `Reports`(`reportId` INT primary key,`year` INT NOT NULL,`month` INT NOT NULL,`branch` INT NOT NULL,`type` varchar(20) NOT NULL,`data` varchar(256) NOT NULL);
 
