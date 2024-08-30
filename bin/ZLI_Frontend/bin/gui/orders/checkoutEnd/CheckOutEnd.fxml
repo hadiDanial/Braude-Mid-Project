@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.checkoutEnd.CheckOutEnd">
+    <children>
+        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox alignment="TOP_CENTER" prefWidth="620.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <VBox alignment="CENTER" prefWidth="500.0">
+                            <children>
+                        <Label text="Processing Order" textFill="#05595b" underline="true">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Label>
+                                <Pane prefHeight="36.0" prefWidth="441.0" />
+                                  <HBox alignment="CENTER" style="-fx-background-color: #05595B; -fx-padding: 7; -fx-background-radius: 15;">
+                                      <children>
+                              <Label fx:id="sendingLabel" prefHeight="35.0" prefWidth="516.0" text="Sending order to server..." textFill="#e2d784">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Pane prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                              <CheckBox fx:id="sendingToServerCheck" allowIndeterminate="true" disable="true" mnemonicParsing="false" mouseTransparent="true" />
+                                      </children>
+                                      <VBox.margin>
+                                          <Insets />
+                                      </VBox.margin>
+                                  </HBox>
+                        <Pane layoutX="10.0" layoutY="95.0" prefHeight="36.0" prefWidth="441.0" />
+                        <Label fx:id="reviewLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="516.0" text="A manager will review your order soon" textFill="#05595b">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                <children>
+                                    <Button fx:id="catalogBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onNextBtn" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Back to Catalog" textFill="#e2d784">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                            </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

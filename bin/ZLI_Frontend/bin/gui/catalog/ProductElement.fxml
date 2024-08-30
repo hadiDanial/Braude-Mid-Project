@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-radius: 35; -fx-background-color: white;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.catalog.ProductElement">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="900.0" style="-fx-padding: 15 35 15 15" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Pane prefHeight="200.0" prefWidth="82.0" />
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="294.0" spacing="20.0">
+               <children>
+                  <Label fx:id="nameLabel" text="Name" textFill="#062c30" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="detailsLabel" text="Details" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Label text="Price:" textFill="#05595b">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="priceLabel" text="56" textFill="#05595b" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="currencyLabel" text="NIS" textFill="#05595b" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#onAddToCart" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 50; -fx-background-color: #05595B;">
+               <graphic>
+                  <MaterialDesignIconView fill="#e2d784" glyphName="CART_PLUS" size="28" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Pane prefHeight="200.0" prefWidth="60.0" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

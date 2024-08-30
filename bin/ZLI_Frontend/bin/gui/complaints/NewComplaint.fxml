@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.complaints.NewComplaint">
+   <children>
+       <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="64.0" prefWidth="898.0" style="-fx-background-radius: 15; -fx-background-color: #078082; -fx-border-width: 5;">
+               <children>
+                  <Pane layoutX="76.0" layoutY="10.0" prefHeight="63.0" prefWidth="39.0" />
+                  <Label text="New Complaint" textFill="#e2d784">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="200.0" prefWidth="647.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER">
+               <children>
+                  <VBox spacing="15.0">
+                     <children>
+                        <Pane prefHeight="35.0" prefWidth="497.0" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <StackPane>
+                           <children>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0">
+                                 <children>
+                                    <Label text="Customer ID:  ">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="customerIDField" prefWidth="324.0" style="-fx-background-radius: 15;">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <TextFlow translateY="50.0">
+                                 <children>
+                                    <Label fx:id="digitError" text="Label" textFill="RED" />
+                                    <Label fx:id="digitError1" layoutX="10.0" layoutY="10.0" text="Label" textFill="RED" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </StackPane>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="131.0">
+                           <children>
+                              <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <StackPane>
+                           <children>
+                              <VBox spacing="5.0" translateY="40.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Complaint Note:">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea fx:id="complaintNoteAria" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 15;" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </StackPane>
+                        <TextFlow>
+                           <children>
+                              <Label fx:id="digitError1" text="Label" textFill="RED" />
+                           </children>
+                        </TextFlow>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Pane prefHeight="57.0" prefWidth="898.0" VBox.vgrow="ALWAYS" />
+            <HBox>
+               <children>
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#onBackBtn" prefWidth="100.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="WHITE">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Pane prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="addBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onAddBtn" prefWidth="100.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Add" textFill="#e2d784">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+   </padding>
+</AnchorPane>

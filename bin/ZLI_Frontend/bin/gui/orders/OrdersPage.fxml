@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="541.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.orders.OrdersPage">
+   <children>
+      <Label fx:id="ordersTitle" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="55.0" layoutY="34.0" minWidth="70.0" prefHeight="45.0" prefWidth="890.0" scaleShape="false" text="Orders" textAlignment="CENTER" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="34.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="refreshBtn" layoutX="870.0" layoutY="67.0" mnemonicParsing="false" onAction="#onRefreshBtnClick" text="Refresh" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="67.0" />
+      <!-- <TableView fx:id="ordersTable" layoutX="55.0" layoutY="114.0" maxWidth="890.0" minWidth="890.0" prefHeight="429.0" prefWidth="890.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="114.0">
+        <columns>
+          <TableColumn prefWidth="43.0" text="#" />
+          <TableColumn maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Price" />
+            <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Details" />
+            <TableColumn maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Color" />
+            <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Greeting" />
+            <TableColumn maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Branch" />
+            <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Order Date" />
+            <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Delivery Date" />
+            <TableColumn editable="false" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" resizable="false" sortable="false" text="Edit" />
+        </columns>
+      </TableView> -->
+   </children>
+</AnchorPane>

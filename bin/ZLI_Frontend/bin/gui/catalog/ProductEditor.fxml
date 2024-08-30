@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1020.0" prefWidth="900.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.catalog.ProductEditor">
+   <children>
+      <HBox layoutX="36.0" layoutY="36.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="639.0" />
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="79.0" prefWidth="828.0" style="-fx-background-radius: 15; -fx-background-color: #078082; -fx-border-width: 5;">
+                     <children>
+                        <Pane layoutX="76.0" layoutY="10.0" prefHeight="63.0" prefWidth="39.0" />
+                        <Label fx:id="titleLabel" prefHeight="40.0" prefWidth="938.0" text="Add Product" textFill="#e2d784">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Pane prefHeight="200.0" prefWidth="647.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Pane prefHeight="35.0" prefWidth="497.0" />
+                              <HBox>
+                                 <children>
+                                    <VBox prefHeight="834.0" prefWidth="845.0" spacing="30.0">
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <VBox alignment="TOP_CENTER">
+                                                   <children>
+                                                      <Pane prefHeight="35.0" prefWidth="200.0" />
+                                                      <Pane minWidth="-Infinity" prefWidth="256.0" style="-fx-border-color: #05595B; -fx-border-radius: 15; -fx-border-width: 2;">
+                                                         <children>
+                                                            <ImageView fx:id="productImage" fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="200.0" />
+                                                      <Button fx:id="imgBtn" mnemonicParsing="false" onAction="#onImageSaveBtn" prefHeight="43.0" prefWidth="129.0" style="-fx-background-color: #05595B; -fx-border-radius: 15;" text="Choose Image" textFill="#e2d784">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </VBox>
+                                                <VBox layoutX="304.0" prefHeight="510.0" prefWidth="500.0" spacing="30.0">
+                                                   <children>
+                                                      <HBox>
+                                                         <children>
+                                                            <VBox minWidth="-Infinity" prefHeight="98.0" prefWidth="113.0">
+                                                               <children>
+                                                                  <Pane prefHeight="29.0" prefWidth="127.0" />
+                                                                  <Label prefHeight="38.0" prefWidth="152.0" text="Product">
+                                                                     <font>
+                                                                        <Font size="26.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </VBox>
+                                                            <Pane prefWidth="30.0" />
+                                                            <JFXToggleButton fx:id="productItemToggle" contentDisplay="RIGHT" onAction="#onProductItemToggle" prefHeight="20.0" prefWidth="0.0" selected="true" size="16.0" text=" ">
+                                                               <font>
+                                                                  <Font size="26.0" />
+                                                               </font>
+                                                            </JFXToggleButton>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER">
+                                                         <children>
+                                                            <Label text="Name: ">
+                                                               <font>
+                                                                  <Font size="26.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                                                            <TextField fx:id="nameField" prefWidth="324.0" style="-fx-background-radius: 15;">
+                                                               <font>
+                                                                  <Font size="26.0" />
+                                                               </font>
+                                                            </TextField>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER" layoutX="10.0" layoutY="45.0">
+                                                         <children>
+                                                            <Label text="Price: ">
+                                                               <font>
+                                                                  <Font size="26.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                                                            <TextField fx:id="priceField" prefWidth="324.0" style="-fx-background-radius: 15;">
+                                                               <font>
+                                                                  <Font size="26.0" />
+                                                               </font>
+                                                            </TextField>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox fx:id="productTypeSelect" alignment="CENTER" layoutX="10.0" layoutY="192.0">
+                                                         <children>
+                                                            <Label text="Type:">
+                                                               <font>
+                                                                  <Font size="26.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />                                               
+                                                            <ChoiceBox fx:id="productTypeDropDown" prefHeight="56.0" prefWidth="324.0" style="-fx-background-radius: 15;" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox fx:id="itemTypeSelect" alignment="CENTER" layoutX="10.0" layoutY="511.0">
+                                                         <children>
+                                                            <Label text="Type:">
+                                                               <font>
+                                                                  <Font size="26.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />                                  
+                                                          <ChoiceBox fx:id="itemTypeDropDown" prefHeight="56.0" prefWidth="324.0" style="-fx-background-radius: 15;" />                                          
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox fx:id="colorSelect" alignment="CENTER" layoutX="10.0" layoutY="101.0">
+                                                         <children>
+                                                            <Label text="Color: ">
+                                                               <font>
+                                                                  <Font size="26.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Pane prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                                                         </children>
+                                                          <ChoiceBox fx:id="colorDropDown" prefHeight="56.0" prefWidth="324.0" style="-fx-background-radius: 15;" />                                                                                             
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </Group>
+                                          <HBox fx:id="addItemsPane" minWidth="-Infinity" prefHeight="129.0" prefWidth="804.0" VBox.vgrow="NEVER">
+                                             <children>
+                                                <HBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="200.0" prefWidth="347.0">
+                                                   <children>
+                                                      <Label text="Items">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Pane prefHeight="129.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
+                                                          <ChoiceBox fx:id="itemDropDown" prefHeight="56.0" prefWidth="186.0" style="-fx-background-radius: 15;" />                                                                                                                                            
+                                                      <Pane prefWidth="30.0" />
+                                                      <Button fx:id="addBtn" mnemonicParsing="false" onAction="#onAddItemBtn" style="-fx-background-color: #05595B; -fx-border-radius: 15;" text="Add" textFill="#e2d784">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                                <Pane prefHeight="129.0" prefWidth="42.0" />
+                                                <HBox alignment="CENTER" prefHeight="44.0">
+                                                   <children>
+                                                      <TableView fx:id="detailsTable" minHeight="-Infinity" minWidth="100.0" prefHeight="200.0" prefWidth="422.0" HBox.hgrow="ALWAYS">
+                                                         <columns>
+                                                            <TableColumn fx:id="itemNameColumn" prefWidth="254.0" text="Items" />
+                                                            <TableColumn fx:id="quantityColumn" prefWidth="93.0" text="Quantity" />
+                                                            <TableColumn fx:id="deleteColumn" prefWidth="74.0" text="Delete" />
+                                                         </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox>
+                                             <children>
+                                                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#onBackBtn" prefWidth="100.0" style="-fx-background-color: #078082; -fx-background-radius: 15;" text="Back" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="26.0" />
+                                                   </font>
+                                                </Button>
+                                                <Pane prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Pane>
+                                                <Button fx:id="saveBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onAddBtn" prefWidth="100.0" style="-fx-background-color: #05595B; -fx-background-radius: 15;" text="Save" textFill="#e2d784">
+                                                   <font>
+                                                      <Font size="26.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane layoutX="814.0" layoutY="10.0" prefHeight="200.0" prefWidth="639.0" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+   </padding>
+</AnchorPane>
